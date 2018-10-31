@@ -29,6 +29,7 @@ public class TambahPelanggan extends javax.swing.JDialog {
         TitleText = new javax.swing.JLabel();
         namaField = new javax.swing.JTextField();
         namaField = new CorneredJTextField(2);
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -49,15 +50,19 @@ public class TambahPelanggan extends javax.swing.JDialog {
             }
         });
 
+        jLabel1.setText("jLabel1");
+
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
-                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TitleText))
+                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TitleText)))
                 .addContainerGap(174, Short.MAX_VALUE))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
@@ -65,7 +70,9 @@ public class TambahPelanggan extends javax.swing.JDialog {
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(53, 53, 53)
                 .addComponent(TitleText)
-                .addGap(28, 28, 28)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(597, Short.MAX_VALUE))
         );
@@ -133,6 +140,7 @@ public class TambahPelanggan extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TambahPelangganPanel;
     private javax.swing.JLabel TitleText;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField namaField;
     // End of variables declaration//GEN-END:variables
 }
