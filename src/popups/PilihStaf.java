@@ -12,12 +12,12 @@ import javax.swing.JFrame;
  *
  * @author ysuta
  */
-public class PilihStaff extends javax.swing.JPanel {
+public class PilihStaf extends javax.swing.JPanel {
 
     /**
      * Creates new form PilihStaff //
      */
-    public PilihStaff() {
+    public PilihStaf() {
         initComponents();
     }
 
@@ -44,7 +44,7 @@ public class PilihStaff extends javax.swing.JPanel {
         TitleText.setBackground(new java.awt.Color(102, 0, 0));
         TitleText.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
-        TitleText.setText("Pilih Staff");
+        TitleText.setText("Pilih Staf");
 
         fieldNama.setForeground(java.awt.Color.gray);
         fieldNama.setText("Masukan nama");
@@ -120,7 +120,7 @@ public class PilihStaff extends javax.swing.JPanel {
      */
     public static void main(String args[]) {
         JFrame a = new JFrame();
-        PilihStaff dialog = new PilihStaff();
+        PilihStaf dialog = new PilihStaf();
         //a.setPreferredSize(dialog.getPreferredSize());
         a.setSize(dialog.getPreferredSize());
         a.setContentPane(dialog);
