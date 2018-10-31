@@ -43,7 +43,6 @@ public class TambahPelanggan extends javax.swing.JDialog {
         namaField.setBackground(java.awt.Color.white);
         namaField.setText("Nama");
         namaField.setName(""); // NOI18N
-        namaField.setSelectionColor(new java.awt.Color(255, 153, 0));
         namaField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 namaFieldActionPerformed(evt);
@@ -129,12 +128,6 @@ public class TambahPelanggan extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
-    
-    private void getBorder(){
-                field.setBorder(BorderFactory.createCompoundBorder(
-        field.getBorder(), 
-        BorderFactory.createEmptyBorder(5, 5, 5, 5)));
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

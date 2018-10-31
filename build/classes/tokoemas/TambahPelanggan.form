@@ -88,9 +88,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nama"/>
             <Property name="name" type="java.lang.String" value="" noResource="true"/>
-            <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="99" red="ff" type="rgb"/>
-            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="namaFieldActionPerformed"/>

@@ -1,5 +1,6 @@
 package tokoemas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.geom.RoundRectangle2D;
@@ -27,6 +28,11 @@ public class CorneredJTextField extends JTextField{
     @Override
     public void setBorder(Border border) {
         super.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10)); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setSelectionColor(Color color) {
+        super.setSelectionColor(new java.awt.Color(255, 153, 0)); //To change body of generated methods, choose Tools | Templates.
     }
     
     
