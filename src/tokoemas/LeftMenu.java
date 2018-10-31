@@ -5,9 +5,6 @@
  */
 package tokoemas;
 
-import Controller.Controller;
-import Controller.Notification;
-import Interfaces.LogOut;
 import java.awt.Color;
 import javax.swing.JPanel;
 
@@ -16,21 +13,9 @@ import javax.swing.JPanel;
  * @author ysuta
  */
 public class LeftMenu extends javax.swing.JPanel {
-    private Controller controller;
-    private LogOut logOut;
-    /**
-     * Creates new form Dashboard
-     */
+
     public LeftMenu() {
         initComponents();
-    }
-    
-    public LeftMenu(Controller controller, LogOut logOut, String nim) {
-        this.controller = controller;
-        this.logOut = logOut;
-        initComponents();
-        initNotification();
-        usernameLabel.setText("Welcome " + this.controller.getUsername(nim));
     }
 
     /**
@@ -326,16 +311,17 @@ public class LeftMenu extends javax.swing.JPanel {
             .addComponent(btn_Staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Rekap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Rekap1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 34, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(171, 171, 171)
+                .addGap(71, 71, 71)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(70, 70, 70)
                 .addComponent(btn_Dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -350,31 +336,16 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(92, 92, 92)
                 .addComponent(btn_Rekap1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(107, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 40, Short.MAX_VALUE)
-                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 650, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void initNotification() {
-        Thread process = new Thread(new Notification(this.newInfo, this.controller));
-        process.setDaemon(true);
-        process.start();
-        System.out.println("Process!");
-    }
-    
+
     private void btn_DashboardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DashboardMousePressed
-        resetColor();
-        setColor(btn_Dashboard);
-        setInvisible();
-        membersPanel.setMembersData();
-        membersPanel.setVisible(true);
+
     }//GEN-LAST:event_btn_DashboardMousePressed
 
     private void btn_TransaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransaksiMousePressed
-        // TODO add your handling code here:
+        // TODO add yr handling code here:
     }//GEN-LAST:event_btn_TransaksiMousePressed
 
     private void btn_PelangganMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_PelangganMousePressed
@@ -402,21 +373,11 @@ public class LeftMenu extends javax.swing.JPanel {
     }
     
     void resetColor() {
-        //btn_notifications.setBackground(new Color(64, 43, 100));
-        btn_ukmAttendance.setBackground(new Color(64, 43, 100));
-        btn_ukmInformation.setBackground(new Color(64, 43, 100));
-        btn_Dashboard.setBackground(new Color(64, 43, 100));
-        btn_ukmStatistics.setBackground(new Color(64, 43, 100));
-        btn_ukmRequest.setBackground(new Color(64, 43, 100));
-        btn_LogOut.setBackground(new Color(53,33,89));
+
     }      
     
     private void setInvisible() {
-        informationPanel.setVisible(false);
-        membersPanel.setVisible(false);
-        attendancePanel.setVisible(false);
-        statisticsPanel.setVisible(false);
-        requestPanel.setVisible(false);
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
