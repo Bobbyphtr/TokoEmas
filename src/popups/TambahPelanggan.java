@@ -60,6 +60,8 @@ public class TambahPelanggan extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
+        namaField.setForeground(java.awt.Color.gray);
+        namaField.setText("Masukan nama pelanggan.");
         namaField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 namaFieldFocusGained(evt);
@@ -69,6 +71,8 @@ public class TambahPelanggan extends javax.swing.JDialog {
             }
         });
 
+        emailField.setForeground(java.awt.Color.gray);
+        emailField.setText("Masukan email.");
         emailField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 emailFieldFocusGained(evt);
@@ -82,6 +86,8 @@ public class TambahPelanggan extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
         jLabel2.setText("Email");
 
+        noTelpField.setForeground(java.awt.Color.gray);
+        noTelpField.setText("Masukan no telp.");
         noTelpField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 noTelpFieldFocusGained(evt);
@@ -100,8 +106,18 @@ public class TambahPelanggan extends javax.swing.JDialog {
         jLabel4.setText("Alamat");
 
         alamatArea.setColumns(20);
+        alamatArea.setForeground(java.awt.Color.gray);
         alamatArea.setRows(5);
+        alamatArea.setText("Masukan alamat.");
         alamatArea.setBorder(null);
+        alamatArea.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                alamatAreaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                alamatAreaFocusLost(evt);
+            }
+        });
         jScrollPane1.setViewportView(alamatArea);
         jScrollPane1.setBorder(null);
 
@@ -129,7 +145,7 @@ public class TambahPelanggan extends javax.swing.JDialog {
                             .addComponent(jLabel1)
                             .addComponent(TitleText)
                             .addComponent(namaField))))
-                .addGap(35, 35, 35))
+                .addGap(36, 36, 36))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,20 +202,46 @@ public class TambahPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_namaFieldFocusLost
 
     private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
-        // TODO add your handling code here:
+        if (emailField.getText().equals("Masukan email.")) {
+            emailField.setText("");
+            emailField.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_emailFieldFocusGained
 
     private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
-        // TODO add your handling code here:
+        if (emailField.getText().equals("")) {
+            emailField.setText("Masukan email.");
+            emailField.setForeground(Color.GRAY);
+        }
     }//GEN-LAST:event_emailFieldFocusLost
 
     private void noTelpFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusGained
-        // TODO add your handling code here:
+        if (noTelpField.getText().equals("Masukan no telp.")) {
+            noTelpField.setText("");
+            noTelpField.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_noTelpFieldFocusGained
 
     private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost
-        // TODO add your handling code here:
+        if (noTelpField.getText().equals("")) {
+            noTelpField.setText("Masukan no telp.");
+            noTelpField.setForeground(Color.GRAY);
+        }
     }//GEN-LAST:event_noTelpFieldFocusLost
+
+    private void alamatAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_alamatAreaFocusGained
+        if (alamatArea.getText().equals("Masukan alamat.")) {
+            alamatArea.setText("");
+            alamatArea.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_alamatAreaFocusGained
+
+    private void alamatAreaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_alamatAreaFocusLost
+        if (alamatArea.getText().equals("")) {
+            alamatArea.setText("Masukan alamat.");
+            alamatArea.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_alamatAreaFocusLost
     /**
      * @param args the command line arguments
      */
