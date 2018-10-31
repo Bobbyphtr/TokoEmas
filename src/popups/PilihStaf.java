@@ -6,6 +6,7 @@
 package popups;
 
 import customComponents.*;
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -48,6 +49,14 @@ public class PilihStaf extends javax.swing.JPanel {
 
         fieldNama.setForeground(java.awt.Color.gray);
         fieldNama.setText("Masukan nama");
+        fieldNama.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldNamaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNamaFocusLost(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
@@ -87,9 +96,8 @@ public class PilihStaf extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
                             .addComponent(jLabel1)
-                            .addGap(34, 34, 34)
+                            .addGap(40, 40, 40)
                             .addComponent(fieldNama))
                         .addComponent(TitleText)))
                 .addGap(36, 36, 36))
@@ -97,7 +105,7 @@ public class PilihStaf extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(30, 30, 30)
                 .addComponent(TitleText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -105,7 +113,7 @@ public class PilihStaf extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
@@ -114,6 +122,20 @@ public class PilihStaf extends javax.swing.JPanel {
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonTambahActionPerformed
+
+    private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained
+        if (fieldNama.getText().equals("Masukan nama")) {
+            fieldNama.setText("");
+            fieldNama.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_fieldNamaFocusGained
+
+    private void fieldNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusLost
+        if (fieldNama.getText().equals("")) {
+            fieldNama.setText("Masukan nama pelanggan");
+            fieldNama.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_fieldNamaFocusLost
 
     /**
      * @param args the command line arguments

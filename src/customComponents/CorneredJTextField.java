@@ -32,7 +32,7 @@ public class CorneredJTextField extends JTextField{
 
     @Override
     public void setSelectionColor(Color color) {
-        super.setSelectionColor(new java.awt.Color(102, 0, 0)); //To change body of generated methods, choose Tools | Templates.
+        super.setSelectionColor(new java.awt.Color(255, 153, 0)); //To change body of generated methods, choose Tools | Templates.
     }
 
     public boolean contains(int x, int y) {
