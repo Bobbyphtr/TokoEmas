@@ -132,7 +132,7 @@ public class PilihStaf extends javax.swing.JPanel {
 
     private void fieldNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusLost
         if (fieldNama.getText().equals("")) {
-            fieldNama.setText("Masukan nama pelanggan");
+            fieldNama.setText("Masukan nama");
             fieldNama.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_fieldNamaFocusLost
