@@ -46,7 +46,8 @@ public class PilihStaff extends javax.swing.JPanel {
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
         TitleText.setText("Pilih Staff");
 
-        fieldNama.setText("jTextField1");
+        fieldNama.setForeground(java.awt.Color.gray);
+        fieldNama.setText("Masukan nama");
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
