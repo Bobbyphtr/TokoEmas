@@ -3,6 +3,7 @@ package popups;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 
 /**
  *
@@ -30,19 +31,19 @@ public class TambahPelanggan extends javax.swing.JDialog {
         TambahPelangganPanel = new javax.swing.JPanel();
         TitleText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        namaField = new javax.swing.JTextField();
-        namaField = new CorneredJTextField(15);
-        emailField = new javax.swing.JTextField();
-        emailField = new CorneredJTextField(15);
+        fieldNama = new javax.swing.JTextField();
+        fieldNama = new CorneredJTextField();
+        fieldEmail = new javax.swing.JTextField();
+        fieldEmail = new CorneredJTextField();
         jLabel2 = new javax.swing.JLabel();
-        noTelpField = new javax.swing.JTextField();
-        noTelpField = new CorneredJTextField(15);
+        fieldNoTelp = new javax.swing.JTextField();
+        fieldNoTelp = new CorneredJTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        alamatArea = new javax.swing.JTextArea();
-        alamatArea = new CorneredJTextArea();
-        jButton1 = new javax.swing.JButton();
+        textAreaAlamat = new javax.swing.JTextArea();
+        textAreaAlamat = new CorneredJTextArea();
+        tambahButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -60,25 +61,25 @@ public class TambahPelanggan extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
-        namaField.setForeground(java.awt.Color.gray);
-        namaField.setText("Masukan nama pelanggan.");
-        namaField.addFocusListener(new java.awt.event.FocusAdapter() {
+        fieldNama.setForeground(java.awt.Color.gray);
+        fieldNama.setText("Masukan nama pelanggan.");
+        fieldNama.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                namaFieldFocusGained(evt);
+                fieldNamaFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                namaFieldFocusLost(evt);
+                fieldNamaFocusLost(evt);
             }
         });
 
-        emailField.setForeground(java.awt.Color.gray);
-        emailField.setText("Masukan email.");
-        emailField.addFocusListener(new java.awt.event.FocusAdapter() {
+        fieldEmail.setForeground(java.awt.Color.gray);
+        fieldEmail.setText("Masukan email.");
+        fieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                emailFieldFocusGained(evt);
+                fieldEmailFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                emailFieldFocusLost(evt);
+                fieldEmailFocusLost(evt);
             }
         });
 
@@ -86,14 +87,14 @@ public class TambahPelanggan extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
         jLabel2.setText("Email");
 
-        noTelpField.setForeground(java.awt.Color.gray);
-        noTelpField.setText("Masukan no telp.");
-        noTelpField.addFocusListener(new java.awt.event.FocusAdapter() {
+        fieldNoTelp.setForeground(java.awt.Color.gray);
+        fieldNoTelp.setText("Masukan no telp.");
+        fieldNoTelp.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                noTelpFieldFocusGained(evt);
+                fieldNoTelpFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                noTelpFieldFocusLost(evt);
+                fieldNoTelpFocusLost(evt);
             }
         });
 
@@ -105,26 +106,26 @@ public class TambahPelanggan extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
         jLabel4.setText("Alamat");
 
-        alamatArea.setColumns(20);
-        alamatArea.setForeground(java.awt.Color.gray);
-        alamatArea.setRows(5);
-        alamatArea.setText("Masukan alamat.");
-        alamatArea.setBorder(null);
-        alamatArea.addFocusListener(new java.awt.event.FocusAdapter() {
+        textAreaAlamat.setColumns(20);
+        textAreaAlamat.setForeground(java.awt.Color.gray);
+        textAreaAlamat.setRows(5);
+        textAreaAlamat.setText("Masukan alamat.");
+        textAreaAlamat.setBorder(null);
+        textAreaAlamat.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                alamatAreaFocusGained(evt);
+                textAreaAlamatFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                alamatAreaFocusLost(evt);
+                textAreaAlamatFocusLost(evt);
             }
         });
-        jScrollPane1.setViewportView(alamatArea);
+        jScrollPane1.setViewportView(textAreaAlamat);
         jScrollPane1.setBorder(null);
 
-        jButton1.setBackground(new java.awt.Color(89, 38, 1));
-        jButton1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        jButton1.setForeground(java.awt.Color.white);
-        jButton1.setText("Tambah");
+        tambahButton.setBackground(new java.awt.Color(89, 38, 1));
+        tambahButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        tambahButton.setForeground(java.awt.Color.white);
+        tambahButton.setText("Tambah");
 
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
@@ -133,18 +134,18 @@ public class TambahPelanggan extends javax.swing.JDialog {
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
                             .addComponent(jLabel4)
                             .addComponent(jLabel3)
-                            .addComponent(noTelpField, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addComponent(fieldNoTelp, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(TitleText)
-                            .addComponent(namaField))))
+                            .addComponent(fieldNama))))
                 .addGap(36, 36, 36))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
@@ -155,21 +156,21 @@ public class TambahPelanggan extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(noTelpField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldNoTelp, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -187,75 +188,80 @@ public class TambahPelanggan extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void namaFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaFieldFocusGained
-        if (namaField.getText().equals("Masukan nama pelanggan.")) {
-            namaField.setText("");
-            namaField.setForeground(Color.BLACK);
+    private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained
+        if (fieldNama.getText().equals("Masukan nama pelanggan.")) {
+            fieldNama.setText("");
+            fieldNama.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_namaFieldFocusGained
+    }//GEN-LAST:event_fieldNamaFocusGained
 
-    private void namaFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaFieldFocusLost
-        if (namaField.getText().equals("")) {
-            namaField.setText("Masukan nama pelanggan");
-            namaField.setForeground(Color.GRAY);
+    private void fieldNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusLost
+        if (fieldNama.getText().equals("")) {
+            fieldNama.setText("Masukan nama pelanggan");
+            fieldNama.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_namaFieldFocusLost
+    }//GEN-LAST:event_fieldNamaFocusLost
 
-    private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
-        if (emailField.getText().equals("Masukan email.")) {
-            emailField.setText("");
-            emailField.setForeground(Color.BLACK);
+    private void fieldEmailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldEmailFocusGained
+        if (fieldEmail.getText().equals("Masukan email.")) {
+            fieldEmail.setText("");
+            fieldEmail.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_emailFieldFocusGained
+    }//GEN-LAST:event_fieldEmailFocusGained
 
-    private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
-        if (emailField.getText().equals("")) {
-            emailField.setText("Masukan email.");
-            emailField.setForeground(Color.GRAY);
+    private void fieldEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldEmailFocusLost
+        if (fieldEmail.getText().equals("")) {
+            fieldEmail.setText("Masukan email.");
+            fieldEmail.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_emailFieldFocusLost
+    }//GEN-LAST:event_fieldEmailFocusLost
 
-    private void noTelpFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusGained
-        if (noTelpField.getText().equals("Masukan no telp.")) {
-            noTelpField.setText("");
-            noTelpField.setForeground(Color.BLACK);
+    private void fieldNoTelpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNoTelpFocusGained
+        if (fieldNoTelp.getText().equals("Masukan no telp.")) {
+            fieldNoTelp.setText("");
+            fieldNoTelp.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_noTelpFieldFocusGained
+    }//GEN-LAST:event_fieldNoTelpFocusGained
 
-    private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost
-        if (noTelpField.getText().equals("")) {
-            noTelpField.setText("Masukan no telp.");
-            noTelpField.setForeground(Color.GRAY);
+    private void fieldNoTelpFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNoTelpFocusLost
+        if (fieldNoTelp.getText().equals("")) {
+            fieldNoTelp.setText("Masukan no telp.");
+            fieldNoTelp.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_noTelpFieldFocusLost
+    }//GEN-LAST:event_fieldNoTelpFocusLost
 
-    private void alamatAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_alamatAreaFocusGained
-        if (alamatArea.getText().equals("Masukan alamat.")) {
-            alamatArea.setText("");
-            alamatArea.setForeground(Color.BLACK);
+    private void textAreaAlamatFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaAlamatFocusGained
+        if (textAreaAlamat.getText().equals("Masukan alamat.")) {
+            textAreaAlamat.setText("");
+            textAreaAlamat.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_alamatAreaFocusGained
+    }//GEN-LAST:event_textAreaAlamatFocusGained
 
-    private void alamatAreaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_alamatAreaFocusLost
-        if (alamatArea.getText().equals("")) {
-            alamatArea.setText("Masukan alamat.");
-            alamatArea.setForeground(Color.GRAY);
+    private void textAreaAlamatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaAlamatFocusLost
+        if (textAreaAlamat.getText().equals("")) {
+            textAreaAlamat.setText("Masukan alamat.");
+            textAreaAlamat.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_alamatAreaFocusLost
+    }//GEN-LAST:event_textAreaAlamatFocusLost
 
-
+    public static void main(String args[]) {
+        JFrame a = new JFrame();
+        TambahPelanggan dialog = new TambahPelanggan(a,true);
+        //a.setPreferredSize(dialog.getPreferredSize());
+       dialog.setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TambahPelangganPanel;
     private javax.swing.JLabel TitleText;
-    private javax.swing.JTextArea alamatArea;
-    private javax.swing.JTextField emailField;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField fieldEmail;
+    private javax.swing.JTextField fieldNama;
+    private javax.swing.JTextField fieldNoTelp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField namaField;
-    private javax.swing.JTextField noTelpField;
+    private javax.swing.JButton tambahButton;
+    private javax.swing.JTextArea textAreaAlamat;
     // End of variables declaration//GEN-END:variables
 }

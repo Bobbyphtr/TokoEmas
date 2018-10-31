@@ -15,8 +15,8 @@ import javax.swing.border.Border;
 public class CorneredJTextField extends JTextField{
     
     private Shape shape;
-    public CorneredJTextField(int size) {
-        super(size);
+    public CorneredJTextField() {
+        super(15);
         setOpaque(false); // As suggested by @AVD in comment
     }
     protected void paintComponent(Graphics g) {

@@ -5,6 +5,9 @@
  */
 package popups;
 
+import customComponents.*;
+import javax.swing.JFrame;
+
 /**
  *
  * @author ysuta
@@ -12,7 +15,7 @@ package popups;
 public class PilihStaff extends javax.swing.JPanel {
 
     /**
-     * Creates new form PilihStaff
+     * Creates new form PilihStaff //
      */
     public PilihStaff() {
         initComponents();
@@ -28,11 +31,12 @@ public class PilihStaff extends javax.swing.JPanel {
     private void initComponents() {
 
         TitleText = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        fieldNama = new javax.swing.JTextField();
+        fieldNama = new CorneredJTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        tableStaff = new javax.swing.JTable();
+        buttonTambah = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 231, 192));
         setPreferredSize(new java.awt.Dimension(400, 550));
@@ -42,13 +46,13 @@ public class PilihStaff extends javax.swing.JPanel {
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
         TitleText.setText("Pilih Staff");
 
-        jTextField1.setText("jTextField1");
+        fieldNama.setText("jTextField1");
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,15 +63,15 @@ public class PilihStaff extends javax.swing.JPanel {
                 "ID", "Nama", "Email", "No Telp"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableStaff);
 
-        jButton1.setBackground(new java.awt.Color(89, 38, 1));
-        jButton1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        jButton1.setForeground(java.awt.Color.white);
-        jButton1.setText("Tambah");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonTambah.setBackground(new java.awt.Color(89, 38, 1));
+        buttonTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonTambah.setForeground(java.awt.Color.white);
+        buttonTambah.setText("Tambah");
+        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                buttonTambahActionPerformed(evt);
             }
         });
 
@@ -78,14 +82,14 @@ public class PilihStaff extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGap(6, 6, 6)
                             .addComponent(jLabel1)
                             .addGap(34, 34, 34)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fieldNama))
                         .addComponent(TitleText)))
                 .addGap(36, 36, 36))
         );
@@ -96,27 +100,38 @@ public class PilihStaff extends javax.swing.JPanel {
                 .addComponent(TitleText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_buttonTambahActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        JFrame a = new JFrame();
+        PilihStaff dialog = new PilihStaff();
+        //a.setPreferredSize(dialog.getPreferredSize());
+        a.setSize(dialog.getPreferredSize());
+        a.setContentPane(dialog);
+        a.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleText;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton buttonTambah;
+    private javax.swing.JTextField fieldNama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tableStaff;
     // End of variables declaration//GEN-END:variables
 }
