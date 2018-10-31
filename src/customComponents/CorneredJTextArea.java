@@ -18,17 +18,18 @@ public class CorneredJTextArea extends JTextArea {
 
     public CorneredJTextArea() {
         setOpaque(false); // As suggested by @AVD in comment
+        setBorder(null);
     }
 
     protected void paintComponent(Graphics g) {
         g.setColor(getBackground());
-        g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 10, 10);
+        g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
         super.paintComponent(g);
     }
 
     @Override
     public void setBorder(Border border) {
-        super.setBorder(new RoundBorder(10)); //To change body of generated methods, choose Tools | Templates.
+        super.setBorder(new RoundBorder(15)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -38,7 +39,7 @@ public class CorneredJTextArea extends JTextArea {
 
     public boolean contains(int x, int y) {
         if (shape == null || !shape.getBounds().equals(getBounds())) {
-            shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 10, 10);
+            shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
         }
         return shape.contains(x, y);
     }
