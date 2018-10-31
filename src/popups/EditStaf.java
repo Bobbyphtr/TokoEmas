@@ -8,12 +8,12 @@ import javax.swing.BorderFactory;
  *
  * @author Xenon
  */
-public class EditStaff extends javax.swing.JDialog {
+public class EditStaf extends javax.swing.JDialog {
 
     /**
      * Creates new form TambahPelanggan
      */
-    public EditStaff(java.awt.Frame parent, boolean modal) {
+    public EditStaf(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
@@ -30,12 +30,12 @@ public class EditStaff extends javax.swing.JDialog {
         TambahPelangganPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         namaField = new javax.swing.JTextField();
-        namaField = new CorneredJTextField(15);
+        namaField = new CorneredJTextField();
         emailField = new javax.swing.JTextField();
-        emailField = new CorneredJTextField(15);
+        emailField = new CorneredJTextField();
         jLabel2 = new javax.swing.JLabel();
         noTelpField = new javax.swing.JTextField();
-        noTelpField = new CorneredJTextField(15);
+        noTelpField = new CorneredJTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -44,15 +44,15 @@ public class EditStaff extends javax.swing.JDialog {
         btnOK = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         posisiField = new javax.swing.JTextField();
-        noTelpField = new CorneredJTextField(15);
+        noTelpField = new CorneredJTextField();
         gajiField = new javax.swing.JTextField();
-        noTelpField = new CorneredJTextField(15);
+        noTelpField = new CorneredJTextField();
         jLabel6 = new javax.swing.JLabel();
         TitleText1 = new javax.swing.JLabel();
         TitleText2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         fieldKuantitasHadiah = new javax.swing.JTextField();
-        noTelpField = new CorneredJTextField(15);
+        noTelpField = new CorneredJTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         alamatArea1 = new javax.swing.JTextArea();
@@ -373,21 +373,23 @@ public class EditStaff extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EditStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditStaf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EditStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditStaf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EditStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditStaf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EditStaff.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EditStaf.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                EditStaff dialog = new EditStaff(new javax.swing.JFrame(), true);
+                EditStaf dialog = new EditStaf(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
