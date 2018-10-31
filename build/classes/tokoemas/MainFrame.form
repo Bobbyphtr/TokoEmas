@@ -41,6 +41,11 @@
   </Layout>
   <SubComponents>
     <Component class="tokoemas.LeftMenu" name="leftMenu1">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c" green="4e" red="6c" type="rgb"/>
+        </Property>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
