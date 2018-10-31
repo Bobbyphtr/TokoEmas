@@ -29,8 +29,6 @@ public class EditStaf extends javax.swing.JDialog {
 
         TambahPelangganPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        namaField = new javax.swing.JTextField();
-        namaField = new CorneredJTextField();
         emailField = new javax.swing.JTextField();
         emailField = new CorneredJTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -52,12 +50,14 @@ public class EditStaf extends javax.swing.JDialog {
         TitleText2 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         fieldKuantitasHadiah = new javax.swing.JTextField();
-        noTelpField = new CorneredJTextField();
+        fieldKuantitasHadiah = new CorneredJTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         alamatArea1 = new javax.swing.JTextArea();
         alamatArea = new CorneredJTextArea();
         btnHapus = new javax.swing.JButton();
+        fieldNama = new javax.swing.JTextField();
+        fieldNama = new CorneredJTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -69,15 +69,6 @@ public class EditStaf extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
-
-        namaField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                namaFieldFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                namaFieldFocusLost(evt);
-            }
-        });
 
         emailField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -194,6 +185,15 @@ public class EditStaf extends javax.swing.JDialog {
             }
         });
 
+        fieldNama.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                fieldNamaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                fieldNamaFocusLost(evt);
+            }
+        });
+
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
@@ -224,10 +224,10 @@ public class EditStaf extends javax.swing.JDialog {
                             .addComponent(noTelpField)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
-                            .addComponent(namaField)
                             .addComponent(jLabel7)
                             .addComponent(fieldKuantitasHadiah)
-                            .addComponent(jScrollPane2)))
+                            .addComponent(jScrollPane2)
+                            .addComponent(fieldNama, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)))
                     .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(TitleText1)))
@@ -241,7 +241,7 @@ public class EditStaf extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(namaField, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -295,20 +295,6 @@ public class EditStaf extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void namaFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaFieldFocusGained
-        if (namaField.getText().equals("Masukan nama pelanggan.")) {
-            namaField.setText("");
-            namaField.setForeground(Color.BLACK);
-        }
-    }//GEN-LAST:event_namaFieldFocusGained
-
-    private void namaFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_namaFieldFocusLost
-        if (namaField.getText().equals("")) {
-            namaField.setText("Masukan nama pelanggan");
-            namaField.setForeground(Color.GRAY);
-        }
-    }//GEN-LAST:event_namaFieldFocusLost
-
     private void emailFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldFocusGained
@@ -316,14 +302,6 @@ public class EditStaf extends javax.swing.JDialog {
     private void emailFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFieldFocusLost
         // TODO add your handling code here:
     }//GEN-LAST:event_emailFieldFocusLost
-
-    private void noTelpFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noTelpFieldFocusGained
-
-    private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_noTelpFieldFocusLost
 
     private void posisiFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_posisiFieldFocusGained
         // TODO add your handling code here:
@@ -356,6 +334,22 @@ public class EditStaf extends javax.swing.JDialog {
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noTelpFieldFocusLost
+
+    private void noTelpFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_noTelpFieldFocusGained
+
+    private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldNamaFocusGained
+
+    private void fieldNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fieldNamaFocusLost
     /**
      * @param args the command line arguments
      */
@@ -411,6 +405,7 @@ public class EditStaf extends javax.swing.JDialog {
     private javax.swing.JButton btnOK;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fieldKuantitasHadiah;
+    private javax.swing.JTextField fieldNama;
     private javax.swing.JTextField gajiField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -422,7 +417,6 @@ public class EditStaf extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField namaField;
     private javax.swing.JTextField noTelpField;
     private javax.swing.JTextField posisiField;
     // End of variables declaration//GEN-END:variables

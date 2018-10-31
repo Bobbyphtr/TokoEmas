@@ -28,8 +28,6 @@ public class Rekap extends javax.swing.JPanel {
     private void initComponents() {
 
         label_TotalPenjualan = new javax.swing.JLabel();
-        label_tanggal = new javax.swing.JLabel();
-        label_Rekap1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_Pegawai = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -41,20 +39,15 @@ public class Rekap extends javax.swing.JPanel {
         label_PenjualanVar = new javax.swing.JLabel();
         label_PembelianVar = new javax.swing.JLabel();
         label_KeuntunganVar = new javax.swing.JLabel();
+        TitleText1 = new javax.swing.JLabel();
+        textTanggal = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 231, 192));
 
-        label_TotalPenjualan.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_TotalPenjualan.setBackground(new java.awt.Color(102, 0, 0));
+        label_TotalPenjualan.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 24)); // NOI18N
         label_TotalPenjualan.setForeground(new java.awt.Color(0, 0, 0));
         label_TotalPenjualan.setText("Total Penjualan:");
-
-        label_tanggal.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        label_tanggal.setForeground(new java.awt.Color(0, 0, 0));
-        label_tanggal.setText("<Tanggal>");
-
-        label_Rekap1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
-        label_Rekap1.setForeground(new java.awt.Color(0, 0, 0));
-        label_Rekap1.setText("REKAP");
 
         table_Pegawai.setBackground(new java.awt.Color(255, 255, 255));
         table_Pegawai.setModel(new javax.swing.table.DefaultTableModel(
@@ -98,74 +91,83 @@ public class Rekap extends javax.swing.JPanel {
             table_Pelanggan.getColumnModel().getColumn(0).setHeaderValue("Ranking Pelanggan");
         }
 
-        label_TotalPembelian.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_TotalPembelian.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 24)); // NOI18N
         label_TotalPembelian.setForeground(new java.awt.Color(0, 0, 0));
         label_TotalPembelian.setText("Total Pembelian:");
 
-        label_Keuntungan.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_Keuntungan.setFont(new java.awt.Font("Microsoft Sans Serif", 0, 24)); // NOI18N
         label_Keuntungan.setForeground(new java.awt.Color(0, 0, 0));
         label_Keuntungan.setText("Keuntungan:");
 
-        label_PenjualanVar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_PenjualanVar.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 24)); // NOI18N
         label_PenjualanVar.setForeground(new java.awt.Color(0, 0, 0));
         label_PenjualanVar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_PenjualanVar.setText("Rp. 1.000.000,-");
         label_PenjualanVar.setToolTipText("");
 
-        label_PembelianVar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_PembelianVar.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 24)); // NOI18N
         label_PembelianVar.setForeground(new java.awt.Color(0, 0, 0));
         label_PembelianVar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_PembelianVar.setText("Rp. 1.000.000,-");
         label_PembelianVar.setToolTipText("");
 
-        label_KeuntunganVar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        label_KeuntunganVar.setFont(new java.awt.Font("MS Reference Sans Serif", 0, 24)); // NOI18N
         label_KeuntunganVar.setForeground(new java.awt.Color(0, 0, 0));
         label_KeuntunganVar.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         label_KeuntunganVar.setText("Rp. 1.000.000,-");
         label_KeuntunganVar.setToolTipText("");
+
+        TitleText1.setBackground(new java.awt.Color(102, 0, 0));
+        TitleText1.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
+        TitleText1.setForeground(new java.awt.Color(102, 0, 0));
+        TitleText1.setText("Edit Staf");
+
+        textTanggal.setBackground(new java.awt.Color(102, 0, 0));
+        textTanggal.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
+        textTanggal.setForeground(new java.awt.Color(102, 0, 0));
+        textTanggal.setText("<Tanggal>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_tanggal)
-                            .addComponent(label_Rekap1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_PenjualanVar)
-                            .addComponent(label_TotalPenjualan))
-                        .addGap(145, 145, 145)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_TotalPembelian)
-                            .addComponent(label_PembelianVar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(90, 90, 90))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_TotalPenjualan)
+                                    .addComponent(label_PenjualanVar))
+                                .addGap(107, 107, 107)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_TotalPembelian)
+                                    .addComponent(label_PembelianVar))
+                                .addGap(101, 101, 101)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(90, 90, 90))
+                            .addComponent(textTanggal)
+                            .addComponent(TitleText1))))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(label_Rekap1)
+                .addGap(39, 39, 39)
+                .addComponent(TitleText1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(label_tanggal)
-                .addGap(37, 37, 37)
+                .addComponent(textTanggal)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_TotalPenjualan)
                     .addComponent(label_TotalPembelian)
@@ -175,9 +177,9 @@ public class Rekap extends javax.swing.JPanel {
                     .addComponent(label_PenjualanVar)
                     .addComponent(label_PembelianVar)
                     .addComponent(label_KeuntunganVar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
@@ -187,6 +189,7 @@ public class Rekap extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel TitleText1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -194,12 +197,11 @@ public class Rekap extends javax.swing.JPanel {
     private javax.swing.JLabel label_KeuntunganVar;
     private javax.swing.JLabel label_PembelianVar;
     private javax.swing.JLabel label_PenjualanVar;
-    private javax.swing.JLabel label_Rekap1;
     private javax.swing.JLabel label_TotalPembelian;
     private javax.swing.JLabel label_TotalPenjualan;
-    private javax.swing.JLabel label_tanggal;
     private javax.swing.JTable table_Pegawai;
     private javax.swing.JTable table_Pelanggan;
     private javax.swing.JTable table_Transaksi;
+    private javax.swing.JLabel textTanggal;
     // End of variables declaration//GEN-END:variables
 }
