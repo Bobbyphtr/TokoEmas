@@ -1,4 +1,4 @@
-package tokoemas;
+package customComponents;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -27,16 +27,14 @@ public class CorneredJTextField extends JTextField{
 
     @Override
     public void setBorder(Border border) {
-        super.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10)); //To change body of generated methods, choose Tools | Templates.
+        super.setBorder(new RoundBorder(10)); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void setSelectionColor(Color color) {
-        super.setSelectionColor(new java.awt.Color(255, 153, 0)); //To change body of generated methods, choose Tools | Templates.
+        super.setSelectionColor(new java.awt.Color(102, 0, 0)); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
+
     public boolean contains(int x, int y) {
          if (shape == null || !shape.getBounds().equals(getBounds())) {
              shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 10, 10);

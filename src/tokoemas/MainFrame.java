@@ -27,7 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        leftMenu1 = new tokoemas.LeftMenu();
+        leftMenu1 = new panels.LeftMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +88,6 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private tokoemas.LeftMenu leftMenu1;
+    private panels.LeftMenu leftMenu1;
     // End of variables declaration//GEN-END:variables
 }
