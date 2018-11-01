@@ -19,6 +19,7 @@ public class CorneredJTextArea extends JTextArea {
     public CorneredJTextArea() {
         setOpaque(false); // As suggested by @AVD in comment
         setBorder(null);
+        setLineWrap(true);
     }
 
     protected void paintComponent(Graphics g) {
