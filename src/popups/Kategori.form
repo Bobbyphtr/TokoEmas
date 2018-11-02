@@ -66,7 +66,7 @@
                               </Group>
                               <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="TitleText" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="fieldNama" alignment="0" max="32767" attributes="0"/>
+                              <Component id="fieldNamaKategori" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Component id="jScrollPane2" alignment="0" min="-2" pref="339" max="-2" attributes="0"/>
@@ -83,7 +83,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="fieldNama" min="-2" pref="36" max="-2" attributes="0"/>
+                  <Component id="fieldNamaKategori" min="-2" pref="36" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnHapus" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
@@ -125,7 +125,7 @@
             <Property name="text" type="java.lang.String" value="Nama Kategori"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="fieldNama">
+        <Component class="javax.swing.JTextField" name="fieldNamaKategori">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
@@ -133,11 +133,11 @@
             <Property name="text" type="java.lang.String" value="Masukan nama supplier."/>
           </Properties>
           <Events>
-            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldNamaFocusGained"/>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldNamaFocusLost"/>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldNamaKategoriFocusGained"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="fieldNamaKategoriFocusLost"/>
           </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="fieldNama = new CorneredJTextField();"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="fieldNamaKategori = new CorneredJTextField();"/>
           </AuxValues>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -147,7 +147,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="listSupplier">
+            <Component class="javax.swing.JList" name="listKategori">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="5">

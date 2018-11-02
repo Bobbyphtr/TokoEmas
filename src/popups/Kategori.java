@@ -30,10 +30,10 @@ public class Kategori extends javax.swing.JDialog {
         TambahPelangganPanel = new javax.swing.JPanel();
         TitleText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        fieldNama = new javax.swing.JTextField();
-        fieldNama = new CorneredJTextField();
+        fieldNamaKategori = new javax.swing.JTextField();
+        fieldNamaKategori = new CorneredJTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
-        listSupplier = new javax.swing.JList<>();
+        listKategori = new javax.swing.JList<>();
         btnHapus = new javax.swing.JButton();
         btnTambah = new javax.swing.JButton();
         btnUbah = new javax.swing.JButton();
@@ -55,23 +55,23 @@ public class Kategori extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama Kategori");
 
-        fieldNama.setForeground(java.awt.Color.gray);
-        fieldNama.setText("Masukan nama supplier.");
-        fieldNama.addFocusListener(new java.awt.event.FocusAdapter() {
+        fieldNamaKategori.setForeground(java.awt.Color.gray);
+        fieldNamaKategori.setText("Masukan nama supplier.");
+        fieldNamaKategori.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldNamaFocusGained(evt);
+                fieldNamaKategoriFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldNamaFocusLost(evt);
+                fieldNamaKategoriFocusLost(evt);
             }
         });
 
-        listSupplier.setModel(new javax.swing.AbstractListModel<String>() {
+        listKategori.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane2.setViewportView(listSupplier);
+        jScrollPane2.setViewportView(listKategori);
 
         btnHapus.setBackground(new java.awt.Color(89, 38, 1));
         btnHapus.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
@@ -111,7 +111,7 @@ public class Kategori extends javax.swing.JDialog {
                                 .addComponent(btnTambah))
                             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(TitleText, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fieldNama, javax.swing.GroupLayout.Alignment.LEADING)))
+                            .addComponent(fieldNamaKategori, javax.swing.GroupLayout.Alignment.LEADING)))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(41, 41, 41))
         );
@@ -123,7 +123,7 @@ public class Kategori extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fieldNamaKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -150,19 +150,19 @@ public class Kategori extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusLost
-        if (fieldNama.getText().equals("")) {
-            fieldNama.setText("Masukan nama supplier.");
-            fieldNama.setForeground(Color.GRAY);
+    private void fieldNamaKategoriFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaKategoriFocusLost
+        if (fieldNamaKategori.getText().equals("")) {
+            fieldNamaKategori.setText("Masukkan nama kategori.");
+            fieldNamaKategori.setForeground(Color.GRAY);
         }
-    }//GEN-LAST:event_fieldNamaFocusLost
+    }//GEN-LAST:event_fieldNamaKategoriFocusLost
 
-    private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained
-        if (fieldNama.getText().equals("Masukan nama supplier.")) {
-            fieldNama.setText("");
-            fieldNama.setForeground(Color.BLACK);
+    private void fieldNamaKategoriFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaKategoriFocusGained
+        if (fieldNamaKategori.getText().equals("Masukkan nama kategori.")) {
+            fieldNamaKategori.setText("");
+            fieldNamaKategori.setForeground(Color.BLACK);
         }
-    }//GEN-LAST:event_fieldNamaFocusGained
+    }//GEN-LAST:event_fieldNamaKategoriFocusGained
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
@@ -176,10 +176,10 @@ public class Kategori extends javax.swing.JDialog {
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;
-    private javax.swing.JTextField fieldNama;
+    private javax.swing.JTextField fieldNamaKategori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> listSupplier;
+    private javax.swing.JList<String> listKategori;
     // End of variables declaration//GEN-END:variables
 }
