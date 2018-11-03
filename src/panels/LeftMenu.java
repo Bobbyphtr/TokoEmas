@@ -50,7 +50,7 @@ public class LeftMenu extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(153, 0, 153));
+        setBackground(new java.awt.Color(255, 231, 192));
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
         btn_Dashboard.setBackground(new java.awt.Color(64, 43, 100));
@@ -341,7 +341,7 @@ public class LeftMenu extends javax.swing.JPanel {
 
 
     private void btn_DashboardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DashboardMousePressed
-
+        System.out.println("Test");
     }//GEN-LAST:event_btn_DashboardMousePressed
 
     private void btn_TransaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransaksiMousePressed
