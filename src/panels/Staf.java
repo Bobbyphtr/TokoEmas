@@ -4,6 +4,7 @@ package panels;
  *
  * @author Xenon
  */
+import CustomJTables.CustomTableCellRenderer;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -30,7 +31,7 @@ public class Staf extends javax.swing.JPanel {
         TitleText = new javax.swing.JLabel();
         buttonTambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableStaf = new javax.swing.JTable();
         fieldCari = new javax.swing.JTextField();
         fieldCari = new CorneredJTextField();
         jlabel = new javax.swing.JLabel();
@@ -61,18 +62,19 @@ public class Staf extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableStaf.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null}
+                {"1", "a", "a", "b", "d", "e", "c", "a", "a"},
+                {"2", "b", "a", "b", "d", "e", "c", "a", "a"},
+                {"3", "c", "a", "b", "d", "e", "c", "a", "aa"},
+                {"4", "d", "a", "b", "d", "e", "c", "a", "a"}
             },
             new String [] {
                 "ID", "Nama", "Email", "Alamat", "No Telp", "Posisi", "Gaji", "Reward", "Deskripsi Reward"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        tableStaf.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        jScrollPane1.setViewportView(tableStaf);
 
         fieldCari.setForeground(java.awt.Color.gray);
         fieldCari.setText("Ketik pencarian");
@@ -230,8 +232,8 @@ public class Staf extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlabel;
+    private javax.swing.JTable tableStaf;
     private javax.swing.JLabel timeText;
     // End of variables declaration//GEN-END:variables
 }

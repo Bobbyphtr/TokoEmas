@@ -46,15 +46,15 @@ public class Transaksi extends javax.swing.JPanel {
         buttonPilihStaf = new javax.swing.JButton();
         buttonPilihPelanggan = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableProduk = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableTroli = new javax.swing.JTable();
         TitleText1 = new javax.swing.JLabel();
         jlabel3 = new javax.swing.JLabel();
         TitleText2 = new javax.swing.JLabel();
         jlabel4 = new javax.swing.JLabel();
-        fieldCariProduk1 = new javax.swing.JTextField();
-        fieldCariProduk1 = new CorneredJTextField();
+        fieldCariTroli = new javax.swing.JTextField();
+        fieldCariTroli = new CorneredJTextField();
         jlabel5 = new javax.swing.JLabel();
         jlabel6 = new javax.swing.JLabel();
         jlabel7 = new javax.swing.JLabel();
@@ -174,7 +174,7 @@ public class Transaksi extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -185,9 +185,9 @@ public class Transaksi extends javax.swing.JPanel {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableProduk);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableTroli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -198,7 +198,7 @@ public class Transaksi extends javax.swing.JPanel {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tableTroli);
 
         TitleText1.setBackground(new java.awt.Color(102, 0, 0));
         TitleText1.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
@@ -218,14 +218,14 @@ public class Transaksi extends javax.swing.JPanel {
         jlabel4.setForeground(new java.awt.Color(102, 0, 0));
         jlabel4.setText("Cari");
 
-        fieldCariProduk1.setForeground(java.awt.Color.gray);
-        fieldCariProduk1.setText("Ketik pencarian");
-        fieldCariProduk1.addFocusListener(new java.awt.event.FocusAdapter() {
+        fieldCariTroli.setForeground(java.awt.Color.gray);
+        fieldCariTroli.setText("Ketik pencarian");
+        fieldCariTroli.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                fieldCariProduk1FocusGained(evt);
+                fieldCariTroliFocusGained(evt);
             }
             public void focusLost(java.awt.event.FocusEvent evt) {
-                fieldCariProduk1FocusLost(evt);
+                fieldCariTroliFocusLost(evt);
             }
         });
 
@@ -287,7 +287,7 @@ public class Transaksi extends javax.swing.JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(jlabel4)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addComponent(fieldCariProduk1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(fieldCariTroli, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addComponent(jlabel))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -343,7 +343,7 @@ public class Transaksi extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabel4)
-                            .addComponent(fieldCariProduk1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(fieldCariTroli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlabel)
                         .addGap(18, 18, 18)
@@ -366,7 +366,7 @@ public class Transaksi extends javax.swing.JPanel {
                             .addComponent(jlabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jRadioButton2)
                         .addGap(18, 18, 18)
                         .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -406,13 +406,13 @@ public class Transaksi extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonPilihPelangganActionPerformed
 
-    private void fieldCariProduk1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariProduk1FocusGained
+    private void fieldCariTroliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariTroliFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldCariProduk1FocusGained
+    }//GEN-LAST:event_fieldCariTroliFocusGained
 
-    private void fieldCariProduk1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariProduk1FocusLost
+    private void fieldCariTroliFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariTroliFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_fieldCariProduk1FocusLost
+    }//GEN-LAST:event_fieldCariTroliFocusLost
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
@@ -437,7 +437,7 @@ public class Transaksi extends javax.swing.JPanel {
     private javax.swing.JButton buttonTambah;
     private javax.swing.JLabel dateText;
     private javax.swing.JTextField fieldCariProduk;
-    private javax.swing.JTextField fieldCariProduk1;
+    private javax.swing.JTextField fieldCariTroli;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -448,8 +448,6 @@ public class Transaksi extends javax.swing.JPanel {
     private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JLabel jlabel;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlabel2;
@@ -459,6 +457,8 @@ public class Transaksi extends javax.swing.JPanel {
     private javax.swing.JLabel jlabel6;
     private javax.swing.JLabel jlabel7;
     private javax.swing.JLabel labelNamaStaff;
+    private javax.swing.JTable tableProduk;
+    private javax.swing.JTable tableTroli;
     private javax.swing.JLabel timeText;
     // End of variables declaration//GEN-END:variables
 }
