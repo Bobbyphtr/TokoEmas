@@ -18,8 +18,8 @@ public class MyFrame extends JFrame {
     
     MyFrame(){
         splitPane = new JSplitPane();
-        menu = new LeftMenu();
-        transaksiPanel = new Transaksi();
+        menu = new LeftMenu(splitPane);
+        transaksiPanel = new Transaksi(); //Ganti dengan Dashboard!
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(splitPane);

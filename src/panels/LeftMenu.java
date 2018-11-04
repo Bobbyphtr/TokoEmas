@@ -6,15 +6,24 @@
 package panels;
 
 import java.awt.Color;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JSplitPane;
 
 /**
  *
  * @author ysuta
  */
 public class LeftMenu extends javax.swing.JPanel {
+    
+    private JSplitPane pane;
 
     public LeftMenu() {
+        initComponents();
+    }
+    
+    public LeftMenu(JSplitPane pane) {
+        this.pane = pane;
         initComponents();
     }
 
@@ -50,10 +59,10 @@ public class LeftMenu extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 231, 192));
+        setBackground(new java.awt.Color(210, 130, 1));
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        btn_Dashboard.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Dashboard.setBackground(new java.awt.Color(227, 180, 31));
         btn_Dashboard.setToolTipText("");
         btn_Dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -90,7 +99,7 @@ public class LeftMenu extends javax.swing.JPanel {
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
 
-        btn_Transaksi.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Transaksi.setBackground(new java.awt.Color(167, 103, 0));
         btn_Transaksi.setToolTipText("");
         btn_Transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -125,7 +134,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Pelanggan.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Pelanggan.setBackground(new java.awt.Color(167, 103, 0));
         btn_Pelanggan.setToolTipText("");
         btn_Pelanggan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -160,7 +169,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Produk.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Produk.setBackground(new java.awt.Color(167, 103, 0));
         btn_Produk.setToolTipText("");
         btn_Produk.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -195,7 +204,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Staff.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Staff.setBackground(new java.awt.Color(167, 103, 0));
         btn_Staff.setToolTipText("");
         btn_Staff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -230,7 +239,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Rekap.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Rekap.setBackground(new java.awt.Color(167, 103, 0));
         btn_Rekap.setToolTipText("");
         btn_Rekap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -265,7 +274,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Keluar.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Keluar.setBackground(new java.awt.Color(156, 131, 50));
         btn_Keluar.setToolTipText("");
         btn_Keluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -341,27 +350,39 @@ public class LeftMenu extends javax.swing.JPanel {
 
 
     private void btn_DashboardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DashboardMousePressed
-        System.out.println("Test");
+        resetColor();
+        setColor(btn_Dashboard);
+        
     }//GEN-LAST:event_btn_DashboardMousePressed
 
     private void btn_TransaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransaksiMousePressed
-        // TODO add yr handling code here:
+        resetColor();
+        setColor(btn_Transaksi);
+        pane.setRightComponent(new Transaksi());
     }//GEN-LAST:event_btn_TransaksiMousePressed
 
     private void btn_PelangganMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_PelangganMousePressed
-        // TODO add your handling code here:
+        resetColor();
+        setColor(btn_Pelanggan);
+         pane.setRightComponent(new Pelanggan());
     }//GEN-LAST:event_btn_PelangganMousePressed
 
     private void btn_ProdukMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ProdukMousePressed
-        // TODO add your handling code here:
+        resetColor();
+        setColor(btn_Produk);
+        pane.setRightComponent(new Produk());
     }//GEN-LAST:event_btn_ProdukMousePressed
 
     private void btn_StaffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_StaffMousePressed
-        // TODO add your handling code here:
+        resetColor();
+        setColor(btn_Staff);
+        pane.setRightComponent(new Staf());
     }//GEN-LAST:event_btn_StaffMousePressed
 
     private void btn_RekapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RekapMousePressed
-        // TODO add your handling code here:
+        resetColor();
+        setColor(btn_Rekap);
+        pane.setRightComponent(new Rekap());
     }//GEN-LAST:event_btn_RekapMousePressed
 
     private void btn_KeluarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_KeluarMousePressed
@@ -369,12 +390,17 @@ public class LeftMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_KeluarMousePressed
 
     void setColor(JPanel panel) {
-        panel.setBackground(new Color(85,55,118));
+        panel.setBackground(new Color(227, 180, 31));
     }
-    
-    void resetColor() {
 
-    }      
+    void resetColor() {
+        btn_Dashboard.setBackground(new Color(167, 103, 0));
+        btn_Pelanggan.setBackground(new Color(167, 103, 0));
+        btn_Produk.setBackground(new Color(167, 103, 0));
+        btn_Rekap.setBackground(new Color(167, 103, 0));
+        btn_Staff.setBackground(new Color(167, 103, 0));
+        btn_Transaksi.setBackground(new Color(167, 103, 0));
+    }   
     
     private void setInvisible() {
 

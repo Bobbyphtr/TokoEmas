@@ -382,10 +382,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void btn_TransaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransaksiMousePressed
         resetColor();
         setColor(btn_Transaksi);
-        //this.removeAll();
-        this.add(new Transaksi(), BorderLayout.EAST);
-        this.repaint();
-        this.repaint();
     }//GEN-LAST:event_btn_TransaksiMousePressed
 
     private void btn_PelangganMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_PelangganMousePressed
