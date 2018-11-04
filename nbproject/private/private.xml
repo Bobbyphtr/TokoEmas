@@ -3,16 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Rekap.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/TambahProduk.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/TambahPelanggan.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/PilihStaf.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/LeftMenu.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Staf.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/customComponents/CorneredJTextField.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/PilihPelanggan.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/EditStaf.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/tokoemas/MainFrame.java</file>
+            <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/TambahPelanggan.java</file>
+            <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/panels/Produk.java</file>
+            <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/panels/Staf.java</file>
+            <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/customComponents/RoundBorder.java</file>
         </group>
     </open-files>
 </project-private>
