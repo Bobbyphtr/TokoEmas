@@ -8,7 +8,8 @@ package tokoemas;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
-import panels.Transaksi;
+import javax.swing.JSplitPane;
+import panels.*;
 
 /**
  *
@@ -22,6 +23,14 @@ public class MainFrame extends javax.swing.JFrame {
     public MainFrame() {
         initComponents();
         this.setLayout(new BorderLayout());
+        JSplitPane splitPane = new JSplitPane();
+        LeftMenu leftMenu = new LeftMenu();
+        splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
+        splitPane.setDividerLocation(200);                    
+        splitPane.setLeftComponent(leftMenu);             
+        splitPane.setRightComponent(new Transaksi());
+        pack();
+        this.add(splitPane);
     }
 
     /**
@@ -56,7 +65,6 @@ public class MainFrame extends javax.swing.JFrame {
         btn_Keluar = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -348,38 +356,19 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(107, Short.MAX_VALUE))
         );
 
-        jInternalFrame1.setBackground(new java.awt.Color(255, 255, 255));
-        jInternalFrame1.setBorder(null);
-        jInternalFrame1.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 966, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(LeftMenu, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(978, 978, 978))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jInternalFrame1)
-                    .addComponent(LeftMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(LeftMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -424,16 +413,16 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_KeluarMousePressed
 
     void setColor(JPanel panel) {
-        panel.setBackground(new Color(227,180,31));
+        panel.setBackground(new Color(227, 180, 31));
     }
 
     void resetColor() {
-        btn_Dashboard.setBackground(new Color(167,103,0));
-        btn_Pelanggan.setBackground(new Color(167,103,0));
-        btn_Produk.setBackground(new Color(167,103,0));
-        btn_Rekap.setBackground(new Color(167,103,0));
-        btn_Staff.setBackground(new Color(167,103,0));
-        btn_Transaksi.setBackground(new Color(167,103,0));
+        btn_Dashboard.setBackground(new Color(167, 103, 0));
+        btn_Pelanggan.setBackground(new Color(167, 103, 0));
+        btn_Produk.setBackground(new Color(167, 103, 0));
+        btn_Rekap.setBackground(new Color(167, 103, 0));
+        btn_Staff.setBackground(new Color(167, 103, 0));
+        btn_Transaksi.setBackground(new Color(167, 103, 0));
     }
 
     /**
@@ -480,7 +469,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel btn_Rekap;
     private javax.swing.JPanel btn_Staff;
     private javax.swing.JPanel btn_Transaksi;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
