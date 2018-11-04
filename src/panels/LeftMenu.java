@@ -46,7 +46,7 @@ public class LeftMenu extends javax.swing.JPanel {
         btn_Rekap = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        btn_Rekap1 = new javax.swing.JPanel();
+        btn_Keluar = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
 
@@ -113,7 +113,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel7)
-                .addGap(0, 119, Short.MAX_VALUE))
+                .addGap(0, 132, Short.MAX_VALUE))
         );
         btn_TransaksiLayout.setVerticalGroup(
             btn_TransaksiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +148,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel9)
-                .addGap(0, 110, Short.MAX_VALUE))
+                .addGap(0, 123, Short.MAX_VALUE))
         );
         btn_PelangganLayout.setVerticalGroup(
             btn_PelangganLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,7 +183,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel11)
-                .addGap(0, 132, Short.MAX_VALUE))
+                .addGap(0, 145, Short.MAX_VALUE))
         );
         btn_ProdukLayout.setVerticalGroup(
             btn_ProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,7 +253,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel15)
-                .addGap(0, 139, Short.MAX_VALUE))
+                .addGap(0, 152, Short.MAX_VALUE))
         );
         btn_RekapLayout.setVerticalGroup(
             btn_RekapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,11 +265,11 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Rekap1.setBackground(new java.awt.Color(64, 43, 100));
-        btn_Rekap1.setToolTipText("");
-        btn_Rekap1.addMouseListener(new java.awt.event.MouseAdapter() {
+        btn_Keluar.setBackground(new java.awt.Color(64, 43, 100));
+        btn_Keluar.setToolTipText("");
+        btn_Keluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                btn_Rekap1MousePressed(evt);
+                btn_KeluarMousePressed(evt);
             }
         });
 
@@ -280,21 +280,21 @@ public class LeftMenu extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Keluar");
 
-        javax.swing.GroupLayout btn_Rekap1Layout = new javax.swing.GroupLayout(btn_Rekap1);
-        btn_Rekap1.setLayout(btn_Rekap1Layout);
-        btn_Rekap1Layout.setHorizontalGroup(
-            btn_Rekap1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(btn_Rekap1Layout.createSequentialGroup()
+        javax.swing.GroupLayout btn_KeluarLayout = new javax.swing.GroupLayout(btn_Keluar);
+        btn_Keluar.setLayout(btn_KeluarLayout);
+        btn_KeluarLayout.setHorizontalGroup(
+            btn_KeluarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_KeluarLayout.createSequentialGroup()
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel17)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        btn_Rekap1Layout.setVerticalGroup(
-            btn_Rekap1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_Rekap1Layout.createSequentialGroup()
+        btn_KeluarLayout.setVerticalGroup(
+            btn_KeluarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btn_KeluarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(btn_Rekap1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                .addGroup(btn_KeluarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel17)
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
@@ -310,7 +310,7 @@ public class LeftMenu extends javax.swing.JPanel {
             .addComponent(btn_Produk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Staff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Rekap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btn_Rekap1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btn_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,7 +334,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(0, 0, 0)
                 .addComponent(btn_Rekap, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
-                .addComponent(btn_Rekap1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btn_Keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(107, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -364,9 +364,9 @@ public class LeftMenu extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_RekapMousePressed
 
-    private void btn_Rekap1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_Rekap1MousePressed
+    private void btn_KeluarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_KeluarMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btn_Rekap1MousePressed
+    }//GEN-LAST:event_btn_KeluarMousePressed
 
     void setColor(JPanel panel) {
         panel.setBackground(new Color(85,55,118));
@@ -382,10 +382,10 @@ public class LeftMenu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btn_Dashboard;
+    private javax.swing.JPanel btn_Keluar;
     private javax.swing.JPanel btn_Pelanggan;
     private javax.swing.JPanel btn_Produk;
     private javax.swing.JPanel btn_Rekap;
-    private javax.swing.JPanel btn_Rekap1;
     private javax.swing.JPanel btn_Staff;
     private javax.swing.JPanel btn_Transaksi;
     private javax.swing.JLabel jLabel10;
