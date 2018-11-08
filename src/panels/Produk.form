@@ -44,13 +44,13 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="buttonTambah2" alignment="0" max="32767" attributes="0"/>
+                              <Component id="buttonTambah" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="buttonTambah" min="-2" pref="130" max="-2" attributes="0"/>
+                                  <Component id="buttonSupplier" min="-2" pref="130" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="buttonTambah1" max="32767" attributes="0"/>
+                                  <Component id="buttonKategori" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="buttonTambah3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="buttonUbah" alignment="0" max="32767" attributes="0"/>
                               <Component id="panelInfoProduk" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -107,8 +107,8 @@
                       <Component id="TitleText" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="buttonTambah" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="buttonTambah1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="buttonSupplier" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          <Component id="buttonKategori" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -130,9 +130,9 @@
                       <Component id="jScrollPane1" min="-2" pref="493" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Component id="buttonTambah2" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="buttonTambah" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="buttonTambah3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="buttonUbah" min="-2" pref="37" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jlabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -160,7 +160,7 @@
         <Property name="text" type="java.lang.String" value="Produk"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonTambah">
+    <Component class="javax.swing.JButton" name="buttonSupplier">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="17" green="50" red="7e" type="rgb"/>
@@ -174,7 +174,7 @@
         <Property name="text" type="java.lang.String" value="Supplier"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTambahActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSupplierActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -259,11 +259,6 @@
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color type="null"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -279,11 +274,6 @@
       </Layout>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel2">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color type="null"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -356,7 +346,7 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonTambah1">
+    <Component class="javax.swing.JButton" name="buttonKategori">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="17" green="50" red="7e" type="rgb"/>
@@ -370,10 +360,10 @@
         <Property name="text" type="java.lang.String" value="Kategori"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTambah1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonKategoriActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonTambah2">
+    <Component class="javax.swing.JButton" name="buttonTambah">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="1" green="26" red="59" type="rgb"/>
@@ -387,10 +377,10 @@
         <Property name="text" type="java.lang.String" value="Tambah Produk"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTambah2ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTambahActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="buttonTambah3">
+    <Component class="javax.swing.JButton" name="buttonUbah">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="1" green="26" red="59" type="rgb"/>
@@ -404,7 +394,7 @@
         <Property name="text" type="java.lang.String" value="Ubah Produk"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonTambah3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonUbahActionPerformed"/>
       </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="panelInfoProduk">

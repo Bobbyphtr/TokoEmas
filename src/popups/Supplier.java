@@ -17,6 +17,10 @@ public class Supplier extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public Supplier() {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

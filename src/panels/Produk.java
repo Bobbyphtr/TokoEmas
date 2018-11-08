@@ -6,7 +6,10 @@ package panels;
  */
 import customComponents.*;
 import java.awt.Color;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import popups.Supplier;
+import popups.TambahProduk;
 
 public class Produk extends javax.swing.JPanel {
 
@@ -28,7 +31,7 @@ public class Produk extends javax.swing.JPanel {
 
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         TitleText = new javax.swing.JLabel();
-        buttonTambah = new javax.swing.JButton();
+        buttonSupplier = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         fieldCari = new javax.swing.JTextField();
@@ -40,9 +43,9 @@ public class Produk extends javax.swing.JPanel {
         timeText = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jComboBox3 = new javax.swing.JComboBox<>();
-        buttonTambah1 = new javax.swing.JButton();
-        buttonTambah2 = new javax.swing.JButton();
-        buttonTambah3 = new javax.swing.JButton();
+        buttonKategori = new javax.swing.JButton();
+        buttonTambah = new javax.swing.JButton();
+        buttonUbah = new javax.swing.JButton();
         panelInfoProduk = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -73,13 +76,13 @@ public class Produk extends javax.swing.JPanel {
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
         TitleText.setText("Produk");
 
-        buttonTambah.setBackground(new java.awt.Color(126, 80, 23));
-        buttonTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        buttonTambah.setForeground(java.awt.Color.white);
-        buttonTambah.setText("Supplier");
-        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
+        buttonSupplier.setBackground(new java.awt.Color(126, 80, 23));
+        buttonSupplier.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonSupplier.setForeground(java.awt.Color.white);
+        buttonSupplier.setText("Supplier");
+        buttonSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTambahActionPerformed(evt);
+                buttonSupplierActionPerformed(evt);
             }
         });
 
@@ -116,8 +119,6 @@ public class Produk extends javax.swing.JPanel {
         jlabel.setForeground(new java.awt.Color(102, 0, 0));
         jlabel.setText("Cari");
 
-        jPanel1.setBackground(null);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -128,8 +129,6 @@ public class Produk extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jPanel2.setBackground(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -156,33 +155,33 @@ public class Produk extends javax.swing.JPanel {
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        buttonTambah1.setBackground(new java.awt.Color(126, 80, 23));
-        buttonTambah1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        buttonTambah1.setForeground(java.awt.Color.white);
-        buttonTambah1.setText("Kategori");
-        buttonTambah1.addActionListener(new java.awt.event.ActionListener() {
+        buttonKategori.setBackground(new java.awt.Color(126, 80, 23));
+        buttonKategori.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonKategori.setForeground(java.awt.Color.white);
+        buttonKategori.setText("Kategori");
+        buttonKategori.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTambah1ActionPerformed(evt);
+                buttonKategoriActionPerformed(evt);
             }
         });
 
-        buttonTambah2.setBackground(new java.awt.Color(89, 38, 1));
-        buttonTambah2.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        buttonTambah2.setForeground(java.awt.Color.white);
-        buttonTambah2.setText("Tambah Produk");
-        buttonTambah2.addActionListener(new java.awt.event.ActionListener() {
+        buttonTambah.setBackground(new java.awt.Color(89, 38, 1));
+        buttonTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonTambah.setForeground(java.awt.Color.white);
+        buttonTambah.setText("Tambah Produk");
+        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTambah2ActionPerformed(evt);
+                buttonTambahActionPerformed(evt);
             }
         });
 
-        buttonTambah3.setBackground(new java.awt.Color(89, 38, 1));
-        buttonTambah3.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        buttonTambah3.setForeground(java.awt.Color.white);
-        buttonTambah3.setText("Ubah Produk");
-        buttonTambah3.addActionListener(new java.awt.event.ActionListener() {
+        buttonUbah.setBackground(new java.awt.Color(89, 38, 1));
+        buttonUbah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonUbah.setForeground(java.awt.Color.white);
+        buttonUbah.setText("Ubah Produk");
+        buttonUbah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonTambah3ActionPerformed(evt);
+                buttonUbahActionPerformed(evt);
             }
         });
 
@@ -328,12 +327,12 @@ public class Produk extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(buttonTambah2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(buttonTambah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(buttonSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buttonTambah1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(buttonTambah3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(buttonKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(buttonUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(panelInfoProduk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlabel1)
@@ -374,8 +373,8 @@ public class Produk extends javax.swing.JPanel {
                         .addComponent(TitleText)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(buttonTambah1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(buttonSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(timeText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -391,9 +390,9 @@ public class Produk extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(buttonTambah2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(buttonTambah3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buttonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -410,9 +409,11 @@ public class Produk extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_fieldCariFocusGained
 
-    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTambahActionPerformed
+    private void buttonSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSupplierActionPerformed
+        JDialog supplier = new Supplier();
+        supplier.setLocationRelativeTo(this);
+        supplier.setVisible(true);
+    }//GEN-LAST:event_buttonSupplierActionPerformed
 
     private void fieldCariFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusLost
         if (fieldCari.getText().equals("")) {
@@ -425,17 +426,19 @@ public class Produk extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_fieldCariActionPerformed
 
-    private void buttonTambah1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambah1ActionPerformed
+    private void buttonKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKategoriActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTambah1ActionPerformed
+    }//GEN-LAST:event_buttonKategoriActionPerformed
 
-    private void buttonTambah2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambah2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTambah2ActionPerformed
+    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
+        JDialog tambahProduk = new TambahProduk();
+        tambahProduk.setLocationRelativeTo(this);
+        tambahProduk.setVisible(true);
+    }//GEN-LAST:event_buttonTambahActionPerformed
 
-    private void buttonTambah3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambah3ActionPerformed
+    private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_buttonTambah3ActionPerformed
+    }//GEN-LAST:event_buttonUbahActionPerformed
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
@@ -451,10 +454,10 @@ public class Produk extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleText;
+    private javax.swing.JButton buttonKategori;
+    private javax.swing.JButton buttonSupplier;
     private javax.swing.JButton buttonTambah;
-    private javax.swing.JButton buttonTambah1;
-    private javax.swing.JButton buttonTambah2;
-    private javax.swing.JButton buttonTambah3;
+    private javax.swing.JButton buttonUbah;
     private javax.swing.JLabel dateText;
     private javax.swing.JTextField fieldCari;
     private javax.swing.JComboBox<String> jComboBox1;

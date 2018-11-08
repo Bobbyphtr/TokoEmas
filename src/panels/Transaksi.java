@@ -4,6 +4,7 @@ package panels;
  *
  * @author Xenon
  */
+import CustomJTables.CustomTableCellRenderer;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -124,8 +125,6 @@ public class Transaksi extends javax.swing.JPanel {
         jlabel.setText("Tanggal Transaksi");
         add(jlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 97, -1, -1));
 
-        jPanel1.setBackground(null);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -134,12 +133,10 @@ public class Transaksi extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(934, 0, -1, 720));
-
-        jPanel2.setBackground(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -149,7 +146,7 @@ public class Transaksi extends javax.swing.JPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 720, Short.MAX_VALUE)
         );
 
         add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 720));
@@ -219,6 +216,7 @@ public class Transaksi extends javax.swing.JPanel {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ));
+        tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         jScrollPane1.setViewportView(tableProduk);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 139, 459, 130));
@@ -234,6 +232,7 @@ public class Transaksi extends javax.swing.JPanel {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ));
+        tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         jScrollPane2.setViewportView(tableTroli);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 360, 459, 135));
@@ -287,15 +286,12 @@ public class Transaksi extends javax.swing.JPanel {
         jlabel7.setText("Metode Bayar");
         add(jlabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 538, -1, -1));
 
-        jRadioButton2.setBackground(null);
         jRadioButton2.setText("Cash");
         add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 557, -1, -1));
 
-        jRadioButton3.setBackground(null);
         jRadioButton3.setText("Credit");
         add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 557, -1, -1));
 
-        jRadioButton4.setBackground(null);
         jRadioButton4.setText("Debit");
         add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(773, 557, -1, -1));
 
@@ -384,7 +380,7 @@ public class Transaksi extends javax.swing.JPanel {
                     .addComponent(jLabel17)
                     .addComponent(jLabel20)
                     .addComponent(jLabel19))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(240, Short.MAX_VALUE))
         );
         panelInfoProdukLayout.setVerticalGroup(
             panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
