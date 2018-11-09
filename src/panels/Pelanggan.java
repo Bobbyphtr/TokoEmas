@@ -38,6 +38,7 @@ public class Pelanggan extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         dateText = new javax.swing.JLabel();
         timeText = new javax.swing.JLabel();
+        buttonUbah = new javax.swing.JButton();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -89,8 +90,6 @@ public class Pelanggan extends javax.swing.JPanel {
         jlabel.setForeground(new java.awt.Color(102, 0, 0));
         jlabel.setText("Cari");
 
-        jPanel1.setBackground(null);
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,8 +100,6 @@ public class Pelanggan extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-
-        jPanel2.setBackground(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,6 +122,16 @@ public class Pelanggan extends javax.swing.JPanel {
         timeText.setForeground(new java.awt.Color(102, 0, 0));
         timeText.setText("<TIME>");
 
+        buttonUbah.setBackground(new java.awt.Color(89, 38, 1));
+        buttonUbah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonUbah.setForeground(java.awt.Color.white);
+        buttonUbah.setText("Ubah Pelanggan");
+        buttonUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonUbahActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,10 +147,12 @@ public class Pelanggan extends javax.swing.JPanel {
                                 .addGap(14, 14, 14)
                                 .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 2, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonTambah)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 622, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(buttonUbah)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(dateText)
                         .addGap(36, 36, 36))
                     .addGroup(layout.createSequentialGroup()
@@ -163,7 +172,9 @@ public class Pelanggan extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(TitleText)
                         .addGap(16, 16, 16)
-                        .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabel)
@@ -198,6 +209,10 @@ public class Pelanggan extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_fieldCariFocusLost
 
+    private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonUbahActionPerformed
+
     public static void main(String args[]) {
         JFrame a = new JFrame();
         a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -213,6 +228,7 @@ public class Pelanggan extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleText;
     private javax.swing.JButton buttonTambah;
+    private javax.swing.JButton buttonUbah;
     private javax.swing.JLabel dateText;
     private javax.swing.JTextField fieldCari;
     private javax.swing.JPanel jPanel1;
