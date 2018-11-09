@@ -8,7 +8,6 @@ import CustomJTables.CustomTableCellRenderer;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.JFrame;
-
 public class Transaksi extends javax.swing.JPanel {
 
     /**
@@ -125,6 +124,8 @@ public class Transaksi extends javax.swing.JPanel {
         jlabel.setText("Tanggal Transaksi");
         add(jlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 97, -1, -1));
 
+        jPanel1.setBackground(null);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -137,6 +138,8 @@ public class Transaksi extends javax.swing.JPanel {
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(934, 0, -1, 720));
+
+        jPanel2.setBackground(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
