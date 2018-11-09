@@ -99,13 +99,13 @@ public class Transaksi extends javax.swing.JPanel {
         buttonTambah.setBackground(new java.awt.Color(89, 38, 1));
         buttonTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         buttonTambah.setForeground(java.awt.Color.white);
-        buttonTambah.setText("Tambah pelanggan");
+        buttonTambah.setText("Tambah Transaksi");
         buttonTambah.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 buttonTambahActionPerformed(evt);
             }
         });
-        add(buttonTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 590, -1, 37));
+        add(buttonTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 600, -1, 37));
 
         fieldCariProduk.setForeground(java.awt.Color.gray);
         fieldCariProduk.setText("Ketik pencarian");
@@ -226,13 +226,13 @@ public class Transaksi extends javax.swing.JPanel {
 
         tableTroli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
+                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Harga Jual", "Aksi"
             }
         ));
         tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
