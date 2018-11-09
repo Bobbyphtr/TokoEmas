@@ -6,7 +6,10 @@ package panels;
  */
 import customComponents.*;
 import java.awt.Color;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import popups.EditPelanggan;
+import popups.TambahPelanggan;
 
 public class Pelanggan extends javax.swing.JPanel {
 
@@ -30,7 +33,7 @@ public class Pelanggan extends javax.swing.JPanel {
         TitleText = new javax.swing.JLabel();
         buttonTambah = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePelanggan = new javax.swing.JTable();
         fieldCari = new javax.swing.JTextField();
         fieldCari = new CorneredJTextField();
         jlabel = new javax.swing.JLabel();
@@ -62,7 +65,7 @@ public class Pelanggan extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -73,7 +76,7 @@ public class Pelanggan extends javax.swing.JPanel {
                 "ID", "Nama", "Email", "Alamat", "No Telp", "Bonus", "Deskripsi Bonus", "Loyal"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablePelanggan);
 
         fieldCari.setForeground(java.awt.Color.gray);
         fieldCari.setText("Ketik pencarian");
@@ -199,7 +202,9 @@ public class Pelanggan extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariFocusGained
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        // TODO add your handling code here:
+        JDialog tambahPelanggan = new TambahPelanggan();
+        tambahPelanggan.setLocationRelativeTo(this);
+        tambahPelanggan.setVisible(true);
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldCariFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusLost
@@ -210,7 +215,11 @@ public class Pelanggan extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariFocusLost
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
-        // TODO add your handling code here:
+        if (tablePelanggan.getSelectedRow() > -1) {
+            JDialog editPelanggan = new EditPelanggan();
+            editPelanggan.setLocationRelativeTo(this);
+            editPelanggan.setVisible(true);
+        }
     }//GEN-LAST:event_buttonUbahActionPerformed
 
     public static void main(String args[]) {
@@ -235,8 +244,8 @@ public class Pelanggan extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlabel;
+    private javax.swing.JTable tablePelanggan;
     private javax.swing.JLabel timeText;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,6 +18,10 @@ public class EditPelanggan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public EditPelanggan() {
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
