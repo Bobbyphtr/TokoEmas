@@ -8,6 +8,8 @@ import customComponents.*;
 import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import popups.EditProduk;
+import popups.Kategori;
 import popups.Supplier;
 import popups.TambahProduk;
 
@@ -33,7 +35,7 @@ public class Produk extends javax.swing.JPanel {
         TitleText = new javax.swing.JLabel();
         buttonSupplier = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableProduk = new javax.swing.JTable();
         fieldCari = new javax.swing.JTextField();
         fieldCari = new CorneredJTextField();
         jlabel = new javax.swing.JLabel();
@@ -86,7 +88,7 @@ public class Produk extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -97,7 +99,7 @@ public class Produk extends javax.swing.JPanel {
                 "Tgl Beli", "ID_Barang", "Deskripsi Barang", "Harga Beli", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableProduk);
 
         fieldCari.setForeground(java.awt.Color.gray);
         fieldCari.setText("Ketik pencarian");
@@ -427,7 +429,9 @@ public class Produk extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariActionPerformed
 
     private void buttonKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonKategoriActionPerformed
-        // TODO add your handling code here:
+        JDialog kategori = new Kategori();
+        kategori.setLocationRelativeTo(this);
+        kategori.setVisible(true);
     }//GEN-LAST:event_buttonKategoriActionPerformed
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
@@ -437,7 +441,11 @@ public class Produk extends javax.swing.JPanel {
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
-        // TODO add your handling code here:
+        if (tableProduk.getSelectedColumn() > -1) {
+           JDialog editProduk = new EditProduk();
+           editProduk.setLocationRelativeTo(this);
+           editProduk.setVisible(true);
+        }
     }//GEN-LAST:event_buttonUbahActionPerformed
 
     public static void main(String args[]) {
@@ -481,10 +489,10 @@ public class Produk extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlabel;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JPanel panelInfoProduk;
+    private javax.swing.JTable tableProduk;
     private javax.swing.JLabel timeText;
     // End of variables declaration//GEN-END:variables
 }
