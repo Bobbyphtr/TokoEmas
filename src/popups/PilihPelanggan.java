@@ -28,10 +28,10 @@ public class PilihPelanggan extends javax.swing.JPanel {
     private void initComponents() {
 
         TitleText = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        textPelanggan = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePelanggan = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 231, 192));
 
@@ -40,13 +40,13 @@ public class PilihPelanggan extends javax.swing.JPanel {
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
         TitleText.setText("Pilih Pelanggan");
 
-        jTextField1.setText("jTextField1");
+        textPelanggan.setText("jTextField1");
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePelanggan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -57,7 +57,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
                 "ID", "Nama", "Email", "No Telp"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablePelanggan);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -70,7 +70,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(jLabel1)
                         .addGap(34, 34, 34)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(TitleText))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -85,7 +85,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
                 .addComponent(TitleText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textPelanggan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -98,7 +98,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
     private javax.swing.JLabel TitleText;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTable tablePelanggan;
+    private javax.swing.JTextField textPelanggan;
     // End of variables declaration//GEN-END:variables
 }
