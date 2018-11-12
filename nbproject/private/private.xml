@@ -3,20 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/TambahProduk.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/TambahPelanggan.java</file>
+            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Rekap.java</file>
+            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/database/Controller.java</file>
             <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/PilihStaf.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Produk.java</file>
             <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/EditProduk.java</file>
             <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/DashboardPanel.java</file>
             <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/Supplier.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Rekap.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/database/Controller.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/LeftMenu.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/EditPelanggan.java</file>
+            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Pelanggan.java</file>
             <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/popups/Kategori.java</file>
             <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/WelcomePanel.java</file>
-            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/panels/Transaksi.java</file>
+            <file>file:/C:/Users/ysuta/Desktop/UC/Coding/TokoEmas/src/database/ConnectionManager.java</file>
         </group>
     </open-files>
 </project-private>
