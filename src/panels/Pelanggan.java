@@ -5,6 +5,7 @@ package panels;
  * @author Xenon
  */
 import customComponents.*;
+import database.Controller;
 import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -16,7 +17,11 @@ public class Pelanggan extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
+    
+    private Controller controller;
+    
     public Pelanggan() {
+        controller = new Controller();
         initComponents();
     }
 
@@ -76,6 +81,7 @@ public class Pelanggan extends javax.swing.JPanel {
                 "ID", "Nama", "Email", "Alamat", "No Telp", "Bonus", "Deskripsi Bonus", "Loyal"
             }
         ));
+        tablePelanggan.setModel(controller.getPelanggan());
         jScrollPane1.setViewportView(tablePelanggan);
 
         fieldCari.setForeground(java.awt.Color.gray);
