@@ -204,7 +204,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablePelanggan.setModel(controller.getPelanggan());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablePelanggan.setModel(getPelanggan());"/>
           </AuxValues>
         </Component>
       </SubComponents>

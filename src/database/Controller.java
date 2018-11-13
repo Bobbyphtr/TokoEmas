@@ -14,12 +14,13 @@ import javax.swing.table.DefaultTableModel;
 public class Controller {
 
     private PreparedStatement preparedStatement;
-    private Statement statement;
-    private ResultSet rs;
-    private ResultSetMetaData rsmt;
+    private static Statement statement;
+    private static ResultSet rs;
+    private static ResultSetMetaData rsmt;
 
     public Controller() {
-        Connection conn = ConnectionManager.getConnection();
+        ConnectionManager cm = new ConnectionManager();
+        Connection conn = cm.getConnection();
         try {
             statement = conn.createStatement();
         } catch (SQLException ex) {
@@ -27,7 +28,7 @@ public class Controller {
         }
     }
 
-    public DefaultTableModel getPelanggan() {
+    public static DefaultTableModel getPelanggan() {
         String query = "SELECT * from customer";
         try {
             rs = statement.executeQuery(query);
@@ -49,7 +50,7 @@ public class Controller {
                 }
                 data.add(row);
             }
-            
+
             return new DefaultTableModel(data, column);
         } catch (SQLException ex) {
             ex.printStackTrace();

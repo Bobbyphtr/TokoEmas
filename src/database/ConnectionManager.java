@@ -12,29 +12,25 @@ import java.util.logging.Logger;
  * @author Xenon
  */
 public class ConnectionManager {
+    
+    private Connection conn;
 
-    public static ConnectionManager conMgr = new ConnectionManager();
-    private static Connection conn;
-
-    private ConnectionManager() {
+    public ConnectionManager() {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/toko_emas", "root", "");
         } catch (ClassNotFoundException | SQLException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(ConnectionManager.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Error: " + ex);
         }
     }
 
-    public static ConnectionManager getInstance() {
-        return conMgr;
-    }
-
-    public static Connection getConnection() {
+    public Connection getConnection() {
         System.out.println(conn != null ? "Connected to Database" : "Not Connected to Database");
         return conn;
     }
 
     public static void main(String[] args) {
-        Connection testCon = ConnectionManager.getConnection();
+        ConnectionManager cm = new ConnectionManager();
+        Connection testConn = cm.getConnection();
     }
 }
