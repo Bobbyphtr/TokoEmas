@@ -7,7 +7,10 @@ package panels;
 import CustomJTables.CustomTableCellRenderer;
 import customComponents.*;
 import java.awt.Color;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import popups.*;
+
 public class Transaksi extends javax.swing.JPanel {
 
     /**
@@ -449,11 +452,17 @@ public class Transaksi extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariProdukFocusLost
 
     private void buttonPilihStafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihStafActionPerformed
-        // TODO add your handling code here:
+        JDialog pilihStafDialog = new JDialog();
+        pilihStafDialog.setContentPane(new PilihStaf());
+        pilihStafDialog.pack();
+        pilihStafDialog.setVisible(true);
     }//GEN-LAST:event_buttonPilihStafActionPerformed
 
     private void buttonPilihPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihPelangganActionPerformed
-        // TODO add your handling code here:
+        JDialog pilihPelangganDialog = new JDialog();
+        pilihPelangganDialog.setContentPane(new PilihPelanggan());
+        pilihPelangganDialog.pack();
+        pilihPelangganDialog.setVisible(true);
     }//GEN-LAST:event_buttonPilihPelangganActionPerformed
 
     private void fieldCariTroliFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariTroliFocusGained
