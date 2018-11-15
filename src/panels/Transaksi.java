@@ -6,9 +6,14 @@ package panels;
  */
 import CustomJTables.CustomTableCellRenderer;
 import customComponents.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Properties;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 import popups.*;
 
 public class Transaksi extends javax.swing.JPanel {
@@ -16,8 +21,25 @@ public class Transaksi extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
+    
+    JDatePickerImpl datePicker;
+    
     public Transaksi() {
         initComponents();
+        initDatePicker();
+    }
+
+    private void initDatePicker() {
+        UtilDateModel model = new UtilDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        dateContainer.setLayout(new BorderLayout());
+        dateContainer.add(datePicker);
+        this.setFocusable(true);
     }
 
     /**
@@ -81,6 +103,7 @@ public class Transaksi extends javax.swing.JPanel {
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jlabel8 = new javax.swing.JLabel();
+        dateContainer = new javax.swing.JPanel();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -97,7 +120,7 @@ public class Transaksi extends javax.swing.JPanel {
         TitleText.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
         TitleText.setText("Transaksi");
-        add(TitleText, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 42, -1, -1));
+        add(TitleText, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, -1, -1));
 
         buttonTambah.setBackground(new java.awt.Color(89, 38, 1));
         buttonTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
@@ -124,10 +147,8 @@ public class Transaksi extends javax.swing.JPanel {
 
         jlabel.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel.setForeground(new java.awt.Color(102, 0, 0));
-        jlabel.setText("Tanggal Transaksi");
-        add(jlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 97, -1, -1));
-
-        jPanel1.setBackground(null);
+        jlabel.setText("Pilih Tanggal Transaksi");
+        add(jlabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -141,8 +162,6 @@ public class Transaksi extends javax.swing.JPanel {
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(934, 0, -1, 720));
-
-        jPanel2.setBackground(null);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -177,17 +196,17 @@ public class Transaksi extends javax.swing.JPanel {
         jlabel2.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel2.setForeground(new java.awt.Color(102, 0, 0));
         jlabel2.setText("Pelanggan");
-        add(jlabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 184, -1, -1));
+        add(jlabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 200, -1, -1));
 
         labelNamaStaff.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         labelNamaStaff.setForeground(new java.awt.Color(102, 0, 0));
         labelNamaStaff.setText("<Nama>");
-        add(labelNamaStaff, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 135, -1, -1));
+        add(labelNamaStaff, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, -1, -1));
 
         LabelNamaPelanggan.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         LabelNamaPelanggan.setForeground(new java.awt.Color(102, 0, 0));
         LabelNamaPelanggan.setText("Default");
-        add(LabelNamaPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(156, 184, -1, -1));
+        add(LabelNamaPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, -1, -1));
 
         buttonPilihStaf.setBackground(new java.awt.Color(89, 38, 1));
         buttonPilihStaf.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
@@ -198,7 +217,7 @@ public class Transaksi extends javax.swing.JPanel {
                 buttonPilihStafActionPerformed(evt);
             }
         });
-        add(buttonPilihStaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 127, -1, 37));
+        add(buttonPilihStaf, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 120, 37));
 
         buttonPilihPelanggan.setBackground(new java.awt.Color(89, 38, 1));
         buttonPilihPelanggan.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
@@ -209,7 +228,7 @@ public class Transaksi extends javax.swing.JPanel {
                 buttonPilihPelangganActionPerformed(evt);
             }
         });
-        add(buttonPilihPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(241, 176, -1, 37));
+        add(buttonPilihPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 37));
 
         tableProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -252,7 +271,7 @@ public class Transaksi extends javax.swing.JPanel {
         jlabel3.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel3.setForeground(new java.awt.Color(102, 0, 0));
         jlabel3.setText("Staff");
-        add(jlabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 135, -1, -1));
+        add(jlabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
         TitleText2.setBackground(new java.awt.Color(102, 0, 0));
         TitleText2.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
@@ -303,134 +322,103 @@ public class Transaksi extends javax.swing.JPanel {
 
         panelInfoProduk.setBackground(java.awt.Color.white);
         panelInfoProduk.setBorder(new BubbleBorderJPanel(Color.WHITE, 10, 20, 0));
+        panelInfoProduk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel1.setForeground(java.awt.Color.gray);
         jLabel1.setText("Deskripsi:");
+        panelInfoProduk.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel2.setForeground(java.awt.Color.black);
         jLabel2.setText("IDProduct");
+        panelInfoProduk.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel4.setForeground(java.awt.Color.black);
         jLabel4.setText("IDProduct");
+        panelInfoProduk.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel9.setForeground(java.awt.Color.black);
         jLabel9.setText("IDProduct");
+        panelInfoProduk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel10.setForeground(java.awt.Color.gray);
         jLabel10.setText("Weight:");
+        panelInfoProduk.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel11.setForeground(java.awt.Color.gray);
         jLabel11.setText("Karat:");
+        panelInfoProduk.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel12.setForeground(java.awt.Color.black);
         jLabel12.setText("IDProduct");
+        panelInfoProduk.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel13.setForeground(java.awt.Color.gray);
         jLabel13.setText("Type:");
+        panelInfoProduk.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel14.setForeground(java.awt.Color.black);
         jLabel14.setText("IDProduct");
+        panelInfoProduk.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel15.setForeground(java.awt.Color.gray);
         jLabel15.setText("Kategori:");
+        panelInfoProduk.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel16.setForeground(java.awt.Color.black);
         jLabel16.setText("IDProduct");
+        panelInfoProduk.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel17.setForeground(java.awt.Color.gray);
         jLabel17.setText("Supplier:");
+        panelInfoProduk.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel18.setForeground(java.awt.Color.black);
         jLabel18.setText("IDProduct");
+        panelInfoProduk.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel19.setForeground(java.awt.Color.gray);
         jLabel19.setText("Harga Beli:");
+        panelInfoProduk.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jLabel20.setForeground(java.awt.Color.black);
         jLabel20.setText("IDProduct");
+        panelInfoProduk.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
-        javax.swing.GroupLayout panelInfoProdukLayout = new javax.swing.GroupLayout(panelInfoProduk);
-        panelInfoProduk.setLayout(panelInfoProdukLayout);
-        panelInfoProdukLayout.setHorizontalGroup(
-            panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInfoProdukLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel19))
-                .addContainerGap(240, Short.MAX_VALUE))
-        );
-        panelInfoProdukLayout.setVerticalGroup(
-            panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInfoProdukLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addGap(0, 0, 0)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel20)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        add(panelInfoProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 281, 323, -1));
+        add(panelInfoProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 320, 350));
 
         jlabel8.setFont(new java.awt.Font("Myriad Pro", 0, 28)); // NOI18N
         jlabel8.setForeground(new java.awt.Color(102, 0, 0));
         jlabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Information_50px_4.png"))); // NOI18N
         jlabel8.setText("Info Produk");
-        add(jlabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 219, -1, -1));
+        add(jlabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 250, -1, -1));
+
+        javax.swing.GroupLayout dateContainerLayout = new javax.swing.GroupLayout(dateContainer);
+        dateContainer.setLayout(dateContainerLayout);
+        dateContainerLayout.setHorizontalGroup(
+            dateContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+        dateContainerLayout.setVerticalGroup(
+            dateContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 30, Short.MAX_VALUE)
+        );
+
+        add(dateContainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 100, 320, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldCariProdukFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariProdukFocusGained
@@ -495,6 +483,7 @@ public class Transaksi extends javax.swing.JPanel {
     private javax.swing.JButton buttonPilihPelanggan;
     private javax.swing.JButton buttonPilihStaf;
     private javax.swing.JButton buttonTambah;
+    private javax.swing.JPanel dateContainer;
     private javax.swing.JLabel dateText;
     private javax.swing.JTextField fieldCariProduk;
     private javax.swing.JTextField fieldCariTroli;
