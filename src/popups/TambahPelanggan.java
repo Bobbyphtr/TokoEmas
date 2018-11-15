@@ -2,7 +2,6 @@ package popups;
 
 import customComponents.*;
 import java.awt.Color;
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 
 /**

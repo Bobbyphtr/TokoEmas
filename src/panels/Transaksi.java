@@ -455,6 +455,7 @@ public class Transaksi extends javax.swing.JPanel {
         JDialog pilihStafDialog = new JDialog();
         pilihStafDialog.setContentPane(new PilihStaf());
         pilihStafDialog.pack();
+        pilihStafDialog.setLocationRelativeTo(this);
         pilihStafDialog.setVisible(true);
     }//GEN-LAST:event_buttonPilihStafActionPerformed
 
