@@ -13,14 +13,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class Controller {
 
-    private PreparedStatement preparedStatement;
+    private static PreparedStatement preparedStatement;
     private static Statement statement;
     private static ResultSet rs;
     private static ResultSetMetaData rsmt;
+    private static Connection conn;
 
     public Controller() {
         ConnectionManager cm = new ConnectionManager();
-        Connection conn = cm.getConnection();
+        conn = cm.getConnection();
         try {
             statement = conn.createStatement();
         } catch (SQLException ex) {
@@ -56,5 +57,24 @@ public class Controller {
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public static void addPelanggan(String nama, String email, String alamat, String no_telp, String status_loyal, int bonus, String deskripsi_bonus) {
+        
+        try {
+            String query = "INSERT INTO customer (nama,email,alamat,no_telp,status_loyal,bonus,deskripsi_bonus) VALUES ( ? , ? , ? , ? , ? , ? , ? );";
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nama);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, alamat);
+            preparedStatement.setString(4, no_telp);
+            preparedStatement.setString(5, status_loyal);
+            preparedStatement.setInt(6, bonus);
+            preparedStatement.setString(7, deskripsi_bonus);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Gagal tambah pelanggan");
+            ex.printStackTrace();
+        }
     }
 }

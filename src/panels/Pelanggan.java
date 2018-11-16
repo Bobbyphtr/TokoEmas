@@ -8,6 +8,9 @@ import customComponents.*;
 import database.Controller;
 import static database.Controller.getPelanggan;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import popups.EditPelanggan;
@@ -18,7 +21,6 @@ public class Pelanggan extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
-       
     public Pelanggan() {
         initComponents();
     }
@@ -209,6 +211,13 @@ public class Pelanggan extends javax.swing.JPanel {
         JDialog tambahPelanggan = new TambahPelanggan();
         tambahPelanggan.setLocationRelativeTo(this);
         tambahPelanggan.setVisible(true);
+        tambahPelanggan.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                tablePelanggan.setModel(getPelanggan());
+            }
+        });
+
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldCariFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusLost
