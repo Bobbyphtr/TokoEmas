@@ -6,13 +6,16 @@ package panels;
  */
 import customComponents.*;
 import database.Controller;
-import static database.Controller.getPelanggan;
+import static database.Controller.*;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 import popups.EditPelanggan;
 import popups.TambahPelanggan;
 
@@ -23,6 +26,14 @@ public class Pelanggan extends javax.swing.JPanel {
      */
     public Pelanggan() {
         initComponents();
+        
+        String[] dateAndTime = getDateAndTime();
+        timeText.setText(dateAndTime[0]);
+        dateText.setText(dateAndTime[1]);
+        System.out.println(dateAndTime[1]);
+        
+        syncDate();
+        
     }
 
     /**
@@ -200,6 +211,18 @@ public class Pelanggan extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void syncDate() {
+        Timer date = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] dateAndTime = getDateAndTime();
+                timeText.setText(dateAndTime[0]);
+                dateText.setText(dateAndTime[1]);
+            }
+        });
+        date.start();
+    }
+    
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
         if (fieldCari.getText().equals("Ketik pencarian")) {
             fieldCari.setText("");

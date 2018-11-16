@@ -1,11 +1,15 @@
 package database;
 
+import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -76,5 +80,21 @@ public class Controller {
             System.out.println("Gagal tambah pelanggan");
             ex.printStackTrace();
         }
+    }
+    
+    public static String[] getDateAndTime() {
+        String[] array = new String[2];
+        String time = "HH:mm";
+        String date = "dd-MM-YYYY";
+        Calendar cal = Calendar.getInstance();
+        
+        DateFormat dateFormat = new SimpleDateFormat(time);
+        array[0] = dateFormat.format(cal.getTime());
+        
+        dateFormat = new SimpleDateFormat(date);
+        array[1] = dateFormat.format(cal.getTime());
+        
+        
+        return array;
     }
 }
