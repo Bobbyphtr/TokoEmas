@@ -1,8 +1,17 @@
 package popups;
 
 import customComponents.*;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Properties;
 import javax.swing.JFrame;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -13,13 +22,30 @@ public class TambahProduk extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
+    JDatePickerImpl datePicker;
+
     public TambahProduk(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        initDatePicker();
     }
-    
-     public TambahProduk() {
+
+    public TambahProduk() {
         initComponents();
+        initDatePicker();
+    }
+
+    private void initDatePicker() {
+        UtilDateModel model = new UtilDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        dateContainer.setLayout(new BorderLayout());
+        dateContainer.add(datePicker);
+        this.setFocusable(true);
     }
 
     /**
@@ -51,6 +77,7 @@ public class TambahProduk extends javax.swing.JDialog {
         spinnerSupplier = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         spinnerKategori = new javax.swing.JComboBox<>();
+        dateContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -107,6 +134,11 @@ public class TambahProduk extends javax.swing.JDialog {
         tambahButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         tambahButton.setForeground(java.awt.Color.white);
         tambahButton.setText("Tambah");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 0, 0));
@@ -132,6 +164,17 @@ public class TambahProduk extends javax.swing.JDialog {
 
         spinnerKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        javax.swing.GroupLayout dateContainerLayout = new javax.swing.GroupLayout(dateContainer);
+        dateContainer.setLayout(dateContainerLayout);
+        dateContainerLayout.setHorizontalGroup(
+            dateContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        dateContainerLayout.setVerticalGroup(
+            dateContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 31, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
@@ -139,57 +182,54 @@ public class TambahProduk extends javax.swing.JDialog {
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(fieldNamaProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel1)
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(spinnerBerat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(spinnerKarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7))
+                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(spinnerBerat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(spinnerKarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel7)
+                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel9)
+                                .addComponent(jLabel8))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel9))
-                                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                                            .addGap(0, 0, Short.MAX_VALUE)
-                                            .addComponent(jLabel8)))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(spinnerSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(spinnerKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addComponent(TitleText))
-                .addContainerGap(41, Short.MAX_VALUE))
+                                .addComponent(spinnerSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spinnerKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(fieldNamaProduk, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(TitleText)
+                            .addComponent(dateContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 41, Short.MAX_VALUE))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(TitleText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dateContainer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldNamaProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -204,9 +244,9 @@ public class TambahProduk extends javax.swing.JDialog {
                     .addComponent(spinnerKarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
                     .addComponent(spinnerSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                .addGap(30, 30, 30)
                 .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -251,15 +291,26 @@ public class TambahProduk extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_textAreaDeskripsiProdukFocusLost
 
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        // Found Date
+        java.util.Date foundDateUtil = (java.util.Date) datePicker.getModel().getValue();
+        Instant instant = foundDateUtil.toInstant();
+        ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+        ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+        LocalDate foundDate = zdt.toLocalDate();
+        System.out.println(java.sql.Date.valueOf(foundDate));
+    }//GEN-LAST:event_tambahButtonActionPerformed
+
     public static void main(String args[]) {
         JFrame a = new JFrame();
-        TambahProduk dialog = new TambahProduk(a,true);
+        TambahProduk dialog = new TambahProduk(a, true);
         //a.setPreferredSize(dialog.getPreferredSize());
-       dialog.setVisible(true);
+        dialog.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TambahPelangganPanel;
     private javax.swing.JLabel TitleText;
+    private javax.swing.JPanel dateContainer;
     private javax.swing.JTextField fieldNamaProduk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
