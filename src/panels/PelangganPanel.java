@@ -4,6 +4,7 @@ package panels;
  *
  * @author Xenon
  */
+import POJO.Pelanggan;
 import customComponents.*;
 import database.Controller;
 import static database.Controller.*;
@@ -16,6 +17,7 @@ import java.awt.event.WindowListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.table.TableModel;
 import popups.EditPelanggan;
 import popups.TambahPelanggan;
 
@@ -24,8 +26,13 @@ public class PelangganPanel extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
+    
+    private TableModel pelangganModel;
+    
     public PelangganPanel() {
         initComponents();
+        
+        pelangganModel = tablePelanggan.getModel();
         
         String[] dateAndTime = getDateAndTime();
         timeText.setText(dateAndTime[0]);
@@ -255,8 +262,21 @@ public class PelangganPanel extends javax.swing.JPanel {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         if (tablePelanggan.getSelectedRow() > -1) {
-            JDialog editPelanggan = new EditPelanggan();
-            int row = tab
+            
+            int row = tablePelanggan.getSelectedRow();
+            
+            int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(row, 0)));
+            String nama =  (String) pelangganModel.getValueAt(row, 1);
+            String email = (String) pelangganModel.getValueAt(row, 2);
+            String alamat = (String) pelangganModel.getValueAt(row, 3);
+            String no_telp = (String) pelangganModel.getValueAt(row, 4);
+            boolean status_loyal = (boolean) pelangganModel.getValueAt(row, 5);
+            int bonus = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(row, 6)));
+            String deskripsi_bonus = (String) pelangganModel.getValueAt(row, 7);
+            
+            Pelanggan pelanggan = new Pelanggan(id, nama, email, alamat, no_telp, status_loyal, bonus, deskripsi_bonus);
+            
+            JDialog editPelanggan = new EditPelanggan(pelanggan);
             editPelanggan.setLocationRelativeTo(this);
             editPelanggan.setVisible(true);
         }
