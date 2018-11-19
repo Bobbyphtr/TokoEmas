@@ -51,18 +51,32 @@ public class Controller {
             while (rs.next()) {
                 Vector row = new Vector();
                 for (int i = 1; i <= c; i++) {
-                    row.add(rs.getString(i));
+                    if (rs.getString(i).equals("true") || rs.getString(i).equals("false")) row.add(rs.getBoolean(i));
+                    else row.add(rs.getString(i));
                 }
                 data.add(row);
             }
 
-            return new DefaultTableModel(data, column);
+            return new DefaultTableModel(data, column) {
+                private final Class<?>[] columnClasses = {String.class, String.class, String.class, String.class, String.class, Boolean.class, String.class, String.class};
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+                @Override
+                public Class<?> getColumnClass(int col) {
+                    return columnClasses[col];
+                }
+
+            };
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-    
+
     public static void addPelanggan(String nama, String email, String alamat, String no_telp, String status_loyal, int bonus, String deskripsi_bonus) {
         
         try {

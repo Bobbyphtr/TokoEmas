@@ -28,7 +28,7 @@ public class MainFrame extends javax.swing.JFrame {
         splitPane.setOrientation(JSplitPane.HORIZONTAL_SPLIT);
         splitPane.setDividerLocation(200);                    
         splitPane.setLeftComponent(leftMenu);             
-        splitPane.setRightComponent(new Transaksi());
+        splitPane.setRightComponent(new TransaksiPanel());
         pack();
         this.add(splitPane);
     }
