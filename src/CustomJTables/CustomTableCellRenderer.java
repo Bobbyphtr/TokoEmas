@@ -29,7 +29,8 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer{
             setBackground(Color.GREEN);
             setForeground(Color.BLACK);
         }
-        
+        // IF CLICKED   => Bg = Color.Orange
+        //              => font = Color.White
         return this;
     }
     

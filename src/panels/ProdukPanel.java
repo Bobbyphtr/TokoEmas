@@ -5,6 +5,7 @@ package panels;
  * @author Xenon
  */
 import customComponents.*;
+import database.Controller;
 import java.awt.Color;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -442,13 +443,14 @@ public class ProdukPanel extends javax.swing.JPanel {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         if (tableProduk.getSelectedColumn() > -1) {
-           JDialog editProduk = new EditProduk();
-           editProduk.setLocationRelativeTo(this);
-           editProduk.setVisible(true);
+            JDialog editProduk = new EditProduk();
+            editProduk.setLocationRelativeTo(this);
+            editProduk.setVisible(true);
         }
     }//GEN-LAST:event_buttonUbahActionPerformed
 
     public static void main(String args[]) {
+        Controller con = new Controller();
         JFrame a = new JFrame();
         a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ProdukPanel panel = new ProdukPanel();
