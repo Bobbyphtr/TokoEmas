@@ -51,8 +51,13 @@ public class Controller {
             while (rs.next()) {
                 Vector row = new Vector();
                 for (int i = 1; i <= c; i++) {
-                    if (rs.getString(i).equals("true") || rs.getString(i).equals("false")) row.add(rs.getBoolean(i));
-                    else row.add(rs.getString(i));
+                    if(rs.getObject(i) != null){
+                        if (rs.getString(i).equals("true") || rs.getString(i).equals("false")) row.add(rs.getBoolean(i));
+                        else row.add(rs.getString(i));
+                    } else {
+                        row.add("-");
+                    }
+
                 }
                 data.add(row);
             }

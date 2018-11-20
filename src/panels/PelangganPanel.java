@@ -16,7 +16,10 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.ListSelectionModel;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
 import popups.EditPelanggan;
 import popups.TambahPelanggan;
@@ -31,9 +34,19 @@ public class PelangganPanel extends javax.swing.JPanel {
     
     public PelangganPanel() {
         initComponents();
-        
+        buttonUbah.setEnabled(false);
         pelangganModel = tablePelanggan.getModel();
         
+        ListSelectionModel lsm = tablePelanggan.getSelectionModel();
+        lsm.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+               if(!lse.getValueIsAdjusting()){
+                   System.out.println(tablePelanggan.getSelectedRow());
+                   buttonUbah.setEnabled(true);
+               }
+            }
+        });     
         String[] dateAndTime = getDateAndTime();
         timeText.setText(dateAndTime[0]);
         dateText.setText(dateAndTime[1]);
@@ -220,7 +233,11 @@ public class PelangganPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void setUpRowFilter(){
+        
+    }
+    
     private void syncDate() {
         Timer date = new Timer(1000, new ActionListener() {
             @Override
