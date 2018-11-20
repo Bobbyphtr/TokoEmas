@@ -213,10 +213,33 @@ public class Kategori extends javax.swing.JDialog {
         listKategori.setModel(getAllKategori());
         fieldNamaKategori.setText("Masukkan nama kategori.");
         fieldNamaKategori.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
-        // TODO add your handling code here:
+        String namaKategori = fieldNamaKategori.getText();
+        String namaTerpilih = listKategori.getModel().getElementAt(listKategori.getSelectedIndex());
+        boolean isExist = false;
+        for (int i = 0; i < listKategori.getModel().getSize(); i++) {
+            if (listKategori.getModel().getElementAt(i).equalsIgnoreCase(namaKategori)) {
+                isExist = true;
+            }
+        }
+        if (isExist) {
+            int reply = JOptionPane.showConfirmDialog(null, "Kategori sudah ada, apakah ingin melanjutkan?",
+                    "Perhatian", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                Controller.updateKategori(namaKategori, namaTerpilih);
+            }
+        } else {
+            Controller.updateKategori(namaKategori, namaTerpilih);
+        }
+        listKategori.setModel(getAllKategori());
+        fieldNamaKategori.setText("Masukkan nama kategori.");
+        fieldNamaKategori.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
@@ -229,7 +252,7 @@ public class Kategori extends javax.swing.JDialog {
             }
         }
         if (isExist) {
-            int reply = JOptionPane.showConfirmDialog(null, "Kategori sudah ada, apakah ingin melanjutkan?", "", JOptionPane.YES_NO_OPTION);
+            int reply = JOptionPane.showConfirmDialog(null, "Kategori sudah ada, apakah ingin melanjutkan?", "Perhatian", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 Controller.addKategori(namaKategori);
             }
@@ -239,6 +262,8 @@ public class Kategori extends javax.swing.JDialog {
         listKategori.setModel(getAllKategori());
         fieldNamaKategori.setText("Masukkan nama kategori.");
         fieldNamaKategori.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnTambahActionPerformed
 
     public static void main(String args[]) {

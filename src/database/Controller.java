@@ -179,6 +179,19 @@ public class Controller {
         
     }
     
+    public static void updateKategori(String nama, String index){
+        String query = "UPDATE kategori SET nama = ? WHERE nama = ?";
+        try{
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nama);
+            preparedStatement.setString(2, index);
+            preparedStatement.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println("Update gagal");
+            ex.printStackTrace();
+        }
+    }
+    
     public static DefaultTableModel getAllProduk() {
         String query = "SELECT * FROM barang";
         try {
