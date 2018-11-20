@@ -2,6 +2,7 @@ package popups;
 
 import POJO.Pelanggan;
 import customComponents.*;
+import database.Controller;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -15,18 +16,17 @@ public class EditPelanggan extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
-    
     private Pelanggan pelanggan;
-    
+
     public EditPelanggan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     public EditPelanggan(Pelanggan pelanggan) {
         initComponents();
         this.pelanggan = pelanggan;
-        
+
         fieldNama.setText(pelanggan.getNama());
         fieldEmail.setText(pelanggan.getEmail());
         fieldNoTelp.setText(pelanggan.getNo_telp());
@@ -34,7 +34,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         fieldKuantitasReward.setText(String.valueOf(pelanggan.getBonus()));
         fieldDeskripsiReward.setText(pelanggan.getDeskripsi_bonus());
     }
-    
+
     public EditPelanggan() {
         initComponents();
     }
@@ -379,7 +379,14 @@ public class EditPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldDeskripsiRewardFocusLost
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus "+ pelanggan.getNama(), title, JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            JOptionPane.showMessageDialog(null, "HELLO");
+        } else {
+            JOptionPane.showMessageDialog(null, "GOODBYE");
+            System.exit(0);
+        }
+        Controller.deletePelanggan(pelanggan.getId());
     }//GEN-LAST:event_btnHapusActionPerformed
 
     public static void main(String args[]) {

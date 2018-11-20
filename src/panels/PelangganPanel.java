@@ -47,7 +47,6 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 if (!lse.getValueIsAdjusting()) {
-                    System.out.println(tablePelanggan.getSelectedRow());
                     buttonUbah.setEnabled(true);
                 }
             }
@@ -241,7 +240,7 @@ public class PelangganPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void setUpRowFilter() {
-        rowFilter = new TableRowSorter<>(pelangganModel);
+        rowFilter = new TableRowSorter<>(tablePelanggan.getModel());
         tablePelanggan.setRowSorter(rowFilter);
         fieldCari.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -294,7 +293,7 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void windowClosed(WindowEvent e) {
                 tablePelanggan.setModel(getPelanggan());
-                
+                setUpRowFilter();
             }
         });
 
@@ -310,16 +309,19 @@ public class PelangganPanel extends javax.swing.JPanel {
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         if (tablePelanggan.getSelectedRow() > -1) {
 
-            int row = tablePelanggan.getSelectedRow();
+            int selectedRow = tablePelanggan.getSelectedRow();
+            int modelRow = tablePelanggan.convertRowIndexToModel(selectedRow);
+            
+            int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(modelRow, 0)));
+            System.out.println("Id :" + id);
 
-            int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(row, 0)));
-            String nama = (String) pelangganModel.getValueAt(row, 1);
-            String email = (String) pelangganModel.getValueAt(row, 2);
-            String alamat = (String) pelangganModel.getValueAt(row, 3);
-            String no_telp = (String) pelangganModel.getValueAt(row, 4);
-            boolean status_loyal = (boolean) pelangganModel.getValueAt(row, 5);
-            int bonus = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(row, 6)));
-            String deskripsi_bonus = (String) pelangganModel.getValueAt(row, 7);
+            String nama = (String) pelangganModel.getValueAt(modelRow, 1);
+            String email = (String) pelangganModel.getValueAt(modelRow, 2);
+            String alamat = (String) pelangganModel.getValueAt(modelRow, 3);
+            String no_telp = (String) pelangganModel.getValueAt(modelRow, 4);
+            boolean status_loyal = (boolean) pelangganModel.getValueAt(modelRow, 5);
+            int bonus = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(modelRow, 6)));
+            String deskripsi_bonus = (String) pelangganModel.getValueAt(modelRow, 7);
 
             Pelanggan pelanggan = new Pelanggan(id, nama, email, alamat, no_telp, status_loyal, bonus, deskripsi_bonus);
 
