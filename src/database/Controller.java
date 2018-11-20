@@ -101,6 +101,18 @@ public class Controller {
         }
     }
     
+    public static void deletePelanggan(int id){
+        try{
+            String query = "DELETE FROM customer WHERE customer.id = ?";
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, String.valueOf(id));
+            preparedStatement.executeUpdate();
+        }catch(SQLException ex){
+            System.out.println("Gagal menghapus pelanggan");
+            ex.printStackTrace();
+        }
+    }
+    
     public static String[] getDateAndTime() {
         String[] array = new String[2];
         String time = "HH:mm";
