@@ -318,7 +318,7 @@
       </AuxValues>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="448" y="139" width="459" height="130"/>
+          <AbsoluteConstraints x="450" y="130" width="459" height="130"/>
         </Constraint>
       </Constraints>
 
@@ -328,12 +328,42 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="6" rowCount="4">
-                <Column editable="true" title="ID_Product" type="java.lang.Object"/>
-                <Column editable="true" title="Berat (gr)" type="java.lang.Object"/>
-                <Column editable="true" title="Karat" type="java.lang.Object"/>
-                <Column editable="true" title="Tipe" type="java.lang.Object"/>
-                <Column editable="true" title="Deskripsi" type="java.lang.Object"/>
-                <Column editable="true" title="Aksi" type="java.lang.Object"/>
+                <Column editable="true" title="ID_Product" type="java.lang.Object">
+                  <Data value="11"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Berat (gr)" type="java.lang.Object">
+                  <Data value="50"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Karat" type="java.lang.Object">
+                  <Data value="11"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Tipe" type="java.lang.Object">
+                  <Data value="11"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Deskripsi" type="java.lang.Object">
+                  <Data value="11"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Aksi" type="java.lang.Object">
+                  <Data value="Tambah"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

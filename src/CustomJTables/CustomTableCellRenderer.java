@@ -20,10 +20,12 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
         if (row % 2 == 0) {
+            setValue(value);
             setBackground(Color.RED);
             setForeground(Color.BLACK);
         }
         else {
+            setValue(value);
             setBackground(Color.GREEN);
             setForeground(Color.BLACK);
         }
