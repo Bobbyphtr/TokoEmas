@@ -20,11 +20,11 @@ import javax.swing.table.TableCellRenderer;
  *
  * @author ysuta
  */
-public class TransaksiCell extends DefaultCellEditor implements TableCellRenderer {
+public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRenderer {
 
     protected JButton button;
 
-    public TransaksiCell(JCheckBox checkBox) {
+    public TransaksiTroliCell(JCheckBox checkBox) {
         super(checkBox);
         button = new JButton();
         button.setOpaque(true);

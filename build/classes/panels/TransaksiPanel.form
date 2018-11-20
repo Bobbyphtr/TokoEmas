@@ -327,33 +327,39 @@
         <Component class="javax.swing.JTable" name="tableProduk">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="6" rowCount="4">
+              <Table columnCount="7" rowCount="4">
                 <Column editable="true" title="ID_Product" type="java.lang.Object">
                   <Data value="11"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="Berat (gr)" type="java.lang.Object">
-                  <Data value="50"/>
+                <Column editable="true" title="Berat (gr)" type="java.lang.Double">
+                  <Data value="500.0"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="Karat" type="java.lang.Object">
-                  <Data value="11"/>
+                <Column editable="true" title="Karat" type="java.lang.Integer">
+                  <Data value="27"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="Tipe" type="java.lang.Object">
-                  <Data value="11"/>
+                <Column editable="true" title="Tipe" type="java.lang.String">
+                  <Data value="Putih"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
                 </Column>
-                <Column editable="true" title="Deskripsi" type="java.lang.Object">
-                  <Data value="11"/>
+                <Column editable="true" title="Deskripsi" type="java.lang.String">
+                  <Data value="Emas Putih"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Harga Jual" type="java.lang.Double">
+                  <Data value="133000.0"/>
                   <Data value="null"/>
                   <Data value="null"/>
                   <Data value="null"/>
@@ -398,6 +404,11 @@
                   <Editor/>
                   <Renderer/>
                 </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
               </TableColumnModel>
             </Property>
             <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
@@ -405,7 +416,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellEditor(new TransaksiCell(new JCheckBox()));&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellRenderer(new TransaksiCell(new JCheckBox()));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox()));&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox()));&#xa;&#xa;tableProduk.setColumnSelectionAllowed(false);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -426,13 +437,48 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="7" rowCount="4">
-                <Column editable="true" title="ID_Product" type="java.lang.Object"/>
-                <Column editable="true" title="Berat (gr)" type="java.lang.Object"/>
-                <Column editable="true" title="Karat" type="java.lang.Object"/>
-                <Column editable="true" title="Tipe" type="java.lang.Object"/>
-                <Column editable="true" title="Deskripsi" type="java.lang.Object"/>
-                <Column editable="true" title="Harga Jual" type="java.lang.Object"/>
-                <Column editable="true" title="Aksi" type="java.lang.Object"/>
+                <Column editable="true" title="ID_Product" type="java.lang.Object">
+                  <Data value="23"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Berat (gr)" type="java.lang.Double">
+                  <Data value="400.0"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Karat" type="java.lang.Integer">
+                  <Data value="27"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Tipe" type="java.lang.String">
+                  <Data value="Kuning"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Deskripsi" type="java.lang.String">
+                  <Data value="Emas"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Harga Jual" type="java.lang.Double">
+                  <Data value="12000.0"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
+                <Column editable="true" title="Aksi" type="java.lang.Object">
+                  <Data value="Kurang"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                  <Data value="null"/>
+                </Column>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">

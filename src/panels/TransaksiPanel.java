@@ -5,8 +5,7 @@ package panels;
  * @author Xenon
  */
 import CustomJTables.CustomTableCellRenderer;
-import CustomTransaksiTable.TransaksiCell;
-import CustomTransaksiTable.TransaksiTableModel;
+import CustomTransaksiTable.TransaksiProdukCell;
 import customComponents.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -237,25 +236,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
         tableProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"11", "50", "11", "11", "11", "Tambah"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
-            }
-        ));
-        tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-        tableProduk.getColumn("Aksi").setCellEditor(new TransaksiCell(new JCheckBox()));
-        tableProduk.getColumn("Aksi").setCellRenderer(new TransaksiCell(new JCheckBox()));
-        jScrollPane1.setViewportView(tableProduk);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 459, 130));
-
-        tableTroli.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
+                {"11",  new Double(500.0),  new Integer(27), "Putih", "Emas Putih",  new Double(133000.0), "Tambah"},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
@@ -263,7 +244,43 @@ public class TransaksiPanel extends javax.swing.JPanel {
             new String [] {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Harga Jual", "Aksi"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox()));
+        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox()));
+
+        tableProduk.setColumnSelectionAllowed(false);
+        jScrollPane1.setViewportView(tableProduk);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 459, 130));
+
+        tableTroli.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"23",  new Double(400.0),  new Integer(27), "Kuning", "Emas",  new Double(12000.0), "Kurang"},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Harga Jual", "Aksi"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         jScrollPane2.setViewportView(tableTroli);
 
