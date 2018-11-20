@@ -38,7 +38,7 @@ public class PelangganPanel extends javax.swing.JPanel {
 
     public PelangganPanel() {
         initComponents();
-       
+
         buttonUbah.setEnabled(false);
         pelangganModel = tablePelanggan.getModel();
 
@@ -246,16 +246,22 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void insertUpdate(DocumentEvent de) {
                 String text = fieldCari.getText();
-                if (text.trim().length() == 0) rowFilter.setRowFilter(null);
-                else rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                if (text.trim().length() == 0) {
+                    rowFilter.setRowFilter(null);
+                } else {
+                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
 
             }
 
             @Override
             public void removeUpdate(DocumentEvent de) {
                 String text = fieldCari.getText();
-                if (text.trim().length() == 0)rowFilter.setRowFilter(null);
-                else rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                if (text.trim().length() == 0) {
+                    rowFilter.setRowFilter(null);
+                } else {
+                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
             }
 
             @Override
@@ -263,7 +269,7 @@ public class PelangganPanel extends javax.swing.JPanel {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
-     
+
     }
 
     private void syncDate() {
@@ -311,7 +317,7 @@ public class PelangganPanel extends javax.swing.JPanel {
 
             int selectedRow = tablePelanggan.getSelectedRow();
             int modelRow = tablePelanggan.convertRowIndexToModel(selectedRow);
-            
+
             int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(modelRow, 0)));
             System.out.println("Id :" + id);
 
@@ -328,6 +334,14 @@ public class PelangganPanel extends javax.swing.JPanel {
             JDialog editPelanggan = new EditPelanggan(pelanggan);
             editPelanggan.setLocationRelativeTo(this);
             editPelanggan.setVisible(true);
+
+            editPelanggan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent we) {
+                   tablePelanggan.setModel(getPelanggan());
+                   setUpRowFilter();
+                }
+            });
         }
     }//GEN-LAST:event_buttonUbahActionPerformed
 

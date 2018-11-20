@@ -6,6 +6,7 @@ import database.Controller;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -379,14 +380,11 @@ public class EditPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldDeskripsiRewardFocusLost
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus "+ pelanggan.getNama(), title, JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus "+ pelanggan.getNama(), "Hapus Pelanggan", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-            JOptionPane.showMessageDialog(null, "HELLO");
-        } else {
-            JOptionPane.showMessageDialog(null, "GOODBYE");
-            System.exit(0);
+             Controller.deletePelanggan(pelanggan.getId());
         }
-        Controller.deletePelanggan(pelanggan.getId());
+        this.dispose();
     }//GEN-LAST:event_btnHapusActionPerformed
 
     public static void main(String args[]) {
