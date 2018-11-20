@@ -55,7 +55,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
     
     private void initTableModel() {
         produkModel = getAllProduk();
-        troliModel = new DefaultTableModel();
+        troliModel = new DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Status", "Tipe", "Harga Beli", "Tanggal Beli", "Aksi"
+                }
+        );
     }
 
     /**
