@@ -5,11 +5,13 @@ package panels;
  * @author Xenon
  */
 import CustomJTables.CustomTableCellRenderer;
-import CustomJTables.TransaksiTableModel;
+import CustomTransaksiTable.TransaksiCell;
+import CustomTransaksiTable.TransaksiTableModel;
 import customComponents.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Properties;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
@@ -244,18 +246,9 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ));
-        tableProduk.setModel(new TransaksiTableModel(
-            new Object [][] {
-                {"11", "50", "11", "11", "11", "Tambah"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
-            }
-        ));
         tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        tableProduk.getColumn("Aksi").setCellEditor(new TransaksiCell(new JCheckBox()));
+        tableProduk.getColumn("Aksi").setCellRenderer(new TransaksiCell(new JCheckBox()));
         jScrollPane1.setViewportView(tableProduk);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 459, 130));

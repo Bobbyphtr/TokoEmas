@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package CustomJTables;
+package CustomTransaksiTable;
 
 import java.util.Vector;
 import javax.swing.JButton;
