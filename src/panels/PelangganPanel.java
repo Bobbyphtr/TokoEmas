@@ -17,10 +17,14 @@ import java.awt.event.WindowListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
 import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import popups.EditPelanggan;
 import popups.TambahPelanggan;
 
@@ -29,31 +33,33 @@ public class PelangganPanel extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
-    
     private TableModel pelangganModel;
-    
+    private TableRowSorter<TableModel> rowFilter;
+
     public PelangganPanel() {
         initComponents();
+       
         buttonUbah.setEnabled(false);
         pelangganModel = tablePelanggan.getModel();
-        
+
         ListSelectionModel lsm = tablePelanggan.getSelectionModel();
         lsm.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
-               if(!lse.getValueIsAdjusting()){
-                   System.out.println(tablePelanggan.getSelectedRow());
-                   buttonUbah.setEnabled(true);
-               }
+                if (!lse.getValueIsAdjusting()) {
+                    System.out.println(tablePelanggan.getSelectedRow());
+                    buttonUbah.setEnabled(true);
+                }
             }
-        });     
+        });
         String[] dateAndTime = getDateAndTime();
         timeText.setText(dateAndTime[0]);
         dateText.setText(dateAndTime[1]);
         System.out.println(dateAndTime[1]);
-        
+
         syncDate();
-        
+        setUpRowFilter();
+
     }
 
     /**
@@ -233,11 +239,34 @@ public class PelangganPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void setUpRowFilter(){
-        
+
+    private void setUpRowFilter() {
+        rowFilter = new TableRowSorter<>(pelangganModel);
+        tablePelanggan.setRowSorter(rowFilter);
+        fieldCari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (text.trim().length() == 0) rowFilter.setRowFilter(null);
+                else rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (text.trim().length() == 0)rowFilter.setRowFilter(null);
+                else rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+     
     }
-    
+
     private void syncDate() {
         Timer date = new Timer(1000, new ActionListener() {
             @Override
@@ -249,7 +278,7 @@ public class PelangganPanel extends javax.swing.JPanel {
         });
         date.start();
     }
-    
+
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
         if (fieldCari.getText().equals("Ketik pencarian")) {
             fieldCari.setText("");
@@ -265,6 +294,7 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void windowClosed(WindowEvent e) {
                 tablePelanggan.setModel(getPelanggan());
+                
             }
         });
 
@@ -279,20 +309,20 @@ public class PelangganPanel extends javax.swing.JPanel {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         if (tablePelanggan.getSelectedRow() > -1) {
-            
+
             int row = tablePelanggan.getSelectedRow();
-            
+
             int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(row, 0)));
-            String nama =  (String) pelangganModel.getValueAt(row, 1);
+            String nama = (String) pelangganModel.getValueAt(row, 1);
             String email = (String) pelangganModel.getValueAt(row, 2);
             String alamat = (String) pelangganModel.getValueAt(row, 3);
             String no_telp = (String) pelangganModel.getValueAt(row, 4);
             boolean status_loyal = (boolean) pelangganModel.getValueAt(row, 5);
             int bonus = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(row, 6)));
             String deskripsi_bonus = (String) pelangganModel.getValueAt(row, 7);
-            
+
             Pelanggan pelanggan = new Pelanggan(id, nama, email, alamat, no_telp, status_loyal, bonus, deskripsi_bonus);
-            
+
             JDialog editPelanggan = new EditPelanggan(pelanggan);
             editPelanggan.setLocationRelativeTo(this);
             editPelanggan.setVisible(true);
