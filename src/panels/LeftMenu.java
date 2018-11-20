@@ -59,10 +59,10 @@ public class LeftMenu extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(210, 130, 1));
+        setBackground(new java.awt.Color(253, 203, 110));
         setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        btn_Dashboard.setBackground(new java.awt.Color(227, 180, 31));
+        btn_Dashboard.setBackground(new java.awt.Color(225, 112, 85));
         btn_Dashboard.setToolTipText("");
         btn_Dashboard.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -99,7 +99,7 @@ public class LeftMenu extends javax.swing.JPanel {
 
         jSeparator3.setBackground(new java.awt.Color(255, 255, 255));
 
-        btn_Transaksi.setBackground(new java.awt.Color(167, 103, 0));
+        btn_Transaksi.setBackground(new java.awt.Color(137, 49, 25));
         btn_Transaksi.setToolTipText("");
         btn_Transaksi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -134,7 +134,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Pelanggan.setBackground(new java.awt.Color(167, 103, 0));
+        btn_Pelanggan.setBackground(new java.awt.Color(137, 49, 25));
         btn_Pelanggan.setToolTipText("");
         btn_Pelanggan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -169,7 +169,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Produk.setBackground(new java.awt.Color(167, 103, 0));
+        btn_Produk.setBackground(new java.awt.Color(137, 49, 25));
         btn_Produk.setToolTipText("");
         btn_Produk.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -204,7 +204,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Staff.setBackground(new java.awt.Color(167, 103, 0));
+        btn_Staff.setBackground(new java.awt.Color(137, 49, 25));
         btn_Staff.setToolTipText("");
         btn_Staff.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -239,7 +239,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Rekap.setBackground(new java.awt.Color(167, 103, 0));
+        btn_Rekap.setBackground(new java.awt.Color(137, 49, 25));
         btn_Rekap.setToolTipText("");
         btn_Rekap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -274,7 +274,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
-        btn_Keluar.setBackground(new java.awt.Color(156, 131, 50));
+        btn_Keluar.setBackground(new java.awt.Color(137, 49, 25));
         btn_Keluar.setToolTipText("");
         btn_Keluar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -390,16 +390,16 @@ public class LeftMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_KeluarMousePressed
 
     void setColor(JPanel panel) {
-        panel.setBackground(new Color(227, 180, 31));
+        panel.setBackground(new Color(225, 112, 85));
     }
 
     void resetColor() {
-        btn_Dashboard.setBackground(new Color(167, 103, 0));
-        btn_Pelanggan.setBackground(new Color(167, 103, 0));
-        btn_Produk.setBackground(new Color(167, 103, 0));
-        btn_Rekap.setBackground(new Color(167, 103, 0));
-        btn_Staff.setBackground(new Color(167, 103, 0));
-        btn_Transaksi.setBackground(new Color(167, 103, 0));
+        btn_Dashboard.setBackground(new Color(137,49,25));
+        btn_Pelanggan.setBackground(new Color(137,49,25));
+        btn_Produk.setBackground(new Color(137,49,25));
+        btn_Rekap.setBackground(new Color(137,49,25));
+        btn_Staff.setBackground(new Color(137,49,25));
+        btn_Transaksi.setBackground(new Color(137,49,25));
     }   
     
     private void setInvisible() {

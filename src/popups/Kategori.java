@@ -36,7 +36,7 @@ public class Kategori extends javax.swing.JDialog {
         lsm.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
-                if (!lse.getValueIsAdjusting()) {
+                if (lse.getValueIsAdjusting()) {
                     btnHapus.setEnabled(true);
                     btnUbah.setEnabled(true);
                     fieldNamaKategori.setText(listKategori.getModel().getElementAt(listKategori.getSelectedIndex()));
@@ -205,7 +205,14 @@ public class Kategori extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldNamaKategoriFocusGained
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        listKategori.clearSelection();
+        int reply = JOptionPane.showConfirmDialog(null, "Menghapus kategori " + fieldNamaKategori.getText(), "Hapus Kategori", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            Controller.deleteKategori(fieldNamaKategori.getText());
+        }
+        listKategori.setModel(getAllKategori());
+        fieldNamaKategori.setText("Masukkan nama kategori.");
+        fieldNamaKategori.setForeground(Color.GRAY);
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
@@ -213,6 +220,7 @@ public class Kategori extends javax.swing.JDialog {
     }//GEN-LAST:event_btnUbahActionPerformed
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        listKategori.clearSelection();
         String namaKategori = fieldNamaKategori.getText();
         boolean isExist = false;
         for (int i = 0; i < listKategori.getModel().getSize(); i++) {
@@ -229,6 +237,8 @@ public class Kategori extends javax.swing.JDialog {
             Controller.addKategori(namaKategori);
         }
         listKategori.setModel(getAllKategori());
+        fieldNamaKategori.setText("Masukkan nama kategori.");
+        fieldNamaKategori.setForeground(Color.GRAY);
     }//GEN-LAST:event_btnTambahActionPerformed
 
     public static void main(String args[]) {
