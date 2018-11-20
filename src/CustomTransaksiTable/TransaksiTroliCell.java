@@ -13,6 +13,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
@@ -24,14 +25,14 @@ import javax.swing.table.TableModel;
 public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRenderer {
 
    protected JButton button;
-    protected TableModel produk;
-    protected TableModel troli;
+    protected DefaultTableModel produkModel;
+    protected DefaultTableModel troliModel;
     protected int row;
 
-    public TransaksiTroliCell(JCheckBox checkBox, TableModel produk, TableModel troli) {
+    public TransaksiTroliCell(JCheckBox checkBox, DefaultTableModel produk, DefaultTableModel troli) {
         super(checkBox);
-        this.produk = produk;
-        this.troli = troli;
+        this.produkModel = produk;
+        this.troliModel = troli;
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {

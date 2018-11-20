@@ -7,6 +7,7 @@ package panels;
 import CustomJTables.CustomTableCellRenderer;
 import CustomTransaksiTable.TransaksiProdukCell;
 import customComponents.*;
+import database.Controller;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Properties;
@@ -20,6 +21,8 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 import popups.*;
 
+import static database.Controller.*;
+
 public class TransaksiPanel extends javax.swing.JPanel {
 
     /**
@@ -28,7 +31,11 @@ public class TransaksiPanel extends javax.swing.JPanel {
     
     JDatePickerImpl datePicker;
     
+    DefaultTableModel troliModel;
+    DefaultTableModel produkModel;
+    
     public TransaksiPanel() {
+        initTableModel();
         initComponents();
         initDatePicker();
     }
@@ -44,6 +51,11 @@ public class TransaksiPanel extends javax.swing.JPanel {
         dateContainer.setLayout(new BorderLayout());
         dateContainer.add(datePicker);
         this.setFocusable(true);
+    }
+    
+    private void initTableModel() {
+        produkModel = getAllProduk();
+        troliModel = new DefaultTableModel();
     }
 
     /**
@@ -234,48 +246,20 @@ public class TransaksiPanel extends javax.swing.JPanel {
         });
         add(buttonPilihPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 37));
 
-        tableProduk.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"11",  new Double(100.0),  new Integer(97), "Kuning", "Emas", "Tambah"},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
+        tableProduk.setModel(produkModel);
         tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
         tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
 
-        tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), tableProduk.getModel(), tableTroli.getModel()));
-        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(),  tableProduk.getModel(), tableTroli.getModel()));
+        tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
+        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
 
         tableProduk.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(tableProduk);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 459, 150));
 
-        tableTroli.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"23", null, null, null, null, null, "Kurang"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Harga Jual", "Aksi"
-            }
-        ));
+        tableTroli.setModel(troliModel);
         tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
         tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
@@ -484,6 +468,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariTroliFocusLost
 
     public static void main(String args[]) {
+        Controller con = new Controller();
         JFrame a = new JFrame();
         a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TransaksiPanel panel = new TransaksiPanel();

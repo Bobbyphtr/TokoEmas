@@ -179,11 +179,59 @@ public class Controller {
         
     }
     
-    
-    public static void getAllProduk(){
+    public static DefaultTableModel getAllProduk() {
         String query = "SELECT * FROM barang";
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+
+
+            Vector column = new Vector();
+
+            column.add("ID");
+            column.add("Nama");
+            column.add("Deskripsi");
+            column.add("Berat");
+            column.add("Karat");
+            column.add("Status");
+            column.add("Tipe");
+            column.add("Harga Beli");
+            column.add("Tanggal Beli");
+            column.add("Aksi");
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getInt("id"));
+                row.add(rs.getString("nama"));
+                row.add(rs.getString("deskripsi"));
+                row.add(rs.getDouble("berat"));
+                row.add(rs.getDouble("karat"));
+                row.add(rs.getString("status"));
+                row.add(rs.getString("tipe_barang"));
+                row.add(rs.getInt("harga_beli"));
+                row.add(rs.getString("tanggal_beli"));
+                data.add(row);
+            }
+
+            return new DefaultTableModel(data, column) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    if (column == columnIdentifiers.size()-1) {
+                        return true;
+                    }
+                    return false;
+                }
+
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-    
+
     public static void getProdukbyId(int id){
         String query = "SELECT * FROM barang WHERE id = ?";
     }

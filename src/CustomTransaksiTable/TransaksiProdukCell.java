@@ -8,6 +8,7 @@ package CustomTransaksiTable;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -23,21 +24,24 @@ import javax.swing.table.TableModel;
 public class TransaksiProdukCell extends DefaultCellEditor implements TableCellRenderer {
 
     protected JButton button;
-    protected DefaultTableModel produk;
-    protected DefaultTableModel troli;
+    protected DefaultTableModel produkModel;
+    protected DefaultTableModel troliModel;
     protected int row;
 
-    public TransaksiProdukCell(JCheckBox checkBox, TableModel produk, TableModel troli) {
+    public TransaksiProdukCell(JCheckBox checkBox, DefaultTableModel produk, DefaultTableModel troli) {
         super(checkBox);
-        this.produk = produk;
-        this.troli = troli;
+        this.produkModel = produk;
+        this.troliModel = troli;
         button = new JButton();
         
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                troli.
+                Vector rowData = (Vector) produkModel.getDataVector().elementAt(row);
+                rowData.add(rowData.size()-2, " ");
+                troliModel.addRow(rowData); 
+                //produk.removeRow(row);
             }
         });
         
