@@ -16,17 +16,19 @@ import javax.swing.table.DefaultTableCellRenderer;
  */
 public class CustomTableCellRenderer extends DefaultTableCellRenderer{
     
+    
+    
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
         if (row % 2 == 0) {
             setValue(value);
-            setBackground(Color.RED);
+            setBackground(new Color(210,130,1));
             setForeground(Color.BLACK);
         }
         else {
             setValue(value);
-            setBackground(Color.GREEN);
+            setBackground(new Color(255,231,192));
             setForeground(Color.BLACK);
         }
         // IF CLICKED   => Bg = Color.Orange

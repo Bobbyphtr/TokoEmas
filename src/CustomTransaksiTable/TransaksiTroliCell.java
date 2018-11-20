@@ -15,6 +15,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JTable;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -22,18 +23,25 @@ import javax.swing.table.TableCellRenderer;
  */
 public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRenderer {
 
-    protected JButton button;
+   protected JButton button;
+    protected TableModel produk;
+    protected TableModel troli;
+    protected int row;
 
-    public TransaksiTroliCell(JCheckBox checkBox) {
+    public TransaksiTroliCell(JCheckBox checkBox, TableModel produk, TableModel troli) {
         super(checkBox);
+        this.produk = produk;
+        this.troli = troli;
         button = new JButton();
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Test Button Transaksi");
+                System.out.println("Test Button Transaksi : " + row);
             }
         });
+        
+      
     }
 
     @Override

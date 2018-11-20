@@ -135,7 +135,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 buttonTambahActionPerformed(evt);
             }
         });
-        add(buttonTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 600, -1, 37));
+        add(buttonTambah, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 630, -1, 37));
 
         fieldCariProduk.setForeground(java.awt.Color.gray);
         fieldCariProduk.setText("Ketik pencarian");
@@ -147,7 +147,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 fieldCariProdukFocusLost(evt);
             }
         });
-        add(fieldCariProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 103, 191, -1));
+        add(fieldCariProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 191, -1));
 
         jlabel.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel.setForeground(new java.awt.Color(102, 0, 0));
@@ -184,18 +184,18 @@ public class TransaksiPanel extends javax.swing.JPanel {
         dateText.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         dateText.setForeground(new java.awt.Color(102, 0, 0));
         dateText.setText("<DD-MM-YYYY>");
-        add(dateText, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 97, -1, -1));
+        add(dateText, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 60, -1, -1));
 
         timeText.setBackground(new java.awt.Color(102, 0, 0));
         timeText.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         timeText.setForeground(new java.awt.Color(102, 0, 0));
         timeText.setText("<TIME>");
-        add(timeText, new org.netbeans.lib.awtextra.AbsoluteConstraints(792, 54, -1, -1));
+        add(timeText, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, -1, -1));
 
         jlabel1.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel1.setForeground(new java.awt.Color(102, 0, 0));
         jlabel1.setText("Cari");
-        add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 106, -1, -1));
+        add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         jlabel2.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel2.setForeground(new java.awt.Color(102, 0, 0));
@@ -236,17 +236,17 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
         tableProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"11",  new Double(500.0),  new Integer(27), "Putih", "Emas Putih",  new Double(133000.0), "Tambah"},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {"11",  new Double(100.0),  new Integer(97), "Kuning", "Emas", "Tambah"},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Harga Jual", "Aksi"
+                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -254,17 +254,20 @@ public class TransaksiPanel extends javax.swing.JPanel {
             }
         });
         tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-        tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox()));
-        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox()));
+        tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
+        tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
+
+        tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), tableProduk.getModel(), tableTroli.getModel()));
+        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(),  tableProduk.getModel(), tableTroli.getModel()));
 
         tableProduk.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(tableProduk);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 459, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 459, 150));
 
         tableTroli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"23",  new Double(400.0),  new Integer(27), "Kuning", "Emas",  new Double(12000.0), "Kurang"},
+                {"23", null, null, null, null, null, "Kurang"},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
@@ -272,25 +275,19 @@ public class TransaksiPanel extends javax.swing.JPanel {
             new String [] {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Harga Jual", "Aksi"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Double.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Object.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        ));
+        tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
+        tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
         jScrollPane2.setViewportView(tableTroli);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 360, 459, 135));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 459, 150));
 
         TitleText1.setBackground(new java.awt.Color(102, 0, 0));
         TitleText1.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText1.setForeground(new java.awt.Color(102, 0, 0));
         TitleText1.setText("Troli");
-        add(TitleText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 281, -1, -1));
+        add(TitleText1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 270, -1, -1));
 
         jlabel3.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel3.setForeground(new java.awt.Color(102, 0, 0));
@@ -301,12 +298,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
         TitleText2.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText2.setForeground(new java.awt.Color(102, 0, 0));
         TitleText2.setText("Produk");
-        add(TitleText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 54, -1, -1));
+        add(TitleText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
 
         jlabel4.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel4.setForeground(new java.awt.Color(102, 0, 0));
         jlabel4.setText("Cari");
-        add(jlabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 327, -1, -1));
+        add(jlabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
 
         fieldCariTroli.setForeground(java.awt.Color.gray);
         fieldCariTroli.setText("Ketik pencarian");
@@ -318,7 +315,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 fieldCariTroliFocusLost(evt);
             }
         });
-        add(fieldCariTroli, new org.netbeans.lib.awtextra.AbsoluteConstraints(489, 324, 191, -1));
+        add(fieldCariTroli, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 191, -1));
 
         jlabel5.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel5.setForeground(new java.awt.Color(102, 0, 0));
@@ -333,16 +330,16 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jlabel7.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel7.setForeground(new java.awt.Color(102, 0, 0));
         jlabel7.setText("Metode Bayar");
-        add(jlabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 538, -1, -1));
+        add(jlabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, -1, -1));
 
         jRadioButton2.setText("Cash");
-        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(846, 557, -1, -1));
+        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 570, -1, -1));
 
         jRadioButton3.setText("Credit");
-        add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(695, 557, -1, -1));
+        add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, -1, -1));
 
         jRadioButton4.setText("Debit");
-        add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(773, 557, -1, -1));
+        add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 570, -1, -1));
 
         panelInfoProduk.setBackground(java.awt.Color.white);
         panelInfoProduk.setBorder(new BubbleBorderJPanel(Color.WHITE, 10, 20, 0));
