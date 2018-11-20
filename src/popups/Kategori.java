@@ -1,8 +1,16 @@
 package popups;
 
 import customComponents.*;
+import database.Controller;
+import static database.Controller.getAllKategori;
 import java.awt.Color;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -17,9 +25,26 @@ public class Kategori extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
+
     public Kategori() {
         initComponents();
+        System.out.println("Masuk sini");
+        btnHapus.setEnabled(false);
+        btnUbah.setEnabled(false);
+
+        ListSelectionModel lsm = listKategori.getSelectionModel();
+        lsm.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    btnHapus.setEnabled(true);
+                    btnUbah.setEnabled(true);
+                    fieldNamaKategori.setText(listKategori.getModel().getElementAt(listKategori.getSelectedIndex()));
+                    fieldNamaKategori.setForeground(Color.BLACK);
+                }
+            }
+        });
+        this.setFocusable(true);
     }
 
     /**
@@ -60,7 +85,7 @@ public class Kategori extends javax.swing.JDialog {
         jLabel1.setText("Nama Kategori");
 
         fieldNamaKategori.setForeground(java.awt.Color.gray);
-        fieldNamaKategori.setText("Masukan nama supplier.");
+        fieldNamaKategori.setText("Masukkan nama kategori.");
         fieldNamaKategori.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fieldNamaKategoriFocusGained(evt);
@@ -70,27 +95,38 @@ public class Kategori extends javax.swing.JDialog {
             }
         });
 
-        listKategori.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        listKategori.setModel(getAllKategori());
         jScrollPane2.setViewportView(listKategori);
 
         btnHapus.setBackground(new java.awt.Color(89, 38, 1));
         btnHapus.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnHapus.setForeground(java.awt.Color.white);
         btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         btnTambah.setBackground(new java.awt.Color(89, 38, 1));
         btnTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnTambah.setForeground(java.awt.Color.white);
         btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         btnUbah.setBackground(new java.awt.Color(89, 38, 1));
         btnUbah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnUbah.setForeground(java.awt.Color.white);
         btnUbah.setText("Ubah");
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
@@ -168,11 +204,38 @@ public class Kategori extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_fieldNamaKategoriFocusGained
 
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        String namaKategori = fieldNamaKategori.getText();
+        boolean isExist = false;
+        for (int i = 0; i < listKategori.getModel().getSize(); i++) {
+            if (listKategori.getModel().getElementAt(i).equalsIgnoreCase(namaKategori)) {
+                isExist = true;
+            }
+        }
+        if (isExist) {
+            int reply = JOptionPane.showConfirmDialog(null, "Kategori sudah ada, apakah ingin melanjutkan?", "", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                Controller.addKategori(namaKategori);
+            }
+        } else {
+            Controller.addKategori(namaKategori);
+        }
+        listKategori.setModel(getAllKategori());
+    }//GEN-LAST:event_btnTambahActionPerformed
+
     public static void main(String args[]) {
         JFrame a = new JFrame();
-        Kategori dialog = new Kategori(a,true);
+        Kategori dialog = new Kategori(a, true);
         //a.setPreferredSize(dialog.getPreferredSize());
-       dialog.setVisible(true);
+        dialog.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TambahPelangganPanel;

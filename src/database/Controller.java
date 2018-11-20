@@ -1,5 +1,6 @@
 package database;
 
+import POJO.Produk;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class Controller {
@@ -51,9 +53,12 @@ public class Controller {
             while (rs.next()) {
                 Vector row = new Vector();
                 for (int i = 1; i <= c; i++) {
-                    if(rs.getObject(i) != null){
-                        if (rs.getString(i).equals("true") || rs.getString(i).equals("false")) row.add(rs.getBoolean(i));
-                        else row.add(rs.getString(i));
+                    if (rs.getObject(i) != null) {
+                        if (rs.getString(i).equals("true") || rs.getString(i).equals("false")) {
+                            row.add(rs.getBoolean(i));
+                        } else {
+                            row.add(rs.getString(i));
+                        }
                     } else {
                         row.add("-");
                     }
@@ -83,7 +88,7 @@ public class Controller {
     }
 
     public static void addPelanggan(String nama, String email, String alamat, String no_telp, String status_loyal, int bonus, String deskripsi_bonus) {
-        
+
         try {
             String query = "INSERT INTO customer (nama,email,alamat,no_telp,status_loyal,bonus,deskripsi_bonus) VALUES ( ? , ? , ? , ? , ? , ? , ? );";
             preparedStatement = conn.prepareStatement(query);
@@ -100,32 +105,105 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-    
-    public static void deletePelanggan(int id){
-        try{
+
+    public static void deletePelanggan(int id) {
+        try {
             String query = "DELETE FROM customer WHERE customer.id = ?";
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, String.valueOf(id));
             preparedStatement.executeUpdate();
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.out.println("Gagal menghapus pelanggan");
             ex.printStackTrace();
         }
     }
     
+    public static void updatePelanggan(int id) {
+        
+    }
+        
+
     public static String[] getDateAndTime() {
         String[] array = new String[2];
         String time = "HH:mm";
         String date = "dd-MM-YYYY";
         Calendar cal = Calendar.getInstance();
-        
+
         DateFormat dateFormat = new SimpleDateFormat(time);
         array[0] = dateFormat.format(cal.getTime());
-        
+
         dateFormat = new SimpleDateFormat(date);
         array[1] = dateFormat.format(cal.getTime());
-        
-        
+
         return array;
     }
+
+    public static DefaultListModel getAllKategori() {
+        String query = "SELECT * FROM kategori";
+        try {
+            rs = statement.executeQuery(query);
+            DefaultListModel listModel = new DefaultListModel();
+            while (rs.next()) {
+                listModel.addElement(rs.getString("nama"));
+            }
+            return listModel;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses kategori");
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void addKategori(String nama) {
+        String query = "INSERT INTO kategori (nama) VALUES (?)";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nama);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Gagal tambah kategori");
+            ex.printStackTrace();
+        }
+
+    }
+    
+    public static void deleteKategori(String nama){
+        String query = "DELETE FROM kategori WHERE nama = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nama);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    
+    public static void getAllProduk(){
+        String query = "SELECT * FROM barang";
+    }
+    
+    public static void getProdukbyId(int id){
+        String query = "SELECT * FROM barang WHERE id = ?";
+    }
+    
+    public static void deleteProduk(int id){
+        String query = "DELETE FROM barang WHERE id = ? ";
+    }
+    
+    public static void addProduk(Produk produk){
+        String query = "INSERT INTO barang (nama, deskripsi, berat, karat, status, tipe_barang,"
+                + "id_kategori, id_supplier, harga_beli, tanggal_beli) VALUES "
+                + "(? , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    }
+    
+    public static void updateProduk(int id){
+        String query = "UPDATE barang SET nama = ?, deskripsi = ?, berat = ?, karat = ?, status = ?, "
+                + "tipe_barang = ?, id_kategori = ?, id_supplier = ?, harga_beli = ?, tanggal_beli = ?"
+                + "WHERE id = ?";
+    }
+    
+    
+    
 }
