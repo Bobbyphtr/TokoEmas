@@ -38,8 +38,9 @@ public class TransaksiTableModel extends DefaultTableModel{
 //        return COLUMN_NAMES.length;
 //    }
     
-    @Override public Class<?> getColumnClass(int columnIndex) {
-        return COLUMN_TYPES[columnIndex];
+    @Override 
+    public Class<?> getColumnClass(int col) {
+        return COLUMN_TYPES[col];
     }
 
     @Override
