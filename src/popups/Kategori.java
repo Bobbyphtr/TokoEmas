@@ -28,7 +28,6 @@ public class Kategori extends javax.swing.JDialog {
 
     public Kategori() {
         initComponents();
-        System.out.println("Masuk sini");
         btnHapus.setEnabled(false);
         btnUbah.setEnabled(false);
 

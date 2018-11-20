@@ -1,8 +1,19 @@
 package popups;
 
+import POJO.SupplierData;
 import customComponents.*;
+import database.Controller;
+import static database.Controller.getAllSupplier;
+import static database.Controller.getSupplierModel;
 import java.awt.Color;
+import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -13,13 +24,64 @@ public class Supplier extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
+    Vector<SupplierData> dataSupplier;
+    DocumentListener docListener;
+
     public Supplier(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
+
     public Supplier() {
         initComponents();
+        System.out.println("MASUK SINI");
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
+        dataSupplier = getAllSupplier();
+
+        ListSelectionModel lsm = listSupplier.getSelectionModel();
+        lsm.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if (lse.getValueIsAdjusting()) {
+                    btnUbah.setEnabled(true);
+                    btnHapus.setEnabled(true);
+                    SupplierData temp = dataSupplier.get(listSupplier.getSelectedIndex());
+                    fieldNama.setText(temp.getNama());
+                    fieldNama.setForeground(Color.BLACK);
+                    fieldNoTelp.setText(temp.getNotelp());
+                    fieldNoTelp.setForeground(Color.BLACK);
+                    textAreaAlamat.setText(temp.getAlamat());
+                    textAreaAlamat.setForeground(Color.BLACK);
+                }
+            }
+        });
+
+        docListener = new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                showClearBtn();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+
+            }
+
+            private void showClearBtn() {
+                btnClear.setVisible(true);
+            }
+        };
+
+        fieldNama.getDocument().addDocumentListener(docListener);
+        fieldNoTelp.getDocument().addDocumentListener(docListener);
+        textAreaAlamat.getDocument().addDocumentListener(docListener);
+
     }
 
     /**
@@ -49,6 +111,8 @@ public class Supplier extends javax.swing.JDialog {
         btnTambah = new javax.swing.JButton();
         btnUbah = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        btnClear = new javax.swing.JButton();
+        btnClear.setVisible(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -67,7 +131,7 @@ public class Supplier extends javax.swing.JDialog {
         jLabel1.setText("Nama Supplier");
 
         fieldNama.setForeground(java.awt.Color.gray);
-        fieldNama.setText("Masukan nama supplier.");
+        fieldNama.setText("Masukkan nama supplier.");
         fieldNama.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fieldNamaFocusGained(evt);
@@ -78,7 +142,7 @@ public class Supplier extends javax.swing.JDialog {
         });
 
         fieldNoTelp.setForeground(java.awt.Color.gray);
-        fieldNoTelp.setText("Masukan no telp.");
+        fieldNoTelp.setText("Masukkan no telp.");
         fieldNoTelp.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 fieldNoTelpFocusGained(evt);
@@ -99,7 +163,7 @@ public class Supplier extends javax.swing.JDialog {
         textAreaAlamat.setColumns(20);
         textAreaAlamat.setForeground(java.awt.Color.gray);
         textAreaAlamat.setRows(5);
-        textAreaAlamat.setText("Masukan alamat.");
+        textAreaAlamat.setText("Masukkan alamat.");
         textAreaAlamat.setBorder(null);
         textAreaAlamat.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -112,10 +176,11 @@ public class Supplier extends javax.swing.JDialog {
         jScrollPane1.setViewportView(textAreaAlamat);
         jScrollPane1.setBorder(null);
 
-        listSupplier.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        listSupplier.setModel(getSupplierModel());
+        listSupplier.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                listSupplierFocusLost(evt);
+            }
         });
         jScrollPane2.setViewportView(listSupplier);
 
@@ -123,20 +188,45 @@ public class Supplier extends javax.swing.JDialog {
         btnHapus.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnHapus.setForeground(java.awt.Color.white);
         btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         btnTambah.setBackground(new java.awt.Color(89, 38, 1));
         btnTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnTambah.setForeground(java.awt.Color.white);
         btnTambah.setText("Tambah");
+        btnTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahActionPerformed(evt);
+            }
+        });
 
         btnUbah.setBackground(new java.awt.Color(89, 38, 1));
         btnUbah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnUbah.setForeground(java.awt.Color.white);
         btnUbah.setText("Ubah");
+        btnUbah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUbahActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 0, 0));
         jLabel5.setText("List Supplier");
+
+        btnClear.setBackground(new java.awt.Color(89, 38, 1));
+        btnClear.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        btnClear.setForeground(java.awt.Color.white);
+        btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
@@ -157,7 +247,10 @@ public class Supplier extends javax.swing.JDialog {
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(fieldNoTelp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnClear))
                         .addComponent(TitleText, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(fieldNama, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)))
@@ -168,8 +261,10 @@ public class Supplier extends javax.swing.JDialog {
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(TitleText)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnClear))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -207,7 +302,7 @@ public class Supplier extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained
-        if (fieldNama.getText().equals("Masukan nama supplier.")) {
+        if (fieldNama.getText().equals("Masukkan nama supplier.")) {
             fieldNama.setText("");
             fieldNama.setForeground(Color.BLACK);
         }
@@ -215,13 +310,13 @@ public class Supplier extends javax.swing.JDialog {
 
     private void fieldNamaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusLost
         if (fieldNama.getText().equals("")) {
-            fieldNama.setText("Masukan nama supplier.");
+            fieldNama.setText("Masukkan nama supplier.");
             fieldNama.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_fieldNamaFocusLost
 
     private void fieldNoTelpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNoTelpFocusGained
-        if (fieldNoTelp.getText().equals("Masukan no telp.")) {
+        if (fieldNoTelp.getText().equals("Masukkan no telp.")) {
             fieldNoTelp.setText("");
             fieldNoTelp.setForeground(Color.BLACK);
         }
@@ -229,13 +324,13 @@ public class Supplier extends javax.swing.JDialog {
 
     private void fieldNoTelpFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNoTelpFocusLost
         if (fieldNoTelp.getText().equals("")) {
-            fieldNoTelp.setText("Masukan no telp.");
+            fieldNoTelp.setText("Masukkan no telp.");
             fieldNoTelp.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_fieldNoTelpFocusLost
 
     private void textAreaAlamatFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaAlamatFocusGained
-        if (textAreaAlamat.getText().equals("Masukan alamat.")) {
+        if (textAreaAlamat.getText().equals("Masukkan alamat.")) {
             textAreaAlamat.setText("");
             textAreaAlamat.setForeground(Color.BLACK);
         }
@@ -243,20 +338,128 @@ public class Supplier extends javax.swing.JDialog {
 
     private void textAreaAlamatFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaAlamatFocusLost
         if (textAreaAlamat.getText().equals("")) {
-            textAreaAlamat.setText("Masukan alamat.");
+            textAreaAlamat.setText("Masukkan alamat.");
             textAreaAlamat.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_textAreaAlamatFocusLost
 
+    private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
+        boolean isExist = false;
+        for (int i = 0; i < listSupplier.getModel().getSize(); i++) {
+            if (listSupplier.getModel().getElementAt(i).equalsIgnoreCase(fieldNama.getText())) {
+                isExist = true;
+            }
+        }
+        if (isExist) {
+            int reply = JOptionPane.showConfirmDialog(null, "nama supplier sudah ada, apakah ingin melanjutkan?",
+                    "Perhatian", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                SupplierData newSupplier = new SupplierData();
+                newSupplier.setNama(fieldNama.getText());
+                newSupplier.setAlamat(textAreaAlamat.getText());
+                newSupplier.setNotelp(fieldNoTelp.getText());
+                Controller.addSupplier(newSupplier);
+            }
+        } else {
+            SupplierData newSupplier = new SupplierData();
+            newSupplier.setNama(fieldNama.getText());
+            newSupplier.setAlamat(textAreaAlamat.getText());
+            newSupplier.setNotelp(fieldNoTelp.getText());
+            Controller.addSupplier(newSupplier);
+        }
+
+        textAreaAlamat.setText("Masukkan alamat.");
+        textAreaAlamat.setForeground(Color.GRAY);
+        fieldNoTelp.setText("Masukkan no telp.");
+        fieldNoTelp.setForeground(Color.GRAY);
+        fieldNama.setText("Masukkan nama supplier.");
+        fieldNama.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
+        listSupplier.setModel(getSupplierModel());
+        dataSupplier = getAllSupplier();
+    }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void btnUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUbahActionPerformed
+        boolean isExist = false;
+        for (int i = 0; i < listSupplier.getModel().getSize(); i++) {
+            if (listSupplier.getModel().getElementAt(i).equalsIgnoreCase(fieldNama.getText())) {
+                isExist = true;
+            }
+        }
+        if (isExist) {
+            int reply = JOptionPane.showConfirmDialog(null, "Nama supplier sudah ada, apakah ingin melanjutkan?",
+                    "Perhatian", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                Controller.updateSupplier(dataSupplier.get(listSupplier.getSelectedIndex()).getId(),
+                        fieldNama.getText(),
+                        textAreaAlamat.getText(),
+                        fieldNoTelp.getText());
+            }
+        } else {
+            Controller.updateSupplier(dataSupplier.get(listSupplier.getSelectedIndex()).getId(),
+                    fieldNama.getText(),
+                    textAreaAlamat.getText(),
+                    fieldNoTelp.getText());
+        }
+
+        textAreaAlamat.setText("Masukkan alamat.");
+        textAreaAlamat.setForeground(Color.GRAY);
+        fieldNoTelp.setText("Masukkan no telp.");
+        fieldNoTelp.setForeground(Color.GRAY);
+        fieldNama.setText("Masukkan nama supplier.");
+        fieldNama.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
+        listSupplier.setModel(getSupplierModel());
+        dataSupplier = getAllSupplier();
+    }//GEN-LAST:event_btnUbahActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        int id =  dataSupplier.get(listSupplier.getSelectedIndex()).getId();
+        int reply = JOptionPane.showConfirmDialog(null, "Menghapus supplier " + fieldNama.getText(), "Hapus Supplier", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            Controller.deleteSupplier(id);
+            listSupplier.clearSelection();
+        }
+        listSupplier.setModel(getSupplierModel());
+        textAreaAlamat.setText("Masukkan alamat.");
+        textAreaAlamat.setForeground(Color.GRAY);
+        fieldNoTelp.setText("Masukkan no telp.");
+        fieldNoTelp.setForeground(Color.GRAY);
+        fieldNama.setText("Masukkan nama supplier.");
+        fieldNama.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
+
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void listSupplierFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listSupplierFocusLost
+        
+    }//GEN-LAST:event_listSupplierFocusLost
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        textAreaAlamat.setText("Masukkan alamat.");
+        textAreaAlamat.setForeground(Color.GRAY);
+        fieldNoTelp.setText("Masukkan no telp.");
+        fieldNoTelp.setForeground(Color.GRAY);
+        fieldNama.setText("Masukkan nama supplier.");
+        fieldNama.setForeground(Color.GRAY);
+        btnUbah.setEnabled(false);
+        btnHapus.setEnabled(false);
+        btnClear.setVisible(false);
+    }//GEN-LAST:event_btnClearActionPerformed
+
     public static void main(String args[]) {
         JFrame a = new JFrame();
-        Supplier dialog = new Supplier(a,true);
+        Supplier dialog = new Supplier(a, true);
         //a.setPreferredSize(dialog.getPreferredSize());
-       dialog.setVisible(true);
+        dialog.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TambahPelangganPanel;
     private javax.swing.JLabel TitleText;
+    private javax.swing.JButton btnClear;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnTambah;
     private javax.swing.JButton btnUbah;

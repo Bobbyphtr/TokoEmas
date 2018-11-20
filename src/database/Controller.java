@@ -1,6 +1,7 @@
 package database;
 
 import POJO.Produk;
+import POJO.SupplierData;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -117,11 +118,10 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-    
+
     public static void updatePelanggan(int id) {
-        
+
     }
-        
 
     public static String[] getDateAndTime() {
         String[] array = new String[2];
@@ -166,8 +166,8 @@ public class Controller {
         }
 
     }
-    
-    public static void deleteKategori(String nama){
+
+    public static void deleteKategori(String nama) {
         String query = "DELETE FROM kategori WHERE nama = ?";
         try {
             preparedStatement = conn.prepareStatement(query);
@@ -176,19 +176,96 @@ public class Controller {
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
-    public static void updateKategori(String nama, String index){
+
+    public static void updateKategori(String nama, String index) {
         String query = "UPDATE kategori SET nama = ? WHERE nama = ?";
-        try{
+        try {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, nama);
             preparedStatement.setString(2, index);
             preparedStatement.executeUpdate();
-        }catch(SQLException ex){
-            System.out.println("Update gagal");
+        } catch (SQLException ex) {
+            System.out.println("Update kategori gagal");
             ex.printStackTrace();
+        }
+    }
+
+    public static DefaultListModel getSupplierModel() {
+        String query = "SELECT * FROM supplier";
+        try {
+            rs = statement.executeQuery(query);
+            DefaultListModel listModel = new DefaultListModel();
+            while (rs.next()) {
+                listModel.addElement(rs.getString("nama"));
+            }
+            return listModel;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses supplier");
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Vector getAllSupplier() {
+        String query = "SELECT * FROM supplier";
+        try {
+            rs = statement.executeQuery(query);
+            Vector data = new Vector();
+            while (rs.next()) {
+                SupplierData newSupplier = new SupplierData();
+                newSupplier.setId(rs.getInt("id"));
+                newSupplier.setNama(rs.getString("nama"));
+                newSupplier.setAlamat(rs.getString("alamat"));
+                newSupplier.setNotelp(rs.getString("no_telp"));
+                data.add(newSupplier);
+            }
+            return data;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses data supplier");
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void addSupplier(SupplierData supplier) {
+        String query = "INSERT INTO supplier (nama, alamat, no_telp) VALUES (? , ?, ?)";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, supplier.getNama());
+            preparedStatement.setString(2, supplier.getAlamat());
+            preparedStatement.setString(3, supplier.getNotelp());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Gagal masukan supplier");
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void updateSupplier(int id, String nama, String alamat, String noTelp){
+        String query = "UPDATE supplier SET nama = ?, alamat = ?, no_telp = ? WHERE id = ?";
+         try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, nama);
+            preparedStatement.setString(2, alamat);
+            preparedStatement.setString(3, noTelp);
+            preparedStatement.setInt(4, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Update supplier gagal");
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void deleteSupplier(int id){
+        String query = "DELETE FROM supplier WHERE id = ?";
+         try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -199,8 +276,6 @@ public class Controller {
             rsmt = rs.getMetaData();
 
             Vector data = new Vector();
-
-
 
             Vector column = new Vector();
 
@@ -232,7 +307,7 @@ public class Controller {
             return new DefaultTableModel(data, column) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    if (column == columnIdentifiers.size()-1) {
+                    if (column == columnIdentifiers.size() - 1) {
                         return true;
                     }
                     return false;
@@ -245,26 +320,24 @@ public class Controller {
         return null;
     }
 
-    public static void getProdukbyId(int id){
+    public static void getProdukbyId(int id) {
         String query = "SELECT * FROM barang WHERE id = ?";
     }
-    
-    public static void deleteProduk(int id){
+
+    public static void deleteProduk(int id) {
         String query = "DELETE FROM barang WHERE id = ? ";
     }
-    
-    public static void addProduk(Produk produk){
+
+    public static void addProduk(Produk produk) {
         String query = "INSERT INTO barang (nama, deskripsi, berat, karat, status, tipe_barang,"
                 + "id_kategori, id_supplier, harga_beli, tanggal_beli) VALUES "
                 + "(? , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     }
-    
-    public static void updateProduk(int id){
+
+    public static void updateProduk(int id) {
         String query = "UPDATE barang SET nama = ?, deskripsi = ?, berat = ?, karat = ?, status = ?, "
                 + "tipe_barang = ?, id_kategori = ?, id_supplier = ?, harga_beli = ?, tanggal_beli = ?"
                 + "WHERE id = ?";
     }
-    
-    
-    
+
 }
