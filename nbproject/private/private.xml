@@ -5,10 +5,12 @@
         <group>
             <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/TambahPelanggan.java</file>
             <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/TambahStaff.java</file>
+            <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/TambahProduk.java</file>
             <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/PilihPelanggan.java</file>
             <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/database/ConnectionManager.java</file>
             <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/panels/Transaksi.java</file>
             <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/PilihStaf.java</file>
+            <file>file:/D:/Kuliah/Sem_5/SE/TokoEmas/src/popups/DateLabelFormatter.java</file>
         </group>
     </open-files>
 </project-private>
