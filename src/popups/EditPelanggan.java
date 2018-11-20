@@ -1,5 +1,6 @@
 package popups;
 
+import POJO.Pelanggan;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.BorderFactory;
@@ -14,9 +15,24 @@ public class EditPelanggan extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
+    
+    private Pelanggan pelanggan;
+    
     public EditPelanggan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+    
+    public EditPelanggan(Pelanggan pelanggan) {
+        initComponents();
+        this.pelanggan = pelanggan;
+        
+        fieldNama.setText(pelanggan.getNama());
+        fieldEmail.setText(pelanggan.getEmail());
+        fieldNoTelp.setText(pelanggan.getNo_telp());
+        textAreaAlamat.setText(pelanggan.getAlamat());
+        fieldKuantitasReward.setText(String.valueOf(pelanggan.getBonus()));
+        fieldDeskripsiReward.setText(pelanggan.getDeskripsi_bonus());
     }
     
     public EditPelanggan() {

@@ -3,6 +3,7 @@ package popups;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.JFrame;
+import static database.Controller.addPelanggan;
 
 /**
  *
@@ -129,6 +130,11 @@ public class TambahPelanggan extends javax.swing.JDialog {
         tambahButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         tambahButton.setForeground(java.awt.Color.white);
         tambahButton.setText("Tambah");
+        tambahButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tambahButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
@@ -246,6 +252,15 @@ public class TambahPelanggan extends javax.swing.JDialog {
             textAreaAlamat.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_textAreaAlamatFocusLost
+
+    private void tambahButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tambahButtonActionPerformed
+        String nama = fieldNama.getText();
+        String email = fieldEmail.getText();
+        String no_telp = fieldNoTelp.getText();
+        String alamat = textAreaAlamat.getText();
+        addPelanggan(nama, email, alamat, no_telp, "false", 0, "Tidak ada");
+        this.dispose();
+    }//GEN-LAST:event_tambahButtonActionPerformed
 
     public static void main(String args[]) {
         JFrame a = new JFrame();

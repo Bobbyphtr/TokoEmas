@@ -358,31 +358,31 @@ public class LeftMenu extends javax.swing.JPanel {
     private void btn_TransaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransaksiMousePressed
         resetColor();
         setColor(btn_Transaksi);
-        pane.setRightComponent(new Transaksi());
+        pane.setRightComponent(new TransaksiPanel());
     }//GEN-LAST:event_btn_TransaksiMousePressed
 
     private void btn_PelangganMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_PelangganMousePressed
         resetColor();
         setColor(btn_Pelanggan);
-         pane.setRightComponent(new Pelanggan());
+         pane.setRightComponent(new PelangganPanel());
     }//GEN-LAST:event_btn_PelangganMousePressed
 
     private void btn_ProdukMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ProdukMousePressed
         resetColor();
         setColor(btn_Produk);
-        pane.setRightComponent(new Produk());
+        pane.setRightComponent(new ProdukPanel());
     }//GEN-LAST:event_btn_ProdukMousePressed
 
     private void btn_StaffMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_StaffMousePressed
         resetColor();
         setColor(btn_Staff);
-        pane.setRightComponent(new Staf());
+        pane.setRightComponent(new StafPanel());
     }//GEN-LAST:event_btn_StaffMousePressed
 
     private void btn_RekapMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RekapMousePressed
         resetColor();
         setColor(btn_Rekap);
-        pane.setRightComponent(new Rekap());
+        pane.setRightComponent(new RekapPanel());
     }//GEN-LAST:event_btn_RekapMousePressed
 
     private void btn_KeluarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_KeluarMousePressed

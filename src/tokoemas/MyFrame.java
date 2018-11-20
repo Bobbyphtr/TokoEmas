@@ -14,12 +14,12 @@ public class MyFrame extends JFrame {
     
     LeftMenu menu;
     JSplitPane splitPane;
-    Transaksi transaksiPanel;
+    TransaksiPanel transaksiPanel;
     
     MyFrame(){
         splitPane = new JSplitPane();
         menu = new LeftMenu(splitPane);
-        transaksiPanel = new Transaksi(); //Ganti dengan Dashboard!
+        transaksiPanel = new TransaksiPanel(); //Ganti dengan Dashboard!
         
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         add(splitPane);
