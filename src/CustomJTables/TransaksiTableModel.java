@@ -16,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class TransaksiTableModel extends DefaultTableModel{
     
     private String[] COLUMN_NAMES;
-    private final Class<?>[] COLUMN_TYPES = new Class<?>[]{Integer.class, String.class, Integer.class, Integer.class, String.class, String.class, JButton.class};
+    private final Class<?>[] COLUMN_TYPES = new Class<?>[]{Integer.class, String.class, Integer.class, Integer.class, String.class, JButton.class};
     
     private Vector data;
     
@@ -44,12 +44,15 @@ public class TransaksiTableModel extends DefaultTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        if (columnIndex == COLUMN_NAMES.length-1) {
-            JButton button = new JButton("Tambah");
+        if (columnIndex == 5) {
+            System.out.println("Button Added!");
+            JButton button = new JButton("Tambah111");
             button.addActionListener((v) ->{
                 System.out.println("DO nothing yet!");
             });
+            return button;
         }
+        System.out.println("Index = " + columnIndex);
         Vector rowVector = (Vector)dataVector.elementAt(rowIndex);
         return rowVector.elementAt(columnIndex);
     }

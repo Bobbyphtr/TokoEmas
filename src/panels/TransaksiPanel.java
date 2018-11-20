@@ -244,6 +244,17 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
             }
         ));
+        tableProduk.setModel(new TransaksiTableModel(
+            new Object [][] {
+                {"11", "50", "11", "11", "11", "Tambah"},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_Product", "Berat (gr)", "Karat", "Tipe", "Deskripsi", "Aksi"
+            }
+        ));
         tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         jScrollPane1.setViewportView(tableProduk);
 
