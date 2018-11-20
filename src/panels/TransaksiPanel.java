@@ -5,12 +5,15 @@ package panels;
  * @author Xenon
  */
 import CustomJTables.CustomTableCellRenderer;
+import CustomJTables.TransaksiTableModel;
 import customComponents.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Properties;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -232,7 +235,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
         tableProduk.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
+                {"11", "50", "11", "11", "11", "Tambah"},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
@@ -244,7 +247,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
         jScrollPane1.setViewportView(tableProduk);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(448, 139, 459, 130));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 130, 459, 130));
 
         tableTroli.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -527,4 +530,5 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JTable tableTroli;
     private javax.swing.JLabel timeText;
     // End of variables declaration//GEN-END:variables
+
 }

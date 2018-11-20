@@ -47,7 +47,7 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void valueChanged(ListSelectionEvent lse) {
                 if (!lse.getValueIsAdjusting()) {
-                    System.out.println(tablePelanggan.getSelectedRow());
+                    System.out.println(tablePelanggan.getSelectedRow() + "ssssss");
                     buttonUbah.setEnabled(true);
                 }
             }
