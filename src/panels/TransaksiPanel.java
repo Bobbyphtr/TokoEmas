@@ -4,7 +4,7 @@ package panels;
  *
  * @author Xenon
  */
-import CustomJTables.CustomTableCellRenderer;
+import CustomJTables.*;
 import POJO.Produk;
 import customComponents.*;
 import database.Controller;
@@ -300,9 +300,9 @@ public class TransaksiPanel extends javax.swing.JPanel {
         add(buttonPilihPelanggan, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 190, -1, 37));
 
         tableProduk.setModel(produkModel);
-        tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-        tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
-        tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
+        tableProduk.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
+        tableProduk.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
+        tableProduk.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
 
         tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
         tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
@@ -313,9 +313,9 @@ public class TransaksiPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 459, 150));
 
         tableTroli.setModel(troliModel);
-        tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-        tableTroli.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
-        tableTroli.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
+        tableTroli.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
+        tableTroli.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
+        tableTroli.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
 
         tableTroli.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
         tableTroli.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));

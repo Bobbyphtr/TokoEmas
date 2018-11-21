@@ -4,7 +4,7 @@ package panels;
  *
  * @author Xenon
  */
-import CustomJTables.CustomTableCellRenderer;
+import CustomJTables.*;
 import POJO.Staf;
 import customComponents.*;
 import database.Controller;
@@ -120,9 +120,9 @@ public class StafPanel extends javax.swing.JPanel {
             }
         });
 
-        tableStaf.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-        tableStaf.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
-        tableStaf.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
+        tableStaf.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
+        tableStaf.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
+        tableStaf.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
         jScrollPane1.setViewportView(tableStaf);
         tableStaf.setModel(getAllStaf());
         tableStaf.setCellSelectionEnabled(false);

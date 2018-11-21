@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  *
  * @author ysuta
  */
-public class CustomTableCellRenderer extends DefaultTableCellRenderer{
+public class DoubleTableCellRenderer extends DefaultTableCellRenderer{
     
     
     
@@ -22,6 +22,7 @@ public class CustomTableCellRenderer extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
         if (row % 2 == 0) {
+            value = Double.parseDouble(String.valueOf(value));
             setValue(value);
             setBackground(new Color(210,130,1));
             setForeground(Color.BLACK);

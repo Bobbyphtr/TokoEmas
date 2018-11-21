@@ -203,7 +203,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableStaf.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableStaf.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());&#xa;tableStaf.setDefaultRenderer(Double.class, new CustomTableCellRenderer());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableStaf.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());&#xa;tableStaf.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());&#xa;tableStaf.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());"/>
           </AuxValues>
         </Component>
       </SubComponents>

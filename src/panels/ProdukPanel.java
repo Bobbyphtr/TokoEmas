@@ -5,6 +5,7 @@ package panels;
  * @author Xenon
  */
 import customComponents.*;
+import CustomJTables.*;
 import database.Controller;
 import static database.Controller.getAllProdukPanel;
 import static database.Controller.getDateAndTime;
@@ -228,20 +229,13 @@ public class ProdukPanel extends javax.swing.JPanel {
             }
         });
 
-        tableProduk.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Tgl Beli", "ID_Barang", "Deskripsi Barang", "Harga Beli", "Status"
-            }
-        ));
         tableProduk.setModel(produkModel);
         tableProduk.setRowSelectionAllowed(true);
         tableProduk.setColumnSelectionAllowed(false);
+
+        tableProduk.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
+        tableProduk.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
+        tableProduk.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
         jScrollPane1.setViewportView(tableProduk);
 
         fieldCari.setForeground(java.awt.Color.gray);
@@ -446,8 +440,7 @@ public class ProdukPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlabel)
                                 .addGap(15, 15, 15)
-                                .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)))
+                                .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );

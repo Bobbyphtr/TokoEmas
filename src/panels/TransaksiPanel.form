@@ -368,7 +368,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());&#xa;tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());&#xa;&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));&#xa;&#xa;tableProduk.setColumnSelectionAllowed(false);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableProduk.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());&#xa;tableProduk.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());&#xa;tableProduk.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());&#xa;&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));&#xa;tableProduk.getColumn(&quot;Aksi&quot;).setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));&#xa;&#xa;tableProduk.setColumnSelectionAllowed(false);"/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -434,7 +434,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableTroli.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());&#xa;tableTroli.setDefaultRenderer(Double.class, new CustomTableCellRenderer());&#xa;&#xa;tableTroli.getColumn(&quot;Aksi&quot;).setCellEditor(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));&#xa;tableTroli.getColumn(&quot;Aksi&quot;).setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableTroli.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());&#xa;tableTroli.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());&#xa;tableTroli.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());&#xa;&#xa;tableTroli.getColumn(&quot;Aksi&quot;).setCellEditor(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));&#xa;tableTroli.getColumn(&quot;Aksi&quot;).setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));"/>
           </AuxValues>
         </Component>
       </SubComponents>

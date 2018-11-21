@@ -4,6 +4,7 @@ package panels;
  *
  * @author Xenon
  */
+import CustomJTables.*;
 import POJO.Pelanggan;
 import customComponents.*;
 import database.Controller;
@@ -14,15 +15,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.ListSelectionModel;
-import javax.swing.RowFilter;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import popups.EditPelanggan;
@@ -119,21 +117,18 @@ public class PelangganPanel extends javax.swing.JPanel {
             }
         });
 
-        tablePelanggan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nama", "Email", "Alamat", "No Telp", "Loyal", "Bonus", "Deskripsi Bonus"
-            }
-        ));
         tablePelanggan.setModel(getPelanggan());
         tablePelanggan.setCellSelectionEnabled(false);
         tablePelanggan.setRowSelectionAllowed(true);
         tablePelanggan.setColumnSelectionAllowed(false);
+
+        tablePelanggan.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
+        tablePelanggan.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
+        tablePelanggan.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
+        tablePelanggan.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
         jScrollPane1.setViewportView(tablePelanggan);
 
         fieldCari.setForeground(java.awt.Color.gray);
