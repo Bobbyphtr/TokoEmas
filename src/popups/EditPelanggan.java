@@ -3,7 +3,10 @@ package popups;
 import POJO.Pelanggan;
 import customComponents.*;
 import database.Controller;
+import static database.Controller.updatePelanggan;
 import java.awt.Color;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -35,8 +38,22 @@ public class EditPelanggan extends javax.swing.JDialog {
         fieldKuantitasReward.setText(String.valueOf(pelanggan.getBonus()));
         fieldDeskripsiReward.setText(pelanggan.getDeskripsi_bonus());
         if (pelanggan.isStatus_loyal()) {
-            
+            checkBLoyal.setSelected(true);
+            checkBLoyal.setForeground(Color.GREEN);
+        } else {
+            checkBLoyal.setSelected(false);
+            checkBLoyal.setForeground(Color.RED);
         }
+        checkBLoyal.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent ie) {
+                if (ie.getStateChange() == ItemEvent.DESELECTED) {
+                    checkBLoyal.setForeground(Color.RED);
+                } else {
+                    checkBLoyal.setForeground(Color.GREEN);
+                }
+            }
+        });
     }
 
     public EditPelanggan() {
@@ -215,6 +232,8 @@ public class EditPelanggan extends javax.swing.JDialog {
             }
         });
 
+        checkBLoyal.setBackground(null);
+        checkBLoyal.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         checkBLoyal.setText("Loyal");
 
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
@@ -285,9 +304,9 @@ public class EditPelanggan extends javax.swing.JDialog {
                 .addComponent(fieldKuantitasReward, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,7 +321,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
+            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
         );
 
         pack();
@@ -393,19 +412,33 @@ public class EditPelanggan extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldDeskripsiRewardFocusLost
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus "+ pelanggan.getNama(), "Hapus Pelanggan", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus " + pelanggan.getNama(), "Hapus Pelanggan", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-             Controller.deletePelanggan(pelanggan.getId());
+            Controller.deletePelanggan(pelanggan.getId());
+            this.dispose();
         }
-        this.dispose();
+
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        updatePelanggan(new Pelanggan(pelanggan.getId(), fieldNama.getText(),
-                fieldEmail.getText(),
-                textAreaAlamat.getText(),
-                fieldNoTelp.getText(),
-                , ABORT, deskripsi_bonus));
+        Pelanggan pelanggan = new Pelanggan();
+        pelanggan.setId(this.pelanggan.getId());
+        pelanggan.setNama(fieldNama.getText());
+        pelanggan.setEmail(fieldEmail.getText());
+        pelanggan.setAlamat(textAreaAlamat.getText());
+        pelanggan.setNo_telp(fieldNoTelp.getText());
+        if (checkBLoyal.isSelected()) {
+            pelanggan.setStatus_loyal(true);
+        } else {
+            pelanggan.setStatus_loyal(false);
+        }
+        pelanggan.setBonus(Integer.parseInt(fieldKuantitasReward.getText()));
+        pelanggan.setDeskripsi_bonus(fieldDeskripsiReward.getText());
+
+        updatePelanggan(pelanggan);
+
+        JOptionPane.showMessageDialog(this, "Update berhasil!");
+        this.dispose();
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     public static void main(String args[]) {

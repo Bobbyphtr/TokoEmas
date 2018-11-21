@@ -140,7 +140,7 @@ public class Controller {
     }
 
     public static void updatePelanggan(Pelanggan pelanggan) {
-        String query = "UPDATE customer SET nama = ?, email = ?, alamat = ?, no_telp = ?"
+        String query = "UPDATE customer SET nama = ?, email = ?, alamat = ?, no_telp = ?,"
                 + "status_loyal = ?, bonus = ?, deskripsi_bonus = ? WHERE id = ?";
         try {
             preparedStatement = conn.prepareStatement(query);

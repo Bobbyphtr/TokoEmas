@@ -325,7 +325,7 @@ public class PelangganPanel extends javax.swing.JPanel {
 
             int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(modelRow, 0)));
             System.out.println("Id :" + id);
-
+            System.out.println("Model Row : " + modelRow);
             String nama = (String) pelangganModel.getValueAt(modelRow, 1);
             String email = (String) pelangganModel.getValueAt(modelRow, 2);
             String alamat = (String) pelangganModel.getValueAt(modelRow, 3);

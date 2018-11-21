@@ -29,6 +29,10 @@ public class Pelanggan {
         this.bonus = bonus;
         this.deskripsi_bonus = deskripsi_bonus;
     }
+    
+    public Pelanggan(){
+        
+    }
 
     public int getId() {
         return id;
