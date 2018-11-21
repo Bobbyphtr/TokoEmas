@@ -164,7 +164,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 fieldCariProdukFocusLost(evt);
             }
         });
-        add(fieldCariProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 70, 191, -1));
+        add(fieldCariProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 60, 191, 30));
 
         jlabel.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel.setForeground(new java.awt.Color(102, 0, 0));
@@ -212,7 +212,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jlabel1.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel1.setForeground(new java.awt.Color(102, 0, 0));
         jlabel1.setText("Cari");
-        add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
+        add(jlabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 70, -1, -1));
 
         jlabel2.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel2.setForeground(new java.awt.Color(102, 0, 0));
@@ -287,12 +287,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
         TitleText2.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText2.setForeground(new java.awt.Color(102, 0, 0));
         TitleText2.setText("Produk");
-        add(TitleText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, -1, -1));
+        add(TitleText2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         jlabel4.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel4.setForeground(new java.awt.Color(102, 0, 0));
         jlabel4.setText("Cari");
-        add(jlabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
+        add(jlabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 320, -1, -1));
 
         fieldCariTroli.setForeground(java.awt.Color.gray);
         fieldCariTroli.setText("Ketik pencarian");
@@ -304,7 +304,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 fieldCariTroliFocusLost(evt);
             }
         });
-        add(fieldCariTroli, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 191, -1));
+        add(fieldCariTroli, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 191, 30));
 
         jlabel5.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel5.setForeground(new java.awt.Color(102, 0, 0));
