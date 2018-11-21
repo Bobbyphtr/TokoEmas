@@ -16,6 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import popups.EditProduk;
 import popups.Kategori;
 import popups.Supplier;
@@ -48,7 +50,7 @@ public class ProdukPanel extends javax.swing.JPanel {
         tableProduk.getColumnModel().removeColumn(idKategori);
         tableProduk.getColumnModel().removeColumn(idSupplier);
         
-        0
+        
         syncDate();
     }
 
@@ -66,6 +68,24 @@ public class ProdukPanel extends javax.swing.JPanel {
             }
         });
         date.start();
+        
+        tableProduk.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                
+            }
+        });
+    }
+    
+    private void infoProdukController() {
+        labelNama.setText("");
+        labelDeskripsi.setText("");
+        labelWeight.setText("");
+        labelKarat.setText("");
+        labelType.setText("");
+        labelKategori.setText("");
+        labelSupplier.setText("");
+        labelHargaBeli.setText("");
     }
 
     /**
@@ -94,23 +114,23 @@ public class ProdukPanel extends javax.swing.JPanel {
         buttonKategori = new javax.swing.JButton();
         buttonTambah = new javax.swing.JButton();
         buttonUbah = new javax.swing.JButton();
+        jlabel1 = new javax.swing.JLabel();
         panelInfoProduk = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        labelDeskripsi = new javax.swing.JLabel();
+        labelWeight = new javax.swing.JLabel();
+        labelNama = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        labelKarat = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        labelType = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        labelKategori = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        labelSupplier = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jlabel1 = new javax.swing.JLabel();
+        labelHargaBeli = new javax.swing.JLabel();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -236,133 +256,89 @@ public class ProdukPanel extends javax.swing.JPanel {
             }
         });
 
-        panelInfoProduk.setBackground(java.awt.Color.white);
-        panelInfoProduk.setBorder(new BubbleBorderJPanel(Color.WHITE, 10, 20, 0));
-
-        jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel1.setForeground(java.awt.Color.gray);
-        jLabel1.setText("Deskripsi:");
-
-        jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel2.setForeground(java.awt.Color.black);
-        jLabel2.setText("IDProduct");
-
-        jLabel4.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel4.setForeground(java.awt.Color.black);
-        jLabel4.setText("IDProduct");
-
-        jLabel9.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel9.setForeground(java.awt.Color.black);
-        jLabel9.setText("IDProduct");
-
-        jLabel10.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel10.setForeground(java.awt.Color.gray);
-        jLabel10.setText("Weight:");
-
-        jLabel11.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel11.setForeground(java.awt.Color.gray);
-        jLabel11.setText("Karat:");
-
-        jLabel12.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel12.setForeground(java.awt.Color.black);
-        jLabel12.setText("IDProduct");
-
-        jLabel13.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel13.setForeground(java.awt.Color.gray);
-        jLabel13.setText("Type:");
-
-        jLabel14.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel14.setForeground(java.awt.Color.black);
-        jLabel14.setText("IDProduct");
-
-        jLabel15.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel15.setForeground(java.awt.Color.gray);
-        jLabel15.setText("Kategori:");
-
-        jLabel16.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel16.setForeground(java.awt.Color.black);
-        jLabel16.setText("IDProduct");
-
-        jLabel17.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel17.setForeground(java.awt.Color.gray);
-        jLabel17.setText("Supplier:");
-
-        jLabel18.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel18.setForeground(java.awt.Color.black);
-        jLabel18.setText("IDProduct");
-
-        jLabel19.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel19.setForeground(java.awt.Color.gray);
-        jLabel19.setText("Harga Beli:");
-
-        jLabel20.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel20.setForeground(java.awt.Color.black);
-        jLabel20.setText("IDProduct");
-
-        javax.swing.GroupLayout panelInfoProdukLayout = new javax.swing.GroupLayout(panelInfoProduk);
-        panelInfoProduk.setLayout(panelInfoProdukLayout);
-        panelInfoProdukLayout.setHorizontalGroup(
-            panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInfoProdukLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel14)
-                    .addComponent(jLabel13)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel15)
-                    .addComponent(jLabel18)
-                    .addComponent(jLabel17)
-                    .addComponent(jLabel20)
-                    .addComponent(jLabel19))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelInfoProdukLayout.setVerticalGroup(
-            panelInfoProdukLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelInfoProdukLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel10)
-                .addGap(0, 0, 0)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel11)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel12)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel13)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel14)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel15)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel17)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel18)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel19)
-                .addGap(1, 1, 1)
-                .addComponent(jLabel20)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jlabel1.setFont(new java.awt.Font("Myriad Pro", 0, 28)); // NOI18N
         jlabel1.setForeground(new java.awt.Color(102, 0, 0));
         jlabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Information_50px_4.png"))); // NOI18N
         jlabel1.setText("Info Produk");
+
+        panelInfoProduk.setBackground(java.awt.Color.white);
+        panelInfoProduk.setBorder(new BubbleBorderJPanel(Color.WHITE, 10, 20, 0));
+        panelInfoProduk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel1.setForeground(java.awt.Color.gray);
+        jLabel1.setText("Deskripsi:");
+        panelInfoProduk.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        labelDeskripsi.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelDeskripsi.setForeground(java.awt.Color.black);
+        labelDeskripsi.setText("Deskripsi");
+        panelInfoProduk.add(labelDeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        labelWeight.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelWeight.setForeground(java.awt.Color.black);
+        labelWeight.setText("Weight");
+        panelInfoProduk.add(labelWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        labelNama.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelNama.setForeground(java.awt.Color.black);
+        labelNama.setText("Nama");
+        panelInfoProduk.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel10.setForeground(java.awt.Color.gray);
+        jLabel10.setText("Weight:");
+        panelInfoProduk.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel11.setForeground(java.awt.Color.gray);
+        jLabel11.setText("Karat:");
+        panelInfoProduk.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        labelKarat.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelKarat.setForeground(java.awt.Color.black);
+        labelKarat.setText("Karat");
+        panelInfoProduk.add(labelKarat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel13.setForeground(java.awt.Color.gray);
+        jLabel13.setText("Type:");
+        panelInfoProduk.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        labelType.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelType.setForeground(java.awt.Color.black);
+        labelType.setText("Type");
+        panelInfoProduk.add(labelType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel15.setForeground(java.awt.Color.gray);
+        jLabel15.setText("Kategori:");
+        panelInfoProduk.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        labelKategori.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelKategori.setForeground(java.awt.Color.black);
+        labelKategori.setText("Kategori");
+        panelInfoProduk.add(labelKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel17.setForeground(java.awt.Color.gray);
+        jLabel17.setText("Supplier:");
+        panelInfoProduk.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        labelSupplier.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelSupplier.setForeground(java.awt.Color.black);
+        labelSupplier.setText("Supplier");
+        panelInfoProduk.add(labelSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
+        jLabel19.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel19.setForeground(java.awt.Color.gray);
+        jLabel19.setText("Harga Beli:");
+        panelInfoProduk.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+
+        labelHargaBeli.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelHargaBeli.setForeground(java.awt.Color.black);
+        labelHargaBeli.setText("Harga Beli");
+        panelInfoProduk.add(labelHargaBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -383,35 +359,32 @@ public class ProdukPanel extends javax.swing.JPanel {
                                     .addComponent(buttonSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(buttonKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(buttonUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(panelInfoProduk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(buttonUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(486, 486, 486)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(486, 486, 486)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(9, 9, 9)
-                                        .addComponent(dateText))
-                                    .addComponent(timeText))
-                                .addGap(30, 30, 30))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(jlabel)
-                                            .addGap(15, 15, 15)
-                                            .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGap(34, 34, 34)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(30, 30, 30)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))))
+                                .addGap(9, 9, 9)
+                                .addComponent(dateText))
+                            .addComponent(timeText))
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlabel)
+                                .addGap(15, 15, 15)
+                                .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
@@ -431,7 +404,7 @@ public class ProdukPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dateText)))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabel)
@@ -446,8 +419,8 @@ public class ProdukPanel extends javax.swing.JPanel {
                         .addComponent(buttonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jlabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -524,24 +497,24 @@ public class ProdukPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jlabel;
     private javax.swing.JLabel jlabel1;
+    private javax.swing.JLabel labelDeskripsi;
+    private javax.swing.JLabel labelHargaBeli;
+    private javax.swing.JLabel labelKarat;
+    private javax.swing.JLabel labelKategori;
+    private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel labelSupplier;
+    private javax.swing.JLabel labelType;
+    private javax.swing.JLabel labelWeight;
     private javax.swing.JPanel panelInfoProduk;
     private javax.swing.JTable tableProduk;
     private javax.swing.JLabel timeText;

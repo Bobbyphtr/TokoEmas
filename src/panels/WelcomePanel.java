@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import tokoemas.MyFrame;
 
 /**
  *
@@ -19,7 +20,15 @@ public class WelcomePanel extends javax.swing.JPanel {
     /**
      * Creates new form WelcomePanel1
      */
+    
+    MyFrame frame;
+    
     public WelcomePanel() {
+        initComponents();
+    }
+    
+    public WelcomePanel(MyFrame frame) {
+        this.frame = frame;
         initComponents();
     }
 
@@ -111,7 +120,7 @@ public class WelcomePanel extends javax.swing.JPanel {
                         .addGap(81, 81, 81)
                         .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(passwordField))
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(684, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +149,7 @@ public class WelcomePanel extends javax.swing.JPanel {
             User user = Controller.getUserbyUsername(usernameField.getText());
             if (user != null) {
                 if(user.getPassword().equals(passwordEncrypted)){
-                    System.out.println("LOGGED IN!!");
+                    frame.changeContent();
                 } else JOptionPane.showMessageDialog(this, "Username atau Password salah.");
             }else {
                  JOptionPane.showMessageDialog(this, "Username atau Password salah.");
