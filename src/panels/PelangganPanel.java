@@ -294,6 +294,7 @@ public class PelangganPanel extends javax.swing.JPanel {
             fieldCari.setText("");
             fieldCari.setForeground(Color.BLACK);
         }
+        tablePelanggan.clearSelection();
     }//GEN-LAST:event_fieldCariFocusGained
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
@@ -304,6 +305,7 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void windowClosed(WindowEvent e) {
                 tablePelanggan.setModel(getPelanggan());
+                pelangganModel = tablePelanggan.getModel();
                 setUpRowFilter();
             }
         });
@@ -344,6 +346,7 @@ public class PelangganPanel extends javax.swing.JPanel {
                 @Override
                 public void windowClosed(WindowEvent we) {
                     tablePelanggan.setModel(getPelanggan());
+                    pelangganModel = tablePelanggan.getModel();
                     setUpRowFilter();
                 }
             });
