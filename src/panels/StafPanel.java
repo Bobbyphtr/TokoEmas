@@ -294,6 +294,7 @@ public class StafPanel extends javax.swing.JPanel {
             fieldCari.setText("");
             fieldCari.setForeground(Color.BLACK);
         }
+        buttonUbah.setEnabled(false);
     }//GEN-LAST:event_fieldCariFocusGained
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
@@ -354,6 +355,7 @@ public class StafPanel extends javax.swing.JPanel {
                 }
             });
         }
+        buttonUbah.setEnabled(false);
     }//GEN-LAST:event_buttonUbahActionPerformed
 
     public static void main(String args[]) {

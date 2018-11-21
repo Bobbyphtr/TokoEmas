@@ -1,6 +1,8 @@
 package popups;
 
+import POJO.Staf;
 import customComponents.*;
+import static database.Controller.addStaf;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 
@@ -17,8 +19,8 @@ public class TambahStaff extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
-    
-    public TambahStaff(){
+
+    public TambahStaff() {
         initComponents();
     }
 
@@ -273,11 +275,19 @@ public class TambahStaff extends javax.swing.JDialog {
     }//GEN-LAST:event_gajiFieldFocusLost
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-       
+        Staf staf = new Staf();
+        staf.setNama(fieldNama.getText());
+        staf.setEmail(emailField.getText());
+        staf.setPosisi(posisiField.getText());
+        staf.setGaji(Integer.parseInt(gajiField.getText()));
+        staf.setNoTelp(noTelpField.getText());
+        staf.setAlamat(alamatArea.getText());
+        addStaf(staf);
+        this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-       this.dispose();
+        this.dispose();
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost
