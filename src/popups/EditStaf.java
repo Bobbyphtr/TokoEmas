@@ -2,8 +2,10 @@ package popups;
 
 import POJO.Staf;
 import customComponents.*;
+import database.Controller;
 import java.awt.Color;
 import javax.swing.BorderFactory;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,19 +16,18 @@ public class EditStaf extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
-    
     Staf staf;
-    
+
     public EditStaf(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
-    public EditStaf(Staf staf){
+
+    public EditStaf(Staf staf) {
         initComponents();
-        
+
         this.staf = staf;
-        
+
         fieldNama.setText(staf.getNama());
         emailField.setText(staf.getEmail());
         posisiField.setText(staf.getPosisi());
@@ -36,7 +37,7 @@ public class EditStaf extends javax.swing.JDialog {
         fieldKuantitasHadiah.setText(String.valueOf(staf.getReward()));
         deskripsiHadiahArea.setText(staf.getDekripsiReward());
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -347,11 +348,20 @@ public class EditStaf extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldKuantitasHadiahFocusLost
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        // TODO add your handling code here:
+       Staf staf = new Staf();
+       staf.setId(this.staf.getId());
+       staf.setNama(fieldNama.getText());
+       staf.setEmail(emailField.getText());
+       staf.setPosisi(posisiField.getText());
+       staf.setGaji(Integer.parseInt(gajiField.getText()));
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
-        // TODO add your handling code here:
+        int reply = JOptionPane.showConfirmDialog(null, "Apakah anda ingin menghapus " + staf.getNama(), "Hapus Staf", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+            Controller.deleteStafbyId(staf.getId());
+            this.dispose();
+        }
     }//GEN-LAST:event_btnHapusActionPerformed
 
     private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost

@@ -11,13 +11,19 @@ import static database.Controller.getDateAndTime;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.RowFilter;
 import javax.swing.Timer;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableRowSorter;
 import popups.EditProduk;
 import popups.Kategori;
 import popups.Supplier;
@@ -30,11 +36,12 @@ public class ProdukPanel extends javax.swing.JPanel {
      */
     TableModel produkModel;
     TableColumn nama, berat, karat, tipeBarang, idKategori, idSupplier;
+    TableRowSorter<TableModel> rowFilter;
 
     public ProdukPanel() {
         produkModel = getAllProdukPanel();
         initComponents();
-        
+
         //hide column
         nama = tableProduk.getColumnModel().getColumn(1);
         berat = tableProduk.getColumnModel().getColumn(3);
@@ -42,16 +49,56 @@ public class ProdukPanel extends javax.swing.JPanel {
         tipeBarang = tableProduk.getColumnModel().getColumn(6);
         idKategori = tableProduk.getColumnModel().getColumn(7);
         idSupplier = tableProduk.getColumnModel().getColumn(8);
-        
+
         tableProduk.getColumnModel().removeColumn(nama);
         tableProduk.getColumnModel().removeColumn(berat);
         tableProduk.getColumnModel().removeColumn(karat);
         tableProduk.getColumnModel().removeColumn(tipeBarang);
         tableProduk.getColumnModel().removeColumn(idKategori);
         tableProduk.getColumnModel().removeColumn(idSupplier);
-        
-        
+
+        tableProduk.getColumnModel().moveColumn(4, 0);
+        tableProduk.getColumnModel().moveColumn(3, 4);
+
         syncDate();
+        setUpRowFilter();
+    }
+
+    private void setUpRowFilter() {
+        rowFilter = new TableRowSorter<>(tableProduk.getModel());
+        tableProduk.setRowSorter(rowFilter);
+        fieldCari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+
     }
 
     private void syncDate() {
@@ -68,24 +115,53 @@ public class ProdukPanel extends javax.swing.JPanel {
             }
         });
         date.start();
-        
+
         tableProduk.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                
+                if (e.getValueIsAdjusting()) {
+                    if (tableProduk.getSelectedRow() > -1) {
+                        infoProdukController(tableProduk.convertRowIndexToModel(tableProduk.getSelectedRow()));
+                    }
+                }
             }
         });
     }
-    
-    private void infoProdukController() {
-        labelNama.setText("");
-        labelDeskripsi.setText("");
-        labelWeight.setText("");
-        labelKarat.setText("");
-        labelType.setText("");
-        labelKategori.setText("");
-        labelSupplier.setText("");
-        labelHargaBeli.setText("");
+
+    private void infoProdukController(int rowIdx) {
+        if (rowIdx > -1) {
+            labelNama.setText((String) tableProduk.getModel().getValueAt(rowIdx, 1));
+            labelDeskripsi.setText((String) tableProduk.getModel().getValueAt(rowIdx, 2));
+            labelWeight.setText(String.valueOf((Double) tableProduk.getModel().getValueAt(rowIdx, 3)));
+            labelKarat.setText(String.valueOf((Double) tableProduk.getModel().getValueAt(rowIdx, 4)));
+            labelType.setText((String) tableProduk.getModel().getValueAt(rowIdx, 6));
+            labelKategori.setText((String) tableProduk.getModel().getValueAt(rowIdx, 7));
+            labelSupplier.setText((String) tableProduk.getModel().getValueAt(rowIdx, 8));
+            labelHargaBeli.setText(intToCurrency((Integer) tableProduk.getModel().getValueAt(rowIdx, 9)));
+        } else {
+            labelNama.setText("-");
+            labelDeskripsi.setText("-");
+            labelWeight.setText("-");
+            labelKarat.setText("-");
+            labelType.setText("-");
+            labelKategori.setText("-");
+            labelSupplier.setText("-");
+            labelHargaBeli.setText("-");
+        }
+
+    }
+
+    private String intToCurrency(int number) {
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+
+        return kursIndonesia.format(number);
+
     }
 
     /**
@@ -109,8 +185,6 @@ public class ProdukPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         dateText = new javax.swing.JLabel();
         timeText = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
         buttonKategori = new javax.swing.JButton();
         buttonTambah = new javax.swing.JButton();
         buttonUbah = new javax.swing.JButton();
@@ -221,10 +295,6 @@ public class ProdukPanel extends javax.swing.JPanel {
         timeText.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         timeText.setForeground(new java.awt.Color(102, 0, 0));
         timeText.setText("<TIME>");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         buttonKategori.setBackground(new java.awt.Color(126, 80, 23));
         buttonKategori.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
@@ -352,17 +422,13 @@ public class ProdukPanel extends javax.swing.JPanel {
                         .addComponent(TitleText)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(buttonTambah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(buttonSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(buttonKategori, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addComponent(buttonUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(buttonTambah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(buttonSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buttonKategori, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                            .addComponent(buttonUbah, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(486, 486, 486)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -371,18 +437,16 @@ public class ProdukPanel extends javax.swing.JPanel {
                             .addComponent(timeText))
                         .addGap(30, 30, 30))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlabel1))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlabel)
                                 .addGap(15, 15, 15)
                                 .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -408,18 +472,16 @@ public class ProdukPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jlabel)
-                            .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(buttonUbah, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                         .addComponent(jlabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(70, Short.MAX_VALUE))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -492,8 +554,6 @@ public class ProdukPanel extends javax.swing.JPanel {
     private javax.swing.JButton buttonUbah;
     private javax.swing.JLabel dateText;
     private javax.swing.JTextField fieldCari;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

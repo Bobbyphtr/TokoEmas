@@ -424,7 +424,10 @@ public class Controller {
     }
     
     public static DefaultTableModel getAllProdukPanel() {
-        String query = "SELECT * FROM barang";
+        String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, status, tipe_barang, "
+                + "kategori.nama as kategori, supplier.nama as supplier, harga_beli, tanggal_beli "
+                + "FROM `barang`, kategori, supplier "
+                + "WHERE kategori.id = barang.id_kategori and supplier.id = barang.id_supplier";
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
@@ -440,8 +443,8 @@ public class Controller {
             column.add("Karat");
             column.add("Status");
             column.add("Tipe");
-            column.add("Id_kategori");
-            column.add("Id_supplier");
+            column.add("kategori");
+            column.add("supplier");
             column.add("Harga Beli");
             column.add("tanggal beli");
             
@@ -454,8 +457,8 @@ public class Controller {
                 row.add(rs.getDouble("karat"));
                 row.add(rs.getString("status"));
                 row.add(rs.getString("tipe_barang"));
-                row.add(rs.getInt("id_kategori"));
-                row.add(rs.getInt("id_supplier"));
+                row.add(rs.getString("kategori"));
+                row.add(rs.getString("supplier"));
                 row.add(rs.getInt("harga_beli"));
                 row.add(rs.getDate("tanggal_beli"));
                 data.add(row);

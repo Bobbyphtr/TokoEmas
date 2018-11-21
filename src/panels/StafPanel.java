@@ -59,7 +59,7 @@ public class StafPanel extends javax.swing.JPanel {
         setUpRowFilter();
         syncDate();
     }
-    
+
     private void syncDate() {
         String[] dateAndTime = getDateAndTime();
         timeText.setText(dateAndTime[0]);
@@ -304,6 +304,7 @@ public class StafPanel extends javax.swing.JPanel {
             @Override
             public void windowClosed(WindowEvent e) {
                 tableStaf.setModel(getAllStaf());
+                stafModel = tableStaf.getModel();
                 setUpRowFilter();
             }
         });
@@ -321,7 +322,7 @@ public class StafPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariActionPerformed
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
-       if (tableStaf.getSelectedRow() > -1) {
+        if (tableStaf.getSelectedRow() > -1) {
 
             int selectedRow = tableStaf.getSelectedRow();
             int modelRow = tableStaf.convertRowIndexToModel(selectedRow);
@@ -348,6 +349,7 @@ public class StafPanel extends javax.swing.JPanel {
                 @Override
                 public void windowClosed(WindowEvent we) {
                     tableStaf.setModel(getAllStaf());
+                    stafModel = tableStaf.getModel();
                     setUpRowFilter();
                 }
             });

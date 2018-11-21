@@ -305,7 +305,6 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void windowClosed(WindowEvent e) {
                 tablePelanggan.setModel(getPelanggan());
-                pelangganModel = tablePelanggan.getModel();
                 setUpRowFilter();
             }
         });

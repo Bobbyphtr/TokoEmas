@@ -1,2 +1,0 @@
-tokoemas.DashboardPanel
-tokoemas.DashboardPanel$1
