@@ -58,39 +58,6 @@ public class PelangganPanel extends javax.swing.JPanel {
 
     }
     
-    
-    private void setUpRowFilter() {
-        rowFilter = new TableRowSorter<>(tablePelanggan.getModel());
-        tablePelanggan.setRowSorter(rowFilter);
-        fieldCari.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                String text = fieldCari.getText();
-                if (text.trim().length() == 0) {
-                    rowFilter.setRowFilter(null);
-                } else {
-                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                String text = fieldCari.getText();
-                if (text.trim().length() == 0) {
-                    rowFilter.setRowFilter(null);
-                } else {
-                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-
-    }
 
     private void syncDate() {
         String[] dateAndTime = getDateAndTime();
@@ -320,18 +287,6 @@ public class PelangganPanel extends javax.swing.JPanel {
             }
         });
 
-    }
-
-    private void syncDate() {
-        Timer date = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String[] dateAndTime = getDateAndTime();
-                timeText.setText(dateAndTime[0]);
-                dateText.setText(dateAndTime[1]);
-            }
-        });
-        date.start();
     }
 
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
