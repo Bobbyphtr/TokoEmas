@@ -51,14 +51,60 @@ public class PelangganPanel extends javax.swing.JPanel {
                 }
             }
         });
-        String[] dateAndTime = getDateAndTime();
-        timeText.setText(dateAndTime[0]);
-        dateText.setText(dateAndTime[1]);
-        System.out.println(dateAndTime[1]);
+
 
         syncDate();
         setUpRowFilter();
 
+    }
+    
+    
+    private void setUpRowFilter() {
+        rowFilter = new TableRowSorter<>(tablePelanggan.getModel());
+        tablePelanggan.setRowSorter(rowFilter);
+        fieldCari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (text.trim().length() == 0) {
+                    rowFilter.setRowFilter(null);
+                } else {
+                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (text.trim().length() == 0) {
+                    rowFilter.setRowFilter(null);
+                } else {
+                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+
+    }
+
+    private void syncDate() {
+        String[] dateAndTime = getDateAndTime();
+        timeText.setText(dateAndTime[0]);
+        dateText.setText(dateAndTime[1]);
+        Timer date = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] dateAndTime = getDateAndTime();
+                timeText.setText(dateAndTime[0]);
+                dateText.setText(dateAndTime[1]);
+            }
+        });
+        date.start();
     }
 
     /**
@@ -238,51 +284,6 @@ public class PelangganPanel extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void setUpRowFilter() {
-        rowFilter = new TableRowSorter<>(tablePelanggan.getModel());
-        tablePelanggan.setRowSorter(rowFilter);
-        fieldCari.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                String text = fieldCari.getText();
-                if (text.trim().length() == 0) {
-                    rowFilter.setRowFilter(null);
-                } else {
-                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-                String text = fieldCari.getText();
-                if (text.trim().length() == 0) {
-                    rowFilter.setRowFilter(null);
-                } else {
-                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
-                }
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            }
-        });
-
-    }
-
-    private void syncDate() {
-        Timer date = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String[] dateAndTime = getDateAndTime();
-                timeText.setText(dateAndTime[0]);
-                dateText.setText(dateAndTime[1]);
-            }
-        });
-        date.start();
-    }
 
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
         if (fieldCari.getText().equals("Ketik pencarian")) {

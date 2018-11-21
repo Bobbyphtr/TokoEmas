@@ -22,6 +22,9 @@ import org.jdatepicker.impl.UtilDateModel;
 import popups.*;
 
 import static database.Controller.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 public class TransaksiPanel extends javax.swing.JPanel {
 
@@ -38,6 +41,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         initTableModel();
         initComponents();
         initDatePicker();
+        syncDate();
     }
 
     private void initDatePicker() {
@@ -61,6 +65,22 @@ public class TransaksiPanel extends javax.swing.JPanel {
                     "ID", "Nama", "Deskripsi", "Berat", "Karat", "Status", "Tipe", "Harga Beli", "Tanggal Beli", "Aksi"
                 }
         );
+    }
+    
+    private void syncDate() {
+        String[] dateAndTime = getDateAndTime();
+        timeText.setText(dateAndTime[0]);
+        dateText.setText(dateAndTime[1]);
+        System.out.println(dateAndTime[1]);
+        Timer date = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] dateAndTime = getDateAndTime();
+                timeText.setText(dateAndTime[0]);
+                dateText.setText(dateAndTime[1]);
+            }
+        });
+        date.start();
     }
 
     /**

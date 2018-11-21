@@ -6,8 +6,12 @@ package panels;
  */
 import CustomJTables.CustomTableCellRenderer;
 import customComponents.*;
+import static database.Controller.getDateAndTime;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class StafPanel extends javax.swing.JPanel {
 
@@ -16,6 +20,23 @@ public class StafPanel extends javax.swing.JPanel {
      */
     public StafPanel() {
         initComponents();
+        syncDate();
+    }
+    
+    private void syncDate() {
+        String[] dateAndTime = getDateAndTime();
+        timeText.setText(dateAndTime[0]);
+        dateText.setText(dateAndTime[1]);
+        System.out.println(dateAndTime[1]);
+        Timer date = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] dateAndTime = getDateAndTime();
+                timeText.setText(dateAndTime[0]);
+                dateText.setText(dateAndTime[1]);
+            }
+        });
+        date.start();
     }
 
     /**
@@ -201,6 +222,8 @@ public class StafPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
+    
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
         if (fieldCari.getText().equals("Ketik pencarian")) {
             fieldCari.setText("");

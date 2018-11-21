@@ -95,6 +95,11 @@ public class Kategori extends javax.swing.JDialog {
         });
 
         listKategori.setModel(getAllKategori());
+        listKategori.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                listKategoriFocusLost(evt);
+            }
+        });
         jScrollPane2.setViewportView(listKategori);
 
         btnHapus.setBackground(new java.awt.Color(89, 38, 1));
@@ -264,6 +269,10 @@ public class Kategori extends javax.swing.JDialog {
         btnUbah.setEnabled(false);
         btnHapus.setEnabled(false);
     }//GEN-LAST:event_btnTambahActionPerformed
+
+    private void listKategoriFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_listKategoriFocusLost
+
+    }//GEN-LAST:event_listKategoriFocusLost
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
