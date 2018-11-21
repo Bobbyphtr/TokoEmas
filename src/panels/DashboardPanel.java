@@ -1,5 +1,8 @@
 package panels;
 
+import database.Controller;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Xenon
@@ -25,8 +28,8 @@ public class DashboardPanel extends javax.swing.JPanel {
         transaksiField = new javax.swing.JTextField();
         profitField = new javax.swing.JTextField();
         employeeField = new javax.swing.JTextField();
-        jamField = new javax.swing.JTextField();
-        tanggalField = new javax.swing.JTextField();
+        timeText = new javax.swing.JLabel();
+        dateText = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 231, 192));
 
@@ -48,17 +51,15 @@ public class DashboardPanel extends javax.swing.JPanel {
         employeeField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         employeeField.setText("Employee Of The Day");
 
-        jamField.setBackground(new java.awt.Color(255, 231, 192));
-        jamField.setFont(new java.awt.Font("Dialog", 0, 48)); // NOI18N
-        jamField.setForeground(new java.awt.Color(102, 0, 0));
-        jamField.setText("21:36");
-        jamField.setBorder(null);
+        timeText.setBackground(new java.awt.Color(102, 0, 0));
+        timeText.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
+        timeText.setForeground(new java.awt.Color(102, 0, 0));
+        timeText.setText("<TIME>");
 
-        tanggalField.setBackground(new java.awt.Color(255, 231, 192));
-        tanggalField.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
-        tanggalField.setForeground(new java.awt.Color(102, 0, 0));
-        tanggalField.setText("21-10-2018");
-        tanggalField.setBorder(null);
+        dateText.setBackground(new java.awt.Color(102, 0, 0));
+        dateText.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        dateText.setForeground(new java.awt.Color(102, 0, 0));
+        dateText.setText("<DD-MM-YYYY>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -73,19 +74,21 @@ public class DashboardPanel extends javax.swing.JPanel {
                 .addContainerGap(404, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tanggalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jamField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(54, 54, 54))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(dateText)
+                        .addGap(9, 9, 9))
+                    .addComponent(timeText))
+                .addGap(55, 55, 55))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jamField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(timeText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tanggalField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addComponent(dateText)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(transaksiField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(52, 52, 52)
                 .addComponent(profitField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -94,13 +97,24 @@ public class DashboardPanel extends javax.swing.JPanel {
                 .addGap(127, 127, 127))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+        public static void main(String args[]) {
+        Controller con = new Controller();
+        JFrame a = new JFrame();
+        a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        DashboardPanel panel = new DashboardPanel();
+        //a.setPreferredSize(dialog.getPreferredSize());
+        a.setSize(panel.getPreferredSize());
+        a.setContentPane(panel);
+        a.setVisible(true);
+        System.out.println("Width : " + a.getWidth());
+        System.out.println("Height : " + a.getHeight());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel dateText;
     private javax.swing.JTextField employeeField;
-    private javax.swing.JTextField jamField;
     private javax.swing.JTextField profitField;
-    private javax.swing.JTextField tanggalField;
+    private javax.swing.JLabel timeText;
     private javax.swing.JTextField transaksiField;
     // End of variables declaration//GEN-END:variables
 }
