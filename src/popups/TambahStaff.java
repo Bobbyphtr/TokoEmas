@@ -273,11 +273,11 @@ public class TambahStaff extends javax.swing.JDialog {
     }//GEN-LAST:event_gajiFieldFocusLost
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
-        // TODO add your handling code here:
+       this.dispose();
     }//GEN-LAST:event_btnBatalActionPerformed
 
     private void noTelpFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_noTelpFieldFocusLost

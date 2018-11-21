@@ -3,6 +3,7 @@ package popups;
 import POJO.Staf;
 import customComponents.*;
 import database.Controller;
+import static database.Controller.updateStaf;
 import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
@@ -348,12 +349,19 @@ public class EditStaf extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldKuantitasHadiahFocusLost
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-       Staf staf = new Staf();
-       staf.setId(this.staf.getId());
-       staf.setNama(fieldNama.getText());
-       staf.setEmail(emailField.getText());
-       staf.setPosisi(posisiField.getText());
-       staf.setGaji(Integer.parseInt(gajiField.getText()));
+        Staf staf = new Staf();
+        staf.setId(this.staf.getId());
+        staf.setNama(fieldNama.getText());
+        staf.setEmail(emailField.getText());
+        staf.setPosisi(posisiField.getText());
+        staf.setGaji(Integer.parseInt(gajiField.getText()));
+        staf.setNoTelp(noTelpField.getText());
+        staf.setAlamat(alamatArea.getText());
+        staf.setReward(Integer.parseInt(fieldKuantitasHadiah.getText()));
+        staf.setDekripsiReward(deskripsiHadiahArea.getText());
+        updateStaf(staf);
+        JOptionPane.showMessageDialog(this, "Update berhasil!");
+        this.dispose();
     }//GEN-LAST:event_btnOKActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
