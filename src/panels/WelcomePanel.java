@@ -1,18 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package tokoemas;
+package panels;
+
+import POJO.User;
+import database.Controller;
+import java.awt.Color;
+import java.security.MessageDigest;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author user
+ * @author Xenon
  */
-public class WelcomePanel extends javax.swing.JFrame {
+public class WelcomePanel extends javax.swing.JPanel {
 
     /**
-     * Creates new form WelcomePanel
+     * Creates new form WelcomePanel1
      */
     public WelcomePanel() {
         initComponents();
@@ -27,22 +32,38 @@ public class WelcomePanel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        loginButton = new javax.swing.JButton();
+        passwordField = new javax.swing.JPasswordField();
         welcomeLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
         tokoEmasLabel = new javax.swing.JLabel();
         usernameField = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JTextField();
-        lupaPassLabel = new javax.swing.JLabel();
-        loginButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 231, 192));
         setPreferredSize(new java.awt.Dimension(980, 720));
-        setSize(new java.awt.Dimension(980, 720));
 
-        jPanel1.setBackground(new java.awt.Color(255, 231, 192));
-        jPanel1.setPreferredSize(new java.awt.Dimension(980, 720));
+        loginButton.setBackground(new java.awt.Color(102, 0, 0));
+        loginButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        loginButton.setForeground(new java.awt.Color(255, 255, 255));
+        loginButton.setText("Login");
+        loginButton.setBorder(null);
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        passwordField.setForeground(new java.awt.Color(102, 102, 102));
+        passwordField.setText("password");
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusLost(evt);
+            }
+        });
 
         welcomeLabel.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(102, 0, 0));
@@ -57,64 +78,44 @@ public class WelcomePanel extends javax.swing.JFrame {
         tokoEmasLabel.setText("TOKO EMAS");
 
         usernameField.setBackground(new java.awt.Color(255, 255, 255));
-        usernameField.setForeground(new java.awt.Color(255, 255, 255));
-        usernameField.setText("jTextField1");
+        usernameField.setForeground(new java.awt.Color(102, 102, 102));
+        usernameField.setText("Masukkan username.");
+        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusLost(evt);
+            }
+        });
 
         usernameLabel.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(102, 0, 0));
         usernameLabel.setText("Username");
 
-        passwordField.setBackground(new java.awt.Color(255, 255, 255));
-        passwordField.setForeground(new java.awt.Color(255, 255, 255));
-        passwordField.setText("jTextField1");
-
-        lupaPassLabel.setFont(new java.awt.Font("Myriad Pro", 2, 10)); // NOI18N
-        lupaPassLabel.setForeground(new java.awt.Color(102, 102, 102));
-        lupaPassLabel.setText("lupa password?");
-        lupaPassLabel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lupaPassLabelMouseClicked(evt);
-            }
-        });
-
-        loginButton.setBackground(new java.awt.Color(102, 0, 0));
-        loginButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
-        loginButton.setForeground(new java.awt.Color(255, 255, 255));
-        loginButton.setText("Login");
-        loginButton.setBorder(null);
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addGap(353, 353, 353)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lupaPassLabel)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(usernameLabel)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(passwordLabel)
-                                .addComponent(usernameField)
-                                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addComponent(welcomeLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(usernameLabel)
+                    .addComponent(passwordLabel)
+                    .addComponent(usernameField)
+                    .addComponent(welcomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(tokoEmasLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(81, 81, 81)
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(385, Short.MAX_VALUE))
+                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(passwordField))
+                .addContainerGap(384, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
                 .addGap(155, 155, 155)
                 .addComponent(welcomeLabel)
                 .addGap(64, 64, 64)
@@ -126,76 +127,89 @@ public class WelcomePanel extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(passwordLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lupaPassLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23)
                 .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(230, Short.MAX_VALUE))
         );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 981, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void lupaPassLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lupaPassLabelMouseClicked
-       
-    }//GEN-LAST:event_lupaPassLabelMouseClicked
-
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        
+        try {
+            String passwordEncrypted = credAndPass(new String(passwordField.getPassword()));
+            User user = Controller.getUserbyUsername(usernameField.getText());
+            if (user != null) {
+                if(user.getPassword().equals(passwordEncrypted)){
+                    //Pindah halaman ke dashboard
+                } else JOptionPane.showMessageDialog(this, "Username atau Password salah.");
+            }else {
+                 JOptionPane.showMessageDialog(this, "Username atau Password salah.");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(WelcomePanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_loginButtonActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(WelcomePanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(WelcomePanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(WelcomePanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(WelcomePanel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
+        char defaultPass[] = {'p', 'a', 's', 's', 'w', 'o', 'r', 'd'};
+        char getPass[] = passwordField.getPassword();
+        if (Arrays.equals(getPass, defaultPass)) {
+            passwordField.setText("");
+            passwordField.setForeground(Color.BLACK);
         }
-        //</editor-fold>
+    }//GEN-LAST:event_passwordFieldFocusGained
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new WelcomePanel().setVisible(true);
-            }
-        });
+    private void passwordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
+        if (passwordField.getPassword().length == 0) {
+            passwordField.setText("password");
+            passwordField.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_passwordFieldFocusLost
+
+    private void usernameFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusGained
+        if (usernameField.getText().equals("Masukkan username.")) {
+            usernameField.setText("");
+            usernameField.setForeground(Color.BLACK);
+        }
+    }//GEN-LAST:event_usernameFieldFocusGained
+
+    private void usernameFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFieldFocusLost
+        if (usernameField.getText().equals("")) {
+            usernameField.setText("Masukkan username.");
+            usernameField.setForeground(Color.GRAY);
+        }
+    }//GEN-LAST:event_usernameFieldFocusLost
+
+    public static String credAndPass(String original) throws Exception {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(original.getBytes());
+        byte[] digest = md.digest();
+        // Note here that I use a StringBuilder instead of a StringBuffer
+        // as it is not meant to be shared so no need to use a thread safe
+        // builder of String
+        StringBuilder sb = new StringBuilder(32);
+        for (byte b : digest) {
+            sb.append(String.format("%02x", b & 0xff));
+        }
+        // Returns the result
+        return sb.toString();
     }
 
+    public static void main(String args[]) {
+        Controller con = new Controller();
+        JFrame a = new JFrame();
+        a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        WelcomePanel panel = new WelcomePanel();
+        //a.setPreferredSize(dialog.getPreferredSize());
+        a.setSize(panel.getPreferredSize());
+        a.setContentPane(panel);
+        a.setVisible(true);
+        System.out.println("Width : " + a.getWidth());
+        System.out.println("Height : " + a.getHeight());
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JButton loginButton;
-    private javax.swing.JLabel lupaPassLabel;
-    private javax.swing.JTextField passwordField;
+    private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel tokoEmasLabel;
     private javax.swing.JTextField usernameField;

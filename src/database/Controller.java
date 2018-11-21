@@ -2,6 +2,7 @@ package database;
 
 import POJO.Produk;
 import POJO.SupplierData;
+import POJO.User;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,6 +35,24 @@ public class Controller {
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public static User getUserbyUsername(String username) {
+        String query = "SELECT * FROM user WHERE username = ? ";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, username);
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                User user = new User(rs.getString("username"), rs.getString("password"));
+                return user;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses user");
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     public static DefaultTableModel getPelanggan() {
@@ -242,10 +261,10 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-    
-    public static void updateSupplier(int id, String nama, String alamat, String noTelp){
+
+    public static void updateSupplier(int id, String nama, String alamat, String noTelp) {
         String query = "UPDATE supplier SET nama = ?, alamat = ?, no_telp = ? WHERE id = ?";
-         try {
+        try {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, nama);
             preparedStatement.setString(2, alamat);
@@ -257,10 +276,10 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-    
-    public static void deleteSupplier(int id){
+
+    public static void deleteSupplier(int id) {
         String query = "DELETE FROM supplier WHERE id = ?";
-         try {
+        try {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
@@ -268,7 +287,7 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static DefaultTableModel getAllProduk() {
         String query = "SELECT * FROM barang";
         try {
