@@ -5,6 +5,7 @@ package panels;
  * @author Xenon
  */
 import CustomJTables.CustomTableCellRenderer;
+import POJO.Produk;
 import customComponents.*;
 import database.Controller;
 import java.awt.BorderLayout;
@@ -22,7 +23,12 @@ import popups.*;
 import static database.Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 public class TransaksiPanel extends javax.swing.JPanel {
 
@@ -35,11 +41,35 @@ public class TransaksiPanel extends javax.swing.JPanel {
     DefaultTableModel troliModel;
     DefaultTableModel produkModel;
     
+    Vector<Produk> produk;
+    
     public TransaksiPanel() {
+        produk = new Vector();
         initTableModel();
         initComponents();
         initDatePicker();
         syncDate();
+        
+        
+                
+        tableProduk.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                
+            }
+        });
+        
+    }
+    
+    private void infoProdukController() {
+        labelNama.setText("");
+        labelDeskripsi.setText("");
+        labelWeight.setText("");
+        labelKarat.setText("");
+        labelType.setText("");
+        labelKategori.setText("");
+        labelSupplier.setText("");
+        labelHargaBeli.setText("");
     }
 
     private void initDatePicker() {
@@ -127,20 +157,20 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jRadioButton4 = new javax.swing.JRadioButton();
         panelInfoProduk = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        labelDeskripsi = new javax.swing.JLabel();
+        labelWeight = new javax.swing.JLabel();
+        labelNama = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        labelKarat = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        labelType = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        labelKategori = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
+        labelSupplier = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        labelHargaBeli = new javax.swing.JLabel();
         jlabel8 = new javax.swing.JLabel();
         dateContainer = new javax.swing.JPanel();
 
@@ -360,20 +390,20 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jLabel1.setText("Deskripsi:");
         panelInfoProduk.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel2.setForeground(java.awt.Color.black);
-        jLabel2.setText("IDProduct");
-        panelInfoProduk.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+        labelDeskripsi.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelDeskripsi.setForeground(java.awt.Color.black);
+        labelDeskripsi.setText("Deskripsi");
+        panelInfoProduk.add(labelDeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel4.setForeground(java.awt.Color.black);
-        jLabel4.setText("IDProduct");
-        panelInfoProduk.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+        labelWeight.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelWeight.setForeground(java.awt.Color.black);
+        labelWeight.setText("Weight");
+        panelInfoProduk.add(labelWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        jLabel9.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel9.setForeground(java.awt.Color.black);
-        jLabel9.setText("IDProduct");
-        panelInfoProduk.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        labelNama.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelNama.setForeground(java.awt.Color.black);
+        labelNama.setText("Nama");
+        panelInfoProduk.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel10.setForeground(java.awt.Color.gray);
@@ -385,50 +415,50 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jLabel11.setText("Karat:");
         panelInfoProduk.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
-        jLabel12.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel12.setForeground(java.awt.Color.black);
-        jLabel12.setText("IDProduct");
-        panelInfoProduk.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        labelKarat.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelKarat.setForeground(java.awt.Color.black);
+        labelKarat.setText("Karat");
+        panelInfoProduk.add(labelKarat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel13.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel13.setForeground(java.awt.Color.gray);
         jLabel13.setText("Type:");
         panelInfoProduk.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
 
-        jLabel14.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel14.setForeground(java.awt.Color.black);
-        jLabel14.setText("IDProduct");
-        panelInfoProduk.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        labelType.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelType.setForeground(java.awt.Color.black);
+        labelType.setText("Type");
+        panelInfoProduk.add(labelType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel15.setForeground(java.awt.Color.gray);
         jLabel15.setText("Kategori:");
         panelInfoProduk.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
-        jLabel16.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel16.setForeground(java.awt.Color.black);
-        jLabel16.setText("IDProduct");
-        panelInfoProduk.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+        labelKategori.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelKategori.setForeground(java.awt.Color.black);
+        labelKategori.setText("Kategori");
+        panelInfoProduk.add(labelKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel17.setForeground(java.awt.Color.gray);
         jLabel17.setText("Supplier:");
         panelInfoProduk.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
 
-        jLabel18.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel18.setForeground(java.awt.Color.black);
-        jLabel18.setText("IDProduct");
-        panelInfoProduk.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+        labelSupplier.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelSupplier.setForeground(java.awt.Color.black);
+        labelSupplier.setText("Supplier");
+        panelInfoProduk.add(labelSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
         jLabel19.setForeground(java.awt.Color.gray);
         jLabel19.setText("Harga Beli:");
         panelInfoProduk.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
-        jLabel20.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jLabel20.setForeground(java.awt.Color.black);
-        jLabel20.setText("IDProduct");
-        panelInfoProduk.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
+        labelHargaBeli.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelHargaBeli.setForeground(java.awt.Color.black);
+        labelHargaBeli.setText("Harga Beli");
+        panelInfoProduk.add(labelHargaBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, -1, -1));
 
         add(panelInfoProduk, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 320, 350));
 
@@ -522,18 +552,10 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -553,7 +575,15 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jlabel6;
     private javax.swing.JLabel jlabel7;
     private javax.swing.JLabel jlabel8;
+    private javax.swing.JLabel labelDeskripsi;
+    private javax.swing.JLabel labelHargaBeli;
+    private javax.swing.JLabel labelKarat;
+    private javax.swing.JLabel labelKategori;
+    private javax.swing.JLabel labelNama;
     private javax.swing.JLabel labelNamaStaff;
+    private javax.swing.JLabel labelSupplier;
+    private javax.swing.JLabel labelType;
+    private javax.swing.JLabel labelWeight;
     private javax.swing.JPanel panelInfoProduk;
     private javax.swing.JTable tableProduk;
     private javax.swing.JTable tableTroli;

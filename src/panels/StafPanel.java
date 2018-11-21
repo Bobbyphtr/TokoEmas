@@ -121,6 +121,8 @@ public class StafPanel extends javax.swing.JPanel {
         });
 
         tableStaf.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        tableStaf.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
+        tableStaf.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
         jScrollPane1.setViewportView(tableStaf);
         tableStaf.setModel(getAllStaf());
         tableStaf.setCellSelectionEnabled(false);
