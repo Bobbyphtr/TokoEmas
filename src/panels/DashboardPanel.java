@@ -1,7 +1,11 @@
 package panels;
 
 import database.Controller;
+import static database.Controller.getDateAndTime;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,6 +18,23 @@ public class DashboardPanel extends javax.swing.JPanel {
      */
     public DashboardPanel() {
         initComponents();
+        syncDate();
+    }
+
+    private void syncDate() {
+        String[] dateAndTime = getDateAndTime();
+        timeText.setText(dateAndTime[0]);
+        dateText.setText(dateAndTime[1]);
+        System.out.println(dateAndTime[1]);
+        Timer date = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] dateAndTime = getDateAndTime();
+                timeText.setText(dateAndTime[0]);
+                dateText.setText(dateAndTime[1]);
+            }
+        });
+        date.start();
     }
 
     /**
