@@ -13,6 +13,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import popups.EditProduk;
 import popups.Kategori;
 import popups.Supplier;
@@ -42,6 +44,24 @@ public class ProdukPanel extends javax.swing.JPanel {
             }
         });
         date.start();
+        
+        tableProduk.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                
+            }
+        });
+    }
+    
+    private void infoProdukController() {
+        labelNama.setText("");
+        labelDeskripsi.setText("");
+        labelWeight.setText("");
+        labelKarat.setText("");
+        labelType.setText("");
+        labelKategori.setText("");
+        labelSupplier.setText("");
+        labelHargaBeli.setText("");
     }
 
     /**
