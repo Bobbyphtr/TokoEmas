@@ -186,7 +186,7 @@
       <SubComponents>
         <Component class="javax.swing.JTable" name="tableProduk">
           <Properties>
-            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+            <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor" postCode="tableProduk.setModel(produkModel);&#xa;tableProduk.setRowSelectionAllowed(true);&#xa;tableProduk.setColumnSelectionAllowed(false);">
               <Table columnCount="5" rowCount="4">
                 <Column editable="true" title="Tgl Beli" type="java.lang.Object"/>
                 <Column editable="true" title="ID_Barang" type="java.lang.Object"/>

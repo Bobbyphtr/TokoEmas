@@ -21,13 +21,13 @@ import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 public class Controller {
-
+    
     private static PreparedStatement preparedStatement;
     private static Statement statement;
     private static ResultSet rs;
     private static ResultSetMetaData rsmt;
     private static Connection conn;
-
+    
     public Controller() {
         ConnectionManager cm = new ConnectionManager();
         conn = cm.getConnection();
@@ -37,7 +37,7 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static User getUserbyUsername(String username) {
         String query = "SELECT * FROM user WHERE username = ? ";
         try {
@@ -48,29 +48,29 @@ public class Controller {
                 User user = new User(rs.getString("username"), rs.getString("password"));
                 return user;
             }
-
+            
         } catch (SQLException ex) {
             System.out.println("Gagal mengakses user");
             ex.printStackTrace();
         }
         return null;
     }
-
+    
     public static DefaultTableModel getPelanggan() {
         String query = "SELECT * from customer WHERE id != 0";
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
-
+            
             Vector data = new Vector();
-
+            
             int c = rsmt.getColumnCount();
-
+            
             Vector column = new Vector(c);
             for (int i = 1; i <= c; i++) {
                 column.add(rsmt.getColumnName(i)); //Nama Kolom untuk sementara ambil dari database
             }
-
+            
             while (rs.next()) {
                 Vector row = new Vector();
                 for (int i = 1; i <= c; i++) {
@@ -83,33 +83,33 @@ public class Controller {
                     } else {
                         row.add("-");
                     }
-
+                    
                 }
                 data.add(row);
             }
-
+            
             return new DefaultTableModel(data, column) {
                 private final Class<?>[] columnClasses = {String.class, String.class, String.class, String.class, String.class, Boolean.class, String.class, String.class};
-
+                
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-
+                
                 @Override
                 public Class<?> getColumnClass(int col) {
                     return columnClasses[col];
                 }
-
+                
             };
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-
+    
     public static void addPelanggan(String nama, String email, String alamat, String no_telp, String status_loyal, int bonus, String deskripsi_bonus) {
-
+        
         try {
             String query = "INSERT INTO customer (nama,email,alamat,no_telp,status_loyal,bonus,deskripsi_bonus) VALUES ( ? , ? , ? , ? , ? , ? , ? );";
             preparedStatement = conn.prepareStatement(query);
@@ -126,7 +126,7 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-
+    
     public static void deletePelanggan(int id) {
         try {
             String query = "DELETE FROM customer WHERE customer.id = ?";
@@ -138,7 +138,7 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-
+    
     public static void updatePelanggan(Pelanggan pelanggan) {
         String query = "UPDATE customer SET nama = ?, email = ?, alamat = ?, no_telp = ?,"
                 + "status_loyal = ?, bonus = ?, deskripsi_bonus = ? WHERE id = ?";
@@ -149,8 +149,11 @@ public class Controller {
             preparedStatement.setString(3, pelanggan.getAlamat());
             preparedStatement.setString(4, pelanggan.getNo_telp());
             
-            if (pelanggan.isStatus_loyal()) preparedStatement.setString(5, "true");
-            else preparedStatement.setString(5, "false");
+            if (pelanggan.isStatus_loyal()) {
+                preparedStatement.setString(5, "true");
+            } else {
+                preparedStatement.setString(5, "false");
+            }
             
             preparedStatement.setInt(6, pelanggan.getBonus());
             preparedStatement.setString(7, pelanggan.getDeskripsi_bonus());
@@ -163,22 +166,22 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-
+    
     public static String[] getDateAndTime() {
         String[] array = new String[2];
         String time = "HH:mm";
         String date = "dd-MM-YYYY";
         Calendar cal = Calendar.getInstance();
-
+        
         DateFormat dateFormat = new SimpleDateFormat(time);
         array[0] = dateFormat.format(cal.getTime());
-
+        
         dateFormat = new SimpleDateFormat(date);
         array[1] = dateFormat.format(cal.getTime());
-
+        
         return array;
     }
-
+    
     public static DefaultListModel getAllKategori() {
         String query = "SELECT * FROM kategori";
         try {
@@ -194,7 +197,7 @@ public class Controller {
         }
         return null;
     }
-
+    
     public static void addKategori(String nama) {
         String query = "INSERT INTO kategori (nama) VALUES (?)";
         try {
@@ -205,9 +208,9 @@ public class Controller {
             System.out.println("Gagal tambah kategori");
             ex.printStackTrace();
         }
-
+        
     }
-
+    
     public static void deleteKategori(String nama) {
         String query = "DELETE FROM kategori WHERE nama = ?";
         try {
@@ -217,9 +220,9 @@ public class Controller {
         } catch (SQLException ex) {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
     public static void updateKategori(String nama, String index) {
         String query = "UPDATE kategori SET nama = ? WHERE nama = ?";
         try {
@@ -232,7 +235,7 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-
+    
     public static DefaultListModel getSupplierModel() {
         String query = "SELECT * FROM supplier";
         try {
@@ -248,7 +251,7 @@ public class Controller {
         }
         return null;
     }
-
+    
     public static Vector getAllSupplier() {
         String query = "SELECT * FROM supplier";
         try {
@@ -269,7 +272,7 @@ public class Controller {
         }
         return null;
     }
-
+    
     public static void addSupplier(SupplierData supplier) {
         String query = "INSERT INTO supplier (nama, alamat, no_telp) VALUES (? , ?, ?)";
         try {
@@ -283,7 +286,7 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-
+    
     public static void updateSupplier(int id, String nama, String alamat, String noTelp) {
         String query = "UPDATE supplier SET nama = ?, alamat = ?, no_telp = ? WHERE id = ?";
         try {
@@ -298,7 +301,7 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-
+    
     public static void deleteSupplier(int id) {
         String query = "DELETE FROM supplier WHERE id = ?";
         try {
@@ -309,22 +312,22 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static DefaultTableModel getAllStaf() {
         String query = "SELECT * from pekerja";
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
-
+            
             Vector data = new Vector();
-
+            
             int c = rsmt.getColumnCount();
-
+            
             Vector column = new Vector(c);
             for (int i = 1; i <= c; i++) {
                 column.add(rsmt.getColumnName(i)); //Nama Kolom untuk sementara ambil dari database
             }
-
+            
             while (rs.next()) {
                 Vector row = new Vector();
                 for (int i = 1; i <= c; i++) {
@@ -333,31 +336,31 @@ public class Controller {
                     } else {
                         row.add("-");
                     }
-
+                    
                 }
                 data.add(row);
             }
-
+            
             return new DefaultTableModel(data, column) {
                 private final Class<?>[] columnClasses = {Integer.class, String.class, String.class, String.class, String.class, Integer.class, String.class, Integer.class, String.class};
-
+                
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     return false;
                 }
-
+                
                 @Override
                 public Class<?> getColumnClass(int col) {
                     return columnClasses[col];
                 }
-
+                
             };
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-
+    
     public static void deleteStafbyId(int id) {
         String query = "DELETE FROM pekerja WHERE id = ?";
         try {
@@ -372,17 +375,16 @@ public class Controller {
 //    public static void updateStaf(int id, ) {
 //
 //    }
-
     public static DefaultTableModel getAllProduk() {
         String query = "SELECT * FROM barang WHERE status = 'INSTOCK'";
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
-
+            
             Vector data = new Vector();
-
+            
             Vector column = new Vector();
-
+            
             column.add("ID");
             column.add("Nama");
             column.add("Deskripsi");
@@ -391,7 +393,7 @@ public class Controller {
             column.add("Tipe");
             column.add("Harga Beli");
             column.add("Aksi");
-
+            
             while (rs.next()) {
                 Vector row = new Vector();
                 row.add(rs.getInt("id"));
@@ -402,9 +404,9 @@ public class Controller {
                 row.add(rs.getString("tipe_barang"));
                 row.add(rs.getInt("harga_beli"));
                 data.add(row);
-
+                
             }
-
+            
             return new DefaultTableModel(data, column) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -413,32 +415,87 @@ public class Controller {
                     }
                     return false;
                 }
-
+                
             };
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
     }
-
+    
+    public static DefaultTableModel getAllProdukPanel() {
+        String query = "SELECT * FROM barang";
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+            
+            Vector data = new Vector();
+            
+            Vector column = new Vector();
+            
+            column.add("ID");
+            column.add("Nama");
+            column.add("Deskripsi");
+            column.add("Berat");
+            column.add("Karat");
+            column.add("Status");
+            column.add("Tipe");
+            column.add("Id_kategori");
+            column.add("Id_supplier");
+            column.add("Harga Beli");
+            column.add("tanggal beli");
+            
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getInt("id"));
+                row.add(rs.getString("nama"));
+                row.add(rs.getString("deskripsi"));
+                row.add(rs.getDouble("berat"));
+                row.add(rs.getDouble("karat"));
+                row.add(rs.getString("status"));
+                row.add(rs.getString("tipe_barang"));
+                row.add(rs.getInt("id_kategori"));
+                row.add(rs.getInt("id_supplier"));
+                row.add(rs.getInt("harga_beli"));
+                row.add(rs.getDate("tanggal_beli"));
+                data.add(row);
+                
+            }
+            
+            return new DefaultTableModel(data, column) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    if (column == columnIdentifiers.size() - 1) {
+                        return true;
+                    }
+                    return false;
+                }
+                
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
     public static void getProdukbyId(int id) {
         String query = "SELECT * FROM barang WHERE id = ?";
     }
-
+    
     public static void deleteProduk(int id) {
         String query = "DELETE FROM barang WHERE id = ? ";
     }
-
+    
     public static void addProduk(Produk produk) {
         String query = "INSERT INTO barang (nama, deskripsi, berat, karat, status, tipe_barang,"
                 + "id_kategori, id_supplier, harga_beli, tanggal_beli) VALUES "
                 + "(? , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     }
-
+    
     public static void updateProduk(int id) {
         String query = "UPDATE barang SET nama = ?, deskripsi = ?, berat = ?, karat = ?, status = ?, "
                 + "tipe_barang = ?, id_kategori = ?, id_supplier = ?, harga_beli = ?, tanggal_beli = ?"
                 + "WHERE id = ?";
     }
-
+    
 }

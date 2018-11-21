@@ -6,6 +6,7 @@ package panels;
  */
 import customComponents.*;
 import database.Controller;
+import static database.Controller.getAllProdukPanel;
 import static database.Controller.getDateAndTime;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import popups.EditProduk;
 import popups.Kategori;
 import popups.Supplier;
@@ -23,11 +26,32 @@ public class ProdukPanel extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
+    TableModel produkModel;
+    TableColumn nama, berat, karat, tipeBarang, idKategori, idSupplier;
+
     public ProdukPanel() {
+        produkModel = getAllProdukPanel();
         initComponents();
+        
+        //hide column
+        nama = tableProduk.getColumnModel().getColumn(1);
+        berat = tableProduk.getColumnModel().getColumn(3);
+        karat = tableProduk.getColumnModel().getColumn(4);
+        tipeBarang = tableProduk.getColumnModel().getColumn(6);
+        idKategori = tableProduk.getColumnModel().getColumn(7);
+        idSupplier = tableProduk.getColumnModel().getColumn(8);
+        
+        tableProduk.getColumnModel().removeColumn(nama);
+        tableProduk.getColumnModel().removeColumn(berat);
+        tableProduk.getColumnModel().removeColumn(karat);
+        tableProduk.getColumnModel().removeColumn(tipeBarang);
+        tableProduk.getColumnModel().removeColumn(idKategori);
+        tableProduk.getColumnModel().removeColumn(idSupplier);
+        
+        0
         syncDate();
     }
-    
+
     private void syncDate() {
         String[] dateAndTime = getDateAndTime();
         timeText.setText(dateAndTime[0]);
@@ -121,6 +145,9 @@ public class ProdukPanel extends javax.swing.JPanel {
                 "Tgl Beli", "ID_Barang", "Deskripsi Barang", "Harga Beli", "Status"
             }
         ));
+        tableProduk.setModel(produkModel);
+        tableProduk.setRowSelectionAllowed(true);
+        tableProduk.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(tableProduk);
 
         fieldCari.setForeground(java.awt.Color.gray);
@@ -427,7 +454,6 @@ public class ProdukPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
 
-    
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
         if (fieldCari.getText().equals("Ketik pencarian")) {
             fieldCari.setText("");
