@@ -17,6 +17,10 @@ public class TambahStaff extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
     }
+    
+    public TambahStaff(){
+        initComponents();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

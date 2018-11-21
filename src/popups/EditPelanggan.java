@@ -34,6 +34,9 @@ public class EditPelanggan extends javax.swing.JDialog {
         textAreaAlamat.setText(pelanggan.getAlamat());
         fieldKuantitasReward.setText(String.valueOf(pelanggan.getBonus()));
         fieldDeskripsiReward.setText(pelanggan.getDeskripsi_bonus());
+        if (pelanggan.isStatus_loyal()) {
+            
+        }
     }
 
     public EditPelanggan() {
@@ -74,6 +77,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         fieldDeskripsiReward = new CorneredJTextArea();
         jLabel7 = new javax.swing.JLabel();
         btnHapus = new javax.swing.JButton();
+        checkBLoyal = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -91,7 +95,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
-        fieldNama.setForeground(java.awt.Color.gray);
+        fieldNama.setForeground(java.awt.Color.black);
         fieldNama.setText("Masukan nama pelanggan.");
         fieldNama.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -102,7 +106,7 @@ public class EditPelanggan extends javax.swing.JDialog {
             }
         });
 
-        fieldEmail.setForeground(java.awt.Color.gray);
+        fieldEmail.setForeground(java.awt.Color.black);
         fieldEmail.setText("Masukan email.");
         fieldEmail.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -117,7 +121,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));
         jLabel2.setText("Email");
 
-        fieldNoTelp.setForeground(java.awt.Color.gray);
+        fieldNoTelp.setForeground(java.awt.Color.black);
         fieldNoTelp.setText("Masukan no telp.");
         fieldNoTelp.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -137,7 +141,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         jLabel4.setText("Alamat");
 
         textAreaAlamat.setColumns(20);
-        textAreaAlamat.setForeground(java.awt.Color.gray);
+        textAreaAlamat.setForeground(java.awt.Color.black);
         textAreaAlamat.setRows(5);
         textAreaAlamat.setText("Masukan alamat.");
         textAreaAlamat.setBorder(null);
@@ -156,12 +160,17 @@ public class EditPelanggan extends javax.swing.JDialog {
         btnSimpan.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         btnSimpan.setForeground(java.awt.Color.white);
         btnSimpan.setText("Simpan");
+        btnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimpanActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 0, 0));
         jLabel5.setText("Reward -  opsional");
 
-        fieldKuantitasReward.setForeground(java.awt.Color.gray);
+        fieldKuantitasReward.setForeground(java.awt.Color.black);
         fieldKuantitasReward.setText("Masukan kuantitas reward. (nominal  voucher)");
         fieldKuantitasReward.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -177,7 +186,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         jLabel6.setText("Kuantitas Reward");
 
         fieldDeskripsiReward.setColumns(20);
-        fieldDeskripsiReward.setForeground(java.awt.Color.gray);
+        fieldDeskripsiReward.setForeground(java.awt.Color.black);
         fieldDeskripsiReward.setRows(5);
         fieldDeskripsiReward.setText("Masukan deskripsi reward - dapat berupa reward deskriptif\nseperti suvenir, produk, tiket dan lain lain.");
         fieldDeskripsiReward.setBorder(null);
@@ -206,6 +215,8 @@ public class EditPelanggan extends javax.swing.JDialog {
             }
         });
 
+        checkBLoyal.setText("Loyal");
+
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
@@ -217,30 +228,30 @@ public class EditPelanggan extends javax.swing.JDialog {
                         .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(fieldKuantitasReward, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(fieldNoTelp, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkBLoyal))
+                            .addComponent(fieldNama, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TitleText, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(41, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                                 .addComponent(btnHapus, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(fieldKuantitasReward, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
-                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(fieldEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jScrollPane1)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel3)
-                                        .addComponent(fieldNoTelp, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
-                                        .addComponent(jLabel2)
-                                        .addComponent(jLabel1)
-                                        .addComponent(TitleText)
-                                        .addComponent(fieldNama))
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(btnSimpan, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(36, 36, 36))))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
@@ -249,7 +260,9 @@ public class EditPelanggan extends javax.swing.JDialog {
                 .addGap(30, 30, 30)
                 .addComponent(TitleText)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(checkBLoyal))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -272,7 +285,7 @@ public class EditPelanggan extends javax.swing.JDialog {
                 .addComponent(fieldKuantitasReward, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -289,7 +302,7 @@ public class EditPelanggan extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 803, Short.MAX_VALUE)
         );
 
         pack();
@@ -387,6 +400,14 @@ public class EditPelanggan extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnHapusActionPerformed
 
+    private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
+        updatePelanggan(new Pelanggan(pelanggan.getId(), fieldNama.getText(),
+                fieldEmail.getText(),
+                textAreaAlamat.getText(),
+                fieldNoTelp.getText(),
+                , ABORT, deskripsi_bonus));
+    }//GEN-LAST:event_btnSimpanActionPerformed
+
     public static void main(String args[]) {
         JFrame a = new JFrame();
         EditPelanggan dialog = new EditPelanggan(a, true);
@@ -398,6 +419,7 @@ public class EditPelanggan extends javax.swing.JDialog {
     private javax.swing.JLabel TitleText;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnSimpan;
+    private javax.swing.JCheckBox checkBLoyal;
     private javax.swing.JTextArea fieldDeskripsiReward;
     private javax.swing.JTextField fieldEmail;
     private javax.swing.JTextField fieldKuantitasReward;

@@ -1,5 +1,6 @@
 package popups;
 
+import POJO.Staf;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.BorderFactory;
@@ -13,11 +14,29 @@ public class EditStaf extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
+    
+    Staf staf;
+    
     public EditStaf(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-
+    
+    public EditStaf(Staf staf){
+        initComponents();
+        
+        this.staf = staf;
+        
+        fieldNama.setText(staf.getNama());
+        emailField.setText(staf.getEmail());
+        posisiField.setText(staf.getPosisi());
+        gajiField.setText(String.valueOf(staf.getGaji()));
+        noTelpField.setText(staf.getNoTelp());
+        alamatArea.setText(staf.getAlamat());
+        fieldKuantitasHadiah.setText(String.valueOf(staf.getReward()));
+        deskripsiHadiahArea.setText(staf.getDekripsiReward());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,7 +72,7 @@ public class EditStaf extends javax.swing.JDialog {
         fieldKuantitasHadiah = new CorneredJTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        alamatArea1 = new javax.swing.JTextArea();
+        deskripsiHadiahArea = new javax.swing.JTextArea();
         alamatArea = new CorneredJTextArea();
         btnHapus = new javax.swing.JButton();
         fieldNama = new javax.swing.JTextField();
@@ -167,12 +186,12 @@ public class EditStaf extends javax.swing.JDialog {
 
         jLabel8.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel8.setText("Deskripsi Reward");
+        jLabel8.setText("Deskripsi Hadiah");
 
-        alamatArea1.setColumns(20);
-        alamatArea1.setRows(5);
-        alamatArea1.setBorder(null);
-        jScrollPane2.setViewportView(alamatArea1);
+        deskripsiHadiahArea.setColumns(20);
+        deskripsiHadiahArea.setRows(5);
+        deskripsiHadiahArea.setBorder(null);
+        jScrollPane2.setViewportView(deskripsiHadiahArea);
         jScrollPane1.setBorder(null);
 
         btnHapus.setBackground(new java.awt.Color(89, 38, 1));
@@ -400,9 +419,9 @@ public class EditStaf extends javax.swing.JDialog {
     private javax.swing.JLabel TitleText1;
     private javax.swing.JLabel TitleText2;
     private javax.swing.JTextArea alamatArea;
-    private javax.swing.JTextArea alamatArea1;
     private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnOK;
+    private javax.swing.JTextArea deskripsiHadiahArea;
     private javax.swing.JTextField emailField;
     private javax.swing.JTextField fieldKuantitasHadiah;
     private javax.swing.JTextField fieldNama;

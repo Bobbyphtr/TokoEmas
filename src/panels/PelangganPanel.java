@@ -246,10 +246,12 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void insertUpdate(DocumentEvent de) {
                 String text = fieldCari.getText();
-                if (text.trim().length() == 0) {
-                    rowFilter.setRowFilter(null);
-                } else {
-                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
                 }
 
             }
@@ -257,10 +259,12 @@ public class PelangganPanel extends javax.swing.JPanel {
             @Override
             public void removeUpdate(DocumentEvent de) {
                 String text = fieldCari.getText();
-                if (text.trim().length() == 0) {
-                    rowFilter.setRowFilter(null);
-                } else {
-                    rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
                 }
             }
 
@@ -338,8 +342,8 @@ public class PelangganPanel extends javax.swing.JPanel {
             editPelanggan.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent we) {
-                   tablePelanggan.setModel(getPelanggan());
-                   setUpRowFilter();
+                    tablePelanggan.setModel(getPelanggan());
+                    setUpRowFilter();
                 }
             });
         }

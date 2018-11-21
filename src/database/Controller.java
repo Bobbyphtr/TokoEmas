@@ -1,5 +1,6 @@
 package database;
 
+import POJO.Pelanggan;
 import POJO.Produk;
 import POJO.SupplierData;
 import POJO.User;
@@ -56,7 +57,7 @@ public class Controller {
     }
 
     public static DefaultTableModel getPelanggan() {
-        String query = "SELECT * from customer";
+        String query = "SELECT * from customer WHERE id != 0";
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
@@ -138,8 +139,29 @@ public class Controller {
         }
     }
 
-    public static void updatePelanggan(int id) {
-
+    public static void updatePelanggan(Pelanggan pelanggan) {
+        String query = "UPDATE customer SET nama = ?, email = ?, alamat = ?, no_telp = ?"
+                + "status_loyal = ?, bonus = ?, deskripsi_bonus = ? WHERE id = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, pelanggan.getNama());
+            preparedStatement.setString(2, pelanggan.getEmail());
+            preparedStatement.setString(3, pelanggan.getAlamat());
+            preparedStatement.setString(4, pelanggan.getNo_telp());
+            
+            if (pelanggan.isStatus_loyal()) preparedStatement.setString(5, "true");
+            else preparedStatement.setString(5, "false");
+            
+            preparedStatement.setInt(6, pelanggan.getBonus());
+            preparedStatement.setString(7, pelanggan.getDeskripsi_bonus());
+            
+            preparedStatement.setInt(8, pelanggan.getId());
+            
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Update pelanggan gagal");
+            ex.printStackTrace();
+        }
     }
 
     public static String[] getDateAndTime() {
@@ -288,8 +310,71 @@ public class Controller {
         }
     }
 
+    public static DefaultTableModel getAllStaf() {
+        String query = "SELECT * from pekerja";
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+            int c = rsmt.getColumnCount();
+
+            Vector column = new Vector(c);
+            for (int i = 1; i <= c; i++) {
+                column.add(rsmt.getColumnName(i)); //Nama Kolom untuk sementara ambil dari database
+            }
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                for (int i = 1; i <= c; i++) {
+                    if (rs.getObject(i) != null) {
+                        row.add(rs.getString(i));
+                    } else {
+                        row.add("-");
+                    }
+
+                }
+                data.add(row);
+            }
+
+            return new DefaultTableModel(data, column) {
+                private final Class<?>[] columnClasses = {Integer.class, String.class, String.class, String.class, String.class, Integer.class, String.class, Integer.class, String.class};
+
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+                @Override
+                public Class<?> getColumnClass(int col) {
+                    return columnClasses[col];
+                }
+
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static void deleteStafbyId(int id) {
+        String query = "DELETE FROM pekerja WHERE id = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+//    public static void updateStaf(int id, ) {
+//
+//    }
+
     public static DefaultTableModel getAllProduk() {
-        String query = "SELECT * FROM barang";
+        String query = "SELECT * FROM barang WHERE status = 'INSTOCK'";
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();

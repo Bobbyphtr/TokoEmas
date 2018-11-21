@@ -5,17 +5,52 @@ package panels;
  * @author Xenon
  */
 import CustomJTables.CustomTableCellRenderer;
+import POJO.Staf;
 import customComponents.*;
+import database.Controller;
+import static database.Controller.getAllStaf;
 import java.awt.Color;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import popups.EditStaf;
+import popups.TambahStaff;
 
 public class StafPanel extends javax.swing.JPanel {
 
     /**
      * Creates new form Staff
      */
+    private TableModel stafModel;
+    private TableRowSorter<TableModel> rowFilter;
+
     public StafPanel() {
         initComponents();
+
+        buttonUbah.setEnabled(false);
+        stafModel = tableStaf.getModel();
+
+        ListSelectionModel lsm = tableStaf.getSelectionModel();
+        lsm.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent lse) {
+                if (!lse.getValueIsAdjusting()) {
+                    buttonUbah.setEnabled(true);
+                }
+            }
+        });
+
+        setUpRowFilter();
     }
 
     /**
@@ -63,18 +98,12 @@ public class StafPanel extends javax.swing.JPanel {
             }
         });
 
-        tableStaf.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {"1", "a", "a", "b", "d", "e", "c", "a", "a"},
-                {"2", "b", "a", "b", "d", "e", "c", "a", "a"},
-                {"3", "c", "a", "b", "d", "e", "c", "a", "aa"},
-                {"4", "d", "a", "b", "d", "e", "c", "a", "a"}
-            },
-            new String [] {
-                "ID", "Nama", "Email", "Alamat", "No Telp", "Posisi", "Gaji", "Reward", "Deskripsi Reward"
-            }
-        ));
         tableStaf.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        jScrollPane1.setViewportView(tableStaf);
+        tableStaf.setModel(getAllStaf());
+        tableStaf.setCellSelectionEnabled(false);
+        tableStaf.setRowSelectionAllowed(true);
+        tableStaf.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(tableStaf);
 
         fieldCari.setForeground(java.awt.Color.gray);
@@ -201,6 +230,42 @@ public class StafPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void setUpRowFilter() {
+        rowFilter = new TableRowSorter<>(tableStaf.getModel());
+        tableStaf.setRowSorter(rowFilter);
+        fieldCari.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                String text = fieldCari.getText();
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+
+    }
+
     private void fieldCariFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusGained
         if (fieldCari.getText().equals("Ketik pencarian")) {
             fieldCari.setText("");
@@ -209,7 +274,16 @@ public class StafPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariFocusGained
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        // TODO add your handling code here:
+        JDialog tambahStaf = new TambahStaff();
+        tambahStaf.setLocationRelativeTo(this);
+        tambahStaf.setVisible(true);
+        tambahStaf.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                tableStaf.setModel(getAllStaf());
+                setUpRowFilter();
+            }
+        });
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldCariFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusLost
@@ -224,11 +298,42 @@ public class StafPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariActionPerformed
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
-        // TODO add your handling code here:
+       if (tableStaf.getSelectedRow() > -1) {
+
+            int selectedRow = tableStaf.getSelectedRow();
+            int modelRow = tableStaf.convertRowIndexToModel(selectedRow);
+
+            int id = Integer.valueOf(String.valueOf(stafModel.getValueAt(modelRow, 0)));
+            System.out.println("Id :" + id);
+
+            String nama = (String) stafModel.getValueAt(modelRow, 1);
+            String email = (String) stafModel.getValueAt(modelRow, 2);
+            String alamat = (String) stafModel.getValueAt(modelRow, 3);
+            String no_telp = (String) stafModel.getValueAt(modelRow, 4);
+            int gaji = Integer.valueOf(String.valueOf(stafModel.getValueAt(modelRow, 5)));
+            String posisi = (String) stafModel.getValueAt(modelRow, 6);
+            int reward = Integer.valueOf(String.valueOf(stafModel.getValueAt(modelRow, 7)));
+            String deskripsi_reward = (String) stafModel.getValueAt(modelRow, 8);
+
+            Staf staf = new Staf(id, gaji, reward, nama, email, alamat, no_telp, posisi, deskripsi_reward);
+
+            JDialog editStaf = new EditStaf(staf);
+            editStaf.setLocationRelativeTo(this);
+            editStaf.setVisible(true);
+
+            editStaf.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent we) {
+                    tableStaf.setModel(getAllStaf());
+                    setUpRowFilter();
+                }
+            });
+        }
     }//GEN-LAST:event_buttonUbahActionPerformed
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
+        Controller con = new Controller();
         a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         StafPanel panel = new StafPanel();
         //a.setPreferredSize(dialog.getPreferredSize());
