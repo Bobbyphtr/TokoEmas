@@ -361,6 +361,27 @@ public class Controller {
         }
         return null;
     }
+    
+    public static void addStaf(Staf staf){
+        String query = "INSERT INTO pekerja (nama, email, alamat, no_telp, gaji, posisi, reward, deskripsi_reward) "
+                + "VALUES (? , ?, ?, ?, ?, ? , ?, ?)";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, staf.getNama());
+            preparedStatement.setString(2, staf.getEmail());
+            preparedStatement.setString(3, staf.getAlamat());
+            preparedStatement.setString(4, staf.getNoTelp());
+            preparedStatement.setInt(5, staf.getGaji());
+            preparedStatement.setString(6, staf.getPosisi());
+            preparedStatement.setInt(7, 0);
+            preparedStatement.setString(8, "Tidak ada");
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Gagal masukan staf");
+            ex.printStackTrace();
+        }
+    }
 
     public static void deleteStafbyId(int id) {
         String query = "DELETE FROM pekerja WHERE id = ?";
