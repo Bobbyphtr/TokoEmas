@@ -393,18 +393,16 @@ public class Controller {
             column.add("Aksi");
 
             while (rs.next()) {
-                if (rs.getString("status").equalsIgnoreCase("INSTOCK")) {
-                    Vector row = new Vector();
-                    row.add(rs.getInt("id"));
-                    row.add(rs.getString("nama"));
-                    row.add(rs.getString("deskripsi"));
-                    row.add(rs.getDouble("berat"));
-                    row.add(rs.getDouble("karat"));
-                    row.add(rs.getString("tipe_barang"));
-                    row.add(rs.getInt("harga_beli"));
-                    data.add(row);
-                }
-                
+                Vector row = new Vector();
+                row.add(rs.getInt("id"));
+                row.add(rs.getString("nama"));
+                row.add(rs.getString("deskripsi"));
+                row.add(rs.getDouble("berat"));
+                row.add(rs.getDouble("karat"));
+                row.add(rs.getString("tipe_barang"));
+                row.add(rs.getInt("harga_beli"));
+                data.add(row);
+
             }
 
             return new DefaultTableModel(data, column) {
