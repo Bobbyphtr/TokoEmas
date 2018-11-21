@@ -47,7 +47,9 @@ public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRe
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        button.setText("Tambah");
+        this.row = row;
+        
+        button.setText("Kurang");
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
             button.setBackground(table.getSelectionBackground());
@@ -60,7 +62,9 @@ public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRe
 
     @Override
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-        button.setText("Tambah");
+        this.row = row;
+        
+        button.setText("Kurang");
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
             button.setBackground(table.getSelectionBackground());

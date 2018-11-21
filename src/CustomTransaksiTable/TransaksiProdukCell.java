@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -39,9 +40,13 @@ public class TransaksiProdukCell extends DefaultCellEditor implements TableCellR
             @Override
             public void actionPerformed(ActionEvent e) {
                 Vector rowData = (Vector) produkModel.getDataVector().elementAt(row);
-                rowData.add(rowData.size()-2, " ");
+                int inputHarga = Integer.valueOf(JOptionPane.showInputDialog("Masukkan Harga"));
+                rowData.add(rowData.size()-2, inputHarga);
+                for (Object object : rowData) {
+                    System.out.print(object + " | ");
+                }
                 troliModel.addRow(rowData); 
-                //produk.removeRow(row);
+                produk.removeRow(row);
             }
         });
         

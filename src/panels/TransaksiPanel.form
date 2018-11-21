@@ -434,7 +434,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());&#xa;tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());&#xa;tableTroli.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());&#xa;tableTroli.setDefaultRenderer(Double.class, new CustomTableCellRenderer());&#xa;&#xa;tableTroli.getColumn(&quot;Aksi&quot;).setCellEditor(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));&#xa;tableTroli.getColumn(&quot;Aksi&quot;).setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));"/>
           </AuxValues>
         </Component>
       </SubComponents>

@@ -5,7 +5,6 @@ package panels;
  * @author Xenon
  */
 import CustomJTables.CustomTableCellRenderer;
-import CustomTransaksiTable.TransaksiProdukCell;
 import customComponents.*;
 import database.Controller;
 import java.awt.BorderLayout;
@@ -15,7 +14,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -62,7 +60,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         troliModel = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Status", "Tipe", "Harga Beli", "Tanggal Beli", "Aksi"
+                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Tipe", "Harga Jual", "Aksi"
                 }
         );
     }
@@ -285,9 +283,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 459, 150));
 
         tableTroli.setModel(troliModel);
-        tableProduk.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
-        tableProduk.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
-        tableProduk.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
+        tableTroli.setDefaultRenderer(Object.class, new CustomTableCellRenderer());
+        tableTroli.setDefaultRenderer(Integer.class, new CustomTableCellRenderer());
+        tableTroli.setDefaultRenderer(Double.class, new CustomTableCellRenderer());
+
+        tableTroli.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
+        tableTroli.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
         jScrollPane2.setViewportView(tableTroli);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 459, 150));
