@@ -7,6 +7,7 @@ package CustomJTables;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -15,6 +16,10 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author ysuta
  */
 public class DoubleTableCellRenderer extends DefaultTableCellRenderer{
+
+    public DoubleTableCellRenderer() {
+        setHorizontalAlignment(JLabel.RIGHT);
+    }
     
     
     

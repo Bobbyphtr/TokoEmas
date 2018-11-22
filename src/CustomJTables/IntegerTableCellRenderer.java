@@ -7,6 +7,7 @@ package CustomJTables;
 
 import java.awt.Color;
 import java.awt.Component;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -15,6 +16,10 @@ import javax.swing.table.DefaultTableCellRenderer;
  * @author ysuta
  */
 public class IntegerTableCellRenderer extends DefaultTableCellRenderer{
+
+    public IntegerTableCellRenderer() {
+        setHorizontalAlignment(JLabel.RIGHT);
+    }
     
     
     
@@ -22,13 +27,14 @@ public class IntegerTableCellRenderer extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         super.getTableCellRendererComponent(table, "", isSelected, hasFocus, row, column);
         if (row % 2 == 0) {
-            value = Integer.parseInt(String.valueOf(value));
-            setValue(value);
+            int newValue = Integer.parseInt(String.valueOf(value));
+            setValue(newValue);
             setBackground(new Color(210,130,1));
             setForeground(Color.BLACK);
         }
         else {
-            setValue(value);
+            int newValue = Integer.parseInt(String.valueOf(value));
+            setValue(newValue);
             setBackground(new Color(255,231,192));
             setForeground(Color.BLACK);
         }

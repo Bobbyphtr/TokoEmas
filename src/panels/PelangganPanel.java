@@ -122,13 +122,17 @@ public class PelangganPanel extends javax.swing.JPanel {
         tablePelanggan.setRowSelectionAllowed(true);
         tablePelanggan.setColumnSelectionAllowed(false);
 
+        IntegerTableCellRenderer intRenderer = new IntegerTableCellRenderer();
+        intRenderer.setHorizontalAlignment(JLabel.RIGHT);
+
         tablePelanggan.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
         tablePelanggan.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
         tablePelanggan.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
 
-        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-        centerRenderer.setHorizontalAlignment( JLabel.CENTER );
-        tablePelanggan.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        ObjectTableCellRenderer obt = new ObjectTableCellRenderer();
+        obt.setHorizontalAlignment(JLabel.CENTER);
+
+        tablePelanggan.getColumnModel().getColumn(5).setCellRenderer(obt);
         jScrollPane1.setViewportView(tablePelanggan);
 
         fieldCari.setForeground(java.awt.Color.gray);

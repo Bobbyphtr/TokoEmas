@@ -18,6 +18,7 @@ import java.util.Calendar;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -74,23 +75,19 @@ public class Controller {
 
             while (rs.next()) {
                 Vector row = new Vector();
-                for (int i = 1; i <= c; i++) {
-                    if (rs.getObject(i) != null) {
-                        if (rs.getString(i).equals("true") || rs.getString(i).equals("false")) {
-                            row.add(rs.getBoolean(i));
-                        } else {
-                            row.add(rs.getString(i));
-                        }
-                    } else {
-                        row.add("-");
-                    }
-
-                }
+                row.add(rs.getString("id"));
+                row.add(rs.getString("nama"));
+                row.add(rs.getString("email"));
+                row.add(rs.getString("alamat"));
+                row.add(rs.getString("no_telp"));
+                row.add(rs.getString("status_loyal"));
+                row.add(rs.getInt("bonus"));
+                row.add(rs.getString("deskripsi_bonus"));
                 data.add(row);
             }
 
             return new DefaultTableModel(data, column) {
-                private final Class<?>[] columnClasses = {String.class, String.class, String.class, String.class, String.class, Boolean.class, String.class, String.class};
+                private final Class<?>[] columnClasses = {String.class, String.class, String.class, String.class, String.class, String.class, Integer.class, String.class};
 
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -242,6 +239,22 @@ public class Controller {
         try {
             rs = statement.executeQuery(query);
             DefaultListModel listModel = new DefaultListModel();
+            while (rs.next()) {
+                listModel.addElement(rs.getString("nama"));
+            }
+            return listModel;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses supplier");
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static DefaultComboBoxModel getSupplierComboBoxModel() {
+        String query = "SELECT * FROM supplier";
+        try {
+            rs = statement.executeQuery(query);
+            DefaultComboBoxModel listModel = new DefaultComboBoxModel();
             while (rs.next()) {
                 listModel.addElement(rs.getString("nama"));
             }
@@ -450,6 +463,12 @@ public class Controller {
             }
 
             return new DefaultTableModel(data, column) {
+                private final Class<?>[] columnClasses = {Integer.class, String.class, String.class, Double.class, Double.class, String.class, Integer.class};
+
+                @Override
+                public Class<?> getColumnClass(int col) {
+                    return columnClasses[col];
+                }
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     if (column == columnIdentifiers.size() - 1) {

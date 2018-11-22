@@ -195,7 +195,7 @@
             </Property>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablePelanggan.setCellSelectionEnabled(false);&#xa;tablePelanggan.setRowSelectionAllowed(true);&#xa;tablePelanggan.setColumnSelectionAllowed(false);&#xa;&#xa;tablePelanggan.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());&#xa;tablePelanggan.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());&#xa;tablePelanggan.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());&#xa;&#xa;DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();&#xa;centerRenderer.setHorizontalAlignment( JLabel.CENTER );&#xa;tablePelanggan.getColumnModel().getColumn(5).setCellRenderer(centerRenderer);"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="tablePelanggan.setCellSelectionEnabled(false);&#xa;tablePelanggan.setRowSelectionAllowed(true);&#xa;tablePelanggan.setColumnSelectionAllowed(false);&#xa;&#xa;IntegerTableCellRenderer intRenderer = new IntegerTableCellRenderer();&#xa;intRenderer.setHorizontalAlignment(JLabel.RIGHT);&#xa;&#xa;tablePelanggan.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());&#xa;tablePelanggan.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());&#xa;tablePelanggan.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());&#xa;&#xa;ObjectTableCellRenderer obt = new ObjectTableCellRenderer();&#xa;obt.setHorizontalAlignment(JLabel.CENTER);&#xa;&#xa;tablePelanggan.getColumnModel().getColumn(5).setCellRenderer(obt);"/>
           </AuxValues>
         </Component>
       </SubComponents>
