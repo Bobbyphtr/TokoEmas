@@ -14,6 +14,7 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import static database.Controller.getSupplierComboBoxModel;
+import static database.Controller.getKategoriComboBoxModel;
 
 /**
  *
@@ -164,7 +165,7 @@ public class TambahProduk extends javax.swing.JDialog {
         jLabel9.setForeground(new java.awt.Color(102, 0, 0));
         jLabel9.setText("Supplier:");
 
-        spinnerKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        spinnerKategori.setModel(getKategoriComboBoxModel());
 
         javax.swing.GroupLayout dateContainerLayout = new javax.swing.GroupLayout(dateContainer);
         dateContainer.setLayout(dateContainerLayout);

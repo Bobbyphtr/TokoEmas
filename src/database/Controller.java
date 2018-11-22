@@ -265,6 +265,22 @@ public class Controller {
         }
         return null;
     }
+    
+    public static DefaultComboBoxModel getKategoriComboBoxModel() {
+        String query = "SELECT * FROM kategori";
+        try {
+            rs = statement.executeQuery(query);
+            DefaultComboBoxModel listModel = new DefaultComboBoxModel();
+            while (rs.next()) {
+                listModel.addElement(rs.getString("nama"));
+            }
+            return listModel;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses kategori");
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public static Vector getAllSupplier() {
         String query = "SELECT * FROM supplier";
