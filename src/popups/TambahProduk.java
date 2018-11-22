@@ -13,6 +13,8 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import static database.Controller.getSupplierComboBoxModel;
+
 /**
  *
  * @author Xenon
@@ -156,7 +158,7 @@ public class TambahProduk extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(102, 0, 0));
         jLabel8.setText("Kategori:");
 
-        spinnerSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        spinnerSupplier.setModel(getSupplierComboBoxModel());
 
         jLabel9.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 0, 0));
