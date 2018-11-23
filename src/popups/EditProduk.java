@@ -1,8 +1,22 @@
 package popups;
 
+import POJO.KategoriData;
+import POJO.SupplierData;
 import customComponents.*;
+import static database.Controller.getAllSupplier;
+import static database.Controller.getKarat;
+import static database.Controller.getKategori;
+import static database.Controller.getKategoriComboBoxModel;
+import static database.Controller.getSupplierComboBoxModel;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Vector;
 import javax.swing.JFrame;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -13,13 +27,49 @@ public class EditProduk extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
+    JDatePickerImpl datePicker;
+    Hashtable kategori;
+    Hashtable supplier;
+
     public EditProduk(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
     }
-    
-     public EditProduk() {
+
+    public EditProduk() {
         initComponents();
+        initDatePicker();
+        initHashtable();
+    }
+
+    private void initDatePicker() {
+        UtilDateModel model = new UtilDateModel();
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+        datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        dateContainer2.setLayout(new BorderLayout());
+        dateContainer2.add(datePicker);
+        this.setFocusable(true);
+    }
+
+    private void initHashtable() {
+        supplier = new Hashtable();
+        Vector supplierV = getAllSupplier();
+        for (Object object : supplierV) {
+            SupplierData temp = (SupplierData) object;
+            supplier.put(temp.getNama(), temp.getId());
+        }
+
+        kategori = new Hashtable();
+        Vector kategoriV = getKategori();
+        for (Object object : kategoriV) {
+            KategoriData temp = (KategoriData) object;
+            kategori.put(temp.getNama(), temp.getId());
+        }
+
     }
 
     /**
@@ -45,12 +95,14 @@ public class EditProduk extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         spinnerBerat = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
-        spinnerKarat = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         spinnerSupplier = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         spinnerKategori = new javax.swing.JComboBox<>();
+        spinnerStatus = new javax.swing.JComboBox<>();
+        dateContainer2 = new javax.swing.JPanel();
+        comboKarat = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -106,7 +158,7 @@ public class EditProduk extends javax.swing.JDialog {
         tambahButton.setBackground(new java.awt.Color(89, 38, 1));
         tambahButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         tambahButton.setForeground(java.awt.Color.white);
-        tambahButton.setText("Tambah");
+        tambahButton.setText("Simpan");
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 0, 0));
@@ -124,66 +176,85 @@ public class EditProduk extends javax.swing.JDialog {
         jLabel8.setForeground(new java.awt.Color(102, 0, 0));
         jLabel8.setText("Kategori:");
 
-        spinnerSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        spinnerSupplier.setModel(getSupplierComboBoxModel());
 
         jLabel9.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 0, 0));
         jLabel9.setText("Supplier:");
 
-        spinnerKategori.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        spinnerKategori.setModel(getKategoriComboBoxModel());
+
+        spinnerStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--status--", "IINSTOCK", "SOLD", "MISSING" }));
+
+        javax.swing.GroupLayout dateContainer2Layout = new javax.swing.GroupLayout(dateContainer2);
+        dateContainer2.setLayout(dateContainer2Layout);
+        dateContainer2Layout.setHorizontalGroup(
+            dateContainer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 303, Short.MAX_VALUE)
+        );
+        dateContainer2Layout.setVerticalGroup(
+            dateContainer2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 31, Short.MAX_VALUE)
+        );
+
+        comboKarat.setModel(getKarat());
 
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(fieldNamaProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)
-                        .addComponent(jLabel2)
-                        .addComponent(jLabel1)
-                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel5)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(spinnerBerat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addComponent(jLabel6)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(spinnerKarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(18, 18, 18)
-                            .addComponent(jLabel7)
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(TitleText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(spinnerStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addContainerGap(36, Short.MAX_VALUE)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
+                                .addComponent(fieldNamaProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel1)
+                                .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5)
+                                        .addComponent(jLabel6))
+                                    .addGap(11, 11, 11)
+                                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                                            .addComponent(spinnerBerat, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel7))
+                                        .addComponent(comboKarat, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(59, 59, 59)
                                     .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel9))
-                                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                                            .addGap(0, 0, Short.MAX_VALUE)
-                                            .addComponent(jLabel8)))
+                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel8))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(spinnerSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(spinnerKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                    .addComponent(TitleText))
-                .addContainerGap(41, Short.MAX_VALUE))
+                                        .addComponent(spinnerKategori, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(dateContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(41, 41, 41))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(TitleText)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spinnerStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addComponent(TitleText)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fieldNamaProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -201,12 +272,12 @@ public class EditProduk extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(spinnerKarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(spinnerSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
+                    .addComponent(spinnerSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboKarat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(tambahButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
+                .addGap(23, 23, 23))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -253,13 +324,18 @@ public class EditProduk extends javax.swing.JDialog {
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
-        EditProduk dialog = new EditProduk(a,true);
+
+        EditProduk dialog = new EditProduk(a, true);
         //a.setPreferredSize(dialog.getPreferredSize());
-       dialog.setVisible(true);
+        dialog.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel TambahPelangganPanel;
     private javax.swing.JLabel TitleText;
+    private javax.swing.JComboBox<String> comboKarat;
+    private javax.swing.JPanel dateContainer;
+    private javax.swing.JPanel dateContainer1;
+    private javax.swing.JPanel dateContainer2;
     private javax.swing.JTextField fieldNamaProduk;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -271,8 +347,8 @@ public class EditProduk extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spinnerBerat;
-    private javax.swing.JSpinner spinnerKarat;
     private javax.swing.JComboBox<String> spinnerKategori;
+    private javax.swing.JComboBox<String> spinnerStatus;
     private javax.swing.JComboBox<String> spinnerSupplier;
     private javax.swing.JButton tambahButton;
     private javax.swing.JTextArea textAreaDeskripsiProduk;

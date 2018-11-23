@@ -12,6 +12,8 @@ import static database.Controller.getDateAndTime;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JDialog;
@@ -36,22 +38,27 @@ public class ProdukPanel extends javax.swing.JPanel {
      * Creates new form Staff
      */
     TableModel produkModel;
-    TableColumn nama, berat, karat, tipeBarang, idKategori, idSupplier;
+    TableColumn deskripsi, berat, karat, tipeBarang, idKategori, idSupplier;
     TableRowSorter<TableModel> rowFilter;
 
     public ProdukPanel() {
-        produkModel = getAllProdukPanel();
         initComponents();
+        initModel();
+        syncDate();
+        setUpRowFilter();
+    }
 
+    private void initModel() {
+        produkModel = tableProduk.getModel();
         //hide column
-        nama = tableProduk.getColumnModel().getColumn(1);
+        deskripsi = tableProduk.getColumnModel().getColumn(2);
         berat = tableProduk.getColumnModel().getColumn(3);
         karat = tableProduk.getColumnModel().getColumn(4);
         tipeBarang = tableProduk.getColumnModel().getColumn(6);
         idKategori = tableProduk.getColumnModel().getColumn(7);
         idSupplier = tableProduk.getColumnModel().getColumn(8);
 
-        tableProduk.getColumnModel().removeColumn(nama);
+        tableProduk.getColumnModel().removeColumn(deskripsi);
         tableProduk.getColumnModel().removeColumn(berat);
         tableProduk.getColumnModel().removeColumn(karat);
         tableProduk.getColumnModel().removeColumn(tipeBarang);
@@ -60,9 +67,6 @@ public class ProdukPanel extends javax.swing.JPanel {
 
         tableProduk.getColumnModel().moveColumn(4, 0);
         tableProduk.getColumnModel().moveColumn(3, 4);
-
-        syncDate();
-        setUpRowFilter();
     }
 
     private void setUpRowFilter() {
@@ -229,7 +233,7 @@ public class ProdukPanel extends javax.swing.JPanel {
             }
         });
 
-        tableProduk.setModel(produkModel);
+        tableProduk.setModel(getAllProdukPanel());
         tableProduk.setRowSelectionAllowed(true);
         tableProduk.setColumnSelectionAllowed(false);
 
@@ -493,6 +497,16 @@ public class ProdukPanel extends javax.swing.JPanel {
         JDialog supplier = new Supplier();
         supplier.setLocationRelativeTo(this);
         supplier.setVisible(true);
+        supplier.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent we) {
+                tableProduk.setModel(getAllProdukPanel());
+                produkModel = tableProduk.getModel();
+                setUpRowFilter();
+                initModel();
+            }
+
+        });
     }//GEN-LAST:event_buttonSupplierActionPerformed
 
     private void fieldCariFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariFocusLost
@@ -510,12 +524,31 @@ public class ProdukPanel extends javax.swing.JPanel {
         JDialog kategori = new Kategori();
         kategori.setLocationRelativeTo(this);
         kategori.setVisible(true);
+        kategori.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent we) {
+                tableProduk.setModel(getAllProdukPanel());
+                produkModel = tableProduk.getModel();
+                setUpRowFilter();
+                initModel();
+            }
+        });
     }//GEN-LAST:event_buttonKategoriActionPerformed
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         JDialog tambahProduk = new TambahProduk();
         tambahProduk.setLocationRelativeTo(this);
         tambahProduk.setVisible(true);
+        tambahProduk.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent we) {
+                tableProduk.setModel(getAllProdukPanel());
+                produkModel = tableProduk.getModel();
+                setUpRowFilter();
+                initModel();
+            }
+
+        });
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
@@ -523,6 +556,16 @@ public class ProdukPanel extends javax.swing.JPanel {
             JDialog editProduk = new EditProduk();
             editProduk.setLocationRelativeTo(this);
             editProduk.setVisible(true);
+
+            editProduk.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent we) {
+                    tableProduk.setModel(getAllProdukPanel());
+                    produkModel = tableProduk.getModel();
+                    setUpRowFilter();
+                    initModel();
+                }
+            });
         }
     }//GEN-LAST:event_buttonUbahActionPerformed
 

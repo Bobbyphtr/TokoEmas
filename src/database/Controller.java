@@ -520,10 +520,15 @@ public class Controller {
     }
 
     public static DefaultTableModel getAllProdukPanel() {
-        String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, status, tipe_barang, "
-                + "kategori.nama as kategori, supplier.nama as supplier, harga_beli, tanggal_beli "
-                + "FROM `barang`, kategori, supplier "
-                + "WHERE kategori.id = barang.id_kategori and supplier.id = barang.id_supplier";
+        
+        String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, status, tipe_barang,"
+                + " kategori.nama as kategori,  supplier.nama as supplier, harga_beli, tanggal_beli "
+                + "FROM barang "
+                + " LEFT JOIN "
+                + "kategori on kategori.id = barang.id_kategori"
+                + " LEFT JOIN "
+                + "supplier on supplier.id = barang.id_supplier";
+        
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
@@ -553,8 +558,8 @@ public class Controller {
                 row.add(rs.getDouble("karat"));
                 row.add(rs.getString("status"));
                 row.add(rs.getString("tipe_barang"));
-                row.add(rs.getString("kategori"));
-                row.add(rs.getString("supplier"));
+                row.add(rs.getString("kategori") == null ? "Tidak ada kategori" : rs.getString("kategori"));
+                row.add(rs.getString("supplier") == null ? "Tidak ada supplier/dihapus" : rs.getString("supplier"));
                 row.add(rs.getInt("harga_beli"));
                 row.add(rs.getDate("tanggal_beli"));
                 data.add(row);

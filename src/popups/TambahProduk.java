@@ -31,9 +31,9 @@ public class TambahProduk extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
-    JDatePickerImpl datePicker;
-    Hashtable kategori;
-    Hashtable supplier;
+    private JDatePickerImpl datePicker;
+    private Hashtable kategori;
+    private Hashtable supplier;
 
     public TambahProduk(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -42,6 +42,7 @@ public class TambahProduk extends javax.swing.JDialog {
     }
 
     public TambahProduk() {
+        this.setTitle("Tambah Produk");
         initHashtable();
         initComponents();
         initDatePicker();
@@ -59,47 +60,50 @@ public class TambahProduk extends javax.swing.JDialog {
         dateContainer.add(datePicker);
         this.setFocusable(true);
     }
-    
+
     private void initHashtable() {
         supplier = new Hashtable();
         Vector supplierV = getAllSupplier();
         for (Object object : supplierV) {
-            SupplierData temp =  (SupplierData) object;
+            SupplierData temp = (SupplierData) object;
             supplier.put(temp.getNama(), temp.getId());
         }
-        
+
         kategori = new Hashtable();
         Vector kategoriV = getKategori();
         for (Object object : kategoriV) {
             KategoriData temp = (KategoriData) object;
             kategori.put(temp.getNama(), temp.getId());
         }
-        
+
     }
-    
+
     private void tambahProduk() {
         int id = 1;
-        int idKategori = Integer.parseInt((String) kategori.get(comboKategori.getSelectedItem()));
-        int idSupplier = Integer.parseInt((String) supplier.get(comboSupplier.getSelectedItem()));
-        int karat = Integer.parseInt((String)comboKarat.getSelectedItem());
+        //System.out.println(kategori.get(comboKategori.getSelectedItem()));
+        int idKategori = (int) kategori.get(comboKategori.getSelectedItem());
+        int idSupplier = (int) supplier.get(comboSupplier.getSelectedItem());
+        int karat = (int) comboKarat.getSelectedItem();
         int hargaBeli = Integer.parseInt(fieldHarga.getText());
         String nama = fieldNamaProduk.getText();
         String deskripsi = textAreaDeskripsiProduk.getText();
         String status = "INSTOCK";
-        String tipeBarang = fieldJenis.getText() ;
+        String tipeBarang = fieldJenis.getText();
         double berat = Double.parseDouble(spinnerBerat.getValue().toString());
-        
+
         java.util.Date foundDateUtil = (java.util.Date) datePicker.getModel().getValue();
         Instant instant = foundDateUtil.toInstant();
         ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
         ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
         LocalDate foundDate = zdt.toLocalDate();
-        
-        Date tanggalBeli =Date.valueOf(foundDate);
-        
+
+        Date tanggalBeli = Date.valueOf(foundDate);
+
         Produk produk = new Produk(id, idKategori, idSupplier, karat, hargaBeli, nama, deskripsi, status, tipeBarang, berat, tanggalBeli);
-        
+
         addProduk(produk);
+        
+        this.dispose();
     }
 
     /**
@@ -247,11 +251,6 @@ public class TambahProduk extends javax.swing.JDialog {
                 fieldHargaFocusLost(evt);
             }
         });
-        fieldHarga.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldHargaActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 0));
@@ -268,15 +267,10 @@ public class TambahProduk extends javax.swing.JDialog {
                 fieldJenisFocusLost(evt);
             }
         });
-        fieldJenis.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldJenisActionPerformed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel10.setText("Jenis");
+        jLabel10.setText("Jenis Emas");
 
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
@@ -291,11 +285,11 @@ public class TambahProduk extends javax.swing.JDialog {
                             .addComponent(jLabel6))
                         .addGap(11, 11, 11)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboKarat, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                                .addComponent(spinnerBerat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(spinnerBerat, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel7))
-                            .addComponent(comboKarat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel7)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel9)
@@ -389,7 +383,7 @@ public class TambahProduk extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldNamaProdukFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaProdukFocusGained
-        if (fieldNamaProduk.getText().equals("Masukan email.")) {
+        if (fieldNamaProduk.getText().equals("Masukan nama produk.")) {
             fieldNamaProduk.setText("");
             fieldNamaProduk.setForeground(Color.BLACK);
         }
@@ -397,7 +391,7 @@ public class TambahProduk extends javax.swing.JDialog {
 
     private void fieldNamaProdukFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaProdukFocusLost
         if (fieldNamaProduk.getText().equals("")) {
-            fieldNamaProduk.setText("Masukan email.");
+            fieldNamaProduk.setText("Masukan nama produk.");
             fieldNamaProduk.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_fieldNamaProdukFocusLost
@@ -421,28 +415,32 @@ public class TambahProduk extends javax.swing.JDialog {
     }//GEN-LAST:event_tambahButtonActionPerformed
 
     private void fieldHargaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldHargaFocusGained
-        // TODO add your handling code here:
+        if (fieldHarga.getText().equals("Masukan Harga.")) {
+            fieldHarga.setText("");
+            fieldHarga.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_fieldHargaFocusGained
 
     private void fieldHargaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldHargaFocusLost
-        // TODO add your handling code here:
+        if (fieldHarga.getText().equals("")) {
+            fieldHarga.setText("Masukan Harga.");
+            fieldHarga.setForeground(Color.GRAY);
+        }
     }//GEN-LAST:event_fieldHargaFocusLost
 
-    private void fieldHargaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldHargaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldHargaActionPerformed
-
     private void fieldJenisFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldJenisFocusGained
-        // TODO add your handling code here:
+        if (fieldJenis.getText().equals("Masukan jenis.")) {
+            fieldJenis.setText("");
+            fieldJenis.setForeground(Color.BLACK);
+        }
     }//GEN-LAST:event_fieldJenisFocusGained
 
     private void fieldJenisFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldJenisFocusLost
-        // TODO add your handling code here:
+        if (fieldJenis.getText().equals("")) {
+            fieldJenis.setText("Masukan jenis.");
+            fieldJenis.setForeground(Color.GRAY);
+        }
     }//GEN-LAST:event_fieldJenisFocusLost
-
-    private void fieldJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldJenisActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldJenisActionPerformed
 
     public static void main(String args[]) {
         JFrame a = new JFrame();
