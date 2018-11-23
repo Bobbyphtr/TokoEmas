@@ -1,6 +1,6 @@
 package POJO;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -9,9 +9,10 @@ import java.util.Date;
 public class Produk {
     private int id, idKategori, idSupplier, karat, hargaBeli;
     private String nama, deskripsi, status, tipeBarang;
+    private double berat;
     private Date tanggalBeli;
 
-    public Produk(int id, int idKategori, int idSupplier, int karat, int hargaBeli, String nama, String deskripsi, String status, String tipeBarang, Date tanggalBeli) {
+    public Produk(int id, int idKategori, int idSupplier, int karat, int hargaBeli, String nama, String deskripsi, String status, String tipeBarang, double berat, Date tanggalBeli) {
         this.id = id;
         this.idKategori = idKategori;
         this.idSupplier = idSupplier;
@@ -21,6 +22,7 @@ public class Produk {
         this.deskripsi = deskripsi;
         this.status = status;
         this.tipeBarang = tipeBarang;
+        this.berat = berat;
         this.tanggalBeli = tanggalBeli;
     }
 
@@ -98,6 +100,14 @@ public class Produk {
 
     public void setTipeBarang(String tipeBarang) {
         this.tipeBarang = tipeBarang;
+    }
+
+    public double getBerat() {
+        return berat;
+    }
+
+    public void setBerat(double berat) {
+        this.berat = berat;
     }
 
     public Date getTanggalBeli() {

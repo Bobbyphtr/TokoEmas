@@ -1,5 +1,6 @@
 package database;
 
+import POJO.KategoriData;
 import POJO.Pelanggan;
 import POJO.Produk;
 import POJO.Staf;
@@ -249,7 +250,7 @@ public class Controller {
         }
         return null;
     }
-    
+
     public static DefaultComboBoxModel getSupplierComboBoxModel() {
         String query = "SELECT * FROM supplier";
         try {
@@ -265,7 +266,7 @@ public class Controller {
         }
         return null;
     }
-    
+
     public static DefaultComboBoxModel getKategoriComboBoxModel() {
         String query = "SELECT * FROM kategori";
         try {
@@ -275,6 +276,23 @@ public class Controller {
                 listModel.addElement(rs.getString("nama"));
             }
             return listModel;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses kategori");
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Vector getKategori() {
+        String query = "SELECT * FROM kategori";
+        try {
+            rs = statement.executeQuery(query);
+            Vector data = new Vector();
+            while (rs.next()) {
+                KategoriData kategori = new KategoriData(rs.getInt("id"), rs.getString("nama"));
+                data.add(kategori);
+            }
+            return data;
         } catch (SQLException ex) {
             System.out.println("Gagal mengakses kategori");
             ex.printStackTrace();
@@ -390,11 +408,11 @@ public class Controller {
         }
         return null;
     }
-    
-    public static void addStaf(Staf staf){
+
+    public static void addStaf(Staf staf) {
         String query = "INSERT INTO pekerja (nama, email, alamat, no_telp, gaji, posisi, reward, deskripsi_reward) "
                 + "VALUES (? , ?, ?, ?, ?, ? , ?, ?)";
-        
+
         try {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, staf.getNama());
@@ -436,12 +454,12 @@ public class Controller {
             preparedStatement.setString(6, staf.getPosisi());
             preparedStatement.setInt(7, staf.getReward());
             preparedStatement.setString(8, staf.getDekripsiReward());
-            
+
             preparedStatement.setInt(9, staf.getId());
-            
+
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("Update supplier gagal");
+            System.out.println("Update staf gagal");
             ex.printStackTrace();
         }
     }
@@ -485,6 +503,7 @@ public class Controller {
                 public Class<?> getColumnClass(int col) {
                     return columnClasses[col];
                 }
+
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     if (column == columnIdentifiers.size() - 1) {
@@ -570,12 +589,47 @@ public class Controller {
         String query = "INSERT INTO barang (nama, deskripsi, berat, karat, status, tipe_barang,"
                 + "id_kategori, id_supplier, harga_beli, tanggal_beli) VALUES "
                 + "(? , ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, produk.getNama());
+            preparedStatement.setString(2, produk.getDeskripsi());
+            preparedStatement.setDouble(3, produk.getBerat());
+            preparedStatement.setInt(4, produk.getKarat());
+            preparedStatement.setString(5, produk.getStatus());
+            preparedStatement.setString(6, produk.getTipeBarang());
+            preparedStatement.setInt(7, produk.getIdKategori());
+            preparedStatement.setInt(8, produk.getIdSupplier());
+            preparedStatement.setInt(9, produk.getHargaBeli());
+            preparedStatement.setDate(10, produk.getTanggalBeli());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Update produk gagal");
+            ex.printStackTrace();
+        }
+
     }
 
     public static void updateProduk(int id) {
         String query = "UPDATE barang SET nama = ?, deskripsi = ?, berat = ?, karat = ?, status = ?, "
                 + "tipe_barang = ?, id_kategori = ?, id_supplier = ?, harga_beli = ?, tanggal_beli = ?"
                 + "WHERE id = ?";
+    }
+
+    public static DefaultComboBoxModel getKarat() {
+        String query = "SELECT * FROM `karat`";
+        try {
+            rs = statement.executeQuery(query);
+            DefaultComboBoxModel listModel = new DefaultComboBoxModel();
+            while (rs.next()) {
+                listModel.addElement(rs.getInt("value"));
+            }
+            return listModel;
+        } catch (SQLException ex) {
+            System.out.println("Gagal mengakses karat");
+            ex.printStackTrace();
+        }
+        return null;
     }
 
 }
