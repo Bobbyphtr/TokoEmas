@@ -8,10 +8,12 @@ package CustomTransaksiTable;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 import javax.swing.AbstractCellEditor;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellEditor;
@@ -38,7 +40,15 @@ public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRe
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Test Button Transaksi : " + row);
+                Vector rowData = (Vector) troliModel.getDataVector().elementAt(row);
+                rowData.remove(rowData.size()-1);
+                
+                for (Object object : rowData) {
+                    System.out.print(object + " | ");
+                }
+                System.out.println("");
+                produkModel.addRow(rowData); 
+                troli.removeRow(row);
             }
         });
         
@@ -49,7 +59,7 @@ public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRe
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         this.row = row;
         
-        button.setText("Kurang");
+        button.setText("-");
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
             button.setBackground(table.getSelectionBackground());
@@ -64,7 +74,7 @@ public class TransaksiTroliCell extends DefaultCellEditor implements TableCellRe
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         this.row = row;
         
-        button.setText("Kurang");
+        button.setText("-");
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
             button.setBackground(table.getSelectionBackground());

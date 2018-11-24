@@ -360,6 +360,31 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static DefaultTableModel getStafDialog() {
+        String query = "SELECT * from pekerja";
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+            Vector column = new Vector();
+            column.add("Nama"); //Nama Kolom untuk sementara ambil dari database
+            
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString("nama"));
+                data.add(row);
+            }
+
+            return new DefaultTableModel(data, column);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public static DefaultTableModel getAllStaf() {
         String query = "SELECT * from pekerja";
@@ -464,6 +489,7 @@ public class Controller {
         }
     }
 
+    /*
     public static DefaultTableModel getAllProduk() {
         String query = "SELECT * FROM barang WHERE status = 'INSTOCK'";
         try {
@@ -504,6 +530,69 @@ public class Controller {
                     return columnClasses[col];
                 }
 
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    if (column == columnIdentifiers.size() - 1) {
+                        return true;
+                    }
+                    return false;
+                }
+
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+*/
+    
+    public static DefaultTableModel getAllProduk() {
+        
+        String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, tipe_barang,"
+                + " kategori.nama as kategori,  supplier.nama as supplier, harga_beli, tanggal_beli "
+                + "FROM barang "
+                + " LEFT JOIN "
+                + "kategori on kategori.id = barang.id_kategori"
+                + " LEFT JOIN "
+                + "supplier on supplier.id = barang.id_supplier WHERE status = 'INSTOCK'";
+        
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+            Vector column = new Vector();
+
+            column.add("ID");
+            column.add("Nama");
+            column.add("Deskripsi");
+            column.add("Berat");
+            column.add("Karat");
+            column.add("Tipe");
+            column.add("kategori");
+            column.add("supplier");
+            column.add("Harga Beli");
+            column.add("tanggal beli");
+            column.add("Aksi");
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getInt("id"));
+                row.add(rs.getString("nama"));
+                row.add(rs.getString("deskripsi"));
+                row.add(rs.getDouble("berat"));
+                row.add(rs.getDouble("karat"));
+                row.add(rs.getString("tipe_barang"));
+                row.add(rs.getString("kategori") == null ? "Tidak ada kategori" : rs.getString("kategori"));
+                row.add(rs.getString("supplier") == null ? "Tidak ada supplier/dihapus" : rs.getString("supplier"));
+                row.add(rs.getInt("harga_beli"));
+                row.add(rs.getDate("tanggal_beli"));
+                data.add(row);
+
+            }
+
+            return new DefaultTableModel(data, column) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
                     if (column == columnIdentifiers.size() - 1) {

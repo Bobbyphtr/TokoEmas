@@ -41,7 +41,8 @@ public class TransaksiProdukCell extends DefaultCellEditor implements TableCellR
             public void actionPerformed(ActionEvent e) {
                 Vector rowData = (Vector) produkModel.getDataVector().elementAt(row);
                 int inputHarga = Integer.valueOf(JOptionPane.showInputDialog("Masukkan Harga"));
-                rowData.add(rowData.size()-2, inputHarga);
+                rowData.add(rowData.size()-1, inputHarga);
+                
                 for (Object object : rowData) {
                     System.out.print(object + " | ");
                 }
@@ -57,7 +58,7 @@ public class TransaksiProdukCell extends DefaultCellEditor implements TableCellR
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         this.row = row;
         
-        button.setText("Tambah");
+        button.setText("+");
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
             button.setBackground(table.getSelectionBackground());
@@ -72,7 +73,7 @@ public class TransaksiProdukCell extends DefaultCellEditor implements TableCellR
     public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
         this.row = row;
         
-        button.setText("Tambah");
+        button.setText("+");
         if (isSelected) {
             button.setForeground(table.getSelectionForeground());
             button.setBackground(table.getSelectionBackground());

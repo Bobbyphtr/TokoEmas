@@ -8,6 +8,13 @@ package popups;
 import customComponents.*;
 import java.awt.Color;
 import javax.swing.JFrame;
+import static database.Controller.getStafDialog;
+import java.awt.Window;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -18,10 +25,34 @@ public class PilihStaf extends javax.swing.JPanel {
     /**
      * Creates new form PilihStaff //
      */
+    
+    JLabel labelNama;
+    
     public PilihStaf() {
         initComponents();
+        
+        tableStaff.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
+                fieldNama.setText(nama);
+            }
+        });
     }
-
+    
+    public PilihStaf(JLabel labelNama) {
+        this.labelNama = labelNama;
+        initComponents();
+        
+        tableStaff.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
+                fieldNama.setText(nama);
+            }
+        });
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -62,17 +93,7 @@ public class PilihStaf extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
-        tableStaff.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nama", "Email", "No Telp"
-            }
-        ));
+        tableStaff.setModel(getStafDialog());
         jScrollPane1.setViewportView(tableStaff);
 
         buttonTambah.setBackground(new java.awt.Color(89, 38, 1));
@@ -120,7 +141,11 @@ public class PilihStaf extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        // TODO add your handling code here:
+        labelNama.setText(fieldNama.getText());
+        JComponent comp = (JComponent) evt.getSource();
+        Window win = SwingUtilities.getWindowAncestor(comp);
+        win.dispose();
+        
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained

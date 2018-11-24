@@ -23,12 +23,15 @@ import popups.*;
 import static database.Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Vector;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableColumn;
 
 public class TransaksiPanel extends javax.swing.JPanel {
 
@@ -41,6 +44,8 @@ public class TransaksiPanel extends javax.swing.JPanel {
     DefaultTableModel troliModel;
     DefaultTableModel produkModel;
     
+   
+    
     Vector<Produk> produk;
     
     public TransaksiPanel() {
@@ -50,26 +55,59 @@ public class TransaksiPanel extends javax.swing.JPanel {
         initDatePicker();
         syncDate();
         
+        removeTableProdukTroliColumn();
+        removeTableTroliColumn();
         
                 
         tableProduk.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                
+                infoProdukController(tableProduk.convertRowIndexToModel(tableProduk.getSelectedRow()));
             }
         });
         
+        tableTroli.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                infoTroliController(tableTroli.convertRowIndexToModel(tableTroli.getSelectedRow()));
+            }
+        });
+        
+        troliModel.addTableModelListener(new TableModelListener() {
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                totalBiaya();
+            }
+        });
     }
     
-    private void infoProdukController() {
-        labelNama.setText("");
-        labelDeskripsi.setText("");
-        labelWeight.setText("");
-        labelKarat.setText("");
-        labelType.setText("");
-        labelKategori.setText("");
-        labelSupplier.setText("");
-        labelHargaBeli.setText("");
+    private void removeTableTroliColumn() {
+        
+        TableColumn id = tableTroli.getColumnModel().getColumn(0);
+        TableColumn deskripsi = tableTroli.getColumnModel().getColumn(2);
+        TableColumn supplier = tableTroli.getColumnModel().getColumn(7);
+        TableColumn hargaBeli = tableTroli.getColumnModel().getColumn(8);
+        TableColumn tglBeli = tableTroli.getColumnModel().getColumn(9);
+        
+        tableTroli.getColumnModel().removeColumn(id);
+        tableTroli.getColumnModel().removeColumn(deskripsi);
+        tableTroli.getColumnModel().removeColumn(supplier);
+        tableTroli.getColumnModel().removeColumn(tglBeli);
+        tableTroli.getColumnModel().removeColumn(hargaBeli);
+    }
+    
+    private void removeTableProdukTroliColumn() {
+        
+        TableColumn id = tableProduk.getColumnModel().getColumn(0);
+        TableColumn deskripsi = tableProduk.getColumnModel().getColumn(2);
+        TableColumn supplier = tableProduk.getColumnModel().getColumn(7);
+        TableColumn tglBeli = tableProduk.getColumnModel().getColumn(9);
+        
+        tableProduk.getColumnModel().removeColumn(id);
+        tableProduk.getColumnModel().removeColumn(deskripsi);
+        tableProduk.getColumnModel().removeColumn(supplier);
+        tableProduk.getColumnModel().removeColumn(tglBeli);
+        
     }
 
     private void initDatePicker() {
@@ -90,7 +128,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         troliModel = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Tipe", "Harga Jual", "Aksi"
+                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Tipe", "Kategori", "Supplier", "Harga Beli", "Tanggal Beli","Harga Jual", "Aksi"
                 }
         );
     }
@@ -110,6 +148,79 @@ public class TransaksiPanel extends javax.swing.JPanel {
         });
         date.start();
     }
+    
+    private void infoProdukController(int rowIdx) {
+        if (rowIdx > -1) {
+            labelNama.setText((String) tableProduk.getModel().getValueAt(rowIdx, 1));
+            labelDeskripsi.setText((String) tableProduk.getModel().getValueAt(rowIdx, 2));
+            labelWeight.setText(String.valueOf((Double) tableProduk.getModel().getValueAt(rowIdx, 3)));
+            labelKarat.setText(String.valueOf((Double) tableProduk.getModel().getValueAt(rowIdx, 4)));
+            labelType.setText((String) tableProduk.getModel().getValueAt(rowIdx, 5));
+            labelKategori.setText((String) tableProduk.getModel().getValueAt(rowIdx, 6));
+            labelSupplier.setText((String) tableProduk.getModel().getValueAt(rowIdx, 7));
+            textHargaBeli.setText("Harga Beli");
+            labelHargaBeli.setText(intToCurrency((Integer) tableProduk.getModel().getValueAt(rowIdx, 8)));
+        } else {
+            labelNama.setText("-");
+            labelDeskripsi.setText("-");
+            labelWeight.setText("-");
+            labelKarat.setText("-");
+            labelType.setText("-");
+            labelKategori.setText("-");
+            labelSupplier.setText("-");
+            textHargaBeli.setText("Harga Beli");
+            labelHargaBeli.setText("-");
+        }
+
+    }
+    
+    private void infoTroliController(int rowIdx) {
+        if (rowIdx > -1) {
+            System.out.println("Row Index = " + rowIdx);
+            labelNama.setText((String) tableTroli.getModel().getValueAt(rowIdx, 1));
+            labelDeskripsi.setText((String) tableTroli.getModel().getValueAt(rowIdx, 2));
+            labelWeight.setText(String.valueOf((Double) tableTroli.getModel().getValueAt(rowIdx, 3)));
+            labelKarat.setText(String.valueOf((Double) tableTroli.getModel().getValueAt(rowIdx, 4)));
+            labelType.setText((String) tableTroli.getModel().getValueAt(rowIdx, 5));
+            labelKategori.setText((String) tableTroli.getModel().getValueAt(rowIdx, 6));
+            labelSupplier.setText((String) tableTroli.getModel().getValueAt(rowIdx, 7));
+            textHargaBeli.setText("Harga Jual");
+            labelHargaBeli.setText(intToCurrency((Integer) tableTroli.getModel().getValueAt(rowIdx, 10)));
+        } else {
+            labelNama.setText("-");
+            labelDeskripsi.setText("-");
+            labelWeight.setText("-");
+            labelKarat.setText("-");
+            labelType.setText("-");
+            labelKategori.setText("-");
+            labelSupplier.setText("-");
+            textHargaBeli.setText("Harga Jual");
+            labelHargaBeli.setText("-");
+        }
+
+    }
+    
+    private String intToCurrency(int number) {
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+
+        return kursIndonesia.format(number);
+
+    }
+    
+    private void totalBiaya() {
+        int total = 0;
+        for (int i = 0; i < tableTroli.getModel().getRowCount(); i++) {
+            total += (Integer) tableTroli.getModel().getValueAt(i, 10);
+        }
+        
+        labelHargaTotal.setText(intToCurrency(total));
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,7 +234,6 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
-        buttonGroup1 = new javax.swing.ButtonGroup();
         TitleText = new javax.swing.JLabel();
         buttonTambah = new javax.swing.JButton();
         fieldCariProduk = new javax.swing.JTextField();
@@ -149,12 +259,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jlabel4 = new javax.swing.JLabel();
         fieldCariTroli = new javax.swing.JTextField();
         fieldCariTroli = new CorneredJTextField();
-        jlabel5 = new javax.swing.JLabel();
+        labelHargaTotal = new javax.swing.JLabel();
         jlabel6 = new javax.swing.JLabel();
         jlabel7 = new javax.swing.JLabel();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        radioCredit = new javax.swing.JRadioButton();
+        radioDebit = new javax.swing.JRadioButton();
+        radioCash = new javax.swing.JRadioButton();
         panelInfoProduk = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         labelDeskripsi = new javax.swing.JLabel();
@@ -169,7 +279,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         labelKategori = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         labelSupplier = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        textHargaBeli = new javax.swing.JLabel();
         labelHargaBeli = new javax.swing.JLabel();
         jlabel8 = new javax.swing.JLabel();
         dateContainer = new javax.swing.JPanel();
@@ -310,7 +420,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         tableProduk.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(tableProduk);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, 459, 150));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 100, 510, 150));
 
         tableTroli.setModel(troliModel);
         tableTroli.setDefaultRenderer(Object.class, new ObjectTableCellRenderer());
@@ -321,7 +431,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         tableTroli.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
         jScrollPane2.setViewportView(tableTroli);
 
-        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 350, 459, 150));
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 350, 510, 150));
 
         TitleText1.setBackground(new java.awt.Color(102, 0, 0));
         TitleText1.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
@@ -357,10 +467,10 @@ public class TransaksiPanel extends javax.swing.JPanel {
         });
         add(fieldCariTroli, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 310, 191, 30));
 
-        jlabel5.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
-        jlabel5.setForeground(new java.awt.Color(102, 0, 0));
-        jlabel5.setText("<HargaTotal>");
-        add(jlabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(801, 513, -1, -1));
+        labelHargaTotal.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelHargaTotal.setForeground(new java.awt.Color(102, 0, 0));
+        labelHargaTotal.setText("<HargaTotal>");
+        add(labelHargaTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(801, 513, -1, -1));
 
         jlabel6.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel6.setForeground(new java.awt.Color(102, 0, 0));
@@ -372,14 +482,14 @@ public class TransaksiPanel extends javax.swing.JPanel {
         jlabel7.setText("Metode Bayar");
         add(jlabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 540, -1, -1));
 
-        jRadioButton2.setText("Cash");
-        add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 570, -1, -1));
+        radioCredit.setText("Credit");
+        add(radioCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, -1, -1));
 
-        jRadioButton3.setText("Credit");
-        add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 570, -1, -1));
+        radioDebit.setText("Debit");
+        add(radioDebit, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 570, -1, -1));
 
-        jRadioButton4.setText("Debit");
-        add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 570, -1, -1));
+        radioCash.setText("Cash");
+        add(radioCash, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 570, -1, -1));
 
         panelInfoProduk.setBackground(java.awt.Color.white);
         panelInfoProduk.setBorder(new BubbleBorderJPanel(Color.WHITE, 10, 20, 0));
@@ -450,10 +560,10 @@ public class TransaksiPanel extends javax.swing.JPanel {
         labelSupplier.setText("Supplier");
         panelInfoProduk.add(labelSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
-        jLabel19.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
-        jLabel19.setForeground(java.awt.Color.gray);
-        jLabel19.setText("Harga Beli:");
-        panelInfoProduk.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        textHargaBeli.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        textHargaBeli.setForeground(java.awt.Color.gray);
+        textHargaBeli.setText("Harga Beli:");
+        panelInfoProduk.add(textHargaBeli, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         labelHargaBeli.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         labelHargaBeli.setForeground(java.awt.Color.black);
@@ -502,7 +612,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
     private void buttonPilihStafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihStafActionPerformed
         JDialog pilihStafDialog = new JDialog();
-        pilihStafDialog.setContentPane(new PilihStaf());
+        pilihStafDialog.setContentPane(new PilihStaf(labelNamaStaff));
         pilihStafDialog.pack();
         pilihStafDialog.setLocationRelativeTo(this);
         pilihStafDialog.setVisible(true);
@@ -541,7 +651,6 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel TitleText;
     private javax.swing.JLabel TitleText1;
     private javax.swing.JLabel TitleText2;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton buttonPilihPelanggan;
     private javax.swing.JButton buttonPilihStaf;
     private javax.swing.JButton buttonTambah;
@@ -555,15 +664,11 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jlabel;
@@ -571,12 +676,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jlabel2;
     private javax.swing.JLabel jlabel3;
     private javax.swing.JLabel jlabel4;
-    private javax.swing.JLabel jlabel5;
     private javax.swing.JLabel jlabel6;
     private javax.swing.JLabel jlabel7;
     private javax.swing.JLabel jlabel8;
     private javax.swing.JLabel labelDeskripsi;
     private javax.swing.JLabel labelHargaBeli;
+    private javax.swing.JLabel labelHargaTotal;
     private javax.swing.JLabel labelKarat;
     private javax.swing.JLabel labelKategori;
     private javax.swing.JLabel labelNama;
@@ -585,8 +690,12 @@ public class TransaksiPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelType;
     private javax.swing.JLabel labelWeight;
     private javax.swing.JPanel panelInfoProduk;
+    private javax.swing.JRadioButton radioCash;
+    private javax.swing.JRadioButton radioCredit;
+    private javax.swing.JRadioButton radioDebit;
     private javax.swing.JTable tableProduk;
     private javax.swing.JTable tableTroli;
+    private javax.swing.JLabel textHargaBeli;
     private javax.swing.JLabel timeText;
     // End of variables declaration//GEN-END:variables
 
