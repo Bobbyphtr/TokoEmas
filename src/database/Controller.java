@@ -15,6 +15,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Vector;
@@ -59,7 +61,7 @@ public class Controller {
         }
         return null;
     }
-    
+
     public static DefaultTableModel getPelangganDialog() {
         String query = "SELECT * from customer WHERE id != 0";
         try {
@@ -71,7 +73,6 @@ public class Controller {
             Vector column = new Vector();
             column.add("ID");
             column.add("Nama"); //Nama Kolom untuk sementara ambil dari database
-            
 
             while (rs.next()) {
                 Vector row = new Vector();
@@ -388,7 +389,7 @@ public class Controller {
             Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public static DefaultTableModel getStafDialog() {
         String query = "SELECT * from pekerja";
         try {
@@ -400,7 +401,6 @@ public class Controller {
             Vector column = new Vector();
             column.add("ID");
             column.add("Nama"); //Nama Kolom untuk sementara ambil dari database
-            
 
             while (rs.next()) {
                 Vector row = new Vector();
@@ -574,10 +574,9 @@ public class Controller {
         }
         return null;
     }
-*/
-    
+     */
     public static DefaultTableModel getAllProduk() {
-        
+
         String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, tipe_barang,"
                 + " kategori.nama as kategori,  supplier.nama as supplier, harga_beli, tanggal_beli "
                 + "FROM barang "
@@ -585,7 +584,7 @@ public class Controller {
                 + "kategori on kategori.id = barang.id_kategori"
                 + " LEFT JOIN "
                 + "supplier on supplier.id = barang.id_supplier WHERE status = 'INSTOCK'";
-        
+
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
@@ -639,7 +638,7 @@ public class Controller {
     }
 
     public static DefaultTableModel getAllProdukPanel() {
-        
+
         String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, status, tipe_barang,"
                 + " kategori.nama as kategori,  supplier.nama as supplier, harga_beli, tanggal_beli "
                 + "FROM barang "
@@ -647,7 +646,7 @@ public class Controller {
                 + "kategori on kategori.id = barang.id_kategori"
                 + " LEFT JOIN "
                 + "supplier on supplier.id = barang.id_supplier";
-        
+
         try {
             rs = statement.executeQuery(query);
             rsmt = rs.getMetaData();
@@ -700,7 +699,7 @@ public class Controller {
         }
         return null;
     }
-    
+
     public static void updateStatusProduk(int id) {
         String query = "UPDATE `barang` SET `status` = 'SOLD' WHERE `barang`.`id` = ?";
         try {
@@ -752,19 +751,25 @@ public class Controller {
         String query = "UPDATE barang SET nama = ?, deskripsi = ?, berat = ?, karat = ?, status = ?, "
                 + "tipe_barang = ?, id_kategori = ?, id_supplier = ?, harga_beli = ?, tanggal_beli = ?"
                 + "WHERE id = ?";
-        
+
         try {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, produk.getNama());
             preparedStatement.setString(2, produk.getDeskripsi());
             preparedStatement.setDouble(3, produk.getBerat());
-            preparedStatement.setDouble(4, (double)produk.getKarat());
+            preparedStatement.setDouble(4, (double) produk.getKarat());
             preparedStatement.setString(5, produk.getStatus());
             preparedStatement.setString(6, produk.getTipeBarang());
-            if (produk.getIdKategori() == 0) preparedStatement.setNull(7, java.sql.Types.INTEGER);
-            else preparedStatement.setInt(7, produk.getIdKategori());
-            if (produk.getIdSupplier() == 0) preparedStatement.setNull(8, java.sql.Types.INTEGER);
-            else preparedStatement.setInt(8, produk.getIdSupplier());
+            if (produk.getIdKategori() == 0) {
+                preparedStatement.setNull(7, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setInt(7, produk.getIdKategori());
+            }
+            if (produk.getIdSupplier() == 0) {
+                preparedStatement.setNull(8, java.sql.Types.INTEGER);
+            } else {
+                preparedStatement.setInt(8, produk.getIdSupplier());
+            }
             preparedStatement.setInt(9, produk.getHargaBeli());
             preparedStatement.setDate(10, produk.getTanggalBeli());
             preparedStatement.setInt(11, produk.getId());
@@ -774,10 +779,10 @@ public class Controller {
             ex.printStackTrace();
         }
     }
-    
+
     public static void addKarat(int karatBaru) {
         String query = "INSERT INTO `karat` (`value`) VALUES (' ? ');";
-        
+
         try {
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setInt(1, karatBaru);
@@ -803,11 +808,84 @@ public class Controller {
         }
         return null;
     }
-    
-    public static void getRankingPegawai() {
-        String query = "SELECT nama FROM (SELECT pekerja.nama,COUNT(id_barang) AS jumlah_penjualan FROM transaksi,pekerja WHERE pekerja.id=transaksi.id_pekerja GROUP BY id_pekerja ORDER BY jumlah_penjualan DESC LIMIT 1) AS marco;";
+
+    public static DefaultTableModel getRankingPegawai() {
+        String query = "SELECT nama FROM (SELECT pekerja.nama,COUNT(id_barang) AS jumlah_penjualan FROM transaksi,pekerja WHERE pekerja.id=transaksi.id_pekerja GROUP BY id_pekerja ORDER BY jumlah_penjualan DESC) AS marco";
+
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+            Vector column = new Vector();
+
+            column.add("Nama");
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString("nama"));
+                data.add(row);
+
+            }
+
+            return new DefaultTableModel(data, column) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
-    
+
+    public static DefaultTableModel getTransaksi() {
+
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        String query = "SELECT transaksi.tanggal_jual, transaksi.harga_jual FROM `transaksi` WHERE 1";
+
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+            Vector column = new Vector();
+
+            column.add("Tindakan");
+            column.add("Judul");
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                String isi = rs.getString(1) + " - " + kursIndonesia.format(rs.getInt(2));
+                row.add("Tindakan");
+                row.add(isi);
+                data.add(row);
+
+            }
+
+            return new DefaultTableModel(data, column) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return true;
+                }
+
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public static void addTransaksi(Transaksi transaksi) {
         String query = "INSERT INTO transaksi VALUE ( ? , ? , ? , ? , ? , ? )";
         try {

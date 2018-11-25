@@ -6,9 +6,10 @@
 package panels;
 
 import database.Controller;
-import static database.Controller.getDateAndTime;
+import static database.Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
@@ -75,27 +76,15 @@ public class RekapPanel extends javax.swing.JPanel {
         label_TotalPenjualan.setText("Total Penjualan:");
 
         table_Pegawai.setBackground(new java.awt.Color(255, 255, 255));
-        table_Pegawai.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null}
-            },
-            new String [] {
-                "Ranking Pegawai"
-            }
-        ));
+        table_Pegawai.setModel(getRankingPegawai());
         table_Pegawai.setRowHeight(50);
         jScrollPane1.setViewportView(table_Pegawai);
 
         table_Transaksi.setBackground(new java.awt.Color(255, 255, 255));
-        table_Transaksi.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null}
-            },
-            new String [] {
-                "Tindakan", "Judul"
-            }
-        ));
+        table_Transaksi.setModel(getTransaksi());
         table_Transaksi.setRowHeight(50);
+        table_Transaksi.getColumn("Tindakan").setCellEditor(new CustomTableCell.RekapTransaksiCell(new JCheckBox()));
+        table_Transaksi.getColumn("Tindakan").setCellRenderer(new CustomTableCell.RekapTransaksiCell(new JCheckBox()));
         jScrollPane2.setViewportView(table_Transaksi);
 
         table_Pelanggan.setBackground(new java.awt.Color(255, 255, 255));

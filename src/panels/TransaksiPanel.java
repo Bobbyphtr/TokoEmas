@@ -500,8 +500,8 @@ public class TransaksiPanel extends javax.swing.JPanel {
         tableProduk.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
         tableProduk.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
 
-        tableProduk.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
-        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
+        tableProduk.getColumn("Aksi").setCellEditor(new CustomTableCell.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
+        tableProduk.getColumn("Aksi").setCellRenderer(new CustomTableCell.TransaksiProdukCell(new JCheckBox(), produkModel, troliModel));
 
         tableProduk.setColumnSelectionAllowed(false);
         jScrollPane1.setViewportView(tableProduk);
@@ -513,8 +513,8 @@ public class TransaksiPanel extends javax.swing.JPanel {
         tableTroli.setDefaultRenderer(Integer.class, new IntegerTableCellRenderer());
         tableTroli.setDefaultRenderer(Double.class, new DoubleTableCellRenderer());
 
-        tableTroli.getColumn("Aksi").setCellEditor(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
-        tableTroli.getColumn("Aksi").setCellRenderer(new CustomTransaksiTable.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
+        tableTroli.getColumn("Aksi").setCellEditor(new CustomTableCell.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
+        tableTroli.getColumn("Aksi").setCellRenderer(new CustomTableCell.TransaksiTroliCell(new JCheckBox(), produkModel, troliModel));
         jScrollPane2.setViewportView(tableTroli);
 
         add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(399, 350, 510, 150));

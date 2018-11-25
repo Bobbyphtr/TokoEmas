@@ -159,7 +159,6 @@ public class PilihPelanggan extends javax.swing.JPanel {
         JComponent comp = (JComponent) evt.getSource();
         Window win = SwingUtilities.getWindowAncestor(comp);
         win.dispose();
-
     }//GEN-LAST:event_buttonTambahActionPerformed
 
 
