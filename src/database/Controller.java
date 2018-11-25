@@ -747,10 +747,45 @@ public class Controller {
 
     }
 
-    public static void updateProduk(int id) {
+    public static void updateProduk(Produk produk) {
+
         String query = "UPDATE barang SET nama = ?, deskripsi = ?, berat = ?, karat = ?, status = ?, "
                 + "tipe_barang = ?, id_kategori = ?, id_supplier = ?, harga_beli = ?, tanggal_beli = ?"
                 + "WHERE id = ?";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, produk.getId());
+            preparedStatement.setString(2, produk.getNama());
+            preparedStatement.setString(3, produk.getDeskripsi());
+            preparedStatement.setDouble(4, produk.getBerat());
+            preparedStatement.setDouble(5, (double)produk.getKarat());
+            preparedStatement.setString(6, produk.getStatus());
+            preparedStatement.setString(7, produk.getDeskripsi());
+            if (produk.getIdKategori() == 0) preparedStatement.setObject(8, null);
+            else preparedStatement.setInt(8, produk.getIdKategori());
+            if (produk.getIdSupplier() == 0) preparedStatement.setObject(9, null);
+            else preparedStatement.setInt(9, produk.getIdSupplier());
+            preparedStatement.setInt(10, produk.getHargaBeli());
+            preparedStatement.setDate(11, produk.getTanggalBeli());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Update produk gagal");
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void addKarat(int karatBaru) {
+        String query = "INSERT INTO `karat` (`value`) VALUES (' ? ');";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, karatBaru);
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Update karat gagal");
+            ex.printStackTrace();
+        }
     }
 
     public static DefaultComboBoxModel getKarat() {
