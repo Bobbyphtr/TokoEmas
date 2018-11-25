@@ -5,6 +5,7 @@ import POJO.Pelanggan;
 import POJO.Produk;
 import POJO.Staf;
 import POJO.SupplierData;
+import POJO.Transaksi;
 import POJO.User;
 import java.awt.Component;
 import java.sql.Connection;
@@ -772,8 +773,21 @@ public class Controller {
         String query = "SELECT nama FROM (SELECT pekerja.nama,COUNT(id_barang) AS jumlah_penjualan FROM transaksi,pekerja WHERE pekerja.id=transaksi.id_pekerja GROUP BY id_pekerja ORDER BY jumlah_penjualan DESC LIMIT 1) AS marco;";
     }
     
-    public static void addTransaksi() {
-        String query = "INSERT INTO transaksi VALUE ([id_barang],SELECT id FROM customer WHERE [nama_jswing] = nama,SELECT id FROM pekerja WHERE [nama_jswing] = nama,[metode_pembayaran],[harga_jual],[tanggal_jual])";
+    public static void addTransaksi(Transaksi transaksi) {
+        String query = "INSERT INTO transaksi VALUE ( ? , ? , ? , ? , ? , ? )";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, transaksi.getIdBarang());
+            preparedStatement.setInt(2, transaksi.getIdCustomer());
+            preparedStatement.setInt(3, transaksi.getIdPekerja());
+            preparedStatement.setString(4, transaksi.getMetodePembayaran());
+            preparedStatement.setInt(5, transaksi.getHargaJual());
+            preparedStatement.setDate(6, transaksi.getTanggalJual());
+            preparedStatement.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Update produk gagal");
+            ex.printStackTrace();
+        }
     }
 
 }

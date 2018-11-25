@@ -6,6 +6,7 @@ package panels;
  */
 import CustomJTables.*;
 import POJO.Produk;
+import POJO.Transaksi;
 import customComponents.*;
 import database.Controller;
 import java.awt.BorderLayout;
@@ -249,12 +250,26 @@ public class TransaksiPanel extends javax.swing.JPanel {
     }
 
     private void totalBiaya() {
+        
         int total = 0;
         for (int i = 0; i < tableTroli.getModel().getRowCount(); i++) {
             total += (Integer) tableTroli.getModel().getValueAt(i, 10);
         }
 
         labelHargaTotal.setText(intToCurrency(total));
+    }
+    
+    private void tambahTransaksi() {
+        for (int i = 0; i < tableTroli.getModel().getRowCount(); i++) {
+            int idBarang = (Integer) tableTroli.getModel().getValueAt(i, 0);
+            int idCustomer = idPelanggan;
+            int idPekerja  = idStaff;
+            String metodePembayaran = getSelectedButtonText();
+            int hargaJual = (Integer) tableTroli.getModel().getValueAt(i, 10);
+            Date tanggalJual = getDate();
+            Transaksi transaksi = new Transaksi(idBarang, idCustomer, idPekerja, metodePembayaran, hargaJual, tanggalJual);
+            addTransaksi(transaksi);
+        }
     }
 
     public String getSelectedButtonText() {
@@ -689,6 +704,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
         if (check) {
             updateStatusBarang();
+            tambahTransaksi();
             System.out.println(idStaff);
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
