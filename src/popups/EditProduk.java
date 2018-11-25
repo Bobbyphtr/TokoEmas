@@ -378,6 +378,8 @@ public class EditProduk extends javax.swing.JDialog {
         
         
         updateProduk(produk);
+        
+        this.dispose();
     }//GEN-LAST:event_simpanButtonActionPerformed
 
     public static void main(String args[]) {

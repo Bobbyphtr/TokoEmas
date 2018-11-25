@@ -203,7 +203,7 @@ public class TambahProduk extends javax.swing.JDialog {
         textAreaDeskripsiProduk.setColumns(20);
         textAreaDeskripsiProduk.setForeground(java.awt.Color.gray);
         textAreaDeskripsiProduk.setRows(5);
-        textAreaDeskripsiProduk.setText("Masukan alamat.");
+        textAreaDeskripsiProduk.setText("Masukan deskripsi produk.");
         textAreaDeskripsiProduk.setBorder(null);
         textAreaDeskripsiProduk.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -419,7 +419,7 @@ public class TambahProduk extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldNamaProdukFocusLost
 
     private void textAreaDeskripsiProdukFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDeskripsiProdukFocusGained
-        if (textAreaDeskripsiProduk.getText().equals("Masukan alamat.")) {
+        if (textAreaDeskripsiProduk.getText().equals("Masukan deskripsi produk.")) {
             textAreaDeskripsiProduk.setText("");
             textAreaDeskripsiProduk.setForeground(Color.BLACK);
         }
@@ -427,7 +427,7 @@ public class TambahProduk extends javax.swing.JDialog {
 
     private void textAreaDeskripsiProdukFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textAreaDeskripsiProdukFocusLost
         if (textAreaDeskripsiProduk.getText().equals("")) {
-            textAreaDeskripsiProduk.setText("Masukan alamat.");
+            textAreaDeskripsiProduk.setText("Masukan deskripsi produk.");
             textAreaDeskripsiProduk.setForeground(Color.GRAY);
         }
     }//GEN-LAST:event_textAreaDeskripsiProdukFocusLost
