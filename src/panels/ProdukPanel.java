@@ -6,6 +6,7 @@ package panels;
  */
 import customComponents.*;
 import CustomJTables.*;
+import POJO.Produk;
 import database.Controller;
 import static database.Controller.getAllProdukPanel;
 import static database.Controller.getDateAndTime;
@@ -14,6 +15,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JDialog;
@@ -46,6 +48,7 @@ public class ProdukPanel extends javax.swing.JPanel {
         initModel();
         syncDate();
         setUpRowFilter();
+        buttonUbah.setEnabled(false);
     }
 
     private void initModel() {
@@ -127,6 +130,7 @@ public class ProdukPanel extends javax.swing.JPanel {
                 if (e.getValueIsAdjusting()) {
                     if (tableProduk.getSelectedRow() > -1) {
                         infoProdukController(tableProduk.convertRowIndexToModel(tableProduk.getSelectedRow()));
+                        buttonUbah.setEnabled(true);
                     }
                 }
             }
@@ -553,7 +557,22 @@ public class ProdukPanel extends javax.swing.JPanel {
 
     private void buttonUbahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonUbahActionPerformed
         if (tableProduk.getSelectedColumn() > -1) {
-            JDialog editProduk = new EditProduk();
+            int idx = tableProduk.convertRowIndexToModel(tableProduk.getSelectedRow());
+            double karat = (double) tableProduk.getModel().getValueAt(idx, 4);
+            Produk produk = new Produk();
+            produk.setId((int) tableProduk.getModel().getValueAt(idx, 0));
+            produk.setNama((String) tableProduk.getModel().getValueAt(idx, 1));
+            produk.setDeskripsi((String) tableProduk.getModel().getValueAt(idx, 2));
+            produk.setBerat((double) tableProduk.getModel().getValueAt(idx, 3));
+            produk.setKarat((int) karat);
+            produk.setStatus((String) tableProduk.getModel().getValueAt(idx, 5));
+            produk.setTipeBarang((String) tableProduk.getModel().getValueAt(idx, 6));
+            produk.setKategori((String) tableProduk.getModel().getValueAt(idx, 7));
+            produk.setSupplier((String) tableProduk.getModel().getValueAt(idx, 8));
+            produk.setHargaBeli((int) tableProduk.getModel().getValueAt(idx, 9));         
+            produk.setTanggalBeli((Date)tableProduk.getModel().getValueAt(idx, 10));
+
+            JDialog editProduk = new EditProduk(produk);
             editProduk.setLocationRelativeTo(this);
             editProduk.setVisible(true);
 
