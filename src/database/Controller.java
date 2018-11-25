@@ -755,19 +755,19 @@ public class Controller {
         
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, produk.getId());
-            preparedStatement.setString(2, produk.getNama());
-            preparedStatement.setString(3, produk.getDeskripsi());
-            preparedStatement.setDouble(4, produk.getBerat());
-            preparedStatement.setDouble(5, (double)produk.getKarat());
-            preparedStatement.setString(6, produk.getStatus());
-            preparedStatement.setString(7, produk.getDeskripsi());
-            if (produk.getIdKategori() == 0) preparedStatement.setObject(8, null);
-            else preparedStatement.setInt(8, produk.getIdKategori());
-            if (produk.getIdSupplier() == 0) preparedStatement.setObject(9, null);
-            else preparedStatement.setInt(9, produk.getIdSupplier());
-            preparedStatement.setInt(10, produk.getHargaBeli());
-            preparedStatement.setDate(11, produk.getTanggalBeli());
+            preparedStatement.setString(1, produk.getNama());
+            preparedStatement.setString(2, produk.getDeskripsi());
+            preparedStatement.setDouble(3, produk.getBerat());
+            preparedStatement.setDouble(4, (double)produk.getKarat());
+            preparedStatement.setString(5, produk.getStatus());
+            preparedStatement.setString(6, produk.getTipeBarang());
+            if (produk.getIdKategori() == 0) preparedStatement.setNull(7, java.sql.Types.INTEGER);
+            else preparedStatement.setInt(7, produk.getIdKategori());
+            if (produk.getIdSupplier() == 0) preparedStatement.setNull(8, java.sql.Types.INTEGER);
+            else preparedStatement.setInt(8, produk.getIdSupplier());
+            preparedStatement.setInt(9, produk.getHargaBeli());
+            preparedStatement.setDate(10, produk.getTanggalBeli());
+            preparedStatement.setInt(11, produk.getId());
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Update produk gagal");
