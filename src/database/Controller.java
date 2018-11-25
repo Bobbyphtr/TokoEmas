@@ -695,6 +695,19 @@ public class Controller {
         }
         return null;
     }
+    
+    public static void updateStatusProduk(int id) {
+        String query = "UPDATE `barang` SET `status` = 'SOLD' WHERE `barang`.`id` = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+            System.out.println("UPDATE SOLD");
+        } catch (SQLException ex) {
+            System.out.println("Update status produk gagal");
+            ex.printStackTrace();
+        }
+    }
 
     public static void getProdukbyId(int id) {
         String query = "SELECT * FROM barang WHERE id = ?";

@@ -46,6 +46,7 @@ public class TransaksiProdukCell extends DefaultCellEditor implements TableCellR
                 for (Object object : rowData) {
                     System.out.print(object + " | ");
                 }
+                System.out.println("");
                 troliModel.addRow(rowData); 
                 produk.removeRow(row);
             }

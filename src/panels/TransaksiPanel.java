@@ -31,6 +31,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.Vector;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
@@ -47,42 +48,37 @@ public class TransaksiPanel extends javax.swing.JPanel {
     /**
      * Creates new form Staff
      */
-    
     JDatePickerImpl datePicker;
-    
+
     DefaultTableModel troliModel;
     DefaultTableModel produkModel;
-    
+
     ButtonGroup group;
-    
-    Vector<Produk> produk;
-    
+
     public TransaksiPanel() {
-        produk = new Vector();
         initTableModel();
         initComponents();
         initDatePicker();
         initRadioButton();
         syncDate();
-        
+
         removeTableProdukTroliColumn();
         removeTableTroliColumn();
-        
-                
+
         tableProduk.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 infoProdukController(tableProduk.convertRowIndexToModel(tableProduk.getSelectedRow()));
             }
         });
-        
+
         tableTroli.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 infoTroliController(tableTroli.convertRowIndexToModel(tableTroli.getSelectedRow()));
             }
         });
-        
+
         troliModel.addTableModelListener(new TableModelListener() {
             @Override
             public void tableChanged(TableModelEvent e) {
@@ -90,41 +86,45 @@ public class TransaksiPanel extends javax.swing.JPanel {
             }
         });
     }
-    
+
+    private void reset() {
+
+    }
+
     private void initRadioButton() {
         group = new ButtonGroup();
         group.add(radioCash);
         group.add(radioCredit);
         group.add(radioDebit);
     }
-    
+
     private void removeTableTroliColumn() {
-        
+
         TableColumn id = tableTroli.getColumnModel().getColumn(0);
         TableColumn deskripsi = tableTroli.getColumnModel().getColumn(2);
         TableColumn supplier = tableTroli.getColumnModel().getColumn(7);
         TableColumn hargaBeli = tableTroli.getColumnModel().getColumn(8);
         TableColumn tglBeli = tableTroli.getColumnModel().getColumn(9);
-        
+
         tableTroli.getColumnModel().removeColumn(id);
         tableTroli.getColumnModel().removeColumn(deskripsi);
         tableTroli.getColumnModel().removeColumn(supplier);
         tableTroli.getColumnModel().removeColumn(tglBeli);
         tableTroli.getColumnModel().removeColumn(hargaBeli);
     }
-    
+
     private void removeTableProdukTroliColumn() {
-        
+
         TableColumn id = tableProduk.getColumnModel().getColumn(0);
         TableColumn deskripsi = tableProduk.getColumnModel().getColumn(2);
         TableColumn supplier = tableProduk.getColumnModel().getColumn(7);
         TableColumn tglBeli = tableProduk.getColumnModel().getColumn(9);
-        
+
         tableProduk.getColumnModel().removeColumn(id);
         tableProduk.getColumnModel().removeColumn(deskripsi);
         tableProduk.getColumnModel().removeColumn(supplier);
         tableProduk.getColumnModel().removeColumn(tglBeli);
-        
+
     }
 
     private void initDatePicker() {
@@ -139,17 +139,17 @@ public class TransaksiPanel extends javax.swing.JPanel {
         dateContainer.add(datePicker);
         this.setFocusable(true);
     }
-    
+
     private void initTableModel() {
         produkModel = getAllProduk();
         troliModel = new DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Tipe", "Kategori", "Supplier", "Harga Beli", "Tanggal Beli","Harga Jual", "Aksi"
+                    "ID", "Nama", "Deskripsi", "Berat", "Karat", "Tipe", "Kategori", "Supplier", "Harga Beli", "Tanggal Beli", "Harga Jual", "Aksi"
                 }
         );
     }
-    
+
     private void syncDate() {
         String[] dateAndTime = getDateAndTime();
         timeText.setText(dateAndTime[0]);
@@ -165,7 +165,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         });
         date.start();
     }
-    
+
     private void infoProdukController(int rowIdx) {
         if (rowIdx > -1) {
             labelNama.setText((String) tableProduk.getModel().getValueAt(rowIdx, 1));
@@ -190,7 +190,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         }
 
     }
-    
+
     private void infoTroliController(int rowIdx) {
         if (rowIdx > -1) {
             System.out.println("Row Index = " + rowIdx);
@@ -216,7 +216,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         }
 
     }
-    
+
     private String intToCurrency(int number) {
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
@@ -229,17 +229,16 @@ public class TransaksiPanel extends javax.swing.JPanel {
         return kursIndonesia.format(number);
 
     }
-    
+
     private void totalBiaya() {
         int total = 0;
         for (int i = 0; i < tableTroli.getModel().getRowCount(); i++) {
             total += (Integer) tableTroli.getModel().getValueAt(i, 10);
         }
-        
+
         labelHargaTotal.setText(intToCurrency(total));
     }
-    
-    
+
     public String getSelectedButtonText() {
         for (Enumeration<AbstractButton> buttons = group.getElements(); buttons.hasMoreElements();) {
             AbstractButton button = buttons.nextElement();
@@ -251,7 +250,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
         return null;
     }
-    
+
     public Date getDate() {
         java.util.Date foundDateUtil = (java.util.Date) datePicker.getModel().getValue();
         if (foundDateUtil != null) {
@@ -265,6 +264,15 @@ public class TransaksiPanel extends javax.swing.JPanel {
             return tanggalBeli;
         }
         return null;
+    }
+
+    public void updateStatusBarang() {
+        for (int i = 0; i < tableTroli.getModel().getRowCount(); i++) {
+            int id = (Integer) tableTroli.getModel().getValueAt(i, 0);
+            System.out.println("ID = " + id);
+            updateStatusProduk(id);
+            reset();
+        }
     }
 
     /**
@@ -646,29 +654,23 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         boolean check = true;
-        
+
         if (getDate() == null) {
             check = false;
             JOptionPane.showMessageDialog(this, "Tanggal Transaksi belum dipilih.");
-        }
-        
-        else if (labelNamaStaff.getText().equalsIgnoreCase("<Nama>")) {
+        } else if (labelNamaStaff.getText().equalsIgnoreCase("<Nama>")) {
             check = false;
             JOptionPane.showMessageDialog(this, "Nama Staff belum dipilih.");
-        }
-        
-        else if (tableTroli.getModel().getRowCount() == 0) {
+        } else if (tableTroli.getModel().getRowCount() == 0) {
             check = false;
             JOptionPane.showMessageDialog(this, "Tidak ada produk pada Troli.");
-        }
-        
-        else if (getSelectedButtonText() == null) {
+        } else if (getSelectedButtonText() == null) {
             check = false;
             JOptionPane.showMessageDialog(this, "Jenis Transaksi belum dipilih.");
         }
-        
+
         if (check) {
-            
+            updateStatusBarang();
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
 
