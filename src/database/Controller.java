@@ -58,6 +58,31 @@ public class Controller {
         }
         return null;
     }
+    
+    public static DefaultTableModel getPelangganDialog() {
+        String query = "SELECT * from customer WHERE id != 0";
+        try {
+            rs = statement.executeQuery(query);
+            rsmt = rs.getMetaData();
+
+            Vector data = new Vector();
+
+            Vector column = new Vector();
+            column.add("nama"); //Nama Kolom untuk sementara ambil dari database
+            
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString("nama"));
+                data.add(row);
+            }
+
+            return new DefaultTableModel(data, column);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     public static DefaultTableModel getPelanggan() {
         String query = "SELECT * from customer WHERE id != 0";

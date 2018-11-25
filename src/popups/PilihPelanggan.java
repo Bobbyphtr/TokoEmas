@@ -7,7 +7,13 @@ package popups;
 
 import java.awt.Color;
 import customComponents.*;
-
+import static database.Controller.getPelangganDialog;
+import java.awt.Window;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 /**
  *
  * @author ysuta
@@ -17,8 +23,24 @@ public class PilihPelanggan extends javax.swing.JPanel {
     /**
      * Creates new form PilihStaff
      */
+    
+    JLabel labelNama;
+    
     public PilihPelanggan() {
         initComponents();
+    }
+    
+    public PilihPelanggan(JLabel labelNama) {
+        this.labelNama = labelNama;
+        initComponents();
+        
+        tablePelanggan.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                String nama = (String) tablePelanggan.getModel().getValueAt(tablePelanggan.getSelectedRow(), 0);
+                fieldNama.setText(nama);
+            }
+        });
     }
 
     /**
@@ -36,6 +58,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablePelanggan = new javax.swing.JTable();
+        buttonTambah = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 231, 192));
 
@@ -58,18 +81,18 @@ public class PilihPelanggan extends javax.swing.JPanel {
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
         jLabel1.setText("Nama");
 
-        tablePelanggan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "ID", "Nama", "Email", "No Telp"
-            }
-        ));
+        tablePelanggan.setModel(getPelangganDialog());
         jScrollPane1.setViewportView(tablePelanggan);
+
+        buttonTambah.setBackground(new java.awt.Color(89, 38, 1));
+        buttonTambah.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        buttonTambah.setForeground(java.awt.Color.white);
+        buttonTambah.setText("Tambah");
+        buttonTambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonTambahActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -77,18 +100,17 @@ public class PilihPelanggan extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addComponent(jLabel1)
                         .addGap(34, 34, 34)
-                        .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TitleText))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                        .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TitleText)
+                        .addGap(118, 118, 118)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,8 +122,10 @@ public class PilihPelanggan extends javax.swing.JPanel {
                     .addComponent(fieldNama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(buttonTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -119,9 +143,18 @@ public class PilihPelanggan extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_fieldNamaFocusLost
 
+    private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
+        labelNama.setText(fieldNama.getText());
+        JComponent comp = (JComponent) evt.getSource();
+        Window win = SwingUtilities.getWindowAncestor(comp);
+        win.dispose();
+
+    }//GEN-LAST:event_buttonTambahActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleText;
+    private javax.swing.JButton buttonTambah;
     private javax.swing.JTextField fieldNama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;

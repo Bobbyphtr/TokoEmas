@@ -23,9 +23,18 @@ import popups.*;
 import static database.Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Enumeration;
 import java.util.Vector;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -44,7 +53,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
     DefaultTableModel troliModel;
     DefaultTableModel produkModel;
     
-   
+    ButtonGroup group;
     
     Vector<Produk> produk;
     
@@ -53,6 +62,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
         initTableModel();
         initComponents();
         initDatePicker();
+        initRadioButton();
         syncDate();
         
         removeTableProdukTroliColumn();
@@ -79,6 +89,13 @@ public class TransaksiPanel extends javax.swing.JPanel {
                 totalBiaya();
             }
         });
+    }
+    
+    private void initRadioButton() {
+        group = new ButtonGroup();
+        group.add(radioCash);
+        group.add(radioCredit);
+        group.add(radioDebit);
     }
     
     private void removeTableTroliColumn() {
@@ -220,6 +237,34 @@ public class TransaksiPanel extends javax.swing.JPanel {
         }
         
         labelHargaTotal.setText(intToCurrency(total));
+    }
+    
+    
+    public String getSelectedButtonText() {
+        for (Enumeration<AbstractButton> buttons = group.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+
+        return null;
+    }
+    
+    public Date getDate() {
+        java.util.Date foundDateUtil = (java.util.Date) datePicker.getModel().getValue();
+        if (foundDateUtil != null) {
+            Instant instant = foundDateUtil.toInstant();
+            ZoneId zoneId = ZoneId.of("Asia/Ho_Chi_Minh");
+            ZonedDateTime zdt = ZonedDateTime.ofInstant(instant, zoneId);
+            LocalDate foundDate = zdt.toLocalDate();
+
+            Date tanggalBeli = Date.valueOf(foundDate);
+
+            return tanggalBeli;
+        }
+        return null;
     }
 
     /**
@@ -600,7 +645,31 @@ public class TransaksiPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldCariProdukFocusGained
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        // TODO add your handling code here:
+        boolean check = true;
+        
+        if (getDate() == null) {
+            check = false;
+            JOptionPane.showMessageDialog(this, "Tanggal Transaksi belum dipilih.");
+        }
+        
+        else if (labelNamaStaff.getText().equalsIgnoreCase("<Nama>")) {
+            check = false;
+            JOptionPane.showMessageDialog(this, "Nama Staff belum dipilih.");
+        }
+        
+        else if (tableTroli.getModel().getRowCount() == 0) {
+            check = false;
+            JOptionPane.showMessageDialog(this, "Tidak ada produk pada Troli.");
+        }
+        
+        else if (getSelectedButtonText() == null) {
+            check = false;
+            JOptionPane.showMessageDialog(this, "Jenis Transaksi belum dipilih.");
+        }
+        
+        if (check) {
+            
+        }
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldCariProdukFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldCariProdukFocusLost
@@ -620,7 +689,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
     private void buttonPilihPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihPelangganActionPerformed
         JDialog pilihPelangganDialog = new JDialog();
-        pilihPelangganDialog.setContentPane(new PilihPelanggan());
+        pilihPelangganDialog.setContentPane(new PilihPelanggan(LabelNamaPelanggan));
         pilihPelangganDialog.pack();
         pilihPelangganDialog.setVisible(true);
     }//GEN-LAST:event_buttonPilihPelangganActionPerformed
