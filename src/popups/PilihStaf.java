@@ -12,9 +12,12 @@ import static database.Controller.getStafDialog;
 import java.awt.Window;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
+import panels.TransaksiPanel;
 
 /**
  *
@@ -27,6 +30,8 @@ public class PilihStaf extends javax.swing.JPanel {
      */
     
     JLabel labelNama;
+    int idStaf;
+    TransaksiPanel transaksi;
     
     public PilihStaf() {
         initComponents();
@@ -34,23 +39,31 @@ public class PilihStaf extends javax.swing.JPanel {
         tableStaff.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
+                idStaf = (int) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
+                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 1);
                 fieldNama.setText(nama);
             }
         });
+       
     }
     
-    public PilihStaf(JLabel labelNama) {
+    public PilihStaf(JLabel labelNama, TransaksiPanel transaksi) {
         this.labelNama = labelNama;
+        this.transaksi = transaksi;
         initComponents();
         
         tableStaff.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
+                idStaf = (int) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
+                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 1);
                 fieldNama.setText(nama);
+                
             }
         });
+        
+        TableColumn id = tableStaff.getColumnModel().getColumn(0);
+        tableStaff.getColumnModel().removeColumn(id);
     }
    
     /**
@@ -142,10 +155,10 @@ public class PilihStaf extends javax.swing.JPanel {
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         labelNama.setText(fieldNama.getText());
+        transaksi.setIdStaff(idStaf);
         JComponent comp = (JComponent) evt.getSource();
         Window win = SwingUtilities.getWindowAncestor(comp);
         win.dispose();
-        
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained

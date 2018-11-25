@@ -68,11 +68,13 @@ public class Controller {
             Vector data = new Vector();
 
             Vector column = new Vector();
-            column.add("nama"); //Nama Kolom untuk sementara ambil dari database
+            column.add("ID");
+            column.add("Nama"); //Nama Kolom untuk sementara ambil dari database
             
 
             while (rs.next()) {
                 Vector row = new Vector();
+                row.add(rs.getInt("id"));
                 row.add(rs.getString("nama"));
                 data.add(row);
             }
@@ -395,11 +397,13 @@ public class Controller {
             Vector data = new Vector();
 
             Vector column = new Vector();
+            column.add("ID");
             column.add("Nama"); //Nama Kolom untuk sementara ambil dari database
             
 
             while (rs.next()) {
                 Vector row = new Vector();
+                row.add(rs.getInt("id"));
                 row.add(rs.getString("nama"));
                 data.add(row);
             }
@@ -762,6 +766,14 @@ public class Controller {
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public static void getRankingPegawai() {
+        String query = "SELECT nama FROM (SELECT pekerja.nama,COUNT(id_barang) AS jumlah_penjualan FROM transaksi,pekerja WHERE pekerja.id=transaksi.id_pekerja GROUP BY id_pekerja ORDER BY jumlah_penjualan DESC LIMIT 1) AS marco;";
+    }
+    
+    public static void addTransaksi() {
+        String query = "INSERT INTO transaksi VALUE ([id_barang],SELECT id FROM customer WHERE [nama_jswing] = nama,SELECT id FROM pekerja WHERE [nama_jswing] = nama,[metode_pembayaran],[harga_jual],[tanggal_jual])";
     }
 
 }

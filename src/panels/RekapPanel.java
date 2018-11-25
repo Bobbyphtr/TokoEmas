@@ -5,6 +5,13 @@
  */
 package panels;
 
+import database.Controller;
+import static database.Controller.getDateAndTime;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import javax.swing.Timer;
+
 /**
  *
  * @author ysuta
@@ -16,6 +23,20 @@ public class RekapPanel extends javax.swing.JPanel {
      */
     public RekapPanel() {
         initComponents();
+        syncDate();
+    }
+    
+    private void syncDate() {
+        String[] dateAndTime = getDateAndTime();
+        dateText.setText(dateAndTime[1]);
+        Timer date = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String[] dateAndTime = getDateAndTime();
+                dateText.setText(dateAndTime[1]);
+            }
+        });
+        date.start();
     }
 
     /**
@@ -27,6 +48,7 @@ public class RekapPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         label_TotalPenjualan = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_Pegawai = new javax.swing.JTable();
@@ -40,7 +62,10 @@ public class RekapPanel extends javax.swing.JPanel {
         label_PembelianVar = new javax.swing.JLabel();
         label_KeuntunganVar = new javax.swing.JLabel();
         TitleText1 = new javax.swing.JLabel();
-        textTanggal = new javax.swing.JLabel();
+        dateText = new javax.swing.JLabel();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setBackground(new java.awt.Color(255, 231, 192));
 
@@ -60,9 +85,6 @@ public class RekapPanel extends javax.swing.JPanel {
         ));
         table_Pegawai.setRowHeight(50);
         jScrollPane1.setViewportView(table_Pegawai);
-        if (table_Pegawai.getColumnModel().getColumnCount() > 0) {
-            table_Pegawai.getColumnModel().getColumn(0).setHeaderValue("Ranking Pelanggan");
-        }
 
         table_Transaksi.setBackground(new java.awt.Color(255, 255, 255));
         table_Transaksi.setModel(new javax.swing.table.DefaultTableModel(
@@ -122,52 +144,48 @@ public class RekapPanel extends javax.swing.JPanel {
         TitleText1.setForeground(new java.awt.Color(102, 0, 0));
         TitleText1.setText("Edit Staf");
 
-        textTanggal.setBackground(new java.awt.Color(102, 0, 0));
-        textTanggal.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
-        textTanggal.setForeground(new java.awt.Color(102, 0, 0));
-        textTanggal.setText("<Tanggal>");
+        dateText.setBackground(new java.awt.Color(102, 0, 0));
+        dateText.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
+        dateText.setForeground(new java.awt.Color(102, 0, 0));
+        dateText.setText("<Tanggal>");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dateText)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label_TotalPenjualan)
+                            .addComponent(label_PenjualanVar))
+                        .addGap(132, 132, 132)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label_TotalPembelian)
+                            .addComponent(label_PembelianVar))
+                        .addGap(112, 112, 112)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label_TotalPenjualan)
-                                    .addComponent(label_PenjualanVar))
-                                .addGap(107, 107, 107)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label_TotalPembelian)
-                                    .addComponent(label_PembelianVar))
-                                .addGap(101, 101, 101)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(90, 90, 90))
-                            .addComponent(textTanggal)
-                            .addComponent(TitleText1))))
-                .addContainerGap(60, Short.MAX_VALUE))
+                    .addComponent(TitleText1))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(27, 27, 27)
                 .addComponent(TitleText1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textTanggal)
-                .addGap(36, 36, 36)
+                .addComponent(dateText)
+                .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_TotalPenjualan)
                     .addComponent(label_TotalPembelian)
@@ -177,19 +195,33 @@ public class RekapPanel extends javax.swing.JPanel {
                     .addComponent(label_PenjualanVar)
                     .addComponent(label_PembelianVar)
                     .addComponent(label_KeuntunganVar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                .addGap(63, 63, 63))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(64, 64, 64))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public static void main(String args[]) {
+        Controller controller = new Controller();
+        JFrame a = new JFrame();
+        a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        RekapPanel panel = new RekapPanel();
+        //a.setPreferredSize(dialog.getPreferredSize());
+        a.setSize(panel.getPreferredSize());
+        a.setContentPane(panel);
+        a.setVisible(true);
+        System.out.println("Width : " + a.getWidth());
+        System.out.println("Height : " + a.getHeight());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TitleText1;
+    private javax.swing.JLabel dateText;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -202,6 +234,5 @@ public class RekapPanel extends javax.swing.JPanel {
     private javax.swing.JTable table_Pegawai;
     private javax.swing.JTable table_Pelanggan;
     private javax.swing.JTable table_Transaksi;
-    private javax.swing.JLabel textTanggal;
     // End of variables declaration//GEN-END:variables
 }

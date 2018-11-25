@@ -23,6 +23,8 @@ import popups.*;
 import static database.Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Date;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -54,8 +56,16 @@ public class TransaksiPanel extends javax.swing.JPanel {
     DefaultTableModel produkModel;
 
     ButtonGroup group;
+    
+    int idPelanggan;
+    int idStaff;
+    
+    TransaksiPanel transaksiPanel;
 
     public TransaksiPanel() {
+        transaksiPanel = this;
+        
+        
         initTableModel();
         initComponents();
         initDatePicker();
@@ -86,9 +96,17 @@ public class TransaksiPanel extends javax.swing.JPanel {
             }
         });
     }
+    
+    public void setIdPelanggan(int id) {
+        idPelanggan = id;
+    }
+    
+    public void setIdStaff(int id) {
+        idStaff = id;
+    }
 
     private void reset() {
-
+        
     }
 
     private void initRadioButton() {
@@ -671,6 +689,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
         if (check) {
             updateStatusBarang();
+            System.out.println(idStaff);
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
 
@@ -683,15 +702,21 @@ public class TransaksiPanel extends javax.swing.JPanel {
 
     private void buttonPilihStafActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihStafActionPerformed
         JDialog pilihStafDialog = new JDialog();
-        pilihStafDialog.setContentPane(new PilihStaf(labelNamaStaff));
+        pilihStafDialog.setContentPane(new PilihStaf(labelNamaStaff, transaksiPanel));
         pilihStafDialog.pack();
         pilihStafDialog.setLocationRelativeTo(this);
         pilihStafDialog.setVisible(true);
+        pilihStafDialog.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Clossed!");
+            }
+        });
     }//GEN-LAST:event_buttonPilihStafActionPerformed
 
     private void buttonPilihPelangganActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonPilihPelangganActionPerformed
         JDialog pilihPelangganDialog = new JDialog();
-        pilihPelangganDialog.setContentPane(new PilihPelanggan(LabelNamaPelanggan));
+        pilihPelangganDialog.setContentPane(new PilihPelanggan(LabelNamaPelanggan, transaksiPanel));
         pilihPelangganDialog.pack();
         pilihPelangganDialog.setVisible(true);
     }//GEN-LAST:event_buttonPilihPelangganActionPerformed
@@ -709,7 +734,6 @@ public class TransaksiPanel extends javax.swing.JPanel {
         JFrame a = new JFrame();
         a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         TransaksiPanel panel = new TransaksiPanel();
-        //a.setPreferredSize(dialog.getPreferredSize());
         a.setSize(panel.getPreferredSize());
         a.setContentPane(panel);
         a.setVisible(true);

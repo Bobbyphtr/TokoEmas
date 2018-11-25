@@ -11,9 +11,12 @@ import static database.Controller.getPelangganDialog;
 import java.awt.Window;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.TableColumn;
+import panels.TransaksiPanel;
 /**
  *
  * @author ysuta
@@ -25,22 +28,29 @@ public class PilihPelanggan extends javax.swing.JPanel {
      */
     
     JLabel labelNama;
+    int idPelanggan;
+    TransaksiPanel transaksi;
     
     public PilihPelanggan() {
         initComponents();
     }
     
-    public PilihPelanggan(JLabel labelNama) {
+    public PilihPelanggan(JLabel labelNama, TransaksiPanel transaksi) {
         this.labelNama = labelNama;
+        this.transaksi = transaksi;
         initComponents();
         
         tablePelanggan.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                String nama = (String) tablePelanggan.getModel().getValueAt(tablePelanggan.getSelectedRow(), 0);
+                idPelanggan = (int) tablePelanggan.getModel().getValueAt(tablePelanggan.getSelectedRow(), 0);
+                String nama = (String) tablePelanggan.getModel().getValueAt(tablePelanggan.getSelectedRow(), 1);
                 fieldNama.setText(nama);
             }
         });
+        
+        TableColumn id = tablePelanggan.getColumnModel().getColumn(0);
+        tablePelanggan.getColumnModel().removeColumn(id);
     }
 
     /**
@@ -145,6 +155,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
         labelNama.setText(fieldNama.getText());
+        transaksi.setIdPelanggan(idPelanggan);
         JComponent comp = (JComponent) evt.getSource();
         Window win = SwingUtilities.getWindowAncestor(comp);
         win.dispose();

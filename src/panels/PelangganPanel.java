@@ -207,7 +207,7 @@ public class PelangganPanel extends javax.swing.JPanel {
                                 .addGap(14, 14, 14)
                                 .addComponent(fieldCari, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 2, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(buttonTambah)
                         .addGap(18, 18, 18)
