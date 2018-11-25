@@ -17,10 +17,12 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import static database.Controller.*;
+import java.awt.event.ItemEvent;
 import java.sql.Date;
 import java.util.Hashtable;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,6 +48,25 @@ public class TambahProduk extends javax.swing.JDialog {
         initHashtable();
         initComponents();
         initDatePicker();
+        
+                //Combo box listener
+        comboKarat.addItemListener((ItemEvent ie) -> {
+            if (ie.getStateChange() == ItemEvent.SELECTED) {
+                if (ie.getItem().equals("-- Tambah Karat --")) {
+                    try {
+                        int karatBaru = Integer.valueOf(JOptionPane.showInputDialog("Input karat :"));
+                        if (karatBaru != 0) {
+                            addKarat(karatBaru);
+                            comboKarat.setModel(getKarat());
+                            comboKarat.setSelectedItem(karatBaru);
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(this, "Silahkan input angka", "Perhatian", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
+        
     }
 
     private void initDatePicker() {
@@ -56,6 +77,7 @@ public class TambahProduk extends javax.swing.JDialog {
         p.put("text.year", "Year");
         JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
         datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+        datePicker.getModel().setSelected(true);
         dateContainer.setLayout(new BorderLayout());
         dateContainer.add(datePicker);
         this.setFocusable(true);
@@ -99,7 +121,7 @@ public class TambahProduk extends javax.swing.JDialog {
 
         Date tanggalBeli = Date.valueOf(foundDate);
 
-        Produk produk = new Produk(id, idKategori, idSupplier, karat, hargaBeli, nama, deskripsi, status, tipeBarang, berat, tanggalBeli);
+        Produk produk = new Produk(idKategori, idSupplier, karat, hargaBeli, nama, deskripsi, status, tipeBarang, berat, tanggalBeli);
 
         addProduk(produk);
         

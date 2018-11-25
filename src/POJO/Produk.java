@@ -8,12 +8,12 @@ import java.sql.Date;
  */
 public class Produk {
     private int id, idKategori, idSupplier, karat, hargaBeli;
-    private String nama, deskripsi, status, tipeBarang;
+    private String nama, deskripsi, status, tipeBarang, kategori, supplier;
     private double berat;
     private Date tanggalBeli;
 
-    public Produk(int id, int idKategori, int idSupplier, int karat, int hargaBeli, String nama, String deskripsi, String status, String tipeBarang, double berat, Date tanggalBeli) {
-        this.id = id;
+    public Produk( int idKategori, int idSupplier, int karat, int hargaBeli, String nama, String deskripsi, String status, String tipeBarang, double berat, Date tanggalBeli) {
+        this.id = 0;
         this.idKategori = idKategori;
         this.idSupplier = idSupplier;
         this.karat = karat;
@@ -29,6 +29,24 @@ public class Produk {
     public Produk(){
         
     }
+
+    public String getKategori() {
+        return kategori;
+    }
+
+    public void setKategori(String kategori) {
+        this.kategori = kategori;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
+    }
+    
+    
     
     public int getId() {
         return id;
