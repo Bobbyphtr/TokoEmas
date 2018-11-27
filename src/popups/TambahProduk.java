@@ -54,7 +54,7 @@ public class TambahProduk extends javax.swing.JDialog {
             if (ie.getStateChange() == ItemEvent.SELECTED) {
                 if (ie.getItem().equals("-- Tambah Karat --")) {
                     try {
-                        int karatBaru = Integer.valueOf(JOptionPane.showInputDialog("Input karat :"));
+                        double karatBaru = Double.valueOf(JOptionPane.showInputDialog("Input karat :"));
                         if (karatBaru != 0) {
                             addKarat(karatBaru);
                             comboKarat.setModel(getKarat());

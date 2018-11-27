@@ -780,12 +780,12 @@ public class Controller {
         }
     }
 
-    public static void addKarat(int karatBaru) {
+    public static void addKarat(Double karatBaru) {
         String query = "INSERT INTO `karat` (`value`) VALUES (' ? ');";
 
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, karatBaru);
+            preparedStatement.setDouble(1, karatBaru);
             preparedStatement.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Update karat gagal");
@@ -799,7 +799,7 @@ public class Controller {
             rs = statement.executeQuery(query);
             DefaultComboBoxModel listModel = new DefaultComboBoxModel();
             while (rs.next()) {
-                listModel.addElement(rs.getInt("value"));
+                listModel.addElement(rs.getDouble("value"));
             }
             return listModel;
         } catch (SQLException ex) {
@@ -886,6 +886,22 @@ public class Controller {
         return null;
     }
 
+    public static String getTransaksiCount() {
+        String query = "SELECT Count(transaksi.id_barang) as jumlah_transaksi FROM `transaksi` WHERE DAY(tanggal_jual) = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            Calendar cal = Calendar.getInstance();
+            preparedStatement.setInt(1, cal.get(Calendar.DATE));
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                return rs.getString("jumlah_transaksi");
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public static void addTransaksi(Transaksi transaksi) {
         String query = "INSERT INTO transaksi VALUE ( ? , ? , ? , ? , ? , ? )";
         try {
@@ -903,4 +919,60 @@ public class Controller {
         }
     }
 
+    public static String getProfitHariIni() {
+        String query = "SELECT SUM(profit) as profit_hari_ini from "
+                + "(SELECT barang.harga_beli as harga_beli, harga_jual, tanggal_jual, (harga_jual - harga_beli) "
+                + "as profit from transaksi, barang where DAY(tanggal_jual) = ? AND transaksi.id_barang = barang.id) as harga";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            Calendar cal = Calendar.getInstance();
+            preparedStatement.setInt(1, cal.get(Calendar.DATE));
+            rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+                DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+                formatRp.setCurrencySymbol("Rp. ");
+                formatRp.setMonetaryDecimalSeparator(',');
+                formatRp.setGroupingSeparator('.');
+                kursIndonesia.setDecimalFormatSymbols(formatRp);
+                String profit = kursIndonesia.format(rs.getInt("profit_hari_ini"));
+                profit = profit.substring(0, profit.length() - 1);
+                //System.out.println(profit);
+                return profit;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Vector getEmployeeOftheDay() { //QUERY untuk mendapatkan urutan semua employee dari penghasil profit terbesar ke kecil per harinya
+        String query = "SELECT nama, SUM(profit) as total\n"
+                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where DAY(tanggal_jual) = ? AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
+                + "GROUP BY nama ORDER BY total DESC";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            Calendar cal = Calendar.getInstance();
+            preparedStatement.setInt(1, cal.get(Calendar.DATE));
+            rs = preparedStatement.executeQuery();
+
+            Vector pekerja = new Vector();
+
+            while (rs.next()) {
+                pekerja.add(rs.getString("nama"));
+            }
+            return pekerja;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();;
+        }
+        return null;
+    }
+
+    public static void getEmployeeRankingByProfit() { //Untuk per montoh diganti aja WHERE nya
+        String query = "SELECT nama, SUM(profit) as total\n"
+                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where DAY(tanggal_jual) = 27 AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
+                + "GROUP BY nama ORDER BY total DESC";
+    }
 }
