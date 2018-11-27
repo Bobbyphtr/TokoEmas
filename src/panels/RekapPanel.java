@@ -131,7 +131,7 @@ public class RekapPanel extends javax.swing.JPanel {
         TitleText1.setBackground(new java.awt.Color(102, 0, 0));
         TitleText1.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText1.setForeground(new java.awt.Color(102, 0, 0));
-        TitleText1.setText("Edit Staf");
+        TitleText1.setText("Rekap");
 
         dateText.setBackground(new java.awt.Color(102, 0, 0));
         dateText.setFont(new java.awt.Font("Myriad Pro", 0, 24)); // NOI18N
