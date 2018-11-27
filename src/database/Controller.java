@@ -9,6 +9,7 @@ import POJO.Transaksi;
 import POJO.User;
 import java.awt.Component;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -209,7 +210,7 @@ public class Controller {
 
         return array;
     }
-
+    
     public static DefaultListModel getAllKategori() {
         String query = "SELECT * FROM kategori";
         try {
@@ -808,19 +809,32 @@ public class Controller {
         }
         return null;
     }
+    
+    public static String getCurrentDateSQL() {
+        String date = "MM";
+        Calendar cal = Calendar.getInstance();
+
+        DateFormat dateFormat = new SimpleDateFormat(date);
+        String format =  dateFormat.format(cal.getTime());
+        System.out.println("Format = " + format);
+        return format;
+    }
+
 
     public static DefaultTableModel getRankingPegawai() {
-        String query = "SELECT nama FROM (SELECT pekerja.nama,COUNT(id_barang) AS jumlah_penjualan FROM transaksi,pekerja WHERE pekerja.id=transaksi.id_pekerja GROUP BY id_pekerja ORDER BY jumlah_penjualan DESC) AS marco";
-
+        String query = "SELECT nama, SUM(profit) as total\n"
+                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where MONTH( tanggal_jual ) = ? AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
+                + "GROUP BY nama ORDER BY total DESC";
         try {
-            rs = statement.executeQuery(query);
-            rsmt = rs.getMetaData();
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, getCurrentDateSQL());
+            rs = preparedStatement.executeQuery();
 
             Vector data = new Vector();
 
             Vector column = new Vector();
 
-            column.add("Nama");
+            column.add("Ranking Pegawai");
 
             while (rs.next()) {
                 Vector row = new Vector();
@@ -974,5 +988,44 @@ public class Controller {
         String query = "SELECT nama, SUM(profit) as total\n"
                 + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where DAY(tanggal_jual) = 27 AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
                 + "GROUP BY nama ORDER BY total DESC";
+    }
+    
+    public static int getTotalPenjualan() {
+        String query = "SELECT SUM(harga_jual) FROM transaksi WHERE MONTH(tanggal_jual) = ? ;";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, getCurrentDateSQL());
+            rs = preparedStatement.executeQuery();
+            
+            if(rs.next()) {
+                    
+                return rs.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Gagal mendapatkan Total Penjualan");
+        }
+        return 0;
+            
+    }
+    
+    public static int getTotalPembelian() {
+        String query = "SELECT SUM(harga_beli) FROM barang WHERE MONTH(tanggal_beli) = ? ;";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, getCurrentDateSQL());
+            rs = preparedStatement.executeQuery();
+            
+            if(rs.next()) {
+                return rs.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println("Gagal mendapatkan Total Pembelian");
+        }
+        return 0;
+            
     }
 }

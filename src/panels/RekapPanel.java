@@ -9,6 +9,9 @@ import database.Controller;
 import static database.Controller.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.Timer;
@@ -22,13 +25,22 @@ public class RekapPanel extends javax.swing.JPanel {
     /**
      * Creates new form Rekap
      */
+    
+    private String[] dateAndTime;
+    
+    private String totalPenjualan, totalPembelian, totalProfit;
+    
     public RekapPanel() {
         initComponents();
         syncDate();
+        initAudit();
+        label_PenjualanVar.setText(totalPenjualan);
+        label_PembelianVar.setText(totalPembelian);
+        label_KeuntunganVar.setText(totalProfit);
     }
     
     private void syncDate() {
-        String[] dateAndTime = getDateAndTime();
+        dateAndTime = getDateAndTime();
         dateText.setText(dateAndTime[1]);
         Timer date = new Timer(1000, new ActionListener() {
             @Override
@@ -38,6 +50,23 @@ public class RekapPanel extends javax.swing.JPanel {
             }
         });
         date.start();
+    }
+
+    private void initAudit() {
+        int penjualan = getTotalPenjualan();
+        int pembelian = getTotalPembelian();
+        int profit = penjualan - pembelian;
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        
+        totalPembelian = kursIndonesia.format(pembelian) + ",-";
+        totalPenjualan = kursIndonesia.format(penjualan) + ",-"; 
+        totalProfit    = kursIndonesia.format(profit) + ",-"; 
     }
 
     /**
