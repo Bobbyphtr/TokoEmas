@@ -822,8 +822,10 @@ public class Controller {
         Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
-            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
+//            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
+//            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
+            preparedStatement.setInt(1, TRIAL_MONTH);
+            preparedStatement.setInt(2, TRIAL_YEAR);
             rs = preparedStatement.executeQuery();
 
             Vector data = new Vector();
