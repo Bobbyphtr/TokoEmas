@@ -822,10 +822,10 @@ public class Controller {
         Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-//            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
-//            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
-            preparedStatement.setInt(1, TRIAL_MONTH);
-            preparedStatement.setInt(2, TRIAL_YEAR);
+//            System.out.println(cal.get(Calendar.MONTH) + 1);
+//            System.out.println(cal.get(Calendar.YEAR));
+            preparedStatement.setInt(1, cal.get(Calendar.MONTH) + 1);
+            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
             rs = preparedStatement.executeQuery();
 
             Vector data = new Vector();
@@ -1005,10 +1005,8 @@ public class Controller {
         Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-//            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
-//            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
-            preparedStatement.setInt(1, TRIAL_MONTH);
-            preparedStatement.setInt(2, TRIAL_YEAR);
+            preparedStatement.setInt(1, cal.get(Calendar.MONTH) + 1);
+            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {
@@ -1028,10 +1026,8 @@ public class Controller {
         Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-//            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
-//            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
-            preparedStatement.setInt(1, TRIAL_MONTH);
-            preparedStatement.setInt(2, TRIAL_YEAR);
+            preparedStatement.setInt(1, cal.get(Calendar.MONTH) + 1);
+            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
             rs = preparedStatement.executeQuery();
 
             if (rs.next()) {

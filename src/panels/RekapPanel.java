@@ -67,11 +67,6 @@ public class RekapPanel extends javax.swing.JPanel {
         totalPembelian = kursIndonesia.format(pembelian) + ",-";
         totalPenjualan = kursIndonesia.format(penjualan) + ",-";
         totalProfit = kursIndonesia.format(profit) + ",-";
-        System.out.println(totalProfit.charAt(0));
-        if (totalProfit.charAt(0) == '(') {
-            totalProfit = totalProfit.substring(1);
-            totalProfit = "- " + totalProfit;
-        }
     }
 
     /**
