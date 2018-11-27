@@ -103,6 +103,17 @@ public class DetailTransaksi extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jlabel6 = new javax.swing.JLabel();
+        textMetodeBayar = new javax.swing.JLabel();
+        jlabel7 = new javax.swing.JLabel();
+        textTotal = new javax.swing.JLabel();
+        textDate = new javax.swing.JLabel();
+        textStaf = new javax.swing.JLabel();
+        textCustomerId = new javax.swing.JLabel();
+        textNamaCustomer = new javax.swing.JLabel();
+        textPhone = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        textAlamat = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -153,6 +164,47 @@ public class DetailTransaksi extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jlabel6.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        jlabel6.setForeground(new java.awt.Color(102, 0, 0));
+        jlabel6.setText("Total : ");
+
+        textMetodeBayar.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        textMetodeBayar.setForeground(new java.awt.Color(102, 0, 0));
+        textMetodeBayar.setText("<HargaTotal>");
+
+        jlabel7.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        jlabel7.setForeground(new java.awt.Color(102, 0, 0));
+        jlabel7.setText("Metode Bayar :");
+
+        textTotal.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        textTotal.setForeground(new java.awt.Color(102, 0, 0));
+        textTotal.setText("<HargaTotal>");
+
+        textDate.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        textDate.setForeground(new java.awt.Color(102, 0, 0));
+        textDate.setText("<HargaTotal>");
+
+        textStaf.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        textStaf.setForeground(new java.awt.Color(102, 0, 0));
+        textStaf.setText("<HargaTotal>");
+
+        textCustomerId.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        textCustomerId.setForeground(new java.awt.Color(102, 0, 0));
+        textCustomerId.setText("<HargaTotal>");
+
+        textNamaCustomer.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        textNamaCustomer.setForeground(new java.awt.Color(102, 0, 0));
+        textNamaCustomer.setText("<HargaTotal>");
+
+        textPhone.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
+        textPhone.setForeground(new java.awt.Color(102, 0, 0));
+        textPhone.setText("<HargaTotal>");
+
+        textAlamat.setColumns(21);
+        textAlamat.setRows(4);
+        textAlamat.setEditable(false);
+        jScrollPane2.setViewportView(textAlamat);
+
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
@@ -164,38 +216,83 @@ public class DetailTransaksi extends javax.swing.JDialog {
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(12, 12, 12)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(352, 352, 352))
-                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textDate)
+                            .addComponent(textStaf)))
+                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                             .addComponent(TitleText)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(35, Short.MAX_VALUE))))
+                            .addGap(256, 256, 256)
+                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
+                                    .addGap(17, 17, 17)
+                                    .addComponent(jLabel4))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
+                                    .addGap(52, 52, 52)
+                                    .addComponent(jLabel5))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addGap(18, 18, 18)
+                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textCustomerId)
+                                .addComponent(textNamaCustomer)
+                                .addComponent(textPhone)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(42, 42, 42))
+                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jlabel6)
+                                .addComponent(jlabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(18, 18, 18)
+                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(textMetodeBayar)
+                                .addComponent(textTotal)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(TitleText)
+                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(TitleText)
+                        .addGap(20, 20, 20)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(textDate))
+                        .addGap(18, 18, 18)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(textStaf)))
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(textCustomerId))
+                        .addGap(18, 18, 18)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(textNamaCustomer))
+                        .addGap(18, 18, 18)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(textPhone))
+                        .addGap(18, 18, 18)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
+                    .addComponent(jlabel6)
+                    .addComponent(textTotal))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textMetodeBayar))
                 .addContainerGap())
         );
 
@@ -207,7 +304,7 @@ public class DetailTransaksi extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 644, Short.MAX_VALUE)
+            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
         );
 
         pack();
@@ -229,6 +326,17 @@ public class DetailTransaksi extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel jlabel6;
+    private javax.swing.JLabel jlabel7;
+    private javax.swing.JTextArea textAlamat;
+    private javax.swing.JLabel textCustomerId;
+    private javax.swing.JLabel textDate;
+    private javax.swing.JLabel textMetodeBayar;
+    private javax.swing.JLabel textNamaCustomer;
+    private javax.swing.JLabel textPhone;
+    private javax.swing.JLabel textStaf;
+    private javax.swing.JLabel textTotal;
     // End of variables declaration//GEN-END:variables
 }

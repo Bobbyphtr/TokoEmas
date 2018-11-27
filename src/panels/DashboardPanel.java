@@ -59,7 +59,8 @@ public class DashboardPanel extends javax.swing.JPanel {
 
     private void showEmployeeOftheDay() {
         Vector pekerja = getEmployeeOftheDay();
-        if (pekerja != null) {
+        //ystem.out.println(pekerja.get(0));
+        if (!pekerja.isEmpty()) {
             employeeField.setText((String) pekerja.get(0));
         } else {
             employeeField.setText("Belum ada transaksi hari ini");
@@ -117,7 +118,7 @@ public class DashboardPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel1.setText("Overall Profit hari ini :");
+        jLabel1.setText("Total Profit hari ini :");
 
         jLabel2.setFont(new java.awt.Font("Myriad Pro", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 0, 0));

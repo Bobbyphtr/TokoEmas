@@ -25,11 +25,10 @@ public class RekapPanel extends javax.swing.JPanel {
     /**
      * Creates new form Rekap
      */
-    
     private String[] dateAndTime;
-    
+
     private String totalPenjualan, totalPembelian, totalProfit;
-    
+
     public RekapPanel() {
         initComponents();
         syncDate();
@@ -38,7 +37,7 @@ public class RekapPanel extends javax.swing.JPanel {
         label_PembelianVar.setText(totalPembelian);
         label_KeuntunganVar.setText(totalProfit);
     }
-    
+
     private void syncDate() {
         dateAndTime = getDateAndTime();
         dateText.setText(dateAndTime[1]);
@@ -56,6 +55,7 @@ public class RekapPanel extends javax.swing.JPanel {
         int penjualan = getTotalPenjualan();
         int pembelian = getTotalPembelian();
         int profit = penjualan - pembelian;
+        System.out.println(profit);
         DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
         DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
 
@@ -63,10 +63,15 @@ public class RekapPanel extends javax.swing.JPanel {
         formatRp.setMonetaryDecimalSeparator(',');
         formatRp.setGroupingSeparator('.');
         kursIndonesia.setDecimalFormatSymbols(formatRp);
-        
+
         totalPembelian = kursIndonesia.format(pembelian) + ",-";
-        totalPenjualan = kursIndonesia.format(penjualan) + ",-"; 
-        totalProfit    = kursIndonesia.format(profit) + ",-"; 
+        totalPenjualan = kursIndonesia.format(penjualan) + ",-";
+        totalProfit = kursIndonesia.format(profit) + ",-";
+        System.out.println(totalProfit.charAt(0));
+        if (totalProfit.charAt(0) == '(') {
+            totalProfit = totalProfit.substring(1);
+            totalProfit = "- " + totalProfit;
+        }
     }
 
     /**
@@ -183,7 +188,7 @@ public class RekapPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(label_TotalPembelian)
                             .addComponent(label_PembelianVar))
-                        .addGap(112, 112, 112)
+                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING)))

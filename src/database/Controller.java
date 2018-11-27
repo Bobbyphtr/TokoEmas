@@ -35,6 +35,11 @@ public class Controller {
     private static ResultSetMetaData rsmt;
     private static Connection conn;
 
+    private static final int TRIAL_DAY = 27;
+    private static final int TRIAL_MONTH = 11;
+    private static final int TRIAL_YEAR = 2018;
+    private static final String TRIAL_DATE = "2018-11-27";
+
     public Controller() {
         ConnectionManager cm = new ConnectionManager();
         conn = cm.getConnection();
@@ -210,7 +215,7 @@ public class Controller {
 
         return array;
     }
-    
+
     public static DefaultListModel getAllKategori() {
         String query = "SELECT * FROM kategori";
         try {
@@ -809,25 +814,16 @@ public class Controller {
         }
         return null;
     }
-    
-    public static String getCurrentDateSQL() {
-        String date = "MM";
-        Calendar cal = Calendar.getInstance();
-
-        DateFormat dateFormat = new SimpleDateFormat(date);
-        String format =  dateFormat.format(cal.getTime());
-        System.out.println("Format = " + format);
-        return format;
-    }
-
 
     public static DefaultTableModel getRankingPegawai() {
         String query = "SELECT nama, SUM(profit) as total\n"
-                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where MONTH( tanggal_jual ) = ? AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
+                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where MONTH( tanggal_jual ) = ? AND YEAR( tanggal_jual ) = ? AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
                 + "GROUP BY nama ORDER BY total DESC";
+        Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, getCurrentDateSQL());
+            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
+            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
             rs = preparedStatement.executeQuery();
 
             Vector data = new Vector();
@@ -901,11 +897,13 @@ public class Controller {
     }
 
     public static String getTransaksiCount() {
-        String query = "SELECT Count(transaksi.id_barang) as jumlah_transaksi FROM `transaksi` WHERE DAY(tanggal_jual) = ?";
+        String query = "SELECT Count(transaksi.id_barang) as jumlah_transaksi FROM `transaksi` WHERE tanggal_jual = ?";
         try {
             preparedStatement = conn.prepareStatement(query);
             Calendar cal = Calendar.getInstance();
-            preparedStatement.setInt(1, cal.get(Calendar.DATE));
+            DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+            //preparedStatement.setString(1, df.format(cal.getTime()));
+            preparedStatement.setString(1, TRIAL_DATE);
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 return rs.getString("jumlah_transaksi");
@@ -936,11 +934,14 @@ public class Controller {
     public static String getProfitHariIni() {
         String query = "SELECT SUM(profit) as profit_hari_ini from "
                 + "(SELECT barang.harga_beli as harga_beli, harga_jual, tanggal_jual, (harga_jual - harga_beli) "
-                + "as profit from transaksi, barang where DAY(tanggal_jual) = ? AND transaksi.id_barang = barang.id) as harga";
+                + "as profit from transaksi, barang where tanggal_jual = ? "
+                + "AND transaksi.id_barang = barang.id) as harga";
         try {
             preparedStatement = conn.prepareStatement(query);
             Calendar cal = Calendar.getInstance();
-            preparedStatement.setInt(1, cal.get(Calendar.DATE));
+            DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+            //preparedStatement.setString(1, df.format(cal.getTime()));
+            preparedStatement.setString(1, TRIAL_DATE);
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -951,7 +952,11 @@ public class Controller {
                 formatRp.setGroupingSeparator('.');
                 kursIndonesia.setDecimalFormatSymbols(formatRp);
                 String profit = kursIndonesia.format(rs.getInt("profit_hari_ini"));
-                profit = profit.substring(0, profit.length() - 1);
+                if (profit.charAt(0) == '(') {
+                    profit = profit.substring(1, profit.length() - 1);
+                    profit = "- " + profit;
+                }
+
                 //System.out.println(profit);
                 return profit;
             }
@@ -963,12 +968,15 @@ public class Controller {
 
     public static Vector getEmployeeOftheDay() { //QUERY untuk mendapatkan urutan semua employee dari penghasil profit terbesar ke kecil per harinya
         String query = "SELECT nama, SUM(profit) as total\n"
-                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where DAY(tanggal_jual) = ? AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
+                + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where tanggal_jual = ? "
+                + "AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
                 + "GROUP BY nama ORDER BY total DESC";
         try {
             preparedStatement = conn.prepareStatement(query);
             Calendar cal = Calendar.getInstance();
-            preparedStatement.setInt(1, cal.get(Calendar.DATE));
+            DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
+            //preparedStatement.setString(1, df.format(cal.getTime()));
+            preparedStatement.setString(1, TRIAL_DATE);
             rs = preparedStatement.executeQuery();
 
             Vector pekerja = new Vector();
@@ -989,43 +997,49 @@ public class Controller {
                 + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where DAY(tanggal_jual) = 27 AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
                 + "GROUP BY nama ORDER BY total DESC";
     }
-    
+
     public static int getTotalPenjualan() {
-        String query = "SELECT SUM(harga_jual) FROM transaksi WHERE MONTH(tanggal_jual) = ? ;";
-        
+        String query = "SELECT SUM(harga_jual) FROM transaksi WHERE MONTH(tanggal_jual) = ? AND YEAR( tanggal_jual ) = ?;";
+        Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, getCurrentDateSQL());
+//            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
+//            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
+            preparedStatement.setInt(1, TRIAL_MONTH);
+            preparedStatement.setInt(2, TRIAL_YEAR);
             rs = preparedStatement.executeQuery();
-            
-            if(rs.next()) {
-                    
+
+            if (rs.next()) {
+
                 return rs.getInt(1);
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("Gagal mendapatkan Total Penjualan");
         }
         return 0;
-            
+
     }
-    
+
     public static int getTotalPembelian() {
-        String query = "SELECT SUM(harga_beli) FROM barang WHERE MONTH(tanggal_beli) = ? ;";
-        
+        String query = "SELECT SUM(harga_beli) FROM barang WHERE MONTH(tanggal_beli) = ? AND YEAR(tanggal_beli) = ? ;";
+        Calendar cal = Calendar.getInstance();
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, getCurrentDateSQL());
+//            preparedStatement.setInt(1, cal.get(Calendar.MONTH));
+//            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
+            preparedStatement.setInt(1, TRIAL_MONTH);
+            preparedStatement.setInt(2, TRIAL_YEAR);
             rs = preparedStatement.executeQuery();
-            
-            if(rs.next()) {
+
+            if (rs.next()) {
                 return rs.getInt(1);
             }
-            
+
         } catch (SQLException ex) {
             System.out.println("Gagal mendapatkan Total Pembelian");
         }
         return 0;
-            
+
     }
 }
