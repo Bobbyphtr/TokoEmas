@@ -542,62 +542,6 @@ public class Controller {
         }
     }
 
-    /*
-    public static DefaultTableModel getAllProduk() {
-        String query = "SELECT * FROM barang WHERE status = 'INSTOCK'";
-        try {
-            rs = statement.executeQuery(query);
-            rsmt = rs.getMetaData();
-
-            Vector data = new Vector();
-
-            Vector column = new Vector();
-
-            column.add("ID");
-            column.add("Nama");
-            column.add("Deskripsi");
-            column.add("Berat");
-            column.add("Karat");
-            column.add("Tipe");
-            column.add("Harga Beli");
-            column.add("Aksi");
-
-            while (rs.next()) {
-                Vector row = new Vector();
-                row.add(rs.getInt("id"));
-                row.add(rs.getString("nama"));
-                row.add(rs.getString("deskripsi"));
-                row.add(rs.getDouble("berat"));
-                row.add(rs.getDouble("karat"));
-                row.add(rs.getString("tipe_barang"));
-                row.add(rs.getInt("harga_beli"));
-                data.add(row);
-
-            }
-
-            return new DefaultTableModel(data, column) {
-                private final Class<?>[] columnClasses = {Integer.class, String.class, String.class, Double.class, Double.class, String.class, Integer.class};
-
-                @Override
-                public Class<?> getColumnClass(int col) {
-                    return columnClasses[col];
-                }
-
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    if (column == columnIdentifiers.size() - 1) {
-                        return true;
-                    }
-                    return false;
-                }
-
-            };
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-     */
     public static DefaultTableModel getAllProduk() {
 
         String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, tipe_barang,"
@@ -736,11 +680,32 @@ public class Controller {
         }
     }
 
-    public static void getProdukbyId(int id) {
-        String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, tipe_barang, "
-                + "kategori.nama as kategori, supplier.nama as supplier, harga_beli, "
-                + "tanggal_beli FROM barang LEFT JOIN kategori on kategori.id = barang.id_kategori "
-                + "LEFT JOIN supplier on supplier.id = barang.id_supplier WHERE barang.id = ?";
+    public static Vector getProdukbyId(int id) {
+        String query = "SELECT barang.nama, deskripsi, berat, karat, tipe_barang, kategori.nama as kategori, supplier.nama as supplier FROM barang "
+                + "LEFT JOIN kategori on kategori.id = barang.id_kategori LEFT JOIN supplier on supplier.id = barang.id_supplier WHERE barang.id = ? ";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+
+            Vector data = new Vector();
+
+            while (rs.next()) {
+                data.add(rs.getString("nama"));
+                data.add(rs.getString("deskripsi"));
+                data.add(rs.getString("berat"));
+                data.add(rs.getString("karat"));
+                data.add(rs.getString("tipe_barang"));
+                data.add(rs.getString("kategori") != null ? rs.getString("kategori") : "NULL");
+                data.add(rs.getString("supplier") != null ? rs.getString("supplier") : "NULL");
+            }
+
+            return data;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
         
     }
 
@@ -1073,5 +1038,46 @@ public class Controller {
         }
         return 0;
 
+    }
+    
+    public static Vector getCustomerByID(int id) {
+        String query = "SELECT `nama`, `no_telp`, `alamat` FROM `customer` WHERE id = ?";
+                
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+
+            Vector data = new Vector();
+
+            while (rs.next()) {
+                data.add(rs.getString("nama"));
+                data.add(rs.getString("no_telp"));
+                data.add(rs.getString("alamat"));
+            }
+
+            return data;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static String getStafNameByID(int id) {
+        String query = "SELECT `nama` FROM `pekerja` WHERE id = ?";
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            rs = preparedStatement.executeQuery();
+
+            if (rs.next()) {
+                return (rs.getString("nama")  != null ? rs.getString("nama") : "NULL");
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return "NULL";
     }
 }

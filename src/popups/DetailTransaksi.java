@@ -15,6 +15,8 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import static database.Controller.*;
+
 /**
  *
  * @author Xenon
@@ -40,6 +42,26 @@ public class DetailTransaksi extends javax.swing.JDialog {
         textMetodeBayar.setText(metodeBayar);
         textTotal.setText(hargaJual);
         textDate.setText(tanggalJual);
+        textCustomerId.setText(String.valueOf(idCustomer));
+        
+        Vector barang = getProdukbyId(idBarang);
+
+        labelNama.setText((String) barang.get(0));
+        labelDeskripsi.setText((String) barang.get(1));
+        labelWeight.setText((String) barang.get(2));
+        labelKarat.setText((String) barang.get(3));
+        labelType.setText((String) barang.get(4));
+        labelKategori.setText((String) barang.get(5));
+        labelSupplier.setText((String) barang.get(6));
+        
+        Vector pelanggan = getCustomerByID(idCustomer);
+        
+        textNamaCustomer.setText((String) pelanggan.get(0));
+        textPhone.setText((String) pelanggan.get(1));
+        textAlamat.setText((String) pelanggan.get(2));
+        
+        textStaf.setText(getStafNameByID(idPekerja));
+
     }
 
 
