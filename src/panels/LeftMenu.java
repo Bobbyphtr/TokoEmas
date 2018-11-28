@@ -5,26 +5,37 @@
  */
 package panels;
 
+import POJO.User;
+import database.Controller;
+import static database.Controller.updatePassword;
 import java.awt.Color;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSplitPane;
+import javax.swing.JTextField;
+import static panels.WelcomePanel.credAndPass;
 
 /**
  *
  * @author ysuta
  */
 public class LeftMenu extends javax.swing.JPanel {
-    
+
     private JSplitPane pane;
+    private User user;
 
     public LeftMenu() {
         initComponents();
     }
-    
-    public LeftMenu(JSplitPane pane) {
+
+    public LeftMenu(JSplitPane pane, User user) {
         this.pane = pane;
+        this.user = user;
         initComponents();
     }
 
@@ -62,6 +73,7 @@ public class LeftMenu extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         usernameLabel = new javax.swing.JLabel();
         settingBtn = new javax.swing.JLabel();
+        passwordKey = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(253, 203, 110));
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -320,12 +332,19 @@ public class LeftMenu extends javax.swing.JPanel {
 
         usernameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(137, 49, 25));
-        usernameLabel.setText("Admin");
+        usernameLabel.setText(user.getUsername());
 
         settingBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Admin_Settings_Male_28px_1.png"))); // NOI18N
         settingBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 settingBtnMouseClicked(evt);
+            }
+        });
+
+        passwordKey.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Key_28px_1.png"))); // NOI18N
+        passwordKey.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                passwordKeyMouseClicked(evt);
             }
         });
 
@@ -341,17 +360,19 @@ public class LeftMenu extends javax.swing.JPanel {
             .addComponent(btn_Rekap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(settingBtn)
-                        .addGap(41, 41, 41)
-                        .addComponent(usernameLabel))
+                        .addComponent(passwordKey)
+                        .addGap(28, 28, 28)
+                        .addComponent(usernameLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(settingBtn))
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -360,11 +381,12 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(settingBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11)
+                    .addComponent(settingBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(passwordKey))
+                .addGap(30, 30, 30)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_Dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,7 +400,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(btn_Rekap, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(btn_Keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -386,7 +408,8 @@ public class LeftMenu extends javax.swing.JPanel {
     private void btn_DashboardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_DashboardMousePressed
         resetColor();
         setColor(btn_Dashboard);
-        
+        pane.setRightComponent(new DashboardPanel());
+
     }//GEN-LAST:event_btn_DashboardMousePressed
 
     private void btn_TransaksiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_TransaksiMousePressed
@@ -398,7 +421,7 @@ public class LeftMenu extends javax.swing.JPanel {
     private void btn_PelangganMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_PelangganMousePressed
         resetColor();
         setColor(btn_Pelanggan);
-         pane.setRightComponent(new PelangganPanel());
+        pane.setRightComponent(new PelangganPanel());
     }//GEN-LAST:event_btn_PelangganMousePressed
 
     private void btn_ProdukMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ProdukMousePressed
@@ -424,22 +447,75 @@ public class LeftMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_KeluarMousePressed
 
     private void settingBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnMouseClicked
-        String pass = JOptionPane.showInputDialog(this, "Input password sekarang","Input Password");
+
     }//GEN-LAST:event_settingBtnMouseClicked
+
+    private void passwordKeyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordKeyMouseClicked
+        String showInputDialog = JOptionPane.showInputDialog(null, null, "Input password sekarang", JOptionPane.OK_CANCEL_OPTION);
+        JPasswordField passwordField = new JPasswordField();
+        try {
+            if (!showInputDialog.equalsIgnoreCase("")) {
+                String passwordEncrypted = credAndPass(new String(passwordField.getPassword()));
+                User user = Controller.getUserbyUsername(this.user.getUsername());
+                if (user != null) {
+                    if (user.getPassword().equals(passwordEncrypted)) {
+                        JPasswordField newPassword = new JPasswordField(5);
+                        JPasswordField confirmNewPassword = new JPasswordField(5);
+
+                        JPanel myPanel = new JPanel();
+                        myPanel.setLayout(new BoxLayout(myPanel, BoxLayout.Y_AXIS));
+                        myPanel.add(new JLabel("Password Baru : "));
+                        myPanel.add(newPassword);
+                        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+                        myPanel.add(new JLabel("Konfirmasi Password Baru :"));
+                        myPanel.add(confirmNewPassword);
+
+                        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                                "Masukan password baru", JOptionPane.OK_CANCEL_OPTION);
+                        if (result == JOptionPane.OK_OPTION) {
+                            if (newPassword.getPassword().length != 0 && confirmNewPassword.getPassword().length != 0) {
+                                String pass1 = new String(newPassword.getPassword());
+                                String pass2 = new String(confirmNewPassword.getPassword());
+                                if (pass1.equals(pass2)) {
+                                    this.user.setPassword(pass2);
+                                    if (updatePassword(this.user)) {
+                                        JOptionPane.showMessageDialog(this, "Password berhasil diubah!");
+                                    }else {
+                                        JOptionPane.showMessageDialog(this, "Password gagal diubah!");
+                                    }
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Silahkan isi password baru.");
+                            }
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Password salah.");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Password salah.");
+                }
+            }
+
+        } catch (Exception ex) {
+
+        }
+
+
+    }//GEN-LAST:event_passwordKeyMouseClicked
 
     void setColor(JPanel panel) {
         panel.setBackground(new Color(225, 112, 85));
     }
 
     void resetColor() {
-        btn_Dashboard.setBackground(new Color(137,49,25));
-        btn_Pelanggan.setBackground(new Color(137,49,25));
-        btn_Produk.setBackground(new Color(137,49,25));
-        btn_Rekap.setBackground(new Color(137,49,25));
-        btn_Staff.setBackground(new Color(137,49,25));
-        btn_Transaksi.setBackground(new Color(137,49,25));
-    }   
-    
+        btn_Dashboard.setBackground(new Color(137, 49, 25));
+        btn_Pelanggan.setBackground(new Color(137, 49, 25));
+        btn_Produk.setBackground(new Color(137, 49, 25));
+        btn_Rekap.setBackground(new Color(137, 49, 25));
+        btn_Staff.setBackground(new Color(137, 49, 25));
+        btn_Transaksi.setBackground(new Color(137, 49, 25));
+    }
+
     private void setInvisible() {
 
     }
@@ -468,6 +544,7 @@ public class LeftMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel passwordKey;
     private javax.swing.JLabel settingBtn;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables

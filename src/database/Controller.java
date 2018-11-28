@@ -25,6 +25,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class Controller {
@@ -66,6 +67,22 @@ public class Controller {
             ex.printStackTrace();
         }
         return null;
+    }
+    
+    public static boolean updatePassword(User user) {
+        JOptionPane optionPane;
+        String query = "UPDATE user SET password = ? WHERE username = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, user.getPassword());
+            preparedStatement.setString(2, user.getUsername());
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Update user gagal");
+            ex.printStackTrace();
+        }
+        return false;
     }
 
     public static DefaultTableModel getPelangganDialog() {

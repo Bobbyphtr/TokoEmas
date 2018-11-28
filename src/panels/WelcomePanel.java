@@ -21,21 +21,21 @@ public class WelcomePanel extends javax.swing.JPanel {
     /**
      * Creates new form WelcomePanel1
      */
-    
     MyFrame frame;
-    
+
     public WelcomePanel() {
+        initComponents();
+
+    }
+
+    public WelcomePanel(MyFrame frame) {
+        this.frame = frame;
         initComponents();
         Dimension dim = new Dimension(1280, 720);
         this.setSize(dim);
         this.setMinimumSize(dim);
         this.setMaximumSize(dim);
         this.setPreferredSize(dim);
-    }
-    
-    public WelcomePanel(MyFrame frame) {
-        this.frame = frame;
-        initComponents();
     }
 
     /**
@@ -122,11 +122,13 @@ public class WelcomePanel extends javax.swing.JPanel {
             String passwordEncrypted = credAndPass(new String(passwordField.getPassword()));
             User user = Controller.getUserbyUsername(usernameField.getText());
             if (user != null) {
-                if(user.getPassword().equals(passwordEncrypted)){
-                    frame.changeContent();
-                } else JOptionPane.showMessageDialog(this, "Username atau Password salah.");
-            }else {
-                 JOptionPane.showMessageDialog(this, "Username atau Password salah.");
+                if (user.getPassword().equals(passwordEncrypted)) {
+                    frame.changeContent(user);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Username atau Password salah.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Username atau Password salah.");
             }
         } catch (Exception ex) {
             Logger.getLogger(WelcomePanel.class.getName()).log(Level.SEVERE, null, ex);

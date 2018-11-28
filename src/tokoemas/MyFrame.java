@@ -1,5 +1,6 @@
 package tokoemas;
 
+import POJO.User;
 import database.Controller;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -14,11 +15,11 @@ public class MyFrame extends JFrame {
     
     LeftMenu menu;
     JSplitPane splitPane;
-    TransaksiPanel transaksiPanel;
+    DashboardPanel dashBoard;
     WelcomePanel welcomePanel;
     
     MyFrame(){
-        welcomePanel = new WelcomePanel();
+        welcomePanel = new WelcomePanel(this);
         add(welcomePanel);
         setPreferredSize(new Dimension(1280, 720));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,15 +33,15 @@ public class MyFrame extends JFrame {
         frame.setVisible(true);
     }
 
-    public void changeContent() {
+    public void changeContent(User user) {
         welcomePanel.setVisible(false);
         splitPane = new JSplitPane();
-        menu = new LeftMenu(splitPane);
-        transaksiPanel = new TransaksiPanel(); //Ganti dengan Dashboard!
+        menu = new LeftMenu(splitPane, user);
+        dashBoard = new DashboardPanel(); //Ganti dengan Dashboard!
 
         splitPane.setDividerLocation(300);
         splitPane.setLeftComponent(menu);
-        splitPane.setRightComponent(transaksiPanel);
+        splitPane.setRightComponent(dashBoard);
         splitPane.remove(splitPane.getComponent(0));
 
         add(splitPane);
