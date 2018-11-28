@@ -7,6 +7,7 @@ package panels;
 
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
@@ -58,6 +59,9 @@ public class LeftMenu extends javax.swing.JPanel {
         btn_Keluar = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        usernameLabel = new javax.swing.JLabel();
+        settingBtn = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(253, 203, 110));
         setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -85,7 +89,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel5)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 1088, Short.MAX_VALUE))
         );
         btn_DashboardLayout.setVerticalGroup(
             btn_DashboardLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,6 +313,22 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addGap(16, 16, 16))
         );
 
+        jLabel1.setBackground(new java.awt.Color(137, 49, 25));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(137, 49, 25));
+        jLabel1.setText("Toko Emas");
+
+        usernameLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        usernameLabel.setForeground(new java.awt.Color(137, 49, 25));
+        usernameLabel.setText("Admin");
+
+        settingBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/icons8_Admin_Settings_Male_28px_1.png"))); // NOI18N
+        settingBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                settingBtnMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,16 +341,30 @@ public class LeftMenu extends javax.swing.JPanel {
             .addComponent(btn_Rekap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_Keluar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(settingBtn)
+                        .addGap(41, 41, 41)
+                        .addComponent(usernameLabel))
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(settingBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(usernameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
+                .addGap(18, 18, 18)
                 .addComponent(btn_Dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(btn_Transaksi, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -344,7 +378,7 @@ public class LeftMenu extends javax.swing.JPanel {
                 .addComponent(btn_Rekap, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(92, 92, 92)
                 .addComponent(btn_Keluar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -389,6 +423,10 @@ public class LeftMenu extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_KeluarMousePressed
 
+    private void settingBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnMouseClicked
+        String pass = JOptionPane.showInputDialog(this, "Input password sekarang","Input Password");
+    }//GEN-LAST:event_settingBtnMouseClicked
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(225, 112, 85));
     }
@@ -414,6 +452,7 @@ public class LeftMenu extends javax.swing.JPanel {
     private javax.swing.JPanel btn_Rekap;
     private javax.swing.JPanel btn_Staff;
     private javax.swing.JPanel btn_Transaksi;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -429,5 +468,7 @@ public class LeftMenu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JLabel settingBtn;
+    private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
 }

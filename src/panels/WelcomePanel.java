@@ -3,6 +3,7 @@ package panels;
 import POJO.User;
 import database.Controller;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -25,6 +26,11 @@ public class WelcomePanel extends javax.swing.JPanel {
     
     public WelcomePanel() {
         initComponents();
+        Dimension dim = new Dimension(1280, 720);
+        this.setSize(dim);
+        this.setMinimumSize(dim);
+        this.setMaximumSize(dim);
+        this.setPreferredSize(dim);
     }
     
     public WelcomePanel(MyFrame frame) {
@@ -51,6 +57,7 @@ public class WelcomePanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 231, 192));
         setPreferredSize(new java.awt.Dimension(980, 720));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginButton.setBackground(new java.awt.Color(102, 0, 0));
         loginButton.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
@@ -62,6 +69,7 @@ public class WelcomePanel extends javax.swing.JPanel {
                 loginButtonActionPerformed(evt);
             }
         });
+        add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 486, 83, 25));
 
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
         passwordField.setText("password");
@@ -73,18 +81,22 @@ public class WelcomePanel extends javax.swing.JPanel {
                 passwordFieldFocusLost(evt);
             }
         });
+        add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 439, 243, 24));
 
         welcomeLabel.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(102, 0, 0));
         welcomeLabel.setText("Selamat Datang");
+        add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 176, -1, -1));
 
         passwordLabel.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(102, 0, 0));
         passwordLabel.setText("Password");
+        add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 418, -1, -1));
 
         tokoEmasLabel.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         tokoEmasLabel.setForeground(new java.awt.Color(102, 0, 0));
         tokoEmasLabel.setText("TOKO EMAS");
+        add(tokoEmasLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 277, -1, -1));
 
         usernameField.setBackground(new java.awt.Color(255, 255, 255));
         usernameField.setForeground(new java.awt.Color(102, 102, 102));
@@ -97,50 +109,12 @@ public class WelcomePanel extends javax.swing.JPanel {
                 usernameFieldFocusLost(evt);
             }
         });
+        add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 376, 243, -1));
 
         usernameLabel.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(102, 0, 0));
         usernameLabel.setText("Username");
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(353, 353, 353)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(usernameLabel)
-                    .addComponent(passwordLabel)
-                    .addComponent(usernameField)
-                    .addComponent(welcomeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
-                        .addComponent(tokoEmasLabel))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(passwordField))
-                .addContainerGap(684, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(155, 155, 155)
-                .addComponent(welcomeLabel)
-                .addGap(64, 64, 64)
-                .addComponent(tokoEmasLabel)
-                .addGap(41, 41, 41)
-                .addComponent(usernameLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(passwordLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(230, Short.MAX_VALUE))
-        );
+        add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 355, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed

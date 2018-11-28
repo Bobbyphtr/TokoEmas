@@ -18,7 +18,7 @@ public class MyFrame extends JFrame {
     WelcomePanel welcomePanel;
     
     MyFrame(){
-        welcomePanel = new WelcomePanel(this);
+        welcomePanel = new WelcomePanel();
         add(welcomePanel);
         setPreferredSize(new Dimension(1280, 720));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
