@@ -8,6 +8,7 @@ package panels;
 import POJO.User;
 import database.Controller;
 import static database.Controller.updatePassword;
+import static database.Controller.updateUsername;
 import java.awt.Color;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -425,7 +426,7 @@ public class LeftMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_PelangganMousePressed
 
     private void btn_ProdukMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_ProdukMousePressed
-        resetColor();
+        resetColor();;
         setColor(btn_Produk);
         pane.setRightComponent(new ProdukPanel());
     }//GEN-LAST:event_btn_ProdukMousePressed
@@ -447,14 +448,29 @@ public class LeftMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_KeluarMousePressed
 
     private void settingBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnMouseClicked
-
+        JPanel inputUsername = new JPanel();
+        JTextField field = new JTextField(5);
+        field.setText(user.getUsername());
+        inputUsername.add(new JLabel("Nama User : "));
+        inputUsername.add(field);
+        int confirm = JOptionPane.showConfirmDialog(null, inputUsername, "Input username sekarang", JOptionPane.OK_CANCEL_OPTION);
+        if (confirm == JOptionPane.OK_OPTION) {
+            if (field.getText().equals("")) JOptionPane.showMessageDialog(null, "Tolong input username");
+            else {
+                if (updateUsername(this.user, field.getText())) JOptionPane.showMessageDialog(this, "Username berhasil diubah!");
+                else JOptionPane.showMessageDialog(this, "Username gagal diubah!");
+            }
+        }
     }//GEN-LAST:event_settingBtnMouseClicked
 
     private void passwordKeyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_passwordKeyMouseClicked
-        String showInputDialog = JOptionPane.showInputDialog(null, null, "Input password sekarang", JOptionPane.OK_CANCEL_OPTION);
-        JPasswordField passwordField = new JPasswordField();
         try {
-            if (!showInputDialog.equalsIgnoreCase("")) {
+            JPanel inputPass = new JPanel();
+            JPasswordField passwordField = new JPasswordField(5);
+            inputPass.add(new JLabel("Password sekarang : "));
+            inputPass.add(passwordField);
+            int confirm = JOptionPane.showConfirmDialog(null, inputPass, "Input password sekarang", JOptionPane.OK_CANCEL_OPTION);
+            if (confirm == JOptionPane.OK_OPTION) {
                 String passwordEncrypted = credAndPass(new String(passwordField.getPassword()));
                 User user = Controller.getUserbyUsername(this.user.getUsername());
                 if (user != null) {
@@ -477,10 +493,10 @@ public class LeftMenu extends javax.swing.JPanel {
                                 String pass1 = new String(newPassword.getPassword());
                                 String pass2 = new String(confirmNewPassword.getPassword());
                                 if (pass1.equals(pass2)) {
-                                    this.user.setPassword(pass2);
+                                    this.user.setPassword(credAndPass(pass2));
                                     if (updatePassword(this.user)) {
                                         JOptionPane.showMessageDialog(this, "Password berhasil diubah!");
-                                    }else {
+                                    } else {
                                         JOptionPane.showMessageDialog(this, "Password gagal diubah!");
                                     }
                                 }
@@ -495,9 +511,8 @@ public class LeftMenu extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(this, "Password salah.");
                 }
             }
-
         } catch (Exception ex) {
-
+            ex.printStackTrace();
         }
 
 

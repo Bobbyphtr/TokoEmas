@@ -84,6 +84,22 @@ public class Controller {
         }
         return false;
     }
+    
+    public static boolean updateUsername(User user, String newUsername) {
+        JOptionPane optionPane;
+        String query = "UPDATE user SET username = ? WHERE username = ?";
+        try {
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, newUsername);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.out.println("Update user gagal");
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
     public static DefaultTableModel getPelangganDialog() {
         String query = "SELECT * from customer WHERE id != 0";
