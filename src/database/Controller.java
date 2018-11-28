@@ -90,8 +90,8 @@ public class Controller {
         String query = "UPDATE user SET username = ? WHERE username = ?";
         try {
             preparedStatement = conn.prepareStatement(query);
-            preparedStatement.setString(1, user.getUsername());
-            preparedStatement.setString(2, newUsername);
+            preparedStatement.setString(1, newUsername);
+            preparedStatement.setString(2, user.getUsername());
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException ex) {

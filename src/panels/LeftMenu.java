@@ -444,7 +444,7 @@ public class LeftMenu extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_RekapMousePressed
 
     private void btn_KeluarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_KeluarMousePressed
-        // TODO add your handling code here:
+        System.exit(1);
     }//GEN-LAST:event_btn_KeluarMousePressed
 
     private void settingBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnMouseClicked
@@ -455,10 +455,17 @@ public class LeftMenu extends javax.swing.JPanel {
         inputUsername.add(field);
         int confirm = JOptionPane.showConfirmDialog(null, inputUsername, "Input username sekarang", JOptionPane.OK_CANCEL_OPTION);
         if (confirm == JOptionPane.OK_OPTION) {
-            if (field.getText().equals("")) JOptionPane.showMessageDialog(null, "Tolong input username");
-            else {
-                if (updateUsername(this.user, field.getText())) JOptionPane.showMessageDialog(this, "Username berhasil diubah!");
-                else JOptionPane.showMessageDialog(this, "Username gagal diubah!");
+            if (field.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Tolong input username");
+            } else {
+                System.out.println("USERNAME sekarang " + user.getUsername() + " Username baru " + field.getText());
+                if (updateUsername(this.user, field.getText())) {
+                    this.usernameLabel.setText(field.getText());
+                    this.user.setUsername(field.getText());
+                    JOptionPane.showMessageDialog(this, "Username berhasil diubah!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Username gagal diubah!");
+                }
             }
         }
     }//GEN-LAST:event_settingBtnMouseClicked

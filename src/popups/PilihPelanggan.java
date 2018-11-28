@@ -12,11 +12,17 @@ import java.awt.Window;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import panels.TransaksiPanel;
+
 /**
  *
  * @author ysuta
@@ -26,31 +32,62 @@ public class PilihPelanggan extends javax.swing.JPanel {
     /**
      * Creates new form PilihStaff
      */
-    
     JLabel labelNama;
     int idPelanggan;
     TransaksiPanel transaksi;
-    
+    TableRowSorter<TableModel> rowFilter;
+
     public PilihPelanggan() {
         initComponents();
+         setUpRowFilter();
     }
-    
+
     public PilihPelanggan(JLabel labelNama, TransaksiPanel transaksi) {
         this.labelNama = labelNama;
         this.transaksi = transaksi;
         initComponents();
-        
+
         tablePelanggan.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                idPelanggan = (int) tablePelanggan.getModel().getValueAt(tablePelanggan.getSelectedRow(), 0);
-                String nama = (String) tablePelanggan.getModel().getValueAt(tablePelanggan.getSelectedRow(), 1);
+                idPelanggan = (int) tablePelanggan.getModel().getValueAt(tablePelanggan.convertRowIndexToModel(tablePelanggan.getSelectedRow()), 0);
+                String nama = (String) tablePelanggan.getModel().getValueAt(tablePelanggan.convertRowIndexToModel(tablePelanggan.getSelectedRow()), 1);
                 fieldNama.setText(nama);
             }
         });
-        
+
         TableColumn id = tablePelanggan.getColumnModel().getColumn(0);
         tablePelanggan.getColumnModel().removeColumn(id);
+        setUpRowFilter();
+    }
+
+    private void setUpRowFilter() {
+        rowFilter = new TableRowSorter<>(tablePelanggan.getModel());
+        tablePelanggan.setRowSorter(rowFilter);
+        fieldNama.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String text = fieldNama.getText();
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+               //
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                //
+            }
+        });
     }
 
     /**
@@ -161,7 +198,7 @@ public class PilihPelanggan extends javax.swing.JPanel {
             Window win = SwingUtilities.getWindowAncestor(comp);
             win.dispose();
         }
-        
+
     }//GEN-LAST:event_buttonTambahActionPerformed
 
 

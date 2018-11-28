@@ -13,10 +13,15 @@ import java.awt.Window;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import panels.TransaksiPanel;
 
 /**
@@ -32,6 +37,7 @@ public class PilihStaf extends javax.swing.JPanel {
     JLabel labelNama;
     int idStaf;
     TransaksiPanel transaksi;
+    TableRowSorter<TableModel> rowFilter;
     
     public PilihStaf() {
         initComponents();
@@ -55,8 +61,8 @@ public class PilihStaf extends javax.swing.JPanel {
         tableStaff.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                idStaf = (int) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 0);
-                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.getSelectedRow(), 1);
+                idStaf = (int) tableStaff.getModel().getValueAt(tableStaff.convertRowIndexToModel(tableStaff.getSelectedRow()), 0);
+                String nama = (String) tableStaff.getModel().getValueAt(tableStaff.convertRowIndexToModel(tableStaff.getSelectedRow()), 1);
                 fieldNama.setText(nama);
                 
             }
@@ -64,8 +70,38 @@ public class PilihStaf extends javax.swing.JPanel {
         
         TableColumn id = tableStaff.getColumnModel().getColumn(0);
         tableStaff.getColumnModel().removeColumn(id);
+        setUpRowFilter();
     }
-   
+    
+     private void setUpRowFilter() {
+        rowFilter = new TableRowSorter<>(tableStaff.getModel());
+        tableStaff.setRowSorter(rowFilter);
+        fieldNama.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                String text = fieldNama.getText();
+                if (!text.equalsIgnoreCase("Ketik pencarian")) {
+                    if (text.trim().length() == 0) {
+                        rowFilter.setRowFilter(null);
+                    } else {
+                        rowFilter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                    }
+                }
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+               //
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                //
+            }
+        });
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
