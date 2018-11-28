@@ -24,8 +24,7 @@ public class DetailTransaksi extends javax.swing.JDialog {
     /**
      * Creates new form TambahPelanggan
      */
-    Vector<SupplierData> dataSupplier;
-    DocumentListener docListener;
+
 
     public DetailTransaksi(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -34,53 +33,7 @@ public class DetailTransaksi extends javax.swing.JDialog {
 
     public DetailTransaksi() {
         initComponents();
-        System.out.println("MASUK SINI");
-        btnUbah.setEnabled(false);
-        btnHapus.setEnabled(false);
-        dataSupplier = getAllSupplier();
 
-        ListSelectionModel lsm = listSupplier.getSelectionModel();
-        lsm.addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent lse) {
-                if (lse.getValueIsAdjusting()) {
-                    btnUbah.setEnabled(true);
-                    btnHapus.setEnabled(true);
-                    SupplierData temp = dataSupplier.get(listSupplier.getSelectedIndex());
-                    fieldNama.setText(temp.getNama());
-                    fieldNama.setForeground(Color.BLACK);
-                    fieldNoTelp.setText(temp.getNotelp());
-                    fieldNoTelp.setForeground(Color.BLACK);
-                    textAreaAlamat.setText(temp.getAlamat());
-                    textAreaAlamat.setForeground(Color.BLACK);
-                }
-            }
-        });
-
-        docListener = new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent de) {
-                showClearBtn();
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent de) {
-
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent de) {
-
-            }
-
-            private void showClearBtn() {
-                btnClear.setVisible(true);
-            }
-        };
-
-        fieldNama.getDocument().addDocumentListener(docListener);
-        fieldNoTelp.getDocument().addDocumentListener(docListener);
-        textAreaAlamat.getDocument().addDocumentListener(docListener);
 
     }
 

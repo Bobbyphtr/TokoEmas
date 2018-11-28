@@ -154,11 +154,14 @@ public class PilihPelanggan extends javax.swing.JPanel {
     }//GEN-LAST:event_fieldNamaFocusLost
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        labelNama.setText(fieldNama.getText());
-        transaksi.setIdPelanggan(idPelanggan);
-        JComponent comp = (JComponent) evt.getSource();
-        Window win = SwingUtilities.getWindowAncestor(comp);
-        win.dispose();
+        if (!fieldNama.getText().equals("Masukan nama")) {
+            labelNama.setText(fieldNama.getText());
+            transaksi.setIdPelanggan(idPelanggan);
+            JComponent comp = (JComponent) evt.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        
     }//GEN-LAST:event_buttonTambahActionPerformed
 
 

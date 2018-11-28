@@ -154,11 +154,14 @@ public class PilihStaf extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buttonTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonTambahActionPerformed
-        labelNama.setText(fieldNama.getText());
-        transaksi.setIdStaff(idStaf);
-        JComponent comp = (JComponent) evt.getSource();
-        Window win = SwingUtilities.getWindowAncestor(comp);
-        win.dispose();
+        if (!fieldNama.getText().equals("Masukan nama")) {
+            labelNama.setText(fieldNama.getText());
+            transaksi.setIdStaff(idStaf);
+            JComponent comp = (JComponent) evt.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
+        }
+        
     }//GEN-LAST:event_buttonTambahActionPerformed
 
     private void fieldNamaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_fieldNamaFocusGained

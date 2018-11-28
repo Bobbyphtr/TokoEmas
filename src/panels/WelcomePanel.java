@@ -56,7 +56,7 @@ public class WelcomePanel extends javax.swing.JPanel {
         usernameLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 231, 192));
-        setPreferredSize(new java.awt.Dimension(980, 720));
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         loginButton.setBackground(new java.awt.Color(102, 0, 0));
@@ -69,7 +69,7 @@ public class WelcomePanel extends javax.swing.JPanel {
                 loginButtonActionPerformed(evt);
             }
         });
-        add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(508, 486, 83, 25));
+        add(loginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 480, 83, 25));
 
         passwordField.setForeground(new java.awt.Color(102, 102, 102));
         passwordField.setText("password");
@@ -81,22 +81,22 @@ public class WelcomePanel extends javax.swing.JPanel {
                 passwordFieldFocusLost(evt);
             }
         });
-        add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 439, 243, 24));
+        add(passwordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, 243, 24));
 
         welcomeLabel.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         welcomeLabel.setForeground(new java.awt.Color(102, 0, 0));
         welcomeLabel.setText("Selamat Datang");
-        add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 176, -1, -1));
+        add(welcomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 170, -1, -1));
 
         passwordLabel.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         passwordLabel.setForeground(new java.awt.Color(102, 0, 0));
         passwordLabel.setText("Password");
-        add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 418, -1, -1));
+        add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 410, -1, -1));
 
         tokoEmasLabel.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         tokoEmasLabel.setForeground(new java.awt.Color(102, 0, 0));
         tokoEmasLabel.setText("TOKO EMAS");
-        add(tokoEmasLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 277, -1, -1));
+        add(tokoEmasLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 270, -1, -1));
 
         usernameField.setBackground(new java.awt.Color(255, 255, 255));
         usernameField.setForeground(new java.awt.Color(102, 102, 102));
@@ -109,12 +109,12 @@ public class WelcomePanel extends javax.swing.JPanel {
                 usernameFieldFocusLost(evt);
             }
         });
-        add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 376, 243, -1));
+        add(usernameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 370, 243, -1));
 
         usernameLabel.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         usernameLabel.setForeground(new java.awt.Color(102, 0, 0));
         usernameLabel.setText("Username");
-        add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(427, 355, -1, -1));
+        add(usernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
