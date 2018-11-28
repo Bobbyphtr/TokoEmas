@@ -15,6 +15,8 @@ import java.text.DecimalFormatSymbols;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -28,14 +30,24 @@ public class RekapPanel extends javax.swing.JPanel {
     private String[] dateAndTime;
 
     private String totalPenjualan, totalPembelian, totalProfit;
+    
+    private DefaultTableModel modelTransaksi, modelPegawai, modelPelanggan;
 
     public RekapPanel() {
+        initTableModel();
         initComponents();
         syncDate();
         initAudit();
         label_PenjualanVar.setText(totalPenjualan);
         label_PembelianVar.setText(totalPembelian);
         label_KeuntunganVar.setText(totalProfit);
+        removeColumn();
+        
+    }
+    
+    private void initTableModel() {
+        modelTransaksi = getTransaksi();
+        modelPegawai = getRankingPegawai();
     }
 
     private void syncDate() {
@@ -67,6 +79,22 @@ public class RekapPanel extends javax.swing.JPanel {
         totalPembelian = kursIndonesia.format(pembelian) + ",-";
         totalPenjualan = kursIndonesia.format(penjualan) + ",-";
         totalProfit = kursIndonesia.format(profit) + ",-";
+    }
+    
+    private void removeColumn() {
+        TableColumn idBarang = table_Transaksi.getColumnModel().getColumn(2);
+        TableColumn idCustomer = table_Transaksi.getColumnModel().getColumn(3);
+        TableColumn idPekerja = table_Transaksi.getColumnModel().getColumn(4);
+        TableColumn metodeBayar = table_Transaksi.getColumnModel().getColumn(5);
+        TableColumn hargaJual = table_Transaksi.getColumnModel().getColumn(6);
+        TableColumn tanggalJual = table_Transaksi.getColumnModel().getColumn(7);
+        
+        table_Transaksi.getColumnModel().removeColumn(idBarang);
+        table_Transaksi.getColumnModel().removeColumn(idCustomer);
+        table_Transaksi.getColumnModel().removeColumn(idPekerja);
+        table_Transaksi.getColumnModel().removeColumn(metodeBayar);
+        //table_Transaksi.getColumnModel().removeColumn(hargaJual);
+        //table_Transaksi.getColumnModel().removeColumn(tanggalJual);
     }
 
     /**
@@ -105,15 +133,16 @@ public class RekapPanel extends javax.swing.JPanel {
         label_TotalPenjualan.setText("Total Penjualan:");
 
         table_Pegawai.setBackground(new java.awt.Color(255, 255, 255));
-        table_Pegawai.setModel(getRankingPegawai());
+        table_Pegawai.setModel(modelPegawai);
         table_Pegawai.setRowHeight(50);
         jScrollPane1.setViewportView(table_Pegawai);
 
+        table_Transaksi.setAutoCreateRowSorter(true);
         table_Transaksi.setBackground(new java.awt.Color(255, 255, 255));
-        table_Transaksi.setModel(getTransaksi());
+        table_Transaksi.setModel(modelTransaksi);
         table_Transaksi.setRowHeight(50);
-        table_Transaksi.getColumn("Tindakan").setCellEditor(new CustomTableCell.RekapTransaksiCell(new JCheckBox()));
-        table_Transaksi.getColumn("Tindakan").setCellRenderer(new CustomTableCell.RekapTransaksiCell(new JCheckBox()));
+        table_Transaksi.getColumn("Tindakan").setCellEditor(new CustomTableCell.RekapTransaksiCell(new JCheckBox(), modelTransaksi));
+        table_Transaksi.getColumn("Tindakan").setCellRenderer(new CustomTableCell.RekapTransaksiCell(new JCheckBox(), modelTransaksi));
         jScrollPane2.setViewportView(table_Transaksi);
 
         table_Pelanggan.setBackground(new java.awt.Color(255, 255, 255));
@@ -174,27 +203,30 @@ public class RekapPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dateText)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_TotalPenjualan)
-                            .addComponent(label_PenjualanVar))
-                        .addGap(132, 132, 132)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_TotalPembelian)
-                            .addComponent(label_PembelianVar))
-                        .addGap(76, 76, 76)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(dateText)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_TotalPenjualan)
+                                    .addComponent(label_PenjualanVar))
+                                .addGap(132, 132, 132)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_TotalPembelian)
+                                    .addComponent(label_PembelianVar))
+                                .addGap(76, 76, 76)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(label_Keuntungan, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_KeuntunganVar, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(TitleText1))
+                        .addContainerGap(161, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(TitleText1))
-                .addContainerGap(34, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

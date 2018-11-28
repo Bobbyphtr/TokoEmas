@@ -720,7 +720,11 @@ public class Controller {
     }
 
     public static void getProdukbyId(int id) {
-        String query = "SELECT * FROM barang WHERE id = ?";
+        String query = "SELECT barang.id, barang.nama, deskripsi, berat, karat, tipe_barang, "
+                + "kategori.nama as kategori, supplier.nama as supplier, harga_beli, "
+                + "tanggal_beli FROM barang LEFT JOIN kategori on kategori.id = barang.id_kategori "
+                + "LEFT JOIN supplier on supplier.id = barang.id_supplier WHERE barang.id = ?";
+        
     }
 
     public static void deleteProduk(int id) {
@@ -863,7 +867,7 @@ public class Controller {
         formatRp.setMonetaryDecimalSeparator(',');
         formatRp.setGroupingSeparator('.');
         kursIndonesia.setDecimalFormatSymbols(formatRp);
-        String query = "SELECT transaksi.tanggal_jual, transaksi.harga_jual FROM `transaksi` WHERE 1";
+        String query = "SELECT tanggal_jual, harga_jual, `id_barang`,`id_customer`,`id_pekerja`,`metode_pembayaran` FROM `transaksi` WHERE 1";
 
         try {
             rs = statement.executeQuery(query);
@@ -875,12 +879,25 @@ public class Controller {
 
             column.add("Tindakan");
             column.add("Judul");
+            column.add("ID_BARANG");
+            column.add("ID_CUSTOMER");
+            column.add("ID_PEKERJA");
+            column.add("METODE BAYAR");
+            column.add("HARGA JUAL");
+            column.add("TANGGAL JUAL");
+            
 
             while (rs.next()) {
                 Vector row = new Vector();
                 String isi = rs.getString(1) + " - " + kursIndonesia.format(rs.getInt(2));
                 row.add("Tindakan");
                 row.add(isi);
+                row.add(rs.getInt(3));
+                row.add(rs.getInt(4));
+                row.add(rs.getInt(5));
+                row.add(rs.getString(6));
+                row.add(kursIndonesia.format(rs.getInt(2)));
+                row.add(rs.getString(1));
                 data.add(row);
 
             }

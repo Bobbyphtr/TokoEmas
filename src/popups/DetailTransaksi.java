@@ -33,9 +33,15 @@ public class DetailTransaksi extends javax.swing.JDialog {
 
     public DetailTransaksi() {
         initComponents();
-
-
     }
+    
+    public DetailTransaksi(int idBarang, int idCustomer, int idPekerja, String metodeBayar, String hargaJual, String tanggalJual) {
+        initComponents();
+        textMetodeBayar.setText(metodeBayar);
+        textTotal.setText(hargaJual);
+        textDate.setText(tanggalJual);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,8 +60,6 @@ public class DetailTransaksi extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jlabel6 = new javax.swing.JLabel();
         textMetodeBayar = new javax.swing.JLabel();
         jlabel7 = new javax.swing.JLabel();
@@ -67,6 +71,20 @@ public class DetailTransaksi extends javax.swing.JDialog {
         textPhone = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAlamat = new javax.swing.JTextArea();
+        panelInfoProduk = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        labelDeskripsi = new javax.swing.JLabel();
+        labelWeight = new javax.swing.JLabel();
+        labelNama = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        labelKarat = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        labelType = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        labelKategori = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        labelSupplier = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tambah Pelanggan");
@@ -78,44 +96,31 @@ public class DetailTransaksi extends javax.swing.JDialog {
         TitleText.setBackground(new java.awt.Color(102, 0, 0));
         TitleText.setFont(new java.awt.Font("Myriad Pro", 0, 36)); // NOI18N
         TitleText.setForeground(new java.awt.Color(102, 0, 0));
-        TitleText.setText("Selling Note");
+        TitleText.setText("Nota Penjualan");
 
         jLabel1.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel1.setText("Date :");
+        jLabel1.setText("Tanggal :");
 
         jLabel3.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel3.setText("Staff Name :");
+        jLabel3.setText("Nama Staf :");
 
         jLabel4.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel4.setText("Customer ID :");
+        jLabel4.setText("ID Pelanggan :");
 
         jLabel5.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel5.setText("Name : ");
+        jLabel5.setText("Nama :");
 
         jLabel6.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel6.setText("Address : ");
+        jLabel6.setText("Alamat :");
 
         jLabel7.setFont(new java.awt.Font("Myriad Pro", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 0, 0));
-        jLabel7.setText("Phone Number :");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        jLabel7.setText("No Telp :");
 
         jlabel6.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
         jlabel6.setForeground(new java.awt.Color(102, 0, 0));
@@ -158,6 +163,75 @@ public class DetailTransaksi extends javax.swing.JDialog {
         textAlamat.setEditable(false);
         jScrollPane2.setViewportView(textAlamat);
 
+        panelInfoProduk.setBackground(java.awt.Color.white);
+        panelInfoProduk.setBorder(new BubbleBorderJPanel(Color.WHITE, 10, 20, 0));
+        panelInfoProduk.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel2.setForeground(java.awt.Color.gray);
+        jLabel2.setText("Deskripsi:");
+        panelInfoProduk.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, -1, -1));
+
+        labelDeskripsi.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelDeskripsi.setForeground(java.awt.Color.black);
+        labelDeskripsi.setText("Deskripsi");
+        panelInfoProduk.add(labelDeskripsi, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
+
+        labelWeight.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelWeight.setForeground(java.awt.Color.black);
+        labelWeight.setText("Weight");
+        panelInfoProduk.add(labelWeight, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
+
+        labelNama.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelNama.setForeground(java.awt.Color.black);
+        labelNama.setText("Nama");
+        panelInfoProduk.add(labelNama, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel10.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel10.setForeground(java.awt.Color.gray);
+        jLabel10.setText("Berat:");
+        panelInfoProduk.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+
+        jLabel11.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel11.setForeground(java.awt.Color.gray);
+        jLabel11.setText("Karat:");
+        panelInfoProduk.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        labelKarat.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelKarat.setForeground(java.awt.Color.black);
+        labelKarat.setText("Karat");
+        panelInfoProduk.add(labelKarat, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        jLabel13.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel13.setForeground(java.awt.Color.gray);
+        jLabel13.setText("Tipe:");
+        panelInfoProduk.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, -1, -1));
+
+        labelType.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelType.setForeground(java.awt.Color.black);
+        labelType.setText("Type");
+        panelInfoProduk.add(labelType, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel15.setForeground(java.awt.Color.gray);
+        jLabel15.setText("Kategori:");
+        panelInfoProduk.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        labelKategori.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelKategori.setForeground(java.awt.Color.black);
+        labelKategori.setText("Kategori");
+        panelInfoProduk.add(labelKategori, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
+
+        jLabel17.setFont(new java.awt.Font("Myriad Pro", 0, 12)); // NOI18N
+        jLabel17.setForeground(java.awt.Color.gray);
+        jLabel17.setText("Supplier:");
+        panelInfoProduk.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, -1, -1));
+
+        labelSupplier.setFont(new java.awt.Font("Myriad Pro", 0, 18)); // NOI18N
+        labelSupplier.setForeground(java.awt.Color.black);
+        labelSupplier.setText("Supplier");
+        panelInfoProduk.add(labelSupplier, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
+
         javax.swing.GroupLayout TambahPelangganPanelLayout = new javax.swing.GroupLayout(TambahPelangganPanel);
         TambahPelangganPanel.setLayout(TambahPelangganPanelLayout);
         TambahPelangganPanelLayout.setHorizontalGroup(
@@ -166,61 +240,63 @@ public class DetailTransaksi extends javax.swing.JDialog {
                 .addGap(32, 32, 32)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addGap(12, 12, 12)
+                        .addComponent(TitleText)
+                        .addContainerGap())
+                    .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textDate)
-                            .addComponent(textStaf)))
-                    .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                            .addComponent(TitleText)
-                            .addGap(256, 256, 256)
-                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addGap(17, 17, 17)
-                                    .addComponent(jLabel4))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
-                                    .addGap(52, 52, 52)
-                                    .addComponent(jLabel5))
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addGap(18, 18, 18)
-                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textCustomerId)
-                                .addComponent(textNamaCustomer)
-                                .addComponent(textPhone)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(42, 42, 42))
-                        .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jlabel6)
-                                .addComponent(jlabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(textMetodeBayar)
-                                .addComponent(textTotal)))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 833, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(35, Short.MAX_VALUE))
+                            .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
+                                .addGap(12, 12, 12)
+                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textDate)
+                                    .addComponent(textStaf)))
+                            .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(textCustomerId)
+                                    .addComponent(textNamaCustomer)
+                                    .addComponent(textPhone)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(8, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TambahPelangganPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jlabel6)
+                                    .addComponent(jlabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(textMetodeBayar)
+                                    .addComponent(textTotal))
+                                .addGap(42, 42, 42))))))
         );
         TambahPelangganPanelLayout.setVerticalGroup(
             TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(TitleText)
+                .addGap(20, 20, 20)
                 .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(TitleText)
-                        .addGap(20, 20, 20)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(textDate))
                         .addGap(18, 18, 18)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(textStaf)))
+                            .addComponent(textStaf))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelInfoProduk, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(TambahPelangganPanelLayout.createSequentialGroup()
-                        .addGap(41, 41, 41)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(textCustomerId))
@@ -235,29 +311,27 @@ public class DetailTransaksi extends javax.swing.JDialog {
                         .addGap(18, 18, 18)
                         .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabel6)
-                    .addComponent(textTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(textMetodeBayar))
-                .addContainerGap())
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlabel6)
+                            .addComponent(textTotal))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(TambahPelangganPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textMetodeBayar))))
+                .addGap(50, 50, 50))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)
+            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 647, Short.MAX_VALUE)
+            .addComponent(TambahPelangganPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -273,16 +347,28 @@ public class DetailTransaksi extends javax.swing.JDialog {
     private javax.swing.JPanel TambahPelangganPanel;
     private javax.swing.JLabel TitleText;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlabel6;
     private javax.swing.JLabel jlabel7;
+    private javax.swing.JLabel labelDeskripsi;
+    private javax.swing.JLabel labelKarat;
+    private javax.swing.JLabel labelKategori;
+    private javax.swing.JLabel labelNama;
+    private javax.swing.JLabel labelSupplier;
+    private javax.swing.JLabel labelType;
+    private javax.swing.JLabel labelWeight;
+    private javax.swing.JPanel panelInfoProduk;
     private javax.swing.JTextArea textAlamat;
     private javax.swing.JLabel textCustomerId;
     private javax.swing.JLabel textDate;

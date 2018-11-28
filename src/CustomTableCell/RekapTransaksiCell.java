@@ -5,6 +5,8 @@
  */
 package CustomTableCell;
 
+import POJO.Pelanggan;
+import POJO.Produk;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,11 +14,13 @@ import java.util.Vector;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
+import popups.DetailTransaksi;
 
 /**
  *
@@ -26,16 +30,29 @@ public class RekapTransaksiCell extends DefaultCellEditor implements TableCellRe
 
     protected JButton button;
     protected int row;
+    
+    protected DefaultTableModel tableTransaksi;
 
-    public RekapTransaksiCell(JCheckBox checkBox) {
+    public RekapTransaksiCell(JCheckBox checkBox, DefaultTableModel transaksi) {
         super(checkBox);
+        this.tableTransaksi = transaksi;
         button = new JButton();
         
         button.setOpaque(true);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Test");
+                int idBarang = (int) tableTransaksi.getValueAt(row, 2);
+                int idCustomer = (int) tableTransaksi.getValueAt(row, 3);
+                int idPekerja = (int) tableTransaksi.getValueAt(row, 4);
+                String metodeBayar = (String) tableTransaksi.getValueAt(row, 5);
+                String hargaJual = (String) tableTransaksi.getValueAt(row, 6);
+                String tanggalJual = (String) tableTransaksi.getValueAt(row, 7);
+                
+                JDialog detailTransaksi = new DetailTransaksi(idBarang, idCustomer, idPekerja, metodeBayar, hargaJual, tanggalJual);
+                detailTransaksi.setLocationRelativeTo(null);
+                detailTransaksi.setVisible(true);
+                
             }
         });
     }
