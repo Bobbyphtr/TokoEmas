@@ -806,6 +806,15 @@ public class Controller {
                 + "from (SELECT pekerja.nama as nama, (harga_jual - harga_beli) as profit from transaksi, barang, pekerja where MONTH( tanggal_jual ) = ? AND YEAR( tanggal_jual ) = ? AND transaksi.id_barang = barang.id AND transaksi.id_pekerja = pekerja.id) as list_profit \n"
                 + "GROUP BY nama ORDER BY total DESC";
         Calendar cal = Calendar.getInstance();
+        
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        
         try {
             preparedStatement = conn.prepareStatement(query);
 //            System.out.println(cal.get(Calendar.MONTH) + 1);
@@ -819,10 +828,62 @@ public class Controller {
             Vector column = new Vector();
 
             column.add("Ranking Pegawai");
+            column.add("Nominal");
 
             while (rs.next()) {
                 Vector row = new Vector();
                 row.add(rs.getString("nama"));
+                row.add(kursIndonesia.format(rs.getInt(2)));
+                data.add(row);
+
+            }
+
+            return new DefaultTableModel(data, column) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+
+            };
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    
+    public static DefaultTableModel getRankingPelanggan() {
+        String query = "SELECT nama, SUM(harga_jual) as spending  FROM transaksi, customer \n" +
+            "WHERE transaksi.id_customer = customer.id AND month(tanggal_jual) = ? and YEAR(tanggal_jual) = ? and customer.id != 0\n" +
+            "GROUP BY transaksi.id_customer ORDER BY spending DESC";
+        Calendar cal = Calendar.getInstance();
+        
+        DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
+        DecimalFormatSymbols formatRp = new DecimalFormatSymbols();
+
+        formatRp.setCurrencySymbol("Rp. ");
+        formatRp.setMonetaryDecimalSeparator(',');
+        formatRp.setGroupingSeparator('.');
+        kursIndonesia.setDecimalFormatSymbols(formatRp);
+        
+        try {
+            preparedStatement = conn.prepareStatement(query);
+//            System.out.println(cal.get(Calendar.MONTH) + 1);
+//            System.out.println(cal.get(Calendar.YEAR));
+            preparedStatement.setInt(1, cal.get(Calendar.MONTH) + 1);
+            preparedStatement.setInt(2, cal.get(Calendar.YEAR));
+            rs = preparedStatement.executeQuery();
+
+            Vector data = new Vector();
+
+            Vector column = new Vector();
+
+            column.add("Ranking Pelanggan");
+            column.add("Nominal");
+
+            while (rs.next()) {
+                Vector row = new Vector();
+                row.add(rs.getString("nama"));
+                row.add(kursIndonesia.format(rs.getInt(2)));
                 data.add(row);
 
             }

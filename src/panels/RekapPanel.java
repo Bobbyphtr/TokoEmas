@@ -14,7 +14,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -32,8 +34,11 @@ public class RekapPanel extends javax.swing.JPanel {
     private String totalPenjualan, totalPembelian, totalProfit;
     
     private DefaultTableModel modelTransaksi, modelPegawai, modelPelanggan;
+    
+    private DefaultTableCellRenderer rightRenderer;
 
     public RekapPanel() {
+        setRightTable();
         initTableModel();
         initComponents();
         syncDate();
@@ -45,9 +50,15 @@ public class RekapPanel extends javax.swing.JPanel {
         
     }
     
+    private void setRightTable() {
+        rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(JLabel.RIGHT);
+    }
+    
     private void initTableModel() {
         modelTransaksi = getTransaksi();
         modelPegawai = getRankingPegawai();
+        modelPelanggan = getRankingPelanggan();
     }
 
     private void syncDate() {
@@ -93,8 +104,8 @@ public class RekapPanel extends javax.swing.JPanel {
         table_Transaksi.getColumnModel().removeColumn(idCustomer);
         table_Transaksi.getColumnModel().removeColumn(idPekerja);
         table_Transaksi.getColumnModel().removeColumn(metodeBayar);
-        //table_Transaksi.getColumnModel().removeColumn(hargaJual);
-        //table_Transaksi.getColumnModel().removeColumn(tanggalJual);
+        table_Transaksi.getColumnModel().removeColumn(hargaJual);
+        table_Transaksi.getColumnModel().removeColumn(tanggalJual);
     }
 
     /**
@@ -135,6 +146,7 @@ public class RekapPanel extends javax.swing.JPanel {
         table_Pegawai.setBackground(new java.awt.Color(255, 255, 255));
         table_Pegawai.setModel(modelPegawai);
         table_Pegawai.setRowHeight(50);
+        table_Pegawai.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
         jScrollPane1.setViewportView(table_Pegawai);
 
         table_Transaksi.setAutoCreateRowSorter(true);
@@ -146,15 +158,9 @@ public class RekapPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(table_Transaksi);
 
         table_Pelanggan.setBackground(new java.awt.Color(255, 255, 255));
-        table_Pelanggan.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null}
-            },
-            new String [] {
-                "Ranking Pelanggan"
-            }
-        ));
+        table_Pelanggan.setModel(modelPelanggan);
         table_Pelanggan.setRowHeight(50);
+        table_Pelanggan.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
         jScrollPane3.setViewportView(table_Pelanggan);
         if (table_Pelanggan.getColumnModel().getColumnCount() > 0) {
             table_Pelanggan.getColumnModel().getColumn(0).setHeaderValue("Ranking Pelanggan");
