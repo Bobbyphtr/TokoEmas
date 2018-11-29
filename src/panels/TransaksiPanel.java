@@ -706,6 +706,7 @@ public class TransaksiPanel extends javax.swing.JPanel {
             updateStatusBarang();
             tambahTransaksi();
             System.out.println(idStaff);
+            System.out.println(idPelanggan);
         }
     }//GEN-LAST:event_buttonTambahActionPerformed
 

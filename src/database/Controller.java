@@ -980,8 +980,8 @@ public class Controller {
             preparedStatement = conn.prepareStatement(query);
             Calendar cal = Calendar.getInstance();
             DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
-            //preparedStatement.setString(1, df.format(cal.getTime()));
-            preparedStatement.setString(1, TRIAL_DATE);
+            preparedStatement.setString(1, df.format(cal.getTime()));
+            //preparedStatement.setString(1, TRIAL_DATE);
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 return rs.getString("jumlah_transaksi");
@@ -1018,8 +1018,8 @@ public class Controller {
             preparedStatement = conn.prepareStatement(query);
             Calendar cal = Calendar.getInstance();
             DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
-            //preparedStatement.setString(1, df.format(cal.getTime()));
-            preparedStatement.setString(1, TRIAL_DATE);
+            preparedStatement.setString(1, df.format(cal.getTime()));
+            //preparedStatement.setString(1, TRIAL_DATE);
             rs = preparedStatement.executeQuery();
             if (rs.next()) {
                 DecimalFormat kursIndonesia = (DecimalFormat) DecimalFormat.getCurrencyInstance();
@@ -1053,8 +1053,8 @@ public class Controller {
             preparedStatement = conn.prepareStatement(query);
             Calendar cal = Calendar.getInstance();
             DateFormat df = new SimpleDateFormat("YYYY-MM-dd");
-            //preparedStatement.setString(1, df.format(cal.getTime()));
-            preparedStatement.setString(1, TRIAL_DATE);
+            preparedStatement.setString(1, df.format(cal.getTime()));
+            //preparedStatement.setString(1, TRIAL_DATE);
             rs = preparedStatement.executeQuery();
 
             Vector pekerja = new Vector();
