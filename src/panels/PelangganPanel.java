@@ -50,12 +50,10 @@ public class PelangganPanel extends javax.swing.JPanel {
             }
         });
 
-
         syncDate();
         setUpRowFilter();
 
     }
-    
 
     private void syncDate() {
         String[] dateAndTime = getDateAndTime();
@@ -322,7 +320,7 @@ public class PelangganPanel extends javax.swing.JPanel {
 
             int selectedRow = tablePelanggan.getSelectedRow();
             int modelRow = tablePelanggan.convertRowIndexToModel(selectedRow);
-
+            System.out.println(pelangganModel.getValueAt(modelRow, 0));
             int id = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(modelRow, 0)));
             System.out.println("Id :" + id);
             System.out.println("Model Row : " + modelRow);
@@ -330,7 +328,14 @@ public class PelangganPanel extends javax.swing.JPanel {
             String email = (String) pelangganModel.getValueAt(modelRow, 2);
             String alamat = (String) pelangganModel.getValueAt(modelRow, 3);
             String no_telp = (String) pelangganModel.getValueAt(modelRow, 4);
-            boolean status_loyal = (boolean) pelangganModel.getValueAt(modelRow, 5);
+            boolean status_loyal;
+            String status = (String) pelangganModel.getValueAt(modelRow, 5);
+            if (status.equalsIgnoreCase("true")) {
+                status_loyal = true;
+            } else {
+                status_loyal = false;
+            }
+
             int bonus = Integer.valueOf(String.valueOf(pelangganModel.getValueAt(modelRow, 6)));
             String deskripsi_bonus = (String) pelangganModel.getValueAt(modelRow, 7);
 
