@@ -4,6 +4,7 @@ import POJO.KategoriData;
 import POJO.Produk;
 import POJO.SupplierData;
 import customComponents.*;
+import database.Controller;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.time.Instant;
@@ -39,15 +40,19 @@ public class TambahProduk extends javax.swing.JDialog {
 
     public TambahProduk(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        initComponents();
-        initDatePicker();
-    }
-
-    public TambahProduk() {
-        this.setTitle("Tambah Produk");
+        
         initHashtable();
         initComponents();
         initDatePicker();
+        this.setTitle("Tambah Produk");
+    }
+
+    public TambahProduk() {
+        
+        initHashtable();
+        initComponents();
+        initDatePicker();
+        this.setTitle("Tambah Produk");
         
                 //Combo box listener
         comboKarat.addItemListener((ItemEvent ie) -> {
@@ -102,10 +107,11 @@ public class TambahProduk extends javax.swing.JDialog {
 
     private void tambahProduk() {
         int id = 1;
-        //System.out.println(kategori.get(comboKategori.getSelectedItem()));
+       
         int idKategori = (int) kategori.get(comboKategori.getSelectedItem());
         int idSupplier = (int) supplier.get(comboSupplier.getSelectedItem());
-        int karat = (int) comboKarat.getSelectedItem();
+        Double karatD = (Double) comboKarat.getSelectedItem();
+        int karat = karatD.intValue();
         int hargaBeli = Integer.parseInt(fieldHarga.getText());
         String nama = fieldNamaProduk.getText();
         String deskripsi = textAreaDeskripsiProduk.getText();
@@ -465,8 +471,10 @@ public class TambahProduk extends javax.swing.JDialog {
     }//GEN-LAST:event_fieldJenisFocusLost
 
     public static void main(String args[]) {
+        Controller con = new Controller();
         JFrame a = new JFrame();
-        TambahProduk dialog = new TambahProduk(a, true);
+        TambahProduk dialog = new TambahProduk();
+        
         //a.setPreferredSize(dialog.getPreferredSize());
         dialog.setVisible(true);
     }
